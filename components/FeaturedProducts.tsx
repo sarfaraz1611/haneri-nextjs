@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import LOGO_SRC from "./../public/images/Haneri Logo.png";
+import DiscoverHero from "./DiscoverHero";
 
 // Import GSAP and ScrollTrigger
 import { gsap } from "gsap";
@@ -184,6 +185,22 @@ export default function FeaturedProducts() {
 
     // Use GSAP Context for proper scope and cleanup
     const ctx = gsap.context(() => {
+      // --- Hero Header Fade Out Animation ---
+      const heroHeader = section.querySelector(".featured-hero");
+      if (heroHeader) {
+        gsap.to(heroHeader, {
+          opacity: 0,
+          y: -50,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "top -20%",
+            scrub: 1,
+          },
+        });
+      }
+
       // --- Main Horizontal Scroll Animation ---
       const horizontalScroll = gsap.to(innerFlex, {
         // Animate the 'x' property (translateX) to the negative scroll distance
@@ -194,7 +211,7 @@ export default function FeaturedProducts() {
           trigger: section,
           pin: true, // Pin the whole section
           scrub: 1, // Link progress to scroll, with 1 second of lag
-          start: "top top", // Start when the section hits the top of the viewport
+          start: "top +26px", // Start when the section hits the top of the viewport
           // End after scrolling a distance equal to the content's extra width
           end: `+=${scrollDistance}`,
 
@@ -249,7 +266,9 @@ export default function FeaturedProducts() {
 
   if (loading)
     return (
-      <div className="py-12 text-center">Loading Featured Products...</div>
+      <section className="py-6 pt-0 relative min-h-screen flex items-center justify-center">
+        <DiscoverHero centered={true} className="w-full" dotted={true} />
+      </section>
     );
   if (!products.length) return null;
 
@@ -260,9 +279,16 @@ export default function FeaturedProducts() {
     <section
       ref={sectionRef}
       // Increased min-height to provide vertical scroll space for the animation to run
-      className="py-6 pt-0  relative"
+      className="py-6 pt-0   relative"
       aria-label="Featured Products"
     >
+      {/* Interactive animated header - fades out on scroll */}
+      <DiscoverHero
+        centered={false}
+        className="absolute top-0 left-0 w-full pointer-events-none overflow-hidden featured-hero"
+        style={{ height: "50vh", zIndex: 20 }}
+      />
+
       <div
         className="container mx-auto px-4 sticky top-0"
         style={{
@@ -271,16 +297,13 @@ export default function FeaturedProducts() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
+          zIndex: 10,
         }}
       >
-        <h2 className="text-left text-[30px] text-[#315859] py-5 font-medium mb-4 font-['Barlow_Condensed'] uppercase tracking-wide">
-          Featured Products
-        </h2>
-
         {/* Horizontal scrolling container (The viewport wrapper) */}
         <div
           ref={contentWrapperRef}
-          className="overflow-hidden pb-4" // Use overflow-hidden to hide the native scrollbar
+          className="overflow-hidden pb-4 mt-20 md:mt-24" // Use overflow-hidden to hide the native scrollbar
           style={{
             // Removed scrollbar-related CSS since we hide overflow
             overflowX: "hidden",
@@ -311,7 +334,7 @@ export default function FeaturedProducts() {
               return (
                 <article
                   key={`${product.id}-${index}`}
-                  className="group relative bg-white border-0 shadow-none overflow-hidden cursor-default shrink-0 w-[300px] sm:w-[320px] md:w-[340px] lg:w-[360px]"
+                  className="group relative rounded-md bg-white border-0  overflow-hidden cursor-default shrink-0 w-[300px] sm:w-[320px] md:w-[340px] lg:w-[360px]"
                   style={{
                     scrollSnapAlign: "start",
                     transition: "all 0.3s ease-out",

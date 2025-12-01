@@ -100,3 +100,72 @@
     background-color: #B24F1F;
   }
 }
+
+/* Utilities Layer */
+@layer utilities {
+  /* Featured Products Hero Animations */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes expand-right {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 80px;
+    }
+  }
+
+  @keyframes expand-left {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 80px;
+    }
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes bounce-slow {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-expand-right {
+    animation: expand-right 1.5s ease-out forwards;
+  }
+
+  .animate-expand-left {
+    animation: expand-left 1.5s ease-out forwards;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 2s ease-in-out infinite;
+  }
+
+  .animate-bounce-slow {
+    animation: bounce-slow 2s ease-in-out infinite;
+  }
+}

@@ -72,11 +72,11 @@ export default function InnovationsSection() {
         <h2 className="heading_1">Innovations that take Haneri further</h2>
 
         <div className="overflow-hidden">
-          <ul className="grid grid-cols-5 gap-5 list-none m-0 p-0 max-[1199px]:grid-cols-3 max-md:flex max-md:gap-4 max-md:overflow-x-auto max-md:snap-x max-md:snap-mandatory max-md:p-0 max-md:[&::-webkit-scrollbar]:hidden">
+          <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 list-none m-0 p-0 max-[1199px]:grid-cols-3 max-md:flex max-md:gap-4 max-md:overflow-x-auto max-md:snap-x max-md:snap-mandatory max-md:p-0 max-md:[&::-webkit-scrollbar]:hidden">
             {innovations.map((item, index) => (
               <li
                 key={item.id}
-                className="rounded-[var(--radius)] overflow-hidden bg-black shadow-DEFAULT max-md:flex-[0_0_45%] max-md:snap-start"
+                className="rounded-[var(--radius)] flex-[0_0_85%] overflow-hidden bg-black shadow-DEFAULT sm:flex-[0_0_45%] max-md:snap-start"
               >
                 <div className="relative w-full pt-[177.78%] bg-[#111] max-[1199px]:pt-0 max-[1199px]:aspect-[9/16] max-[1199px]:max-h-[80vh] max-[1199px]:mx-auto">
                   <iframe
