@@ -1,0 +1,102 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Open+Sans:wght@300;400;600;700;800&family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@400;700&family=Roboto:wght@400;500;700&display=swap");
+
+/* Import Tailwind CSS */
+@import "tailwindcss";
+
+/* Custom Local Font - Ailerons */
+@font-face {
+  font-family: "Ailerons";
+  src: url("/fonts/Ailerons-Typeface.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Base Layer */
+@layer base {
+  :root {
+    --radius: 10px;
+    --shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+    --brand: #CA5D27;
+    --primary-green: #315859;
+    --dark-green: #244a46;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: 'Open Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+/* Components Layer */
+@layer components {
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .main {
+    min-height: 100vh;
+  }
+
+  .heading_1 {
+    font-family: 'Barlow Condensed', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-weight: 600;
+    font-size: clamp(28px, 4vw, 36px);
+    line-height: 1.2;
+    color: #315859;
+    margin-bottom: 20px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    letter-spacing: 0.025em;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background-color: #244a46;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background-color: #1a3634;
+  }
+
+  .btn-brand {
+    background-color: #CA5D27;
+    color: white;
+  }
+
+  .btn-brand:hover {
+    background-color: #B24F1F;
+  }
+}
