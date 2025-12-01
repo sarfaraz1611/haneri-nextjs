@@ -129,7 +129,7 @@ export default function Header() {
 
   return (
     // Ensure header has high z-index relative to page
-    <header className="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
+    <header className="fixed w-full top-0 z-50 bg-white backdrop-blur-md shadow-sm">
       <div className="py-[15px] max-md:py-2.5">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
