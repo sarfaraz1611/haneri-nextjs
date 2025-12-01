@@ -207,12 +207,16 @@ export default function FeaturedProducts() {
       gsap.utils
         .toArray(innerFlex.querySelectorAll("article"))
         .forEach((card) => {
-          gsap.to(card.querySelector("img"), {
+          const cardEl = card as HTMLElement;
+          const imgEl = cardEl.querySelector("img") as HTMLElement | null;
+          if (!imgEl) return;
+
+          gsap.to(imgEl, {
             scale: 1.1,
             rotate: 2,
             ease: "power1.inOut",
             scrollTrigger: {
-              trigger: card as HTMLElement,
+              trigger: cardEl,
               // Link this smaller animation to the main horizontal scroll progress
               containerAnimation: horizontalScroll,
               start: "left right", // When the card enters from the right edge of the viewport
@@ -307,7 +311,7 @@ export default function FeaturedProducts() {
               return (
                 <article
                   key={`${product.id}-${index}`}
-                  className="group relative bg-white border-0 shadow-none overflow-hidden cursor-default flex-shrink-0 w-[300px] sm:w-[320px] md:w-[340px] lg:w-[360px]"
+                  className="group relative bg-white border-0 shadow-none overflow-hidden cursor-default shrink-0 w-[300px] sm:w-[320px] md:w-[340px] lg:w-[360px]"
                   style={{
                     scrollSnapAlign: "start",
                     transition: "all 0.3s ease-out",
