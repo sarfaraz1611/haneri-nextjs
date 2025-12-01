@@ -9,7 +9,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#1a1a1a] text-white pt-[60px] pb-5  max-sm:pt-10">
+    <footer className="bg-[#00473E] text-white pt-[60px] pb-5  max-sm:pt-10">
       <div className="container">
         <div className="mb-10">
           <div className="grid grid-cols-[2fr_1fr_1fr_2fr] gap-10 max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:gap-[30px]">
