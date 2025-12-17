@@ -93,13 +93,13 @@ export default function BlogsSection() {
                   </h3>
                   <p className="mt-5 line-clamp-3 text-sm/6 text-gray-600">{post.description}</p>
                 </div>
-                <Link
+                {/* <Link
                   href={post.href}
                   className="mt-8 inline-flex items-center justify-center py-2.5 px-3.5 rounded-full border border-gray-200 bg-gray-50 text-gray-900 font-semibold text-sm leading-none no-underline whitespace-nowrap transition-all hover:bg-gray-100 active:translate-y-px"
                   aria-label={`Read more: ${post.title}`}
                 >
                   Read More
-                </Link>
+                </Link> */}
               </div>
             </article>
           ))}

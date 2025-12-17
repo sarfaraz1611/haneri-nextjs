@@ -290,7 +290,7 @@ export default function FeaturedProducts() {
       />
 
       <div
-        className="container mx-auto px-4 sticky top-0"
+        className="w-full  sticky top-0"
         style={{
           // This container is the viewport for the pinned content
           height: "100vh",
@@ -303,7 +303,7 @@ export default function FeaturedProducts() {
         {/* Horizontal scrolling container (The viewport wrapper) */}
         <div
           ref={contentWrapperRef}
-          className="overflow-hidden pb-4 mt-20 md:mt-24" // Use overflow-hidden to hide the native scrollbar
+          className="overflow-hidden pb-4 mt-20 md:mt-24 w-full" // Use overflow-hidden to hide the native scrollbar
           style={{
             // Removed scrollbar-related CSS since we hide overflow
             overflowX: "hidden",
@@ -312,7 +312,7 @@ export default function FeaturedProducts() {
         >
           {/* Inner div that gets the translateX animation from GSAP */}
           <div
-            className="flex gap-9"
+            className="flex gap-9 justify-center pl-40 pr-40"
             style={{
               minWidth: "max-content", // Ensure the div is wide enough to contain all flex items
             }}
@@ -362,14 +362,14 @@ export default function FeaturedProducts() {
                   </div>
 
                   {/* Logo, Title, Description, Price, Swatches, CTA (Standard rendering) */}
-                  <Image
+                  {/* <Image
                     src={LOGO_SRC}
                     alt="Brand Logo"
                     width={110}
                     height={20}
                     className="block mb-2 w-[110px] h-auto"
                     style={{ width: "110px", height: "auto" }}
-                  />
+                  /> */}
                   <h3 className="font-['Barlow_Condensed'] font-semibold text-[30px] leading-[1.05] text-[#CA5D27] uppercase mb-2.5">
                     <Link
                       href={`/product_detail?id=${product.id}`}

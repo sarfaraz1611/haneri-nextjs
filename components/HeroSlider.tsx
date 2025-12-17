@@ -42,11 +42,11 @@ export default function HeroSlider() {
         {/* The containing div's height is constrained */}
         <div className="relative w-full h-[clamp(320px,70vh,900px)] bg-black overflow-hidden max-sm:h-[clamp(260px,55vh,720px)]">
           {/* Skeleton shimmer */}
-          <div
+          {/* <div
             ref={skeletonRef}
             className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a] via-[#2a2a2a] to-[#1a1a1a]
             bg-[length:400%_100%] animate-shimmer z-[1]"
-          ></div>
+          ></div> */}
 
           {/* Vimeo iframe container */}
           <div className="absolute top-1/2 left-1/2 w-screen h-[56.25vw] min-w-[177.78vh] min-h-screen -translate-x-1/2 -translate-y-1/2">
