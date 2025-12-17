@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      html {
+        height: 100vh;
+      }
+      body {
+        margin: 0;
+        height: 5000px;
+        background: #000;
+      }
+      canvas {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 100vw;
+        max-height: 100vh;
+      }
+
+      .text-container {
+        position: relative;
+        width: 100%;
+        height: 100vh; /* full screen section */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        overflow: hidden;
+        perspective: 1000px; /* enables 3D depth */
+      }
+
+      .text-left,
+      .text-right {
+        font-size: 4rem;
+        font-weight: bold;
+        color: white;
+        opacity: 0;
+        transform-style: preserve-3d;
+      }
+
+      #hero-title {
+        position: fixed;
+        bottom: -100px; /* start off-screen */
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 4rem;
+        color: white;
+        opacity: 0;
+        pointer-events: none;
+        z-index: 10;
+      }
+      #body {
+        background-color: #000000ff;
+      }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/ScrollTrigger.min.js"></script>
+  </head>
+
+  <body id="body">
+    <canvas id="hero-lightpass"></canvas>
+    <h1 id="hero-title">Your Title Here</h1>
+
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Animate left text (scroll in from left with 3D rotation)
+
+      console.clear();
+
+      const canvas = document.getElementById("hero-lightpass");
+      const context = canvas.getContext("2d");
+
+      // Make canvas full screen
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      // Initial resize
+      resizeCanvas();
+
+      // Resize on window change
+      window.addEventListener("resize", resizeCanvas);
+
+      const frameCount = 250;
+      const currentFrame = (index) =>
+        `${(index + 1).toString().padStart(4, "0")}.png`;
+
+      const images = [];
+      const airpods = { frame: 0 };
+
+      for (let i = 0; i < frameCount; i++) {
+        const img = new Image();
+        img.src = currentFrame(i);
+        images.push(img);
+      }
+
+      // Register plugin
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.to(airpods, {
+        frame: frameCount - 1,
+        snap: "frame",
+        ease: "none",
+        scrollTrigger: {
+          scrub: 0.5,
+        },
+        onUpdate: render,
+      });
+
+      images[0].onload = render;
+
+      function render() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        // Draw image scaled to fit full screen
+        context.drawImage(
+          images[airpods.frame],
+          0,
+          0,
+          canvas.width,
+          canvas.height
+        );
+      }
+
+      // Title animation timeline
+      const title = document.getElementById("hero-title");
+
+      const titleTimeline = gsap.timeline({
+        scrollTrigger: {
+          scrub: 0.5,
+          start: "top top",
+          end: "bottom bottom",
+        },
+      });
+
+      // Show title after frame 15 (≈ 6% of scroll)
+      titleTimeline.to(
+        title,
+        {
+          opacity: 1,
+          bottom: 50,
+          duration: 1,
+          ease: "power2.out",
+        },
+        15 / frameCount
+      );
+
+      // Fade out title at frame 250 (end of scroll)
+      titleTimeline.to(
+        title,
+        {
+          opacity: 0,
+          duration: 1.5,
+          ease: "power2.out",
+        },
+        1
+      ); // 1 = end of scroll
+    </script>
+  </body>
+</html>
