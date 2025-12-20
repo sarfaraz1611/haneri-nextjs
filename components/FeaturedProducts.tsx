@@ -185,22 +185,6 @@ export default function FeaturedProducts() {
 
     // Use GSAP Context for proper scope and cleanup
     const ctx = gsap.context(() => {
-      // --- Hero Header Fade Out Animation ---
-      const heroHeader = section.querySelector(".featured-hero");
-      if (heroHeader) {
-        gsap.to(heroHeader, {
-          opacity: 0,
-          y: -50,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: section,
-            start: "top top",
-            end: "top -20%",
-            scrub: 1,
-          },
-        });
-      }
-
       // --- Main Horizontal Scroll Animation ---
       const horizontalScroll = gsap.to(innerFlex, {
         // Animate the 'x' property (translateX) to the negative scroll distance
@@ -282,7 +266,7 @@ export default function FeaturedProducts() {
       className="py-6 pt-0   relative"
       aria-label="Featured Products"
     >
-      {/* Interactive animated header - fades out on scroll */}
+      {/* Interactive animated header - stays visible */}
       <DiscoverHero
         centered={false}
         className="absolute top-0 left-0 w-full pointer-events-none overflow-hidden featured-hero"

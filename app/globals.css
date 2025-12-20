@@ -21,6 +21,11 @@
     --brand: #CA5D27;
     --primary-green: #315859;
     --dark-green: #244a46;
+    --font-barlow-condensed: 'Barlow Condensed', ui-sans-serif, system-ui;
+    --font-open-sans: 'Open Sans', sans-serif, system-ui;
+    --color-haneri-green: #00473E;
+    --color-haneri-orange: #CA5D27;
+    --color-haneri-gray: #464646;
   }
 
   * {
@@ -39,6 +44,10 @@
     font-family: 'Open Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   a {
@@ -98,6 +107,141 @@
 
   .btn-brand:hover {
     background-color: #B24F1F;
+  }
+
+  /* Custom heading styles matching original design */
+  .heading1 {
+    font-family: var(--font-barlow-condensed);
+    font-weight: 500;
+    font-size: clamp(34px, 5vw, 70px);
+    line-height: 1.2;
+    color: var(--color-haneri-green);
+  }
+
+  .heading2 {
+    font-family: var(--font-barlow-condensed);
+    font-weight: 300;
+    font-size: clamp(34px, 4vw, 58px);
+    line-height: 1.2;
+    color: var(--color-haneri-green);
+    text-align: left;
+  }
+
+  .heading3 {
+    font-family: var(--font-barlow-condensed);
+    font-weight: 700;
+    font-size: 42px;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+  }
+
+  /* Journal styles from original design */
+  .journal-title {
+    font-family: var(--font-barlow-condensed);
+    font-weight: 500;
+    font-size: clamp(34px, 5vw, 70px);
+    line-height: 1;
+    color: var(--color-haneri-green);
+  }
+
+  .journal-subtitle {
+    font-family: var(--font-barlow-condensed);
+    font-size: clamp(18px, 2vw, 26px);
+    color: var(--color-haneri-orange);
+    margin-top: -10px;
+  }
+
+  .journal-description {
+    font-family: var(--font-open-sans);
+    font-size: 16px;
+    line-height: 1.7;
+    color: #000;
+    margin-top: 1.25rem;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Paragraph styles */
+  .paragraph1 {
+    font-family: var(--font-open-sans);
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+    color: #555;
+  }
+
+  /* Button styles */
+  .btn-haneri {
+    display: inline-block;
+    background-color: #315858;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+  }
+
+  .btn-haneri:hover {
+    background-color: #00473e;
+    border-color: rgba(0, 71, 62, 0.7);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Brand row styles */
+  .brand-row-container {
+    margin-bottom: 2rem;
+    padding: 1.25rem;
+    border-radius: 8px;
+    background-color: white;
+  }
+
+  .brand-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 3rem;
+  }
+
+  /* Image container with overflow hidden for zoom effect */
+  .img-zoom-container {
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  /* Hover effects */
+  .hover-zoom {
+    transition: transform 0.3s ease;
+  }
+
+  .hover-zoom:hover {
+    transform: scale(1.03);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 480px) {
+    .journal-title,
+    .heading1 {
+      font-size: 34px;
+      text-align: left;
+    }
+
+    .journal-description {
+      font-size: 14px;
+      line-height: 1.75;
+      text-align: justify;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1199px) {
+    .container {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
   }
 }
 
@@ -167,5 +311,78 @@
 
   .animate-bounce-slow {
     animation: bounce-slow 2s ease-in-out infinite;
+  }
+
+  /* Scroll reveal animations */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    will-change: opacity, transform;
+  }
+
+  .reveal.in,
+  .reveal-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Custom utility classes */
+  .text-haneri-green {
+    color: var(--color-haneri-green);
+  }
+
+  .text-haneri-orange {
+    color: var(--color-haneri-orange);
+  }
+
+  .bg-haneri-green {
+    background-color: var(--color-haneri-green);
+  }
+
+  .border-haneri-green {
+    border-color: var(--color-haneri-green);
+  }
+
+  /* Responsive aspect ratios */
+  .aspect-16-9 {
+    aspect-ratio: 16 / 9;
+  }
+
+  .aspect-1-1 {
+    aspect-ratio: 1 / 1;
+  }
+
+  /* Gradient overlays */
+  .gradient-overlay-dark {
+    background: linear-gradient(90deg, rgba(17,28,21,.65) 0%, rgba(17,28,21,.35) 38%, rgba(17,28,21,0) 65%),
+                radial-gradient(1000px 100% at 0% 0%, rgba(15,40,25,.35) 0%, rgba(15,40,25,0) 60%);
+  }
+}
+
+/* Accessibility - Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal,
+  .reveal.in,
+  .reveal-in {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
   }
 }

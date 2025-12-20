@@ -1,6 +1,6 @@
 "use client";
 
-import BlowupShot from "./BlowupShot";
+import BlowupShotClean from "./BlowupShotClean";
 
 const HeroSection = () => {
   return (
@@ -55,7 +55,7 @@ const HeroSection = () => {
 
           {/* Fan Animation */}
           <div className="relative h-[400px] md:h-[600px] flex items-center justify-center">
-            <BlowupShot />
+            <BlowupShotClean />
           </div>
         </div>
       </div>

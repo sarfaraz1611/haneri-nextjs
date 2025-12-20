@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
 
-export default function Preloader() {
+export default function aPreloader() {
   const [progress, setProgress] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
   const logoRef = useRef<HTMLImageElement>(null);
