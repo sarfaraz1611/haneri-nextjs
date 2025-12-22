@@ -10,7 +10,7 @@ import WhyChoose from "@/components/WhyChoose";
 import Fancraft from "@/components/Fancraft";
 import BlogsSection from "@/components/BlogsSection";
 import Preloader from "@/components/Preloader";
-import HeroSlider from "@/components/HeroSlider";
+// import HeroSlider from "@/components/HeroSlider";
 import HeroSection from "@/components/HeroSection";
 
 export default function Home() {
@@ -57,7 +57,7 @@ export default function Home() {
 
         <InnovationsSection />
 
-        <div className="container">
+        <div className="container mt-8">
           <SteelFanSlider />
           <WhyChoose />
           <Fancraft />

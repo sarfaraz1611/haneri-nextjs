@@ -148,6 +148,7 @@ const config: Config = {
     },
   },
   plugins: [
+    require('tailwind-scrollbar')({ nocompatible: true }),
     // Custom plugin for container utility
     function ({ addComponents }: any) {
       addComponents({

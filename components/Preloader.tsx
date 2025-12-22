@@ -165,7 +165,7 @@ export default function aPreloader() {
             ref={logoRef}
             src="/images/Haneri Logo.png"
             alt="Haneri"
-            className="h-20 md:h-24 w-auto mx-auto mb-4"
+            className="h-16 md:h-24 w-auto mx-auto mb-4"
           />
         </div>
 

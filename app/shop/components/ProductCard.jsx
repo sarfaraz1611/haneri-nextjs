@@ -1,110 +1,151 @@
-'use client';
-import { useState } from 'react';
-import Link from 'next/link';
+"use client";
+import { useState } from "react";
+import Link from "next/link";
 
-// Helper for Hex codes
-const getColorHex = (name) => {
-  const map = {
-    'Denim Blue': '#6497B2', 'Baby Pink': '#C7ABA9', 'Pearl White': '#F5F5F5',
-    'Matte Black': '#21201E', 'Pine': '#DDC194', 'Beige': '#E6E0D4',
-    'Walnut': '#926148', 'Sunset Copper': '#936053', 'Royal Brass': '#B7A97C',
-    'Regal Gold': '#D3B063', 'Pure Steel': '#878782', 'Metallic Grey': '#D4D4D4',
-    'Sand Beige': '#D3CBBB', 'Metallic Walnut': '#7F513F', 
-    'Espresso Walnut': '#926148', 'Moonlit White': '#E6E6E6',
-    'Natural Pine': '#DDC194', 'Velvet Black': '#0B0A08'
-  };
-  return /^#/.test(name) ? name : (map[name] || '#ddd');
+// Color options with swatches
+const COLOR_OPTIONS = [
+  { label: "Denim Blue", value: "Denim Blue", swatch: "#6497B2" },
+  { label: "Baby Pink", value: "Baby Pink", swatch: "#C7ABA9" },
+  { label: "Pearl White", value: "Pearl White", swatch: "#F5F5F5" },
+  { label: "Matte Black", value: "Matte Black", swatch: "#21201E" },
+  { label: "Pine", value: "Pine", swatch: "#DDC194" },
+  { label: "Beige", value: "Beige", swatch: "#E6E0D4" },
+  { label: "Walnut", value: "Walnut", swatch: "#926148" },
+  { label: "Sunset Copper", value: "Sunset Copper", swatch: "#936053" },
+  { label: "Royal Brass", value: "Royal Brass", swatch: "#B7A97C" },
+  { label: "Regal Gold", value: "Regal Gold", swatch: "#D3B063" },
+  { label: "Pure Steel", value: "Pure Steel", swatch: "#878782" },
+  { label: "Metallic Grey", value: "Metallic Grey", swatch: "#D4D4D4" },
+  { label: "Sand Beige", value: "Sand Beige", swatch: "#D3CBBB" },
+  { label: "Metallic Walnut", value: "Metallic Walnut", swatch: "#7F513F" },
+  { label: "Espresso Walnut", value: "Espresso Walnut", swatch: "#926148" },
+  { label: "Moonlit White", value: "Moonlit White", swatch: "#E6E6E6" },
+  { label: "Natural Pine", value: "Natural Pine", swatch: "#DDC194" },
+  { label: "Velvet Black", value: "Velvet Black", swatch: "#0B0A08" },
+];
+
+// Utility function
+const classNames = (...classes) => classes.filter(Boolean).join(" ");
+
+const normalizePrice = (val) => {
+  if (!val) return 0;
+  return parseFloat(String(val).replace(/,/g, ""));
 };
 
-export default function ProductCard({ product, initialVariant, addToCart }) {
-  const [activeVariant, setActiveVariant] = useState(initialVariant);
+export default function ProductCard({ product, onAddToCart }) {
+  const [activeVariant, setActiveVariant] = useState(product.variants[0] || {});
 
-  const normalizePrice = (val) => {
-    if(!val) return 0;
-    return parseFloat(String(val).replace(/,/g, ''));
-  };
+  const regularPrice = normalizePrice(activeVariant.regular_price);
+  const sellingPrice = normalizePrice(activeVariant.selling_price);
+  const hasDiscount = regularPrice > 0 && regularPrice !== sellingPrice;
 
-  const isSamePrice = normalizePrice(activeVariant.regular_price) === normalizePrice(activeVariant.selling_price);
-  
-  const imageSrc = (activeVariant.file_urls && activeVariant.file_urls[0]) 
-    ? activeVariant.file_urls[0] 
-    : "/images/placeholder.jpg"; 
+  const imageUrl =
+    activeVariant.file_urls?.[0] ||
+    activeVariant.variant_images?.[0]?.image_url ||
+    product.product_images?.[0]?.image_url ||
+    "/images/placeholder.jpg";
 
-  // Clean HTML from description
-  const shortDesc = product.description 
-    ? product.description.replace(/<[^>]*>?/gm, '').substring(0, 100) + '...' 
-    : '';
+  const shortDesc = product.description
+    ? product.description.replace(/<[^>]*>?/gm, "").substring(0, 80) + "..."
+    : "";
+
+  const productUrl = `/product_detail?id=${product.id}&v_id=${activeVariant.id}`;
 
   return (
-    <div className="col-6 col-sm-6 col-md-4 col-lg-3 shop_products">
-      <div className="card featured pro-card" data-product-id={activeVariant.product_id}>
-        
-        <Link href={`/product_detail?id=${activeVariant.product_id}&v_id=${activeVariant.id}`}>
-          <div className="card_image">
-            <img src={imageSrc} alt={activeVariant.variant_value} className="img-fluid-card" />
-          </div>
-        </Link>
-
-        <h4 className="heading4 mbo brand_image">
-          <img src="/images/Link_img.png" alt="Haneri Img" className="img-fluid-card" />
-        </h4>
-        <br />
-
-        <h4 className="product_names">
-          <Link 
-            href={`/product_detail?id=${activeVariant.product_id}&v_id=${activeVariant.id}`} 
-            className="product_nam"
-          >
-            {product.name}
-          </Link>
-        </h4>
-
-        {shortDesc && <p className="prod-desc mb-2">{shortDesc}</p>}
-
-        <div className="price-box">
-          <div className="c_price">
-            <span className="product-price heading2"> MRP ₹{activeVariant.selling_price}</span>
-            {/* Conditional class string for hidden price */}
-            <span className={`old-price heading2 ${isSamePrice ? 'd-none' : ''}`}>
-              MRP ₹{activeVariant.regular_price}
-            </span>
-          </div>
-          <div className="sp_price none">
-            Special Price : <span className="special_price paragraph1">MRP ₹{activeVariant.sales_price_vendor}</span>
-          </div>
+    <li className="group relative flex flex-col">
+      {/* Product Image */}
+      <Link href={productUrl}>
+        <div className="aspect-square w-full overflow-hidden rounded-lg bg-gray-200">
+          <img
+            alt={activeVariant.variant_value || product.name}
+            src={imageUrl}
+            className="h-full w-full object-cover object-center group-hover:opacity-75 transition-opacity"
+          />
         </div>
+      </Link>
 
-        <div className="cart_view_add">
-          <div className="variant-swatches">
-            {product.variants.map((v) => {
-              const dotClass = `color-dot ${v.id === activeVariant.id ? 'active' : ''}`;
-              
-              return (
-                <span
-                  key={v.id}
-                  className={dotClass}
-                  style={{ background: getColorHex(v.color || v.variant_value) }}
-                  title={v.color || v.variant_value}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setActiveVariant(v);
-                  }}
-                ></span>
-              );
-            })}
-          </div>
-          
-          <button 
-            className="btn rounded-pill px-4 add_to_carts"
-            onClick={(e) => {
-              e.stopPropagation();
-              addToCart(product.id, activeVariant.id);
-            }}
-          >
-            Add to Cart
-          </button>
+      {/* Brand Logo */}
+      <div className="mt-3 flex justify-center">
+        <img
+          src="/images/Link_img.png"
+          alt="Haneri"
+          className="h-6 object-contain"
+        />
+      </div>
+
+      {/* Product Info */}
+      <div className="mt-3 flex flex-col">
+        <h3 className="text-sm font-medium text-gray-900">
+          <Link href={productUrl}>{product.name}</Link>
+        </h3>
+
+        {shortDesc && (
+          <p className="mt-1 text-xs text-gray-500 line-clamp-2">{shortDesc}</p>
+        )}
+
+        {/* Price Display */}
+        <div className="mt-2 flex items-center gap-2">
+          <p className="text-base font-semibold text-gray-900">
+            ₹{sellingPrice || activeVariant.price || 0}
+          </p>
+          {hasDiscount && (
+            <p className="text-sm text-gray-500 line-through">
+              ₹{regularPrice}
+            </p>
+          )}
         </div>
       </div>
-    </div>
+
+      {/* Color Variant Selector */}
+      {product.variants && product.variants.length > 0 && (
+        <div className="mt-4">
+          <h4 className="sr-only">Available colors</h4>
+          <ul role="list" className="flex items-center flex-wrap gap-2">
+            {product.variants.map((variant) => {
+              // Try to find color match from variant.color or variant.variant_value
+              const colorValue = variant.color || variant.variant_value || "";
+              const colorObj = COLOR_OPTIONS.find(
+                (c) => c.value.toLowerCase() === colorValue.toLowerCase()
+              );
+              const isActive = variant.id === activeVariant.id;
+
+              // Use color swatch or default gray
+              const backgroundColor = colorObj?.swatch || "#D1D5DB";
+
+              return (
+                <li
+                  key={variant.id}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveVariant(variant);
+                  }}
+                  style={{ backgroundColor }}
+                  className={classNames(
+                    "size-7 rounded-full border-2 cursor-pointer hover:scale-110 transition-transform shadow-sm",
+                    isActive
+                      ? "border-indigo-600 ring-2 ring-indigo-600 ring-offset-2"
+                      : "border-gray-400"
+                  )}
+                  title={colorValue}
+                >
+                  <span className="sr-only">{colorValue}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
+
+      {/* Add to Cart Button */}
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          onAddToCart(product.id, activeVariant.id);
+        }}
+        className="mt-4 w-full rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-colors"
+      >
+        Add to Cart
+      </button>
+    </li>
   );
 }

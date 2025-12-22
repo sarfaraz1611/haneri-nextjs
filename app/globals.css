@@ -4,6 +4,12 @@
 /* Import Tailwind CSS */
 @import "tailwindcss";
 
+/* Tailwind v4 Custom Theme */
+@theme {
+  --font-heading: 'Barlow Condensed', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --font-ailerons: 'Ailerons', sans-serif;
+}
+
 /* Custom Local Font - Ailerons */
 @font-face {
   font-family: "Ailerons";
@@ -44,6 +50,30 @@
     font-family: 'Open Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Custom Scrollbar Styles */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 71, 62, 0.3) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 71, 62, 0.3);
+    border-radius: 20px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 71, 62, 0.5);
   }
 
   html {
@@ -351,6 +381,16 @@
 
   .aspect-1-1 {
     aspect-ratio: 1 / 1;
+  }
+
+  /* Hide scrollbar */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 
   /* Gradient overlays */

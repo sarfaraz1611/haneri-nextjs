@@ -2,9 +2,9 @@ import Link from "next/link";
 
 export default function Fancraft() {
   return (
-    <section className="py-6" aria-label="Fan Craft by Haneri">
-      <div className="mx-auto mt-15 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden bg-gray-900 px-6 py-20 shadow-xl sm:rounded-3xl sm:px-10 sm:py-24 md:px-12 lg:px-20">
+    <section className="py-6 " aria-label="Fan Craft by Haneri">
+      <div className="mx-auto mt-15 ">
+        <div className="relative overflow-hidden bg-gray-900 px-6 py-20 shadow-xl  rounded-xl sm:rounded-3xl sm:px-10 sm:py-24 md:px-12 lg:px-20">
           <img
             alt="Fancraft by Haneri background"
             src="/images/Fancraft.png"
@@ -21,7 +21,7 @@ export default function Fancraft() {
               FANCRAFT
             </h2>
             <figure>
-              <blockquote className="text-md font-normal text-white sm:text-xl/8">
+              <blockquote className="text-[16px] font-normal text-[#e9e3dc] sm:text-xl/8 line-clamp-6">
                 <p>
                   Fancraft by Haneri is our bespoke design offering — a specialised service
                   that allows you to personalise the aesthetic of any Haneri

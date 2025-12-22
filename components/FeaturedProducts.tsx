@@ -183,6 +183,8 @@ export default function FeaturedProducts() {
     // Safety check: only run the animation if there is content to scroll
     if (scrollDistance <= 0) return;
 
+    // Reduce the pin spacer height to avoid extra white space after scroll ends
+
     // Use GSAP Context for proper scope and cleanup
     const ctx = gsap.context(() => {
       // --- Main Horizontal Scroll Animation ---
@@ -198,7 +200,6 @@ export default function FeaturedProducts() {
           start: "top +26px", // Start when the section hits the top of the viewport
           // End after scrolling a distance equal to the content's extra width
           end: `+=${scrollDistance}`,
-
           // CRITICAL FOR DEBUGGING: Show start/end/pin markers
           markers: false,
         },
@@ -263,7 +264,7 @@ export default function FeaturedProducts() {
     <section
       ref={sectionRef}
       // Increased min-height to provide vertical scroll space for the animation to run
-      className="py-6 pt-0   relative"
+      className=" py-6  pt-0 relative"
       aria-label="Featured Products"
     >
       {/* Interactive animated header - stays visible */}
@@ -296,7 +297,7 @@ export default function FeaturedProducts() {
         >
           {/* Inner div that gets the translateX animation from GSAP */}
           <div
-            className="flex gap-9 justify-center pl-40 pr-40"
+            className="flex gap-9 justify-center pl-[45px] pr-[45px] md:pl-40 md:pr-40"
             style={{
               minWidth: "max-content", // Ensure the div is wide enough to contain all flex items
             }}
