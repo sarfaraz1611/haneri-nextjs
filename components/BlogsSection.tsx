@@ -36,11 +36,12 @@ export default function BlogsSection() {
       <div className="">
         <div className="w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch justify-items-stretch">
           {blogs.map((post) => (
-            <article
+            <Link
               key={post.id}
-              className="flex border border-[#ececec] rounded-[14px] overflow-hidden bg-white shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(0,0,0,0.08)]"
+              href={post.href}
+              className="flex border border-[#ececec] rounded-[14px] overflow-hidden bg-white shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(0,0,0,0.08)] no-underline"
             >
-              <div className="grid grid-rows-[auto_1fr_auto] w-full min-h-full">
+              <article className="grid grid-rows-[auto_1fr_auto] w-full min-h-full">
                 <div className="relative w-full aspect-video overflow-hidden bg-[#f7f7f7]">
                   <img
                     src={post.imageUrl}
@@ -50,7 +51,7 @@ export default function BlogsSection() {
                     className="absolute inset-0 w-full h-full object-cover"
                   />
                 </div>
-                <div className="p-3.5 pb-0 grid gap-2">
+                <div className="p-3.5  grid gap-2 pb-4">
                   <h3 className="font-barlow font-medium text-[clamp(18px,2.2vw,22px)] leading-[1.15] text-[#2a5b57] m-0 text-left line-clamp-2">
                     {post.title}
                   </h3>
@@ -58,15 +59,14 @@ export default function BlogsSection() {
                     {post.description}
                   </p>
                 </div>
-                <Link
-                  href={post.href}
-                  className="mx-3.5 mb-3.5 mt-3 inline-flex items-center justify-center py-2.5 px-3.5 rounded-[10px] border border-[#e5eceb] bg-[#f4faf9] text-[#075E5E] font-semibold text-[13px] leading-none no-underline whitespace-nowrap transition-all hover:bg-[#e9f4f2] active:translate-y-px"
-                  aria-label={`Read more: ${post.title}`}
+                {/* <span
+                  className="mx-3.5 mb-3.5 mt-3 inline-flex items-center justify-center py-2.5 px-3.5 rounded-[10px] border border-[#e5eceb] bg-[#f4faf9] text-[#075E5E] font-semibold text-[13px] leading-none whitespace-nowrap transition-all group-hover:bg-[#e9f4f2]"
+                  aria-hidden="true"
                 >
                   Read More
-                </Link>
-              </div>
-            </article>
+                </span> */}
+              </article>
+            </Link>
           ))}
         </div>
       </div>

@@ -27,7 +27,7 @@ export default function DiscoverHero({
             Discover
           </h2>
           <div
-            className={`flex items-center gap-4 ${
+            className={`flex items-center gap-4  ${
               centered ? "justify-center" : "justify-center "
             }`}
           >
