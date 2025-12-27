@@ -420,6 +420,12 @@
   }
 }
 
+/* Services Slider */
+.services-slider-wrapper {
+  position: relative;
+  width: 100%;
+}
+
 /* Print styles */
 @media print {
   .no-print {

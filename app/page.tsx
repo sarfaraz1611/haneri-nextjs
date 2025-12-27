@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import BlowupShot from "@/components/BlowupShot";
 import FeaturedProducts from "@/components/FeaturedProducts";
 import InnovationsSection from "@/components/InnovationsSection";
+import ServicesSlider from "@/components/ServicesSlider";
 import SteelFanSlider from "@/components/SteelFanSlider";
 import WhyChoose from "@/components/WhyChoose";
 import Fancraft from "@/components/Fancraft";
@@ -56,6 +57,11 @@ export default function Home() {
         </div>
 
         <InnovationsSection />
+
+
+        <div className=" ">
+          <ServicesSlider />
+        </div>
 
         <div className="container mt-8">
           <SteelFanSlider />
