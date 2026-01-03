@@ -286,7 +286,7 @@ export default function ServicesSlider() {
     <div ref={wrapperRef} className="services-slider-wrapper">
       <section
         ref={containerRef}
-        className="relative h-dvh w-full overflow-hidden bg-primary"
+        className="relative h-screen w-full overflow-hidden bg-primary"
         style={{ fontFamily: "'Sora', sans-serif" }}
       >
         {/* Slides */}
