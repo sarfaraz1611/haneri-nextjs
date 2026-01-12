@@ -53,6 +53,7 @@ export default function LumiAmbience() {
           {/* Section 2 - Text Left, Image Right */}
           <div className="grid grid-cols-1 items-center gap-x-16 gap-y-10 lg:grid-cols-2 mt-15">
             <motion.div
+            className="order-2 md:order-1"
               initial={{ opacity: 0, x: -60 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
@@ -82,6 +83,7 @@ export default function LumiAmbience() {
             </motion.div>
 
             <motion.div
+                       className="order-1 md:order-2"
               initial={{ opacity: 0, x: 60 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
@@ -329,6 +331,149 @@ export default function LumiAmbience() {
                 </motion.li>
               </motion.ul>
             </motion.div>
+          </div>
+
+          {/* Why Choose Section */}
+          <motion.div
+            className="mt-15"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <h2 className="text-4xl font-semibold tracking-tight text-[#315858] mb-4">
+              Why Choose Haneri LumiAmbience Ceiling Fans?
+            </h2>
+            <p className="text-black">
+              LumiAmbience Technology redefines what lighting can achieve, delivering advanced functionality and unparalleled comfort. With its unique lens diffuser,
+              customizable colour options, and seamless integration with Haneri ceiling fans, LumiAmbience sets a new standard in lighting innovation. It&apos;s not just
+              about illumination—it&apos;s about creating the perfect atmosphere for every moment.
+            </p>
+          </motion.div>
+
+          {/* Experience Section */}
+          <motion.div
+            className="mt-15"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+          >
+            <h2 className="text-4xl font-semibold tracking-tight text-[#315858] mb-4">
+              Experience LumiAmbience Technology Today!
+            </h2>
+            <p className="text-black">
+              Transform your space with Haneri&apos;s LumiAmbience-enabled ceiling fans. Experience lighting that adapts to your mood and lifestyle with the added
+              elegance of Haneri&apos;s cutting-edge design. Choose LumiAmbience Technology—where innovation meets ambience and lighting meets perfection.
+            </p>
+          </motion.div>
+
+          <div className="mt-20 flex flex-col items-start">
+            <h2 className="text-4xl  mb-10 font-semibold  tracking-tight text-[#315858]">
+              Benefits For Customers
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2  gap-8 w-full">
+              <motion.div
+                className="grid  grid-cols-[72px_1fr] items-start gap-3.5 p-4 rounded-lg border border-gray-200 bg-white"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              >
+                <Image
+                  src="/images/enhance_comfort.png"
+                  alt="Comfort Icon"
+                  width={72}
+                  height={72}
+                  className="object-contain mb-4"
+                />
+                <div>
+                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                    Enhanced Comfort
+                  </h3>
+                  <p className="mt-2 text-black">
+                    Experience superior cooling with high air delivery, ensuring
+                    a refreshing breeze in every corner of the room.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="grid grid-cols-[72px_1fr] items-start gap-3.5 p-4 rounded-lg border border-gray-200 bg-white"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+              >
+                <Image
+                  src="/images/cost_savings.png"
+                  alt="Cost Savings"
+                  width={72}
+                  height={72}
+                  className="object-contain mb-4"
+                />
+                <div>
+                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                    Cost Savings
+                  </h3>
+                  <p className="mt-2 text-black">
+                    Energy-efficient operation translates to long-term savings
+                    on electricity bills.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="grid grid-cols-[72px_1fr] items-start gap-3.5 p-4 rounded-lg border border-gray-200 bg-white"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+              >
+                <Image
+                  src="/images/sustainable_choice.png"
+                  alt="Sustainable Choice"
+                  width={72}
+                  height={72}
+                  className="object-contain mb-4"
+                />
+                <div>
+                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                    Sustainable Choice
+                  </h3>
+                  <p className="mt-2 text-black">
+                    This Technology contributes to a greener, more sustainable
+                    environment by reducing energy consumption.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="grid grid-cols-[72px_1fr] items-start gap-3.5 p-4 rounded-lg border border-gray-200 bg-white"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
+              >
+                <Image
+                  src="/images/quiet_operation.png"
+                  alt="Modern Aesthetics"
+                  width={72}
+                  height={72}
+                  className="object-contain mb-4"
+                />
+                <div>
+                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                    Quiet Operation
+                  </h3>
+                  <p className="mt-2 text-black">
+                    Reduced turbulence and noise make Silent M.A.S.S ideal for
+                    bedrooms, offices, and libraries where silence is a
+                    priority.
+                  </p>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </div>

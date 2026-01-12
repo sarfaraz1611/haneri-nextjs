@@ -32,8 +32,8 @@ export default function AirCurveDesign() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-4xl tracking-tight text-[#315858]">
-                <span className="text-[#bb6125] font-semibold">
+              <h2 className="text-4xl tracking-tight  text-[#315858]">
+                <span className="text-[#bb6125] font-semibold mb-1" >
                   Introducing Air Curve Design:
                 </span>
                 <br />
@@ -55,12 +55,13 @@ export default function AirCurveDesign() {
           {/* Section 2 - Text Left, Image Right */}
           <div className="grid grid-cols-1 items-center gap-x-16 gap-y-10 lg:grid-cols-2 mt-15">
             <motion.div
+             className="order-2 lg:order-1"
               initial={{ opacity: 0, x: -60 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
+              <h2 className="text-4xl font-semibold  tracking-tight text-[#315858]">
                 Why is Air Curve Design?
               </h2>
               <p className="mt-4 text-black">
@@ -75,6 +76,7 @@ export default function AirCurveDesign() {
             </motion.div>
 
             <motion.div
+             className="order-1 lg:order-2"
               initial={{ opacity: 0, x: 60 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
@@ -88,6 +90,121 @@ export default function AirCurveDesign() {
                 className="aspect-[3/2] w-full rounded-lg bg-gray-100 object-cover"
               />
             </motion.div>
+          </div>
+
+          {/* Key Features Section */}
+          <div className="mt-20">
+              <h2 className="text-4xl  mb-10 font-semibold  tracking-tight text-[#315858]">
+              Key Features of Air Curve Design
+            </h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <motion.div
+                className="grid grid-cols-[72px_1fr] items-start gap-3.5 p-4 rounded-lg border border-gray-200 bg-white"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              >
+                <Image
+                  src="/images/hight_air_delivery.png"
+                  alt="High Air Delivery"
+                  width={72}
+                  height={72}
+                  className="object-contain"
+                />
+                <div>
+                  <h3 className="text-xl font-semibold text-[#315858]">
+                    High Air Delivery
+                  </h3>
+                  <p className="mt-2 text-black">
+                    Air Curve blades are engineered to maximize airflow, providing
+                    a powerful and consistent cooling experience. They are designed
+                    to deliver optimal air circulation even in large spaces.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="grid grid-cols-[72px_1fr] items-start gap-3.5 p-4 rounded-lg border border-gray-200 bg-white"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+              >
+                <Image
+                  src="/images/energy_efficiency.png"
+                  alt="Energy Efficiency"
+                  width={72}
+                  height={72}
+                  className="object-contain"
+                />
+                <div>
+                  <h3 className="text-xl font-semibold text-[#315858]">
+                    Energy Efficiency
+                  </h3>
+                  <p className="mt-2 text-black">
+                    The aerodynamic profile of Air Curve blades optimizing drag,
+                    reducing the load on the motor and ensuring energy-efficient
+                    operation. Thanks to their energy-efficient operation, you can
+                    enjoy a powerful cooling experience while saving on electricity
+                    bills.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="grid grid-cols-[72px_1fr] items-start gap-3.5 p-4 rounded-lg border border-gray-200 bg-white"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+              >
+                <Image
+                  src="/images/advance_material.png"
+                  alt="Advanced Materials"
+                  width={72}
+                  height={72}
+                  className="object-contain"
+                />
+                <div>
+                  <h3 className="text-xl font-semibold text-[#315858]">
+                    Advanced Materials
+                  </h3>
+                  <p className="mt-2 text-black">
+                    Air Curve blades are crafted using high-strength, lightweight
+                    materials, ensuring durability and optimal blade weight for
+                    efficient rotation. You can trust in the longevity of your
+                    cooling solution.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="grid grid-cols-[72px_1fr] items-start gap-3.5 p-4 rounded-lg border border-gray-200 bg-white"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
+              >
+                <Image
+                  src="/images/silent_performance.png"
+                  alt="Silent Performance"
+                  width={72}
+                  height={72}
+                  className="object-contain"
+                />
+                <div>
+                  <h3 className="text-xl font-semibold text-[#315858]">
+                    Silent Performance
+                  </h3>
+                  <p className="mt-2 text-black">
+                    The streamlined blade design minimizes turbulence, ensuring
+                    whisper-quiet operation, ideal for residential and professional
+                    settings.
+                  </p>
+                </div>
+              </motion.div>
+            </div>
           </div>
 
           {/* Section 3 - Image Left with List */}
@@ -185,6 +302,114 @@ export default function AirCurveDesign() {
                 </motion.li>
               </motion.ul>
             </motion.div>
+          </div>
+
+       
+
+          {/* Benefits For Customers Section */}
+          <div className="mt-20 flex flex-col items-start">
+             <h2 className="text-4xl  mb-10 font-semibold  tracking-tight text-[#315858]">
+              Benefits For Customers
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2  gap-8 w-full">
+              <motion.div
+               className="grid  grid-cols-[72px_1fr] items-start gap-3.5 p-4 rounded-lg border border-gray-200 bg-white"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              >
+                <Image
+                  src="/images/enhance_comfort.png"
+                  alt="Comfort Icon"
+                  width={72}
+                  height={72}
+                  className="object-contain mb-4"
+                />
+                <div>
+                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                    Enhanced Comfort
+                  </h3>
+                  <p className="mt-2 text-black">
+                    Experience superior cooling with high air delivery, ensuring a refreshing breeze in every corner of
+                    the room.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+               className="grid grid-cols-[72px_1fr] items-start gap-3.5 p-4 rounded-lg border border-gray-200 bg-white"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+              >
+                <Image
+                  src="/images/cost_savings.png"
+                  alt="Cost Savings"
+                  width={72}
+                  height={72}
+                  className="object-contain mb-4"
+                />
+                <div>
+                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                    Cost Savings
+                  </h3>
+                  <p className="mt-2 text-black">
+                    Energy-efficient operation translates to long-term savings on electricity bills.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+               className="grid grid-cols-[72px_1fr] items-start gap-3.5 p-4 rounded-lg border border-gray-200 bg-white"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+              >
+                <Image
+                  src="/images/sustainable_choice.png"
+                  alt="Sustainable Choice"
+                  width={72}
+                  height={72}
+                  className="object-contain mb-4"
+                />
+                <div>
+                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                    Sustainable Choice
+                  </h3>
+                  <p className="mt-2 text-black">
+                    This Technology contributes to a greener, more sustainable environment by reducing energy
+                    consumption.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+               className="grid grid-cols-[72px_1fr] items-start gap-3.5 p-4 rounded-lg border border-gray-200 bg-white"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
+              >
+                <Image
+                  src="/images/quiet_operation.png"
+                  alt="Modern Aesthetics"
+                  width={72}
+                  height={72}
+                  className="object-contain mb-4"
+                />
+                <div>
+                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                    Quiet Operation
+                  </h3>
+                  <p className="mt-2 text-black">
+                    Reduced turbulence and noise make Silent M.A.S.S ideal for bedrooms, offices, and libraries where silence is a priority.
+                  </p>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </div>

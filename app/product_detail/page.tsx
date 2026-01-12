@@ -11,24 +11,6 @@ function ProductDetailContent() {
   const productId = searchParams.get("id");
   const variantId = searchParams.get("v_id") || undefined;
 
-  // Debug logging
-  console.log(
-    "🔍 ProductDetailPage - All searchParams:",
-    Object.fromEntries(searchParams.entries())
-  );
-  console.log(
-    "🔍 ProductDetailPage - productId:",
-    productId,
-    "type:",
-    typeof productId
-  );
-  console.log(
-    "🔍 ProductDetailPage - variantId:",
-    variantId,
-    "type:",
-    typeof variantId
-  );
-
   // Don't render if no productId
   if (!productId) {
     return (
@@ -41,12 +23,6 @@ function ProductDetailContent() {
     );
   }
 
-  console.log(
-    "✅ ProductDetailPage - Rendering ProductDetailClient with productId:",
-    productId,
-    "variantId:",
-    variantId
-  );
   return <ProductDetailClient productId={productId} variantId={variantId} />;
 }
 

@@ -583,21 +583,78 @@ export default function OurStorySection({
                 : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center p-4"
             }
           >
-            <div className="flex flex-col md:flex-row gap-8 items-center max-w-6xl w-full">
-              <div className="w-full md:flex-1 order-2 md:order-1">
-                <h3 className="text-[32px] text-center md:text-left sm:text-[34px] font-light font-['Barlow_Condensed'] text-[#00473E] mb-4">
+            <div className="flex flex-col md:flex-row gap-8 items-start max-w-6xl w-full">
+              <div className="w-full md:flex-1 flex flex-col gap-4 order-2 md:order-1">
+                <h3 className="text-[32px] text-center md:text-left sm:text-[34px] font-light font-['Barlow_Condensed'] text-[#00473E] mb-2">
                   Our Mission
                 </h3>
                 <p className="text-md text-center md:text-left sm:text-[14px] font-['Open_Sans'] leading-[1.8] sm:leading-[1.75] text-black">
                   We will achieve our mission through thoughtful design, lasting
-                  quality, inclusive pricing, and exceptional customer
-                  care—making luxury accessible and elevating everyday living
-                  for all.
+                  quality, inclusive pricing, and exceptional customer care—making
+                  luxury accessible and elevating everyday living for all.
+                </p>
+                <p className="text-md text-center md:text-left sm:text-[14px] font-['Open_Sans'] leading-[1.8] sm:leading-[1.75] text-black font-semibold">
+                  We will achieve our mission by focusing on four key pillars:
+                </p>
+                <div className="space-y-3">
+                  <div className="text-center md:text-left">
+                    <h4 className="text-[18px] text-[#CA5D27] font-['Barlow_Condensed'] font-semibold mb-1">
+                      Innovative Design and Engineering
+                    </h4>
+                    <p className="text-[13px] font-['Open_Sans'] leading-[1.75] text-black">
+                      We will bring together talented designers and engineers to
+                      craft solutions that are as aesthetically pleasing as they
+                      are functional. By staying ahead of design trends and
+                      technological advancements, we ensure that each product is
+                      thoughtfully crafted to meet the evolving needs of the
+                      modern consumer.
+                    </p>
+                  </div>
+                  <div className="text-center md:text-left">
+                    <h4 className="text-[18px] text-[#CA5D27] font-['Barlow_Condensed'] font-semibold mb-1">
+                      Commitment to Quality and Durability
+                    </h4>
+                    <p className="text-[13px] font-['Open_Sans'] leading-[1.75] text-black">
+                      Quality will be at the core of everything we do. From
+                      materials to manufacturing processes, we will invest in
+                      ensuring that each product is built to last and provide a
+                      reliable experience over time.
+                    </p>
+                  </div>
+                  <div className="text-center md:text-left">
+                    <h4 className="text-[18px] text-[#CA5D27] font-['Barlow_Condensed'] font-semibold mb-1">
+                      Accessibility and Inclusivity
+                    </h4>
+                    <p className="text-[13px] font-['Open_Sans'] leading-[1.75] text-black">
+                      We believe luxury should be accessible to everyone. By
+                      designing products with a broad range of price points and
+                      functionality, we will make our solutions available to
+                      diverse consumers, considering various lifestyles, budgets,
+                      and preferences.
+                    </p>
+                  </div>
+                  <div className="text-center md:text-left">
+                    <h4 className="text-[18px] text-[#CA5D27] font-['Barlow_Condensed'] font-semibold mb-1">
+                      Exceptional Customer Experience
+                    </h4>
+                    <p className="text-[13px] font-['Open_Sans'] leading-[1.75] text-black">
+                      We are dedicated to supporting our customers throughout
+                      their journey, from purchase to daily use and beyond.
+                      Through responsive customer service, educational resources,
+                      and aftercare support, we will ensure our customers feel
+                      valued and equipped to enjoy our solutions' benefits fully.
+                    </p>
+                  </div>
+                </div>
+                <p className="text-md text-center md:text-left sm:text-[14px] font-['Open_Sans'] leading-[1.8] sm:leading-[1.75] text-black mt-2">
+                  Focusing on these pillars will transform aspirational living
+                  into a reality for every space, continuously elevating everyday
+                  experiences.
                 </p>
               </div>
               <div
                 className={
-                  isMobile ? "w-1/2" : "w-full md:w-[35%] order-1 md:order-2"
+                  isMobile ? "w-1/2 mx-auto order-1" : "w-full my-auto md:w-[30%] flex-shrink-0 order-1 md:order-2"
                 }
               >
                 <img
@@ -643,10 +700,72 @@ export default function OurStorySection({
                 : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center p-4"
             }
           >
-            <div className="flex flex-col md:flex-row gap-8 items-center max-w-6xl w-full">
+            <div className="flex flex-col md:flex-row gap-8 items-start max-w-6xl w-full">
+              <div className="w-full md:flex-1 flex flex-col gap-4 order-2 md:order-1">
+                <h3 className="text-[32px] text-center md:text-left sm:text-[34px] font-light font-['Barlow_Condensed'] text-[#00473E] mb-2">
+                  Our Values
+                </h3>
+                <div className="space-y-3">
+                  <div className="text-center md:text-left">
+                    <h4 className="text-[18px] text-[#CA5D27] font-['Barlow_Condensed'] font-semibold mb-1">
+                      Human-Centric Design
+                    </h4>
+                    <p className="text-[13px] font-['Open_Sans'] leading-[1.75] text-black">
+                      We focus on creating products that are intuitive, inclusive,
+                      and designed with real people in mind.
+                    </p>
+                  </div>
+                  <div className="text-center md:text-left">
+                    <h4 className="text-[18px] text-[#CA5D27] font-['Barlow_Condensed'] font-semibold mb-1">
+                      Excellence in Quality
+                    </h4>
+                    <p className="text-[13px] font-['Open_Sans'] leading-[1.75] text-black">
+                      We uphold the highest standards of craftsmanship, using
+                      durable materials for products that stand the test of time.
+                    </p>
+                  </div>
+                  <div className="text-center md:text-left">
+                    <h4 className="text-[18px] text-[#CA5D27] font-['Barlow_Condensed'] font-semibold mb-1">
+                      Accessibility and Inclusivity
+                    </h4>
+                    <p className="text-[13px] font-['Open_Sans'] leading-[1.75] text-black">
+                      We believe luxury should be attainable for everyone, creating
+                      products that suit diverse lifestyles, needs, and budgets.
+                    </p>
+                  </div>
+                  <div className="text-center md:text-left">
+                    <h4 className="text-[18px] text-[#CA5D27] font-['Barlow_Condensed'] font-semibold mb-1">
+                      Responsiveness to Consumer Needs
+                    </h4>
+                    <p className="text-[13px] font-['Open_Sans'] leading-[1.75] text-black">
+                      We listen and adapt to our customers' needs, ensuring a
+                      seamless experience from purchase through long-term use.
+                    </p>
+                  </div>
+                  <div className="text-center md:text-left">
+                    <h4 className="text-[18px] text-[#CA5D27] font-['Barlow_Condensed'] font-semibold mb-1">
+                      Transparency and Integrity
+                    </h4>
+                    <p className="text-[13px] font-['Open_Sans'] leading-[1.75] text-black">
+                      We operate with honesty and accountability, building trust
+                      through clear communication and ethical practices.
+                    </p>
+                  </div>
+                  <div className="text-center md:text-left">
+                    <h4 className="text-[18px] text-[#CA5D27] font-['Barlow_Condensed'] font-semibold mb-1">
+                      Sustainability and Responsibility
+                    </h4>
+                    <p className="text-[13px] font-['Open_Sans'] leading-[1.75] text-black">
+                      We are committed to minimizing our environmental impact,
+                      choosing sustainable materials and processes to create a
+                      positive impact for future generations.
+                    </p>
+                  </div>
+                </div>
+              </div>
               <div
                 className={
-                  isMobile ? "w-1/2" : "w-full md:w-[35%] order-1 md:order-2"
+                  isMobile ? "w-1/2 mx-auto order-1" : "w-full my-auto md:w-[30%] flex-shrink-0 order-1 md:order-2"
                 }
               >
                 <img
@@ -654,17 +773,6 @@ export default function OurStorySection({
                   alt="Values"
                   className="w-full h-auto rounded-md object-cover"
                 />
-              </div>
-              <div className="w-full md:flex-1">
-                <h3 className="text-[32px] text-center md:text-left sm:text-[34px] font-light font-['Barlow_Condensed'] text-[#00473E] mb-4">
-                  Our Values
-                </h3>
-                <p className="text-md text-center md:text-left sm:text-[14px] font-['Open_Sans'] leading-[1.8] sm:leading-[1.75] text-black">
-                  We focus on human-centric, intuitive design, lasting quality,
-                  and accessible luxury for all lifestyles. With a commitment to
-                  transparency, responsiveness, and sustainability, we create
-                  thoughtful, ethical, and enduring solutions.
-                </p>
               </div>
             </div>
           </div>
@@ -703,41 +811,72 @@ export default function OurStorySection({
                 : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center p-4 sm:p-2"
             }
           >
-            <div className="relative w-full max-w-[80%] overflow-hidden rounded-lg shadow-lg h-[500px] sm:h-[400px] md:h-[520px]">
-              <img
-                src="images/about_top_last.png"
-                alt="The Haneri Promise"
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-              <div
-                className="absolute inset-0"
-                style={{
-                  background: `linear-gradient(90deg, rgba(17,28,21,.75) 0%, rgba(17,28,21,.5) 50%, rgba(17,28,21,.2) 100%),
-                    radial-gradient(1000px 100% at 0% 0%, rgba(15,40,25,.4) 0%, rgba(15,40,25,0) 60%)`,
-                }}
-              ></div>
-              <div className="absolute inset-0 flex items-center justify-start">
-                <div className="max-w-xl w-full px-8 md:px-12 sm:px-6">
-                  <h2 className="text-white text-[28px] md:text-[42px] sm:text-[28px] font-light font-['Barlow_Condensed'] mb-4 sm:mb-3">
+            {isMobile ? (
+              <div className="w-full max-w-[90%] mx-auto overflow-hidden rounded-lg shadow-lg bg-[#00473E]">
+                <div className="relative w-full h-[200px]">
+                  <img
+                    src="images/about_top_last.png"
+                    alt="The Haneri Promise"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-6 text-center">
+                  <h2 className="text-white text-[24px] font-light font-['Barlow_Condensed'] mb-3">
                     THE HANERI PROMISE
                   </h2>
-                  <p className="text-white mb-4 sm:mb-3 text-[14px] md:text-[16px] sm:text-[14px] leading-[1.8] sm:leading-[1.75]">
+                  <p className="text-white mb-3 text-[14px] leading-[1.75]">
                     Every product we create is a reflection of our passion for
                     design, precision, and purpose.
                   </p>
-                  <p className="text-white mb-6 sm:mb-4 text-[14px] md:text-[16px] sm:text-[14px] leading-[1.8] sm:leading-[1.75]">
+                  <p className="text-white mb-4 text-[14px] leading-[1.75]">
                     We promise innovation that lasts, experiences that inspire,
                     and quality that defines every space you live in.
                   </p>
                   <a
-                    href="shop.php"
-                    className="inline-block bg-white text-[#2b2b2b] font-semibold text-xs font-['Open_Sans'] uppercase tracking-[0.4px] py-2.5 px-4 sm:py-2 sm:px-3 no-underline transition-all duration-[0.25s] border-2 border-white hover:bg-[#00473E] hover:text-white hover:border-white"
+                    href="shop"
+                    className="inline-block bg-white text-[#2b2b2b] font-semibold text-xs font-['Open_Sans'] uppercase tracking-[0.4px] py-2.5 px-4 no-underline transition-all duration-[0.25s] border-2 border-white hover:bg-transparent hover:text-white hover:border-white"
                   >
                     Explore Products
                   </a>
                 </div>
               </div>
-            </div>
+            ) : (
+              <div className="relative w-full max-w-[80%] overflow-hidden rounded-lg shadow-lg h-[520px]">
+                <img
+                  src="images/about_top_last.png"
+                  alt="The Haneri Promise"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: `linear-gradient(90deg, rgba(17,28,21,.75) 0%, rgba(17,28,21,.5) 50%, rgba(17,28,21,.2) 100%),
+                      radial-gradient(1000px 100% at 0% 0%, rgba(15,40,25,.4) 0%, rgba(15,40,25,0) 60%)`,
+                  }}
+                ></div>
+                <div className="absolute inset-0 flex items-center justify-start">
+                  <div className="max-w-xl w-full px-12">
+                    <h2 className="text-white text-[42px] font-light font-['Barlow_Condensed'] mb-4">
+                      THE HANERI PROMISE
+                    </h2>
+                    <p className="text-white mb-4 text-[16px] leading-[1.8]">
+                      Every product we create is a reflection of our passion for
+                      design, precision, and purpose.
+                    </p>
+                    <p className="text-white mb-6 text-[16px] leading-[1.8]">
+                      We promise innovation that lasts, experiences that inspire,
+                      and quality that defines every space you live in.
+                    </p>
+                    <a
+                      href="shop.php"
+                      className="inline-block bg-white text-[#2b2b2b] font-semibold text-xs font-['Open_Sans'] uppercase tracking-[0.4px] py-2.5 px-4 no-underline transition-all duration-[0.25s] border-2 border-white hover:bg-[#00473E] hover:text-white hover:border-white"
+                    >
+                      Explore Products
+                    </a>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>

@@ -111,7 +111,6 @@ export default function ProductDetailClient({
       // Initialize with variantId from props if available
       if (variantId) {
         const parsed = parseInt(variantId);
-        console.log("Initializing selectedVariantId from props:", parsed);
         return isNaN(parsed) ? null : parsed;
       }
       return null;
@@ -123,64 +122,28 @@ export default function ProductDetailClient({
 
   // Log props changes and sync variantId prop to state
   useEffect(() => {
-    console.log("=== ProductDetailClient Props ===");
-    console.log("productId prop:", productId, "type:", typeof productId);
-    console.log("variantId prop:", variantId, "type:", typeof variantId);
-
     // Sync variantId from props to state when it changes
     if (variantId) {
       const parsed = parseInt(variantId);
       if (!isNaN(parsed) && parsed !== selectedVariantId) {
-        console.log("Syncing variantId from props to state:", parsed);
         setSelectedVariantId(parsed);
       }
     }
   }, [productId, variantId]);
 
   useEffect(() => {
-    console.log("=== useEffect for fetchProduct triggered ===");
-    console.log(
-      "productId:",
-      productId,
-      "type:",
-      typeof productId,
-      "truthy:",
-      !!productId
-    );
-    console.log("variantId:", variantId);
-
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        console.log(
-          "🚀 API CALL STARTING - Fetching product:",
-          productId,
-          "variantId from URL:",
-          variantId
-        );
-        console.log(
-          "API URL:",
-          `${BASE_URL}/products/get_products/${productId}`
-        );
-
         const response = await axios.post(
           `${BASE_URL}/products/get_products/${productId}`
         );
-
-        console.log("✅ API RESPONSE RECEIVED:", response);
 
         // Handle both { success: true, data: {...} } and direct data response (matching PHP)
         const productData =
           response.data && response.data.success && response.data.data
             ? response.data.data
             : response.data;
-
-        console.log("Product data received:", productData);
-        console.log("Variants:", productData.variants);
-        console.log(
-          "Variant IDs:",
-          productData.variants?.map((v: Variant) => v.id)
-        );
 
         // Set product first
         setProduct(productData);
@@ -195,8 +158,6 @@ export default function ProductDetailClient({
         ) {
           const urlVariantId = variantId ? parseInt(variantId) : null;
 
-          console.log("URL variantId:", variantId, "Parsed:", urlVariantId);
-
           if (urlVariantId && !isNaN(urlVariantId)) {
             // Check if variant exists - matching PHP: p.variants.find(v => v.id === parseInt(variantIdFromUrl))
             const selectedVariant = productData.variants.find(
@@ -204,21 +165,13 @@ export default function ProductDetailClient({
             );
 
             if (selectedVariant) {
-              console.log("Found variant from URL, setting to:", urlVariantId);
               setSelectedVariantId(urlVariantId);
             } else {
-              console.log(
-                "Variant from URL not found, using first variant:",
-                productData.variants[0].id
-              );
               setSelectedVariantId(productData.variants[0].id);
             }
           } else {
             // No variant in URL, use first one (matching PHP: updateVariant(first))
-            console.log(
-              "No variant in URL, using first variant:",
-              productData.variants[0].id
-            );
+
             setSelectedVariantId(productData.variants[0].id);
           }
         }
@@ -232,13 +185,8 @@ export default function ProductDetailClient({
 
     // Only fetch if productId exists and is not empty
     if (productId && productId.trim() !== "") {
-      console.log("✅ productId is valid, calling fetchProduct");
       fetchProduct();
     } else {
-      console.log(
-        "❌ productId is invalid, NOT calling fetchProduct. productId:",
-        productId
-      );
       setLoading(false);
       setError("Product ID is required");
     }
@@ -254,10 +202,7 @@ export default function ProductDetailClient({
     ) {
       if (!selectedVariantId) {
         // No variant selected, select the first one
-        console.log(
-          "No variant selected, selecting first variant:",
-          product.variants[0].id
-        );
+
         setSelectedVariantId(product.variants[0].id);
       } else {
         // Validate selected variant still exists
@@ -265,12 +210,6 @@ export default function ProductDetailClient({
           (v) => v.id === selectedVariantId
         );
         if (!variantExists) {
-          console.log(
-            "Selected variant",
-            selectedVariantId,
-            "no longer exists, selecting first variant:",
-            product.variants[0].id
-          );
           setSelectedVariantId(product.variants[0].id);
         } else {
           console.log("Selected variant", selectedVariantId, "is valid");
@@ -408,23 +347,6 @@ export default function ProductDetailClient({
       ? Math.max(0, Math.min(currentImageIndex, images.length - 1))
       : 0;
 
-  // Debug logging
-  console.log("=== Product Detail Debug ===");
-  console.log("Product:", product);
-  console.log("Variants:", variants);
-  console.log("Selected Variant ID:", selectedVariantId);
-  console.log("Selected variant:", selectedVariant);
-  console.log("Selected variant file_urls:", selectedVariant?.file_urls);
-  console.log("Selected variant banner_urls:", selectedVariant?.banner_urls);
-  console.log("Images array:", images);
-  console.log("Images length:", images.length);
-  console.log("Safe image index:", safeImageIndex);
-  console.log("Current image index:", currentImageIndex);
-  console.log("Product name:", product.name);
-  console.log("Product description:", product.description);
-  console.log("Feature icons:", product.feature_icons);
-  console.log("Features:", product.features);
-
   return (
     <main className="bg-white mt-20">
       <section className="container mx-auto px-4 lg:px-6 py-6">
@@ -447,12 +369,7 @@ export default function ProductDetailClient({
                         images[safeImageIndex]
                       );
                     }}
-                    onLoad={() => {
-                      console.log(
-                        "Image loaded successfully:",
-                        images[safeImageIndex]
-                      );
-                    }}
+                    onLoad={() => {}}
                   />
                 </div>
               ) : (
@@ -536,229 +453,233 @@ export default function ProductDetailClient({
           {/* ================= RIGHT : INFO ================= */}
           <div className="mt-6 lg:mt-0">
             <div className="lg:sticky lg:top-28 lg:max-h-[calc(100vh-8rem)] lg:overflow-y-auto">
-            <Image
-              src="/images/Haneri Logo.png"
-              alt="Haneri"
-              width={120}
-              height={28}
-              className="h-7 mb-2"
-            />
+              <Image
+                src="/images/Haneri Logo.png"
+                alt="Haneri"
+                width={120}
+                height={28}
+                className="h-7 mb-2"
+              />
 
-            <h1 className="font-heading text-3xl uppercase text-[#CA5D27] font-semibold">
-              {product.name || "Product Name"}
-            </h1>
+              <h1 className="font-heading text-3xl uppercase text-[#CA5D27] font-semibold">
+                {product.name || "Product Name"}
+              </h1>
 
-            {/* Ratings */}
-            {(product.rating !== undefined || product.review_count) && (
-              <div className="flex items-center gap-3 mt-3">
-                <div className="flex items-center">
-                  <div className="relative w-24 h-4">
-                    <div className="absolute inset-0 flex gap-0.5">
-                      {[...Array(5)].map((_, i) => (
-                        <span key={i} className="text-gray-300 text-sm">
-                          ★
-                        </span>
-                      ))}
-                    </div>
-                    <div
-                      className="absolute inset-0 flex gap-0.5 overflow-hidden"
-                      style={{ width: `${((product.rating || 0) / 5) * 100}%` }}
-                    >
-                      {[...Array(5)].map((_, i) => (
-                        <span key={i} className="text-yellow-400 text-sm">
-                          ★
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                {product.review_count && product.review_count > 0 && (
-                  <a
-                    href="#"
-                    className="text-[#075E5E] text-sm hover:underline"
-                  >
-                    ( {product.review_count} Reviews )
-                  </a>
-                )}
-              </div>
-            )}
-
-            {product.category && (
-              <p className="uppercase text-sm font-bold text-[#075E5E] mt-3">
-                Category: <span className="font-bold">{product.category}</span>
-              </p>
-            )}
-
-            {product.description && (
-              <div className="text-[#777] font-normal mt-3 text-[14px]">
-                Ratings/Reviews section - Not present in current code Feature
-                Slider - A horizontal scrolling carousel showing product
-                features with icons Discount percentage badge - Shows the
-                percentage off MRP label and better price formatting
-              </div>
-            )}
-
-            {/* Variants */}
-            {variants && Array.isArray(variants) && variants.length > 0 && (
-              <div className="mt-5 flex  items-center gap-6">
-                <p className="uppercase  mt-3 text-sm font-bold text-[#075E5E] mb-3">
-                  Select The Variant:
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  {variants.map((v) => {
-                    const colorValue = v.color || v.variant_value || "";
-                    const colorObj = COLOR_OPTIONS.find(
-                      (c) => c.value.toLowerCase() === colorValue.toLowerCase()
-                    );
-                    const isActive = v.id === selectedVariantId;
-                    const backgroundColor = colorObj?.swatch || "#D1D5DB";
-
-                    return (
-                      <button
-                        key={v.id}
-                        onClick={() => setSelectedVariantId(v.id)}
-                        style={{ backgroundColor }}
-                        className={`w-6 h-6 rounded-full border-2 transition-all hover:scale-110 shadow-sm ${
-                          isActive
-                            ? "border-[#075E5E] ring-2 ring-[#075E5E] ring-offset-2"
-                            : "border-gray-400"
-                        }`}
-                        title={v.variant_value}
+              {/* Ratings */}
+              {(product.rating !== undefined || product.review_count) && (
+                <div className="flex items-center gap-3 mt-3">
+                  <div className="flex items-center">
+                    <div className="relative w-24 h-4">
+                      <div className="absolute inset-0 flex gap-0.5">
+                        {[...Array(5)].map((_, i) => (
+                          <span key={i} className="text-gray-300 text-sm">
+                            ★
+                          </span>
+                        ))}
+                      </div>
+                      <div
+                        className="absolute inset-0 flex gap-0.5 overflow-hidden"
+                        style={{
+                          width: `${((product.rating || 0) / 5) * 100}%`,
+                        }}
                       >
-                        <span className="sr-only">{v.variant_value}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-
-            {/* Price */}
-            {selectedVariant && (
-              <div className="mt-6">
-                <div className="flex items-center gap-3">
-                  {selectedVariant.regular_price &&
-                    parseFloat(selectedVariant.regular_price) >
-                      selectedVariant.selling_price && (
-                      <span className="bg-[#CA5D27] text-white text-xs font-bold px-2 py-1 rounded">
-                        -
-                        {(
-                          ((parseFloat(selectedVariant.regular_price) -
-                            selectedVariant.selling_price) /
-                            parseFloat(selectedVariant.regular_price)) *
-                          100
-                        ).toFixed(2)}
-                        %
-                      </span>
-                    )}
-                  <span className="text-3xl font-heading text-[#075E5E] font-semibold">
-                    ₹{selectedVariant.selling_price.toLocaleString("en-IN")}
-                  </span>
-                </div>
-                <div className="mt-2 flex items-center gap-2">
-                  {selectedVariant.regular_price &&
-                    parseFloat(selectedVariant.regular_price) >
-                      selectedVariant.selling_price && (
-                      <>
-                        <span className="text-xs text-gray-500 uppercase font-semibold">
-                          MRP
-                        </span>
-                        <del className="text-gray-400 text-sm">
-                          ₹
-                          {parseFloat(
-                            selectedVariant.regular_price
-                          ).toLocaleString("en-IN")}
-                        </del>
-                      </>
-                    )}
-                </div>
-                <p className="text-xs text-gray-500 mt-1">
-                  Inclusive All Taxes
-                </p>
-              </div>
-            )}
-
-            {/* Quantity + CTA */}
-            <div className="flex items-center gap-4 mt-6">
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-10 rounded-[10px]  border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
-                  aria-label="Decrease quantity"
-                >
-                  <span className="text-lg font-bold">−</span>
-                </button>
-                <span className="text-lg font-semibold w-8 text-center">
-                  {quantity}
-                </span>
-                <button
-                  onClick={() => setQuantity(quantity + 1)}
-                  className="w-10 h-10 rounded-[10px] border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
-                  aria-label="Increase quantity"
-                >
-                  <span className="text-lg font-bold">+</span>
-                </button>
-              </div>
-              <button className="bg-[#075E5E] text-white px-6 py-3 rounded-lg font-bold hover:bg-[#064d4d] transition-colors">
-                Add to Cart
-              </button>
-            </div>
-
-            {/* Guides */}
-            <hr className="my-6 border-gray-200" />
-            <div className="flex gap-6 mt-6 text-sm font-semibold text-[#075E5E]">
-              <a href="#">Buying Guide</a>
-              <a href="#">Installation Guide</a>
-            </div>
-
-            <hr className="my-6 border-gray-200" />
-
-            {/* Feature Slider */}
-            {(() => {
-              const featureIcons =
-                product.feature_icons &&
-                Array.isArray(product.feature_icons) &&
-                product.feature_icons.length > 0
-                  ? product.feature_icons
-                  : DEFAULT_FEATURE_ICONS;
-
-              return (
-                <div className="relative mt-6">
-                  <div
-                    ref={featureScrollRef}
-                    className="overflow-x-auto scrollbar-hide px-8"
-                    onMouseEnter={() => setIsFeatureAutoScrolling(false)}
-                    onMouseLeave={() => setIsFeatureAutoScrolling(true)}
-                  >
-                    <div className="flex gap-4 pb-2">
-                      {featureIcons.map((feature) => (
-                        <div
-                          key={feature.id}
-                          className="shrink-0 flex flex-col items-center justify-center w-24 text-center"
-                        >
-                          <div className="w-8 h-8 relative mb-2">
-                            <Image
-                              src={feature.icon_url}
-                              alt={feature.label}
-                              fill
-                              sizes="66px"
-                              className="object-contain"
-                              loading="lazy"
-                            />
-                          </div>
-                          <div
-                            className="text-xs text-[#CA5D27] font-semibold leading-tight"
-                            style={{ whiteSpace: "pre-line" }}
-                          >
-                            {feature.label}
-                          </div>
-                        </div>
-                      ))}
+                        {[...Array(5)].map((_, i) => (
+                          <span key={i} className="text-yellow-400 text-sm">
+                            ★
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
+                  {product.review_count && product.review_count > 0 && (
+                    <a
+                      href="#"
+                      className="text-[#075E5E] text-sm hover:underline"
+                    >
+                      ( {product.review_count} Reviews )
+                    </a>
+                  )}
                 </div>
-              );
-            })()}
+              )}
+
+              {product.category && (
+                <p className="uppercase text-sm font-bold text-[#075E5E] mt-3">
+                  Category:{" "}
+                  <span className="font-bold">{product.category}</span>
+                </p>
+              )}
+
+              {product.description && (
+                <div className="text-[#777] font-normal mt-3 text-[14px]">
+                  Ratings/Reviews section - Not present in current code Feature
+                  Slider - A horizontal scrolling carousel showing product
+                  features with icons Discount percentage badge - Shows the
+                  percentage off MRP label and better price formatting
+                </div>
+              )}
+
+              {/* Variants */}
+              {variants && Array.isArray(variants) && variants.length > 0 && (
+                <div className="mt-5 flex  items-center gap-6">
+                  <p className="uppercase  mt-3 text-sm font-bold text-[#075E5E] mb-3">
+                    Select The Variant:
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    {variants.map((v) => {
+                      const colorValue = v.color || v.variant_value || "";
+                      const colorObj = COLOR_OPTIONS.find(
+                        (c) =>
+                          c.value.toLowerCase() === colorValue.toLowerCase()
+                      );
+                      const isActive = v.id === selectedVariantId;
+                      const backgroundColor = colorObj?.swatch || "#D1D5DB";
+
+                      return (
+                        <button
+                          key={v.id}
+                          onClick={() => setSelectedVariantId(v.id)}
+                          style={{ backgroundColor }}
+                          className={`w-6 h-6 rounded-full border-2 transition-all hover:scale-110 shadow-sm ${
+                            isActive
+                              ? "border-[#075E5E] ring-2 ring-[#075E5E] ring-offset-2"
+                              : "border-gray-400"
+                          }`}
+                          title={v.variant_value}
+                        >
+                          <span className="sr-only">{v.variant_value}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Price */}
+              {selectedVariant && (
+                <div className="mt-6">
+                  <div className="flex items-center gap-3">
+                    {selectedVariant.regular_price &&
+                      parseFloat(selectedVariant.regular_price) >
+                        selectedVariant.selling_price && (
+                        <span className="bg-[#CA5D27] text-white text-xs font-bold px-2 py-1 rounded">
+                          -
+                          {(
+                            ((parseFloat(selectedVariant.regular_price) -
+                              selectedVariant.selling_price) /
+                              parseFloat(selectedVariant.regular_price)) *
+                            100
+                          ).toFixed(2)}
+                          %
+                        </span>
+                      )}
+                    <span className="text-3xl font-heading text-[#075E5E] font-semibold">
+                      ₹{selectedVariant.selling_price.toLocaleString("en-IN")}
+                    </span>
+                  </div>
+                  <div className="mt-2 flex items-center gap-2">
+                    {selectedVariant.regular_price &&
+                      parseFloat(selectedVariant.regular_price) >
+                        selectedVariant.selling_price && (
+                        <>
+                          <span className="text-xs text-gray-500 uppercase font-semibold">
+                            MRP
+                          </span>
+                          <del className="text-gray-400 text-sm">
+                            ₹
+                            {parseFloat(
+                              selectedVariant.regular_price
+                            ).toLocaleString("en-IN")}
+                          </del>
+                        </>
+                      )}
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Inclusive All Taxes
+                  </p>
+                </div>
+              )}
+
+              {/* Quantity + CTA */}
+              <div className="flex items-center gap-4 mt-6">
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    className="w-10 h-10 rounded-[10px]  border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
+                    aria-label="Decrease quantity"
+                  >
+                    <span className="text-lg font-bold">−</span>
+                  </button>
+                  <span className="text-lg font-semibold w-8 text-center">
+                    {quantity}
+                  </span>
+                  <button
+                    onClick={() => setQuantity(quantity + 1)}
+                    className="w-10 h-10 rounded-[10px] border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors"
+                    aria-label="Increase quantity"
+                  >
+                    <span className="text-lg font-bold">+</span>
+                  </button>
+                </div>
+                <button className="bg-[#075E5E] text-white px-6 py-3 rounded-lg font-bold hover:bg-[#064d4d] transition-colors">
+                  Add to Cart
+                </button>
+              </div>
+
+              {/* Guides */}
+              <hr className="my-6 border-gray-200" />
+              <div className="flex gap-6 mt-6 text-sm font-semibold text-[#075E5E]">
+                <a href="#">Buying Guide</a>
+                <a href="#">Installation Guide</a>
+              </div>
+
+              <hr className="my-6 border-gray-200" />
+
+              {/* Feature Slider */}
+              {(() => {
+                const featureIcons =
+                  product.feature_icons &&
+                  Array.isArray(product.feature_icons) &&
+                  product.feature_icons.length > 0
+                    ? product.feature_icons
+                    : DEFAULT_FEATURE_ICONS;
+
+                return (
+                  <div className="relative mt-6">
+                    <div
+                      ref={featureScrollRef}
+                      className="overflow-x-auto scrollbar-hide px-8"
+                      onMouseEnter={() => setIsFeatureAutoScrolling(false)}
+                      onMouseLeave={() => setIsFeatureAutoScrolling(true)}
+                    >
+                      <div className="flex gap-4 pb-2">
+                        {featureIcons.map((feature) => (
+                          <div
+                            key={feature.id}
+                            className="shrink-0 flex flex-col items-center justify-center w-24 text-center"
+                          >
+                            <div className="w-8 h-8 relative mb-2">
+                              <Image
+                                src={feature.icon_url}
+                                alt={feature.label}
+                                fill
+                                sizes="66px"
+                                className="object-contain"
+                                loading="lazy"
+                              />
+                            </div>
+                            <div
+                              className="text-xs text-[#CA5D27] font-semibold leading-tight"
+                              style={{ whiteSpace: "pre-line" }}
+                            >
+                              {feature.label}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           </div>
         </div>

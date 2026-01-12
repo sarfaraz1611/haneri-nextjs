@@ -7,7 +7,7 @@ const blogs = [
     title: "Why BLDC Fans Are the Future of Energy-Efficient Cooling",
     description:
       "Why BLDC Fans Are Becoming the Industry Standard In today's world, where energy efficiency and sustainable living are becoming top priorities, every appliance in our homes is undergoing a transformation - and the humble ceiling fan is no exception.",
-    href: "/blog/bldc-fans-future",
+    href: "/single-blog?key=bldc-fans-future",
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ const blogs = [
     title: "BLDC vs Traditional Ceiling Fans: Which One Should You Choose?",
     description:
       "As energy efficiency and smart technology take center stage, the humble ceiling fan is undergoing a remarkable transformation. Today, homeowners are increasingly choosing BLDC fans over traditional electric fans for their performance.",
-    href: "/blog/bldc-vs-traditional",
+    href: "/single-blog?key=bldc-vs-traditional",
   },
   {
     id: 3,
@@ -23,7 +23,7 @@ const blogs = [
     title: "How Smart Fans Are Revolutionizing Home Comfort",
     description:
       "In today's fast-evolving world of home automation, the humble ceiling fan is undergoing a dramatic transformation. No longer just a basic cooling device, the modern smart fan is becoming a vital part of intelligent living spaces.",
-    href: "/blog/smart-fans-revolution",
+    href: "/single-blog?key=smart-fans-revolution",
   },
 ];
 
