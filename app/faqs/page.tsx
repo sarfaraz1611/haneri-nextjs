@@ -172,7 +172,7 @@ export default function FAQs() {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-white mt-20 sm:mt-4">
       <div className="mx-auto max-w-[90%] px-6 py-8 sm:py-24 lg:px-8 lg:py-24">
         <div className="mx-auto">
           <motion.h2
