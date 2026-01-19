@@ -9,35 +9,158 @@ interface FAQ {
 }
 
 const faqs: FAQ[] = [
+  // About Haneri
   {
-    question: "What's the best thing about Switzerland?",
+    question: "What is Haneri?",
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "Haneri is a premium appliance brand built by a team with 75+ years of combined experience in consumer durables and innovation, focusing on performance and user-centric design.",
   },
   {
-    question: "How do you make holy water?",
+    question: "Why trust a new brand like Haneri?",
     answer:
-      "You boil the hell out of it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam aut tempora vitae odio inventore fuga aliquam nostrum quod porro. Delectus quia facere id sequi expedita natus.",
+      "The founding team has deep expertise in product creation and manufacturing, with every product engineered to high standards and supported by reliable after-sales service.",
   },
   {
-    question: "What do you call someone with no body and no nose?",
+    question: "How does Haneri compare to established brands?",
     answer:
-      "Nobody knows. Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, voluptas ipsa quia excepturi, quibusdam natus exercitationem sapiente tempore labore voluptatem.",
+      "Haneri combines veteran expertise with fresh design perspectives, aiming to match or exceed performance benchmarks while addressing evolving consumer needs.",
+  },
+  // Personalisation & Design
+  {
+    question: "What is Haneri BeSpoke™?",
+    answer:
+      "Haneri BeSpoke™ lets you personalise select fan models with your choice of colours, patterns, finishes—and on select models, even materials, built in smaller lots with a nominal premium.",
   },
   {
-    question: "Why do you never see elephants hiding in trees?",
+    question: "What is Air Curve Design™?",
     answer:
-      "Because they're so good at it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      "Air Curve Design™ uses advanced computational modelling to craft blade profiles that maximise airflow and efficiency for superior aerodynamics.",
+  },
+  // Core Technologies
+  {
+    question: "What is Silent H.A.S.S.™ Technology?",
+    answer:
+      "Silent H.A.S.S.™ integrates two Haneri pillars—Air Curve Design™ blades + TurboSilent BLDC™ motor, delivering exceptional air at reduced RPM with quiet operation.",
   },
   {
-    question: "Why can't you hear a pterodactyl go to the bathroom?",
+    question: "What is TurboSilent BLDC™?",
     answer:
-      "Because the pee is silent. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, quas voluptatibus ex culpa ipsum, aspernatur blanditiis fugiat ullam magnam suscipit deserunt illum natus facilis atque vero consequatur! Quisquam, debitis error.",
+      "A high-torque, energy-efficient BLDC motor platform engineered for strong air delivery, stable speed control, and ultra-quiet performance.",
   },
   {
-    question: "Why did the invisible man turn down the job offer?",
+    question: "What is More Air Slow Speed Technology™?",
     answer:
-      "He couldn't see himself doing it. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet perspiciatis officiis corrupti tenetur. Temporibus ut voluptatibus, perferendis sed unde rerum deserunt eius.",
+      "This innovation delivers excellent airflow at lower speeds, enabling comfort while saving energy.",
+  },
+  {
+    question: "What is LumiAmbience™?",
+    answer:
+      "Selectable ambient lighting on supported models to set a cozy or vibrant mood. Adjustable via the fan's remote.",
+  },
+  // Products & Performance
+  {
+    question: "What types of fans do you offer?",
+    answer:
+      "A wide range including ceiling, pedestal, wall-mounted, table, exhaust, and designer fans.",
+  },
+  {
+    question: "Are Haneri fans suitable for large rooms?",
+    answer:
+      "Yes, high-performance models are engineered for superior air delivery across larger spaces.",
+  },
+  {
+    question: "Are Haneri fans energy-efficient?",
+    answer:
+      "Yes, most models use BLDC platform technology for strong airflow with minimal power consumption.",
+  },
+  {
+    question: "Do Haneri fans run quietly?",
+    answer:
+      "Yes, featuring TurboSilent BLDC™ motors and Silent H.A.S.S.™ integration for low sound levels.",
+  },
+  {
+    question: "Do Haneri fans have remote control?",
+    answer:
+      "Many models include remote control for speed, modes, and available lighting features.",
+  },
+  // Quality, Compliance & Manufacturing
+  {
+    question: "Where are Haneri fans manufactured?",
+    answer:
+      "Designed and manufactured in-house and comply with BIS and BEE norms; proudly Made in India.",
+  },
+  {
+    question: "How do you ensure durability and quality?",
+    answer:
+      "Through premium materials, advanced engineering, and multi-stage QC testing aligned to international standards.",
+  },
+  {
+    question: "Are Haneri fans certified?",
+    answer:
+      "Yes, products meet or exceed safety, energy-efficiency, and performance certifications.",
+  },
+  // Ownership, Service & Warranty
+  {
+    question: "Do Haneri fans come with a warranty?",
+    answer:
+      "Yes, all fans include standard warranty (terms vary by model; see product manual).",
+  },
+  {
+    question: "How do I register my warranty?",
+    answer:
+      "Register on the website with purchase details and serial number.",
+  },
+  {
+    question: "Is after-sales service available?",
+    answer:
+      "Yes, comprehensive service through authorised centres nationwide.",
+  },
+  {
+    question: "Can I install the fan myself?",
+    answer:
+      "Some models are DIY-friendly; professional installation recommended for optimal performance.",
+  },
+  {
+    question: "How do I clean and maintain my fan?",
+    answer:
+      "Wipe blades and housing with soft, damp cloth; consult product manual for detailed care.",
+  },
+  {
+    question: "Are replacement parts available?",
+    answer:
+      "Yes, contact customer service or visit authorised service centres for genuine parts.",
+  },
+  {
+    question: "What if my fan isn't working?",
+    answer:
+      "Check the troubleshooting section in your manual; contact support if issues persist.",
+  },
+  // Buying, Shipping & Returns
+  {
+    question: "Where can I buy Haneri fans?",
+    answer:
+      "Official website, select e-commerce platforms, and leading retail stores.",
+  },
+  {
+    question: "Do you offer free shipping?",
+    answer:
+      "Free shipping available on select products and locations per Shipping Policy.",
+  },
+  {
+    question: "What's your return/replacement policy?",
+    answer:
+      "Hassle-free returns/replacements for eligible defective or damaged products per Return Policy.",
+  },
+  // Support
+  {
+    question: "How do I contact Haneri?",
+    answer:
+      "Via customer care number, email, or contact form on the website.",
+  },
+  {
+    question: "How does Haneri engage with customers?",
+    answer:
+      "Through clear communication about features, warranties, and policies across website, social channels, and support lines.",
   },
 ];
 
