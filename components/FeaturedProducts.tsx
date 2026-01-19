@@ -378,7 +378,7 @@ export default function FeaturedProducts() {
               return (
                 <article
                   key={`${product.id}-${index}`}
-                  className="group relative rounded-md bg-white inset-shadow-2xs shadow-md p-4 border-0  overflow-hidden cursor-default shrink-0 w-[300px] sm:w-[320px] md:w-[340px] lg:w-[360px] hover:scale-95 transition duration-300 ease-in-out"
+                  className="group relative rounded-lg bg-white inset-shadow-2xs shadow-md p-4 border-0  overflow-hidden cursor-default shrink-0 w-[300px] sm:w-[320px] md:w-[340px] lg:w-[360px] hover:scale-95 transition duration-300 ease-in-out"
                   style={{
                     scrollSnapAlign: "start",
                     transition: "all 0.3s ease-out",
