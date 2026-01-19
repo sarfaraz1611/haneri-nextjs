@@ -12,7 +12,7 @@ interface CartItem {
   product_name: string;
   variant_value?: string;
   selling_price: number;
-  quantity: number;k
+  quantity: number;
   file_urls?: string[];
 }
 
