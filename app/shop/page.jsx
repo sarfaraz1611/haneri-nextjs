@@ -27,7 +27,7 @@ import Link from "next/link";
 // ==================== Constants ====================
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "https://haneri.ongoingsites.xyz/domex";
+  process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com/api";
 
 const COLOR_OPTIONS = [
   { label: "Denim Blue", value: "Denim Blue", swatch: "#6497B2" },

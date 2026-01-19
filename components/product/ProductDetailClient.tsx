@@ -5,7 +5,7 @@ import Image from "next/image";
 import axios from "axios";
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || "https://haneri.ongoingsites.xyz/domex";
+  process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com/api";
 
 // Color options with swatches (matching shop page)
 const COLOR_OPTIONS = [
