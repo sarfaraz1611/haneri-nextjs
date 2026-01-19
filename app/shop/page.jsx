@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import axios from "axios";
 import {
   Dialog,
@@ -537,7 +537,7 @@ function SortMenu({ currentSort, onSortChange, onPageReset }) {
 
 // ==================== Main Component ====================
 
-export default function ShopPage() {
+function ShopPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const category = searchParams.get("category") || "";
@@ -858,5 +858,22 @@ export default function ShopPage() {
       {/* Flash Message */}
       {/* <FlashMessage message={flashMsg} /> */}
     </div>
+  );
+}
+
+export default function ShopPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="bg-white min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-[#315858] border-r-transparent"></div>
+            <p className="mt-4 text-gray-600">Loading...</p>
+          </div>
+        </div>
+      }
+    >
+      <ShopPageContent />
+    </Suspense>
   );
 }
