@@ -14,15 +14,15 @@ import {
   MenuItem,
   MenuItems,
 } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { XMarkIcon, FunnelIcon } from "@heroicons/react/24/outline";
 import {
   ChevronDownIcon,
-  FunnelIcon,
   MinusIcon,
   PlusIcon,
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
 import Link from "next/link";
+import { useSearchParams, useRouter } from "next/navigation";
 
 // ==================== Constants ====================
 
@@ -81,12 +81,27 @@ const normalizePrice = (val) => {
   if (!val) return 0;
   return parseFloat(String(val).replace(/,/g, ""));
 };
+const formatPrice = (amount) => {
+  const num = Number(amount) || 0;
+  return new Intl.NumberFormat("en-IN", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(num);
+};
 
 // ==================== Components ====================
 
 // Product Card Component
-function ProductCard({ product, onAddToCart }) {
-  const [activeVariant, setActiveVariant] = useState(product.variants[0] || {});
+function ProductCard({
+  product,
+  onAddToCart,
+  addingToCart,
+  addedToCart,
+  onViewCart,
+}) {
+  const [activeVariant, setActiveVariant] = useState(
+    product.activeVariant || product.variants?.[0] || product || {},
+  );
 
   const regularPrice = normalizePrice(activeVariant.regular_price);
   const sellingPrice = normalizePrice(activeVariant.selling_price);
@@ -103,12 +118,13 @@ function ProductCard({ product, onAddToCart }) {
     : "";
 
   const productUrl = `/product_detail?id=${product.id}&v_id=${activeVariant.id}`;
+  const showStrike = regularPrice > sellingPrice && regularPrice > 0;
 
   return (
-    <li className="group relative flex flex-col ">
+    <li className="group relative flex flex-col shadow-md rounded-xl p-4 inset-shadow-2xs hover:scale-95 transition duration-300 ease-in-out ">
       {/* Product Image */}
       <Link href={productUrl}>
-        <div className="aspect-square w-full overflow-hidden rounded-lg bg-gray-200 shadow">
+        <div className="aspect-square w-full overflow-hidden rounded-lg ">
           <img
             alt={activeVariant.variant_value || product.name}
             src={imageUrl}
@@ -117,34 +133,34 @@ function ProductCard({ product, onAddToCart }) {
         </div>
       </Link>
 
-      {/* Brand Logo */}
-      {/* <div className="mt-3 flex justify-center"> */}
-      {/* <img
-          src="/images/Link_img.png"
-          alt="Haneri"
-          className="h-6 object-contain"
-        /> */}
-      {/* </div> */}
-
       {/* Product Info */}
       <div className="mt-3 flex flex-col">
-        <h3 className="text-[30px] font-heading font-bold text-[#ca5d27]">
+        <h3 className="font-['Barlow_Condensed'] font-semibold text-[27px] leading-[1.05] text-[#CA5D27] uppercase mb-2.5">
           <Link href={productUrl}>{product.name}</Link>
         </h3>
 
+        {/* Variant Display */}
+        {activeVariant.variant_value && (
+          <p className="mt-1 text-sm text-[#315859] ">
+            {/* <span className="font-medium">{activeVariant.variant_type}:</span>{" "} */}
+            {activeVariant.variant_value}
+          </p>
+        )}
+
         {shortDesc && (
-          <p className="mt-1 text-xs text-gray-500 line-clamp-2">{shortDesc}</p>
+          <p className="text-[#6F6F6F] text-sm leading-relaxed mb-4 max-w-[60ch] line-clamp-2">
+            {shortDesc}
+          </p>
         )}
 
         {/* Price Display */}
-        <div className="mt-2 flex items-center gap-2">
-          <p className="text-base font-semibold text-gray-900">
-            ₹{sellingPrice || activeVariant.price || 0}
-          </p>
-          {hasDiscount && (
-            <p className="text-sm text-gray-500 line-through">
-              ₹{regularPrice}
-            </p>
+        <div className="font-['Barlow_Condensed'] text-[24px] font-normal leading-none text-[#315859] text-left mb-4 flex gap-2 items-baseline">
+          <span className="font-semibold">MRP</span>
+          <span className="font-semibold">₹{formatPrice(sellingPrice)}</span>
+          {showStrike && (
+            <del className="text-[#B8B8B8] font-semibold text-[20px]">
+              ₹{formatPrice(regularPrice)}
+            </del>
           )}
         </div>
       </div>
@@ -152,13 +168,16 @@ function ProductCard({ product, onAddToCart }) {
       {/* Color Variant Selector */}
       {product.variants && product.variants.length > 0 && (
         <div className="mt-4">
-          <h4 className="sr-only">Available colors</h4>
+          <h4 className="text-xs text-gray-500 mb-2">
+            {product.variants.length}{" "}
+            {product.variants.length === 1 ? "variant" : "variants"} available
+          </h4>
           <ul role="list" className="flex items-center flex-wrap gap-2">
             {product.variants.map((variant) => {
               // Try to find color match from variant.color or variant.variant_value
               const colorValue = variant.color || variant.variant_value || "";
               const colorObj = COLOR_OPTIONS.find(
-                (c) => c.value.toLowerCase() === colorValue.toLowerCase()
+                (c) => c.value.toLowerCase() === colorValue.toLowerCase(),
               );
               const isActive = variant.id === activeVariant.id;
 
@@ -174,10 +193,8 @@ function ProductCard({ product, onAddToCart }) {
                   }}
                   style={{ backgroundColor }}
                   className={classNames(
-                    "size-7 rounded-full border-2 cursor-pointer hover:scale-110 transition-transform shadow-sm",
-                    isActive
-                      ? "border-indigo-600 ring-2 ring-indigo-600 ring-offset-2"
-                      : "border-gray-400"
+                    "block w-6 h-6 rounded-full cursor-pointer transition-transform duration-200 hover:scale-110",
+                    isActive ? " ring-2 ring-offset-2 ring-[#CA5D27]" : "",
                   )}
                   title={colorValue}
                 >
@@ -193,11 +210,25 @@ function ProductCard({ product, onAddToCart }) {
       <button
         onClick={(e) => {
           e.preventDefault();
-          onAddToCart(product.id, activeVariant.id);
+          e.stopPropagation();
+          if (addedToCart.has(`${product.id}-${activeVariant.id}`)) {
+            onViewCart();
+          } else {
+            onAddToCart(product.id, activeVariant.id);
+          }
         }}
-        className="mt-4 w-full rounded-md bg-[#00473E] px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-colors"
+        disabled={addingToCart === `${product.id}-${activeVariant.id}`}
+        className={`mt-4 w-full rounded-lg px-4 py-2 text-sm font-semibold text-white shadow-sm hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${
+          addedToCart.has(`${product.id}-${activeVariant.id}`)
+            ? "bg-[#CA5D27] hover:bg-[#b54d1f]"
+            : "bg-[#00473E] hover:bg-[#244a46]"
+        }`}
       >
-        Add to Cart
+        {addingToCart === `${product.id}-${activeVariant.id}`
+          ? "Adding..."
+          : addedToCart.has(`${product.id}-${activeVariant.id}`)
+            ? "View Cart"
+            : "Add to Cart"}
       </button>
     </li>
   );
@@ -242,13 +273,13 @@ function FilterSection({ section, selectedValues, onFilterChange }) {
                         onFilterChange(
                           section.id,
                           option.value,
-                          e.target.checked
+                          e.target.checked,
                         )
                       }
                       id={`filter-${section.id}-${optionIdx}`}
                       name={`${section.id}[]`}
                       type="checkbox"
-                      className="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      className="col-start-1 row-start-1 appearance-none rounded-sm border border-gray-300 bg-white checked:border-[#244a46] checked:bg-[#244a46] focus-visible:outline-2 focus-visible:outline-offset-2 "
                     />
                     <svg
                       fill="none"
@@ -373,10 +404,10 @@ function MobileFiltersDialog({
         className="fixed inset-0 bg-black/25 transition-opacity duration-300 ease-linear data-closed:opacity-0"
       />
 
-      <div className="fixed inset-0 z-40 flex">
+      <div className="fixed inset-0 z-40 flex ">
         <DialogPanel
           transition
-          className="relative ml-auto flex size-full max-w-xs transform flex-col overflow-y-auto bg-white pt-4 pb-6 shadow-xl transition duration-300 ease-in-out data-closed:translate-x-full"
+          className="mt-18 relative ml-auto flex size-full max-w-xs transform flex-col overflow-y-auto bg-white px-4 pt-4 pb-6 shadow-xl transition duration-300 ease-in-out data-closed:translate-x-full"
         >
           {/* Header */}
           <div className="flex items-center justify-between px-4">
@@ -441,7 +472,7 @@ function FeaturesBanner({ features }) {
 function SortMenu({ currentSort, onSortChange, onPageReset }) {
   return (
     <Menu as="div" className="relative inline-block text-left">
-      <MenuButton className="group inline-flex justify-center text-sm font-medium text-gray-700 hover:text-gray-900">
+      <MenuButton className="group inline-flex justify-center text-sm xl:text-md font-medium text-gray-700 hover:text-gray-900">
         Sort
         <ChevronDownIcon
           aria-hidden="true"
@@ -465,7 +496,7 @@ function SortMenu({ currentSort, onSortChange, onPageReset }) {
                   currentSort === option.value
                     ? "font-medium text-gray-900"
                     : "text-gray-500",
-                  "block w-full text-left px-4 py-2 text-sm data-focus:bg-gray-100"
+                  "block w-full text-left px-4 py-2 text-sm data-focus:bg-gray-100",
                 )}
               >
                 {option.name}
@@ -479,40 +510,46 @@ function SortMenu({ currentSort, onSortChange, onPageReset }) {
 }
 
 // Flash Message Component
-function FlashMessage({ message }) {
-  if (!message) return null;
+// function FlashMessage({ message }) {
+//   if (!message) return null;
 
-  return (
-    <div
-      style={{
-        position: "fixed",
-        bottom: "30px",
-        left: "50%",
-        transform: "translateX(-50%)",
-        background: message.bg,
-        color: message.color,
-        padding: "14px 24px",
-        borderRadius: "8px",
-        fontWeight: 500,
-        fontSize: "16px",
-        zIndex: 9999,
-        border: `1px solid ${message.color}`,
-      }}
-    >
-      {message.msg}
-    </div>
-  );
-}
+//   return (
+//     <div
+//       style={{
+//         position: "fixed",
+//         top: "30px",
+//         right: "10%",
+//         transform: "translateX(-50%)",
+//         background: message.bg,
+//         color: message.color,
+//         padding: "10px 12px",
+//         borderRadius: "8px",
+//         fontWeight: 500,
+//         fontSize: "16px",
+//         zIndex: 9999,
+//         border: `1px solid ${message.color}`,
+//       }}
+//     >
+//       {message.msg}
+//     </div>
+//   );
+// }
 
 // ==================== Main Component ====================
 
 export default function ShopPage() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const category = searchParams.get("category") || "";
+
   // State Management
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modelOptions, setModelOptions] = useState([]);
   const [flashMsg, setFlashMsg] = useState(null);
+  const [addingToCart, setAddingToCart] = useState(null);
+  const [addedToCart, setAddedToCart] = useState(new Set());
 
   // Filter States
   const [selectedModels, setSelectedModels] = useState([]);
@@ -548,6 +585,7 @@ export default function ShopPage() {
     const offset = (currentPage - 1) * itemsPerPage;
 
     const payload = {
+      search_category: category,
       search_product: selectedModels.join(","),
       color: selectedColors.join(","),
       sweep_size: selectedSweeps.join(","),
@@ -557,40 +595,48 @@ export default function ShopPage() {
         sortBy === "ascending"
           ? "Ascending"
           : sortBy === "descending"
-          ? "Descending"
-          : "",
+            ? "Descending"
+            : "",
       limit: itemsPerPage,
-      offset: offset,
+      offset,
       variant_type: "",
     };
 
     const token =
       typeof window !== "undefined" ? localStorage.getItem("auth_token") : null;
+
     const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
     axios
       .post(`${BASE_URL}/products/get_products`, payload, { headers })
       .then((res) => {
         if (res.data?.data) {
-          setProducts(res.data.data);
+          // Create one card per variant, each with full product info and activeVariantId
+          const productCards = res.data.data.flatMap((product) =>
+            product.variants.map((variant) => ({
+              ...product,
+              activeVariantId: variant.id,
+              activeVariant: variant,
+            })),
+          );
+          setProducts(productCards);
           setTotalItems(res.data.total_records || 0);
         } else {
           setProducts([]);
           setTotalItems(0);
         }
       })
-      .catch((err) => {
-        console.error(err);
-        setProducts([]);
-      })
+      .catch(() => setProducts([]))
       .finally(() => setLoading(false));
   };
 
   // Fetch products when filters or pagination changes
   useEffect(() => {
+    setCurrentPage(1);
     fetchProducts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
+    category,
     currentPage,
     itemsPerPage,
     sortBy,
@@ -601,38 +647,49 @@ export default function ShopPage() {
   ]);
 
   // Handlers
-  const handleAddToCart = (productId, variantId) => {
-    const token = localStorage.getItem("auth_token");
-    const tempId = localStorage.getItem("temp_id");
+  const handleAddToCart = async (productId, variantId) => {
+    const cartKey = `${productId}-${variantId}`;
+    if (addingToCart) return;
 
-    const payload = {
-      product_id: parseInt(productId),
-      quantity: 1,
-      variant_id: parseInt(variantId),
-    };
-    if (!token && tempId) payload.cart_id = tempId;
+    setAddingToCart(cartKey);
 
-    axios
-      .post(`${BASE_URL}/cart/add`, payload, {
+    try {
+      const token = localStorage.getItem("auth_token");
+      const tempId = localStorage.getItem("temp_id");
+
+      const payload = {
+        product_id: parseInt(productId),
+        quantity: 1,
+        variant_id: parseInt(variantId),
+      };
+      if (!token && tempId) payload.cart_id = tempId;
+
+      const res = await axios.post(`${BASE_URL}/cart/add`, payload, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
-      })
-      .then((res) => {
-        if (
-          res.data.success ||
-          (res.data.message && res.data.message.includes("successfully"))
-        ) {
-          if (!token && !tempId && res.data.data?.user_id) {
-            localStorage.setItem("temp_id", res.data.data.user_id);
-          }
-          showFlash("Item added to cart!");
-        } else {
-          showFlash("Failed to add to cart", "#ffeaea", "#ff0000");
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        showFlash("Error adding to cart", "#ffeaea", "#ff0000");
       });
+
+      if (
+        res.data.success ||
+        (res.data.message && res.data.message.includes("successfully"))
+      ) {
+        if (!token && !tempId && res.data.data?.user_id) {
+          localStorage.setItem("temp_id", res.data.data.user_id);
+        }
+        setAddedToCart((prev) => new Set(prev).add(cartKey));
+        showFlash("Item added to cart!");
+      } else {
+        showFlash("Failed to add to cart", "#ffeaea", "#ff0000");
+      }
+    } catch (err) {
+      console.error(err);
+      showFlash("Error adding to cart", "#ffeaea", "#ff0000");
+    } finally {
+      setAddingToCart(null);
+    }
+  };
+
+  const handleViewCart = () => {
+    router.push("/cart");
   };
 
   const showFlash = (msg, bg = "#b3e3dd", color = "#00473E") => {
@@ -643,7 +700,7 @@ export default function ShopPage() {
   const handleFilterChange = (filterId, value, checked) => {
     const updateFilter = (setter) => {
       setter((prev) =>
-        checked ? [...prev, value] : prev.filter((v) => v !== value)
+        checked ? [...prev, value] : prev.filter((v) => v !== value),
       );
     };
 
@@ -701,16 +758,11 @@ export default function ShopPage() {
         onPriceChange={setPriceRange}
       />
 
-      {/* Features Banner */}
-      <div className="mx-auto max-w-[82%]  px-4 sm:px-6 lg:px-8 pt-20">
-        <FeaturesBanner features={FEATURE_ITEMS} />
-      </div>
-
       {/* Main Content */}
-      <main className="mx-auto max-w-[82%] px-4 sm:px-6 lg:px-8">
+      <main className="mx-auto xl:max-w-[90%]  2xl:max-w-[82%]  px-4 sm:px-6 lg:px-8 pt-20">
         {/* Header */}
         <div className="flex items-baseline justify-between border-b border-gray-200 pt-10 pb-6">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+          <h1 className="text-[20px]  md:text-[30px] xl:text-4xl font-bold tracking-tight text-[#315858]">
             Our Products
           </h1>
 
@@ -729,7 +781,7 @@ export default function ShopPage() {
               <span className="sr-only">Filters</span>
               <FunnelIcon aria-hidden="true" className="size-5" />
               {activeFiltersCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-indigo-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-[#244a46] text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
                   {activeFiltersCount}
                 </span>
               )}
@@ -760,17 +812,18 @@ export default function ShopPage() {
                 onPriceChange={setPriceRange}
                 onPageReset={() => setCurrentPage(1)}
               />
+              <FeaturesBanner features={FEATURE_ITEMS} />
             </form>
 
             {/* Product Grid */}
-            <div className="lg:col-span-3 lg:border-l lg:border-gray-200 lg:pl-8">
+            <div className="pb-4 pr-1 lg:col-span-3 lg:border-l lg:border-gray-200 lg:pl-8 lg:max-h-[calc(100vh-200px)] lg:overflow-y-auto scrollbar-hide">
               {loading ? (
                 <div className="text-center py-12">
-                  <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-indigo-600 border-r-transparent"></div>
+                  <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-[#315858] border-r-transparent"></div>
                   <p className="mt-4 text-gray-600">Loading products...</p>
                 </div>
               ) : products.length === 0 ? (
-                <div className="text-center py-12">
+                <div className=" h-full flex flex-col justify-center text-center py-12">
                   <h3 className="text-2xl font-semibold text-gray-900">
                     No products found
                   </h3>
@@ -781,17 +834,17 @@ export default function ShopPage() {
               ) : (
                 <ul
                   role="list"
-                  className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8"
+                  className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 xl:grid-cols-3 xl:gap-x-8"
                 >
                   {products.map((product) => {
-                    if (!product.variants || product.variants.length === 0)
-                      return null;
-
                     return (
                       <ProductCard
-                        key={product.id}
+                        key={`${product.id}-${product.activeVariantId || product.id}`}
                         product={product}
                         onAddToCart={handleAddToCart}
+                        addingToCart={addingToCart}
+                        addedToCart={addedToCart}
+                        onViewCart={handleViewCart}
                       />
                     );
                   })}
@@ -803,7 +856,7 @@ export default function ShopPage() {
       </main>
 
       {/* Flash Message */}
-      <FlashMessage message={flashMsg} />
+      {/* <FlashMessage message={flashMsg} /> */}
     </div>
   );
 }

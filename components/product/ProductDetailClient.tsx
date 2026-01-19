@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+import { getColorHex, isLightColor } from "../FeaturedProducts";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com/api";
@@ -98,10 +100,42 @@ interface FeatureIcon {
   label: string;
 }
 
+// Description section with Read More / Show Less toggle
+function DescriptionSection({ description }: { description: string }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const maxLength = 400;
+  const shouldTruncate = description.length > maxLength;
+
+  const displayText =
+    shouldTruncate && !isExpanded
+      ? description.slice(0, maxLength) + "..."
+      : description;
+
+  return (
+    <div>
+      <p
+        className="text-gray-600 text-sm leading-relaxed whitespace-pre-line inline"
+        dangerouslySetInnerHTML={{
+          __html: displayText.replace(/\n/g, "<br>"),
+        }}
+      />
+      {shouldTruncate && (
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="text-[#075E5E] font-semibold text-sm mt-2 hover:underline"
+        >
+          {isExpanded ? "Show Less" : "Read More"}
+        </button>
+      )}
+    </div>
+  );
+}
+
 export default function ProductDetailClient({
   productId,
   variantId,
 }: ProductDetailClientProps) {
+  const router = useRouter();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const featureScrollRef = useRef<HTMLDivElement>(null);
@@ -114,11 +148,13 @@ export default function ProductDetailClient({
         return isNaN(parsed) ? null : parsed;
       }
       return null;
-    }
+    },
   );
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [addingToCart, setAddingToCart] = useState(false);
+  const [addedToCart, setAddedToCart] = useState(false);
 
   // Log props changes and sync variantId prop to state
   useEffect(() => {
@@ -136,7 +172,7 @@ export default function ProductDetailClient({
       try {
         setLoading(true);
         const response = await axios.post(
-          `${BASE_URL}/products/get_products/${productId}`
+          `${BASE_URL}/products/get_products/${productId}`,
         );
 
         // Handle both { success: true, data: {...} } and direct data response (matching PHP)
@@ -161,7 +197,7 @@ export default function ProductDetailClient({
           if (urlVariantId && !isNaN(urlVariantId)) {
             // Check if variant exists - matching PHP: p.variants.find(v => v.id === parseInt(variantIdFromUrl))
             const selectedVariant = productData.variants.find(
-              (v: Variant) => v.id === urlVariantId
+              (v: Variant) => v.id === urlVariantId,
             );
 
             if (selectedVariant) {
@@ -207,7 +243,7 @@ export default function ProductDetailClient({
       } else {
         // Validate selected variant still exists
         const variantExists = product.variants.some(
-          (v) => v.id === selectedVariantId
+          (v) => v.id === selectedVariantId,
         );
         if (!variantExists) {
           setSelectedVariantId(product.variants[0].id);
@@ -218,10 +254,65 @@ export default function ProductDetailClient({
     }
   }, [product, selectedVariantId]);
 
-  // Reset image index when variant changes
+  // Reset image index and addedToCart when variant changes
   useEffect(() => {
     setCurrentImageIndex(0);
+    setAddedToCart(false);
   }, [selectedVariantId]);
+
+  // Handle Add to Cart
+  const handleAddToCart = async () => {
+    if (addingToCart || !selectedVariantId || !product) return;
+
+    setAddingToCart(true);
+
+    try {
+      const token = localStorage.getItem("auth_token");
+      const tempId = localStorage.getItem("temp_id");
+
+      const payload: {
+        product_id: number;
+        quantity: number;
+        variant_id: number;
+        cart_id?: string;
+      } = {
+        product_id: Number(productId),
+        quantity: quantity,
+        variant_id: Number(selectedVariantId),
+      };
+
+      if (!token && tempId) {
+        payload.cart_id = tempId;
+      }
+
+      const CART_BASE_URL = "https://api.haneri.com/api";
+      const response = await fetch(`${CART_BASE_URL}/cart/add`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (
+        data.success ||
+        (data.message && data.message.includes("successfully"))
+      ) {
+        if (!token && !tempId && data.data?.user_id) {
+          localStorage.setItem("temp_id", data.data.user_id);
+        }
+        setAddedToCart(true);
+      } else {
+      }
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    } finally {
+      setAddingToCart(false);
+    }
+  };
 
   // Ensure currentImageIndex stays within bounds when product/variant changes
   useEffect(() => {
@@ -241,9 +332,9 @@ export default function ProductDetailClient({
           selectedVariant.file_urls && selectedVariant.file_urls.length > 0
             ? selectedVariant.file_urls
             : selectedVariant.banner_urls &&
-              selectedVariant.banner_urls.length > 0
-            ? selectedVariant.banner_urls
-            : [];
+                selectedVariant.banner_urls.length > 0
+              ? selectedVariant.banner_urls
+              : [];
 
         // Reset index if out of bounds (only check, don't depend on currentImageIndex)
         setCurrentImageIndex((prev) => {
@@ -319,7 +410,7 @@ export default function ProductDetailClient({
   // If we have variants but no variant is selected, log a warning
   if (variants.length > 0 && !selectedVariantId && !loading) {
     console.warn(
-      "Variants exist but no variant selected. This should not happen."
+      "Variants exist but no variant selected. This should not happen.",
     );
   }
 
@@ -366,7 +457,7 @@ export default function ProductDetailClient({
                     onError={(e) => {
                       console.error(
                         "Image failed to load:",
-                        images[safeImageIndex]
+                        images[safeImageIndex],
                       );
                     }}
                     onLoad={() => {}}
@@ -529,21 +620,26 @@ export default function ProductDetailClient({
                       const colorValue = v.color || v.variant_value || "";
                       const colorObj = COLOR_OPTIONS.find(
                         (c) =>
-                          c.value.toLowerCase() === colorValue.toLowerCase()
+                          c.value.toLowerCase() === colorValue.toLowerCase(),
                       );
+
                       const isActive = v.id === selectedVariantId;
                       const backgroundColor = colorObj?.swatch || "#D1D5DB";
+                      const color = getColorHex(v.variant_value);
+                      const needsBorder = isLightColor(color);
 
                       return (
                         <button
                           key={v.id}
                           onClick={() => setSelectedVariantId(v.id)}
                           style={{ backgroundColor }}
-                          className={`w-6 h-6 rounded-full border-2 transition-all hover:scale-110 shadow-sm ${
-                            isActive
-                              ? "border-[#075E5E] ring-2 ring-[#075E5E] ring-offset-2"
-                              : "border-gray-400"
-                          }`}
+                          className={`block w-6 h-6 rounded-full cursor-pointer
+                          transition-transform duration-200 hover:scale-110
+                           ${needsBorder ? "border-2 border-gray-300" : ""} ${
+                             isActive
+                               ? "ring-2 ring-offset-2 ring-[#CA5D27]"
+                               : ""
+                           }`}
                           title={v.variant_value}
                         >
                           <span className="sr-only">{v.variant_value}</span>
@@ -587,7 +683,7 @@ export default function ProductDetailClient({
                           <del className="text-gray-400 text-sm">
                             ₹
                             {parseFloat(
-                              selectedVariant.regular_price
+                              selectedVariant.regular_price,
                             ).toLocaleString("en-IN")}
                           </del>
                         </>
@@ -620,8 +716,26 @@ export default function ProductDetailClient({
                     <span className="text-lg font-bold">+</span>
                   </button>
                 </div>
-                <button className="bg-[#075E5E] text-white px-6 py-3 rounded-lg font-bold hover:bg-[#064d4d] transition-colors">
-                  Add to Cart
+                <button
+                  onClick={() => {
+                    if (addedToCart) {
+                      router.push("/cart");
+                    } else {
+                      handleAddToCart();
+                    }
+                  }}
+                  disabled={addingToCart}
+                  className={`px-6 py-3 rounded-lg font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+                    addedToCart
+                      ? "bg-[#CA5D27] hover:bg-[#b54d1f] text-white"
+                      : "bg-[#075E5E] hover:bg-[#064d4d] text-white"
+                  }`}
+                >
+                  {addingToCart
+                    ? "Adding..."
+                    : addedToCart
+                      ? "View Cart"
+                      : "Add to Cart"}
                 </button>
               </div>
 
@@ -685,6 +799,63 @@ export default function ProductDetailClient({
         </div>
       </section>
 
+      {/* ================= DESCRIPTION ================= */}
+      {product.description && (
+        <section className="container mx-auto px-4 py-10">
+          <h2 className="font-barlow text-3xl text-[#2a5b57] mb-4">
+            Description
+          </h2>
+          <DescriptionSection description={product.description} />
+        </section>
+      )}
+
+      {/* ================= SPECIFICATIONS ================= */}
+      {product.features && product.features.length > 0 && (
+        <section className="container mx-auto px-4 py-10">
+          <h2 className="font-barlow text-3xl text-[#2a5b57] mb-4">
+            Technical Specifications
+          </h2>
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse">
+              <tbody>
+                {(() => {
+                  const features = product.features;
+                  const rows = [];
+                  for (let i = 0; i < features.length; i += 2) {
+                    rows.push(
+                      <tr key={i} className="border-b border-gray-200">
+                        <th className="text-left py-3 px-4 bg-gray-50 text-[#075E5E] font-semibold text-sm w-1/4">
+                          {features[i].feature_name}
+                        </th>
+                        <td className="py-3 px-4 text-gray-600 text-sm w-1/4">
+                          {features[i].feature_value}
+                        </td>
+                        {features[i + 1] ? (
+                          <>
+                            <th className="text-left py-3 px-4 bg-gray-50 text-[#075E5E] font-semibold text-sm w-1/4">
+                              {features[i + 1].feature_name}
+                            </th>
+                            <td className="py-3 px-4 text-gray-600 text-sm w-1/4">
+                              {features[i + 1].feature_value}
+                            </td>
+                          </>
+                        ) : (
+                          <>
+                            <th className="py-3 px-4 bg-gray-50 w-1/4"></th>
+                            <td className="py-3 px-4 w-1/4"></td>
+                          </>
+                        )}
+                      </tr>,
+                    );
+                  }
+                  return rows;
+                })()}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
       {/* ================= FAQ ================= */}
       <section className="container mx-auto px-4 py-10">
         <h2 className="font-barlow text-3xl text-[#2a5b57] mb-4">
@@ -696,8 +867,11 @@ export default function ProductDetailClient({
             "What makes Haneri different?",
             "Design + engineering for fluid airflow.",
           ],
-          ["Is installation included?", "Available in supported cities."],
-          ["Warranty?", "5 years from purchase date."],
+          [
+            "Is installation included?",
+            "We provide service & installation in supported cities.",
+          ],
+          ["Warranty?", "5 years from the date of purchase."],
         ].map(([q, a]) => (
           <details key={q} className="border-t py-4">
             <summary className="cursor-pointer font-semibold">{q}</summary>

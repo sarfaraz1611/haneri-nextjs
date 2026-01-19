@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import LOGO_SRC from "./../public/images/Haneri Logo.png";
 import DiscoverHero from "./DiscoverHero";
 
@@ -76,7 +77,7 @@ const COLOR_MAP: Record<string, string> = {
   Grey: "#8b8b8b",
 };
 
-const getColorHex = (label: string) => {
+export const getColorHex = (label: string) => {
   if (!label) return "#ccc";
   const t = String(label).trim();
   if (COLOR_MAP[t]) return COLOR_MAP[t];
@@ -93,7 +94,7 @@ const formatPrice = (amount: number | string) => {
 };
 
 // Check if a color is light/similar to white background
-const isLightColor = (hex: string): boolean => {
+export const isLightColor = (hex: string): boolean => {
   // Convert hex to RGB
   const r = parseInt(hex.slice(1, 3), 16);
   const g = parseInt(hex.slice(3, 5), 16);
@@ -236,17 +237,75 @@ export default function FeaturedProducts() {
   }, [products]);
 
   // --- 3. Interaction Handlers ---
+  const router = useRouter();
+  const [addingToCart, setAddingToCart] = useState<string | number | null>(
+    null,
+  );
+  const [addedToCart, setAddedToCart] = useState<Set<string | number>>(
+    new Set(),
+  );
+
   const handleAddToCart = async (
     e: React.MouseEvent,
     productId: string | number,
-    variantId: string | number
+    variantId: string | number,
   ) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log(
-      `[MOCK CART] Adding Product ${productId}, Variant ${variantId} to cart.`
-    );
-    alert(`Added Product ${productId} to cart! (Mock Action)`);
+
+    if (addingToCart) return;
+
+    setAddingToCart(productId);
+
+    try {
+      const BASE_URL =
+        process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com";
+      const token = localStorage.getItem("auth_token");
+      const tempId = localStorage.getItem("temp_id");
+
+      const payload: {
+        product_id: number;
+        quantity: number;
+        variant_id: number;
+        cart_id?: string;
+      } = {
+        product_id: Number(productId),
+        quantity: 1,
+        variant_id: Number(variantId),
+      };
+
+      if (!token && tempId) {
+        payload.cart_id = tempId;
+      }
+
+      const response = await fetch(`${BASE_URL}/cart/add`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (
+        data.success ||
+        (data.message && data.message.includes("successfully"))
+      ) {
+        if (!token && !tempId && data.data?.user_id) {
+          localStorage.setItem("temp_id", data.data.user_id);
+        }
+        setAddedToCart((prev) => new Set(prev).add(productId));
+      } else {
+        alert(data.message || "Failed to add to cart");
+      }
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      alert("Failed to add to cart. Please try again.");
+    } finally {
+      setAddingToCart(null);
+    }
   };
 
   if (loading)
@@ -309,7 +368,7 @@ export default function FeaturedProducts() {
               const first = variants[0];
 
               const sellingPrice = Number(
-                String(first.selling_price).replace(/,/g, "") || 0
+                String(first.selling_price).replace(/,/g, "") || 0,
               );
               const regularPrice = Number(first.regular_price || 0);
 
@@ -319,7 +378,7 @@ export default function FeaturedProducts() {
               return (
                 <article
                   key={`${product.id}-${index}`}
-                  className="group relative rounded-md bg-white border-0  overflow-hidden cursor-default shrink-0 w-[300px] sm:w-[320px] md:w-[340px] lg:w-[360px]"
+                  className="group relative rounded-md bg-white inset-shadow-2xs shadow-md p-4 border-0  overflow-hidden cursor-default shrink-0 w-[300px] sm:w-[320px] md:w-[340px] lg:w-[360px] hover:scale-95 transition duration-300 ease-in-out"
                   style={{
                     scrollSnapAlign: "start",
                     transition: "all 0.3s ease-out",
@@ -346,20 +405,8 @@ export default function FeaturedProducts() {
                     </Link>
                   </div>
 
-                  {/* Logo, Title, Description, Price, Swatches, CTA (Standard rendering) */}
-                  {/* <Image
-                    src={LOGO_SRC}
-                    alt="Brand Logo"
-                    width={110}
-                    height={20}
-                    className="block mb-2 w-[110px] h-auto"
-                    style={{ width: "110px", height: "auto" }}
-                  /> */}
-                  <h3 className="font-['Barlow_Condensed'] font-semibold text-[30px] leading-[1.05] text-[#CA5D27] uppercase mb-2.5">
-                    <Link
-                      href={`/product_detail?id=${product.id}`}
-                      className="no-underline hover:text-[#CA5D27]"
-                    >
+                  <h3 className="font-['Barlow_Condensed'] font-semibold text-[27px] leading-[1.05] text-[#CA5D27] uppercase mb-2.5">
+                    <Link href={`/product_detail?id=${product.id}`}>
                       {product.name}
                     </Link>
                   </h3>
@@ -367,8 +414,8 @@ export default function FeaturedProducts() {
                     {product.description}
                   </p>
                   <div className="font-['Barlow_Condensed'] text-[24px] font-normal leading-none text-[#315859] text-left mb-4 flex gap-2 items-baseline">
-                    <span className="font-bold">MRP</span>
-                    <span className="font-bold">
+                    <span className="font-semibold">MRP</span>
+                    <span className="font-semibold">
                       ₹{formatPrice(sellingPrice)}
                     </span>
                     {showStrike && (
@@ -404,10 +451,33 @@ export default function FeaturedProducts() {
                     })}
                   </div>
                   <button
-                    onClick={(e) => handleAddToCart(e, product.id, first.id)}
-                    className="inline-block px-5 py-3 rounded-[10px] bg-[#244a46] text-white font-bold tracking-wide no-underline hover:bg-[#1b3835] transition-colors"
+                    onClick={(e) => {
+                      if (addedToCart.has(product.id)) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        router.push("/cart");
+                      } else {
+                        handleAddToCart(e, product.id, first.id);
+                      }
+                    }}
+                    disabled={addingToCart === product.id}
+                    className={`mt-2 w-full rounded-lg px-4 py-2 text-sm font-semibold text-white shadow-sm hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${
+                      addedToCart.has(product.id)
+                        ? "bg-[#CA5D27] hover:bg-[#b54d1f]"
+                        : "bg-[#00473E] hover:bg-[#244a46]"
+                    }`}
+
+                    // className={` ${
+                    //   addedToCart.has(product.id)
+                    //     ? "bg-[#CA5D27] text-white hover:bg-[#b54d1f]"
+                    //     : "bg-[#244a46] text-white hover:bg-[#1b3835]"
+                    // }`}
                   >
-                    Add to Cart
+                    {addingToCart === product.id
+                      ? "Adding..."
+                      : addedToCart.has(product.id)
+                        ? "View Cart"
+                        : "Add to Cart"}
                   </button>
                 </article>
               );

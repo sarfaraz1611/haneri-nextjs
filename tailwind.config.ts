@@ -24,6 +24,9 @@ const config: Config = {
       },
     },
     extend: {
+      screens: {
+        "3xl": "1920px",
+      },
       // Custom Colors
       colors: {
         brand: {

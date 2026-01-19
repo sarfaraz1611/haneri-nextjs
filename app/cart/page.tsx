@@ -11,10 +11,16 @@ interface CartItem {
   id: number;
   product_name: string;
   variant_value?: string;
-  selling_price: number;
+  selling_price: number | string;
   quantity: number;
   file_urls?: string[];
 }
+
+const parsePrice = (price: number | string): number => {
+  if (typeof price === "number") return price;
+  // Remove commas and parse as float
+  return parseFloat(price.replace(/,/g, "")) || 0;
+};
 
 interface FlashMessage {
   type: "success" | "error";
@@ -98,8 +104,8 @@ export default function CartPage() {
 
       setCartItems((prev) =>
         prev.map((item) =>
-          item.id === itemId ? { ...item, quantity: newQuantity } : item
-        )
+          item.id === itemId ? { ...item, quantity: newQuantity } : item,
+        ),
       );
       setFlash({ type: "success", message: "Cart updated" });
     } catch (error) {
@@ -138,8 +144,8 @@ export default function CartPage() {
 
   const calculateSubtotal = () => {
     return cartItems.reduce(
-      (sum, item) => sum + item.selling_price * item.quantity,
-      0
+      (sum, item) => sum + parsePrice(item.selling_price) * item.quantity,
+      0,
     );
   };
 
@@ -214,9 +220,9 @@ export default function CartPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F5F5F5]">
+    <div className=" bg-[#F5F5F5] mt-20">
       {/* Flash Message */}
-      {flash && (
+      {/* {flash && (
         <div
           className={`fixed bottom-5 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-lg shadow-lg transition-all duration-300 ${
             flash.type === "success"
@@ -226,21 +232,32 @@ export default function CartPage() {
         >
           {flash.message}
         </div>
-      )}
+      )} */}
 
       {/* Breadcrumb */}
-      <div className="bg-primary py-8">
+      <div className="bg-primary pt-4">
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl md:text-4xl font-heading font-bold text-white uppercase tracking-wide">
+          {/* Continue Shopping Link */}
+          <Link
+            href="/shop"
+            className="inline-flex   font-heading  text-3xl items-center gap-2 text-[#075E5E] hover:text-brand font-semibold transition-colors mt-4"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="w-8 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+              />
+            </svg>
             Shopping Cart
-          </h1>
-          <div className="flex items-center gap-2 mt-2 text-white/80 text-sm">
-            <Link href="/" className="hover:text-white transition-colors">
-              Home
-            </Link>
-            <span>/</span>
-            <span className="text-white">Cart</span>
-          </div>
+          </Link>
         </div>
       </div>
 
@@ -319,7 +336,7 @@ export default function CartPage() {
                           </p>
                         )}
                         <p className="text-brand font-semibold mt-2">
-                          {formatPrice(item.selling_price)}
+                          {formatPrice(parsePrice(item.selling_price))}
                         </p>
                       </div>
                       <button
@@ -368,7 +385,9 @@ export default function CartPage() {
                         </button>
                       </div>
                       <p className="font-bold text-[#464646]">
-                        {formatPrice(item.selling_price * item.quantity)}
+                        {formatPrice(
+                          parsePrice(item.selling_price) * item.quantity,
+                        )}
                       </p>
                     </div>
                   </div>
@@ -416,7 +435,7 @@ export default function CartPage() {
                       </div>
                     </div>
                     <div className="col-span-2 text-center font-semibold text-[#464646]">
-                      {formatPrice(item.selling_price)}
+                      {formatPrice(parsePrice(item.selling_price))}
                     </div>
                     <div className="col-span-2 flex justify-center">
                       <div className="flex items-center border border-gray-200 rounded-lg">
@@ -444,33 +463,13 @@ export default function CartPage() {
                       </div>
                     </div>
                     <div className="col-span-2 text-center font-bold text-[#464646]">
-                      {formatPrice(item.selling_price * item.quantity)}
+                      {formatPrice(
+                        parsePrice(item.selling_price) * item.quantity,
+                      )}
                     </div>
                   </div>
                 </div>
               ))}
-
-              {/* Continue Shopping Link */}
-              <Link
-                href="/shop"
-                className="inline-flex items-center gap-2 text-[#075E5E] hover:text-brand font-semibold transition-colors mt-4"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                  className="w-4 h-4"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
-                  />
-                </svg>
-                Continue Shopping
-              </Link>
             </div>
 
             {/* Order Summary */}

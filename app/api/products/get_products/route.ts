@@ -5,7 +5,9 @@ export async function POST(request: NextRequest) {
     // Get the authorization header if present
     const authHeader = request.headers.get("authorization");
 
-    // Forward the request to the actual API (api.haneri.com, not www.haneri.in)
+    // Get the request body to forward to the API
+    const requestBody = await request.json();
+
     const response = await fetch(
       "https://api.haneri.com/api/products/get_products",
       {
@@ -14,7 +16,7 @@ export async function POST(request: NextRequest) {
           "Content-Type": "application/json",
           ...(authHeader && { Authorization: authHeader }),
         },
-        body: JSON.stringify({}),
+        body: JSON.stringify(requestBody),
       }
     );
 

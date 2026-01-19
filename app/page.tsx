@@ -40,7 +40,7 @@ export default function Home() {
           opacity: 1,
           duration: 1,
           ease: "power2.out",
-        }
+        },
       );
     }
   }, [isLoaded]);
@@ -57,7 +57,6 @@ export default function Home() {
         </div>
 
         <InnovationsSection />
-
 
         <div className=" ">
           <ServicesSlider />
