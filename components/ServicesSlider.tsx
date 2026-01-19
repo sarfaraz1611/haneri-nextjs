@@ -1,14 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
-
-// Register plugin only on client-side
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 const slides = [
   {
@@ -59,13 +52,33 @@ export default function ServicesSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const animatingRef = useRef(false);
   const currentIndexRef = useRef(0);
+  const gsapRef = useRef<typeof import("gsap").gsap | null>(null);
+  const ScrollTriggerRef = useRef<typeof import("gsap/ScrollTrigger").ScrollTrigger | null>(null);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     currentIndexRef.current = currentIndex;
   }, [currentIndex]);
 
+  // Initialize GSAP on client-side only
+  useEffect(() => {
+    const initGsap = async () => {
+      const gsapModule = await import("gsap");
+      const scrollTriggerModule = await import("gsap/ScrollTrigger");
+
+      gsapRef.current = gsapModule.gsap;
+      ScrollTriggerRef.current = scrollTriggerModule.ScrollTrigger;
+
+      gsapModule.gsap.registerPlugin(scrollTriggerModule.ScrollTrigger);
+      setIsClient(true);
+    };
+
+    initGsap();
+  }, []);
+
   const gotoSection = useCallback((index: number, direction: number) => {
-    if (animatingRef.current) return;
+    const gsap = gsapRef.current;
+    if (!gsap || animatingRef.current) return;
 
     const totalSlides = slides.length;
 
@@ -158,7 +171,10 @@ export default function ServicesSlider() {
   }, []);
 
   useEffect(() => {
-    if (!containerRef.current || !wrapperRef.current) return;
+    const gsap = gsapRef.current;
+    const ScrollTrigger = ScrollTriggerRef.current;
+
+    if (!isClient || !gsap || !ScrollTrigger || !containerRef.current || !wrapperRef.current) return;
 
     // Initial setup
     gsap.set(outerWrappersRef.current, { xPercent: 100 });
@@ -169,11 +185,11 @@ export default function ServicesSlider() {
     gsap.set(imagesRef.current, { autoAlpha: 0 });
     gsap.set(imagesRef.current[0], { autoAlpha: 1 });
 
-    let trigger: ScrollTrigger | null = null;
+    let trigger: globalThis.ScrollTrigger | null = null;
 
     // Wait for all content to load and render
     const initScrollTrigger = () => {
-      if (!containerRef.current) return;
+      if (!containerRef.current || !ScrollTrigger) return;
 
       // Kill any existing triggers with our ID
       ScrollTrigger.getById("servicesSlider")?.kill();
@@ -206,7 +222,7 @@ export default function ServicesSlider() {
         },
         onLeaveBack: () => {
           // Reset to first slide when scrolling back up past the section
-          if (currentIndexRef.current !== 0) {
+          if (currentIndexRef.current !== 0 && gsap) {
             currentIndexRef.current = 0;
             setCurrentIndex(0);
             gsap.set(outerWrappersRef.current, { xPercent: 100 });
@@ -227,7 +243,7 @@ export default function ServicesSlider() {
     let hasInitialized = false;
 
     const initAfterPinSpacers = () => {
-      if (hasInitialized) return;
+      if (hasInitialized || !ScrollTrigger) return;
 
       // Check if FeaturedProducts pin-spacer exists
       const pinSpacers = document.querySelectorAll(".pin-spacer");
@@ -269,7 +285,7 @@ export default function ServicesSlider() {
           hasInitialized = true;
           initScrollTrigger();
         }
-        ScrollTrigger.refresh(true);
+        ScrollTrigger?.refresh(true);
       }, 500);
     };
     window.addEventListener("load", handleLoad);
@@ -284,7 +300,7 @@ export default function ServicesSlider() {
         trigger.kill();
       }
     };
-  }, [gotoSection]);
+  }, [isClient, gotoSection]);
 
   return (
     <div ref={wrapperRef} className="services-slider-wrapper">
