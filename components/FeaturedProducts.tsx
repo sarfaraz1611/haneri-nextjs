@@ -11,8 +11,10 @@ import DiscoverHero from "./DiscoverHero";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 
-// Register ScrollTrigger so GSAP knows about the plugin
-gsap.registerPlugin(ScrollTrigger);
+// Register ScrollTrigger only on client-side
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 // --- Types based on your API usage ---
 interface Variant {
@@ -203,6 +205,7 @@ export default function FeaturedProducts() {
           end: `+=${scrollDistance}`,
           // CRITICAL FOR DEBUGGING: Show start/end/pin markers
           markers: false,
+          anticipatePin: 1, // Helps prevent jump when pinning starts/ends
         },
       });
 

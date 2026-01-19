@@ -186,9 +186,10 @@ export default function ServicesSlider() {
         end: `+=${(slides.length - 1) * 100}%`,
         pin: true,
         pinSpacing: true,
-        scrub: false,
+        scrub: 0.5, // Add smooth scrubbing to prevent jumps
         markers: false,
         invalidateOnRefresh: true,
+        anticipatePin: 1, // Helps prevent jump when pinning starts
         onUpdate: (self) => {
           if (animatingRef.current) return;
 

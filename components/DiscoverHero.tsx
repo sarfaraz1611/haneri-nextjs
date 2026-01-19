@@ -33,7 +33,7 @@ export default function DiscoverHero({
           >
             <div className="h-[2px] w-16 bg-[#CA5D27] animate-expand-right"></div>
             <p className="text-[#CA5D27] text-[16px] md:text-[20px] lg:text-[24px] font-medium animate-pulse-slow uppercase">
-              <span className="md:hidden">Trending</span>
+              {/* <span className="md:hidden">Trending</span> */}
               <span className="hidden md:inline">Trending Now</span>
             </p>
             <div className="h-[2px] w-16 bg-[#CA5D27] animate-expand-left"></div>
