@@ -63,7 +63,7 @@ export default function CartPage() {
         payload.cart_id = tempId;
       }
 
-      const response = await axios.post(`${BASE_URL}/cart/fetch`, payload, {
+      const response = await axios.post(`${BASE_URL}/api/cart/fetch`, payload, {
         headers: getAuthHeaders(),
       });
 
