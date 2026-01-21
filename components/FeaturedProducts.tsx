@@ -281,7 +281,7 @@ export default function FeaturedProducts() {
         payload.cart_id = tempId;
       }
 
-      const response = await fetch(`${BASE_URL}/cart/add`, {
+      const response = await fetch(`${BASE_URL}/api/cart/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

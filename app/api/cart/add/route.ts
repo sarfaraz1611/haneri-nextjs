@@ -5,7 +5,7 @@ export async function POST(request: NextRequest) {
     const authHeader = request.headers.get("authorization");
     const requestBody = await request.json();
 
-    const response = await fetch("https://api.haneri.com/cart/add", {
+    const response = await fetch("https://api.haneri.com/api/cart/add", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
