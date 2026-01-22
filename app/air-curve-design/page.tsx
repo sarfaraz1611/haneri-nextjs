@@ -33,21 +33,24 @@ export default function AirCurveDesign() {
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
               <h2 className="text-4xl tracking-tight  text-[#315858]">
-                <span className="text-[#bb6125] font-semibold mb-1" >
+                <span className="text-[#bb6125] font-semibold mb-1 text-4xl  tracking-tight">
                   Introducing Air Curve Design:
                 </span>
                 <br />
                 Redefining Ceiling Fan Efficiency
               </h2>
-              <p className="mt-4 text-black">
-                Haneri is the brainchild of a passionate team with over 75 years
-                of collective experience in the consumer durable industry. With
-                expertise spanning product creation, innovation, engineering, and
-                manufacturing, we envisioned Haneri as a brand that caters to
-                consumers seeking products that seamlessly blend with modern
-                living. At Haneri, our mission is to inspire everyday life by
-                offering thoughtfully designed, functional, and future-ready
-                solutions.
+              <p
+                className="text-[16px] mt-4 font-normal text-gray-500 "
+                style={{ fontFamily: "'Montserrat', sans-serif" }}
+              >
+                At Haneri, innovation drives us to create products that are not
+                only stylish but also deliver superior performance. Our
+                revolutionary Air Curve Design technology transforms how ceiling
+                fan blades are conceptualized, designed, and manufactured. With
+                high-tech design and precision engineering, blades designed with
+                Air Curve Design Technology offer unmatched air delivery,
+                efficiency, and durability, showcasing the superiority of our
+                product.
               </p>
             </motion.div>
           </div>
@@ -55,7 +58,7 @@ export default function AirCurveDesign() {
           {/* Section 2 - Text Left, Image Right */}
           <div className="grid grid-cols-1 items-center gap-x-16 gap-y-10 lg:grid-cols-2 mt-15">
             <motion.div
-             className="order-2 lg:order-1"
+              className="order-2 lg:order-1"
               initial={{ opacity: 0, x: -60 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
@@ -64,7 +67,10 @@ export default function AirCurveDesign() {
               <h2 className="text-4xl font-semibold  tracking-tight text-[#315858]">
                 Why is Air Curve Design?
               </h2>
-              <p className="mt-4 text-black">
+              <p
+                className="text-[16px] mt-4 font-normal text-gray-500 "
+                style={{ fontFamily: "'Montserrat', sans-serif" }}
+              >
                 Air Curve Design is a cutting-edge blade technology that
                 leverages advanced computational modelling and simulation to
                 craft blades optimized for maximum airflow and energy
@@ -76,7 +82,7 @@ export default function AirCurveDesign() {
             </motion.div>
 
             <motion.div
-             className="order-1 lg:order-2"
+              className="order-1 lg:order-2"
               initial={{ opacity: 0, x: 60 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
@@ -94,7 +100,7 @@ export default function AirCurveDesign() {
 
           {/* Key Features Section */}
           <div className="mt-20">
-              <h2 className="text-4xl  mb-10 font-semibold  tracking-tight text-[#315858]">
+            <h2 className="text-4xl  mb-10 font-semibold  tracking-tight text-[#315858]">
               Key Features of Air Curve Design
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -116,10 +122,18 @@ export default function AirCurveDesign() {
                   <h3 className="text-xl font-semibold text-[#315858]">
                     High Air Delivery
                   </h3>
-                  <p className="mt-2 text-black">
-                    Air Curve blades are engineered to maximize airflow, providing
-                    a powerful and consistent cooling experience. They are designed
-                    to deliver optimal air circulation even in large spaces.
+                  <p
+                    className="mt-2 text-black"
+                    style={{
+                      fontFamily:
+                        'Montserrat, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif',
+                      fontWeight: 400,
+                    }}
+                  >
+                    Air Curve blades are engineered to maximize airflow,
+                    providing a powerful and consistent cooling experience. They
+                    are designed to deliver optimal air circulation even in
+                    large spaces.
                   </p>
                 </div>
               </motion.div>
@@ -142,12 +156,19 @@ export default function AirCurveDesign() {
                   <h3 className="text-xl font-semibold text-[#315858]">
                     Energy Efficiency
                   </h3>
-                  <p className="mt-2 text-black">
+                  <p
+                    className="mt-2 text-black"
+                    style={{
+                      fontFamily:
+                        'Montserrat, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif',
+                      fontWeight: 400,
+                    }}
+                  >
                     The aerodynamic profile of Air Curve blades optimizing drag,
                     reducing the load on the motor and ensuring energy-efficient
-                    operation. Thanks to their energy-efficient operation, you can
-                    enjoy a powerful cooling experience while saving on electricity
-                    bills.
+                    operation. Thanks to their energy-efficient operation, you
+                    can enjoy a powerful cooling experience while saving on
+                    electricity bills.
                   </p>
                 </div>
               </motion.div>
@@ -170,11 +191,18 @@ export default function AirCurveDesign() {
                   <h3 className="text-xl font-semibold text-[#315858]">
                     Advanced Materials
                   </h3>
-                  <p className="mt-2 text-black">
-                    Air Curve blades are crafted using high-strength, lightweight
-                    materials, ensuring durability and optimal blade weight for
-                    efficient rotation. You can trust in the longevity of your
-                    cooling solution.
+                  <p
+                    className="mt-2 text-black"
+                    style={{
+                      fontFamily:
+                        'Montserrat, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif',
+                      fontWeight: 400,
+                    }}
+                  >
+                    Air Curve blades are crafted using high-strength,
+                    lightweight materials, ensuring durability and optimal blade
+                    weight for efficient rotation. You can trust in the
+                    longevity of your cooling solution.
                   </p>
                 </div>
               </motion.div>
@@ -197,10 +225,17 @@ export default function AirCurveDesign() {
                   <h3 className="text-xl font-semibold text-[#315858]">
                     Silent Performance
                   </h3>
-                  <p className="mt-2 text-black">
+                  <p
+                    className="mt-2 text-black"
+                    style={{
+                      fontFamily:
+                        'Montserrat, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif',
+                      fontWeight: 400,
+                    }}
+                  >
                     The streamlined blade design minimizes turbulence, ensuring
-                    whisper-quiet operation, ideal for residential and professional
-                    settings.
+                    whisper-quiet operation, ideal for residential and
+                    professional settings.
                   </p>
                 </div>
               </motion.div>
@@ -257,11 +292,16 @@ export default function AirCurveDesign() {
                     <span className="text-[#315858] font-bold">
                       Computational Fluid Dynamics (CFD):
                     </span>{" "}
-                    Powered by Air Curve Design, the blades feature
-                    precision-engineered contours that maximize air displacement
-                    while optimizing drag. High torque from the TurboSilent BLDC
-                    Motor ensures efficient blade rotation, delivering
-                    consistent airflow even at reduced speeds.
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      Powered by Air Curve Design, the blades feature
+                      precision-engineered contours that maximize air
+                      displacement while optimizing drag. High torque from the
+                      TurboSilent BLDC Motor ensures efficient blade rotation,
+                      delivering consistent airflow even at reduced speeds.
+                    </span>
                   </span>
                 </motion.li>
 
@@ -277,9 +317,14 @@ export default function AirCurveDesign() {
                     <span className="text-[#315858] font-bold">
                       Prototyping and Testing:{" "}
                     </span>{" "}
+                      <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
                     Multiple prototypes are tested under real-world conditions
                     to validate performance metrics such as air delivery, noise
                     levels, and energy consumption.
+                  </span>
                   </span>
                 </motion.li>
 
@@ -295,25 +340,28 @@ export default function AirCurveDesign() {
                     <span className="text-[#315858] font-bold">
                       Iterative Design:{" "}
                     </span>{" "}
+                     <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
                     Continuous refinement based on data-driven insights ensures
                     that AirCurve blades exceed industry benchmarks for
                     performance and reliability.
+                  </span>
                   </span>
                 </motion.li>
               </motion.ul>
             </motion.div>
           </div>
 
-       
-
           {/* Benefits For Customers Section */}
           <div className="mt-20 flex flex-col items-start">
-             <h2 className="text-4xl  mb-10 font-semibold  tracking-tight text-[#315858]">
+            <h2 className="text-4xl  mb-10 font-semibold  tracking-tight text-[#315858]">
               Benefits For Customers
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2  gap-8 w-full">
               <motion.div
-               className="grid  grid-cols-[72px_1fr] items-start gap-3.5 p-4 rounded-lg border border-gray-200 bg-white"
+                className="grid  grid-cols-[72px_1fr] items-start gap-3.5 p-4 rounded-lg border border-gray-200 bg-white"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -330,15 +378,22 @@ export default function AirCurveDesign() {
                   <h3 className="text-xl font-semibold text-[#CA5C27]">
                     Enhanced Comfort
                   </h3>
-                  <p className="mt-2 text-black">
-                    Experience superior cooling with high air delivery, ensuring a refreshing breeze in every corner of
-                    the room.
+                  <p
+                    className="mt-2 text-black"
+                    style={{
+                      fontFamily:
+                        'Montserrat, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif',
+                      fontWeight: 400,
+                    }}
+                  >
+                    Experience superior cooling with high air delivery, ensuring
+                    a refreshing breeze in every corner of the room.
                   </p>
                 </div>
               </motion.div>
 
               <motion.div
-               className="grid grid-cols-[72px_1fr] items-start gap-3.5 p-4 rounded-lg border border-gray-200 bg-white"
+                className="grid grid-cols-[72px_1fr] items-start gap-3.5 p-4 rounded-lg border border-gray-200 bg-white"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -355,14 +410,22 @@ export default function AirCurveDesign() {
                   <h3 className="text-xl font-semibold text-[#CA5C27]">
                     Cost Savings
                   </h3>
-                  <p className="mt-2 text-black">
-                    Energy-efficient operation translates to long-term savings on electricity bills.
+                  <p
+                    className="mt-2 text-black"
+                    style={{
+                      fontFamily:
+                        'Montserrat, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif',
+                      fontWeight: 400,
+                    }}
+                  >
+                    Energy-efficient operation translates to long-term savings
+                    on electricity bills.
                   </p>
                 </div>
               </motion.div>
 
               <motion.div
-               className="grid grid-cols-[72px_1fr] items-start gap-3.5 p-4 rounded-lg border border-gray-200 bg-white"
+                className="grid grid-cols-[72px_1fr] items-start gap-3.5 p-4 rounded-lg border border-gray-200 bg-white"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -379,15 +442,22 @@ export default function AirCurveDesign() {
                   <h3 className="text-xl font-semibold text-[#CA5C27]">
                     Sustainable Choice
                   </h3>
-                  <p className="mt-2 text-black">
-                    This Technology contributes to a greener, more sustainable environment by reducing energy
-                    consumption.
+                  <p
+                    className="mt-2 text-black"
+                    style={{
+                      fontFamily:
+                        'Montserrat, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif',
+                      fontWeight: 400,
+                    }}
+                  >
+                    This Technology contributes to a greener, more sustainable
+                    environment by reducing energy consumption.
                   </p>
                 </div>
               </motion.div>
 
               <motion.div
-               className="grid grid-cols-[72px_1fr] items-start gap-3.5 p-4 rounded-lg border border-gray-200 bg-white"
+                className="grid grid-cols-[72px_1fr] items-start gap-3.5 p-4 rounded-lg border border-gray-200 bg-white"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -404,8 +474,17 @@ export default function AirCurveDesign() {
                   <h3 className="text-xl font-semibold text-[#CA5C27]">
                     Quiet Operation
                   </h3>
-                  <p className="mt-2 text-black">
-                    Reduced turbulence and noise make Silent M.A.S.S ideal for bedrooms, offices, and libraries where silence is a priority.
+                  <p
+                    className="mt-2 text-black"
+                    style={{
+                      fontFamily:
+                        'Montserrat, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif',
+                      fontWeight: 400,
+                    }}
+                  >
+                    Reduced turbulence and noise make Silent M.A.S.S ideal for
+                    bedrooms, offices, and libraries where silence is a
+                    priority.
                   </p>
                 </div>
               </motion.div>

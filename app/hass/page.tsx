@@ -32,27 +32,26 @@ export default function SilentHASS() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-4xl tracking-tight text-[#315858]">
+              <h2 className="text-4xl tracking-tight text-[#315858] xl:max-w-3/4">
                 <span className="text-[#bb6125] font-semibold">
                   Introducing Silent H.A.S.S Technology:
                 </span>
-                <br />
+                {/* <br /> */}
                 High Air, Slow Speed
               </h2>
-              <p className="mt-4 text-black">
+              <p
+                className="text-[16px] mt-4 font-normal text-gray-500 "
+                style={{ fontFamily: "'Montserrat', sans-serif" }}
+              >
                 At Haneri, we believe that true innovation lies in challenging
                 common misconceptions and delivering solutions that redefine
-                industry standards. Our Silent H.A.S.S Technology (High Air,
+                industry standards. Our Silent H.A.S.S Technology (More Air,
                 Slow Speed) embodies this philosophy, and debunks the myth that
-                you don&apos;t need high speed (RPM) to achieve superior air
+                you don’t need high speed (RPM) to achieve superior air
                 delivery. Leveraging our advanced Air Curve Design and
                 TurboSilent BLDC Motor Technology, Silent H.A.S.S delivers
                 unparalleled performance, offering powerful airflow with
-                near-silent operation at lower rotational speeds. By optimizing
-                airflow dynamics and minimizing noise, Haneri&apos;s Silent
-                H.A.S.S Technology ensures a more comfortable and efficient user
-                experience, whether in industrial settings or residential
-                applications.
+                near-silent operation at lower rotational speeds.
               </p>
             </motion.div>
           </div>
@@ -60,7 +59,7 @@ export default function SilentHASS() {
           {/* Section 2 - Text Left, Image Right */}
           <div className="grid grid-cols-1 items-center gap-x-16 gap-y-10 lg:grid-cols-2 mt-15">
             <motion.div
-            className="order-2 md:order-1"
+              className="order-2 md:order-1"
               initial={{ opacity: 0, x: -60 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
@@ -69,33 +68,22 @@ export default function SilentHASS() {
               <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
                 What is Silent H.A.S.S Technology?
               </h2>
-              <p className="mt-4 text-black">
-                Our Silent H.A.S.S Technology (High Air, Slow Speed) challenges
-                the conventional notion that higher RPM alone equals better air
-                delivery. By redefining the relationship between speed, airflow,
-                and silence, this innovation delivers a superior experience
-                rooted in intelligent design rather than brute force.
-              </p>
-              <p className="mt-4 text-black">
-                With Air Curve Design and TurboSilent BLDC Motor Technology,
-                Silent H.A.S.S achieves remarkable airflow even at lower
-                rotational speeds, maintaining a powerful yet whisper-quiet
-                operation. This not only enhances comfort but also contributes
-                to significant energy savings and long-term durability.
-              </p>
-              <p className="mt-4 text-black">
-                Every fan powered by Haneri&apos;s Silent H.A.S.S system is
-                meticulously engineered to optimize blade geometry, reduce
-                turbulence, and minimize drag — ensuring a balanced air thrust
-                across spaces of all sizes. The result is efficient cooling,
-                reduced noise, and improved air circulation, redefining how
-                modern ceiling fans perform in both residential and commercial
-                environments.
+              <p
+                className="text-[16px] mt-4 font-normal text-gray-500 "
+                style={{ fontFamily: "'Montserrat', sans-serif" }}
+              >
+                Silent H.A.S.S Technology is a revolutionary integration of
+                Haneri’s two engineering marvels—Air Curve Design and
+                TurboSilent BLDC Motor Technology. By combining aerodynamically
+                optimized blades with high-torque, energy-efficient motors, this
+                Trademark Registered Pillar Technology achieves exceptional air
+                delivery at reduced RPM, redefining ceiling fan performance
+                while ensuring whisper-quiet operation.
               </p>
             </motion.div>
 
             <motion.div
-                        className="order-1 md:order-2"
+              className="order-1 md:order-2"
               initial={{ opacity: 0, x: 60 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
@@ -161,9 +149,16 @@ export default function SilentHASS() {
                     <span className="text-[#315858] font-semibold">
                       High Air Delivery at Low RPM:
                     </span>{" "}
-                    Precision blade contours (Air Curve Design) + high torque
-                    TurboSilent BLDC deliver consistent airflow at reduced
-                    speeds.
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      Powered by Air Curve Design, the blades feature
+                      precision-engineered contours that maximize air
+                      displacement while optimizing drag. High torque from the
+                      TurboSilent BLDC Motor ensures efficient blade rotation,
+                      delivering consistent airflow even at reduced speeds.
+                    </span>
                   </span>
                 </motion.li>
 
@@ -179,8 +174,16 @@ export default function SilentHASS() {
                     <span className="text-[#315858] font-semibold">
                       Ultra-Quiet Operation:
                     </span>{" "}
-                    Low RPM with efficient torque output reduces mechanical
-                    noise; streamlined profiles cut turbulence.
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      The low RPM operation, combined with Efficient Torque
+                      output from the TurboSilent BLDC Motor, eliminates
+                      mechanical noise, creating an ultra-quiet cooling
+                      experience. Streamlined blade profiles reduce turbulence,
+                      further contributing to silent performance.
+                    </span>
                   </span>
                 </motion.li>
 
@@ -196,8 +199,17 @@ export default function SilentHASS() {
                     <span className="text-[#315858] font-semibold">
                       Enhanced Motor Efficiency:{" "}
                     </span>{" "}
-                    Optimized electromagnetic design and Indian-tuned controller
-                    minimize losses and cost.
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      TurboSilent BLDC motors utilize advanced electromagnetic
+                      design for optimal torque-to-RPM ratios, ensuring seamless
+                      operation at low speeds. Electronic Controller which has
+                      been made in India as per Indian Conditions , minimizes
+                      energy losses, making the system highly efficient and
+                      cost-effective.
+                    </span>
                   </span>
                 </motion.li>
 
@@ -213,7 +225,14 @@ export default function SilentHASS() {
                     <span className="text-[#315858] font-semibold">
                       Advanced Blade Aerodynamics:{" "}
                     </span>{" "}
-                    CFD-driven profiles maximize air delivery per watt.
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      Blades designed with Air Curve Design use computational
+                      fluid dynamics (CFD) to optimize airflow pathways,
+                      ensuring maximum air delivery per watt of power consumed.
+                    </span>
                   </span>
                 </motion.li>
 
@@ -229,8 +248,14 @@ export default function SilentHASS() {
                     <span className="text-[#315858] font-semibold">
                       Trademarked Technology:{" "}
                     </span>{" "}
-                    A proprietary Haneri pillar integrating hardware + control
-                    engineering.
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      Silent M.A.S.S Technology is a Trademark Registered Pillar
+                      of Haneri, integrating proprietary engineering solutions
+                      to deliver performance and efficiency.
+                    </span>
                   </span>
                 </motion.li>
               </motion.ul>
@@ -270,8 +295,15 @@ export default function SilentHASS() {
                     <span className="text-[#315858] font-semibold">
                       Aerodynamic Optimization with Air Curve Design:{" "}
                     </span>{" "}
-                    Efficient pressure differential at slower speeds reduces
-                    resistance and noise.
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      Advanced blade profiles create an efficient pressure
+                      differential, maximizing air displacement while operating
+                      at slower speeds. The design minimizes resistance and
+                      turbulence, reducing energy wastage and noise.
+                    </span>
                   </span>
                 </motion.li>
 
@@ -287,8 +319,16 @@ export default function SilentHASS() {
                     <span className="text-[#315858] font-semibold">
                       High-Torque Motor Performance:{" "}
                     </span>{" "}
-                    FOC and advanced algorithms maintain smooth, precise low-RPM
-                    control.
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      TurboSilent BLDC Motors leverage high torque generation to
+                      power blades effectively at low RPM, ensuring consistent
+                      airflow without overloading the system. Field-oriented
+                      control (FOC) and advanced motor algorithms enable precise
+                      speed regulation, maintaining performance consistency.
+                    </span>
                   </span>
                 </motion.li>
 
@@ -304,8 +344,15 @@ export default function SilentHASS() {
                     <span className="text-[#315858] font-semibold">
                       Integrated System Design:{" "}
                     </span>{" "}
-                    Blades + BLDC + controller tuned together remove
-                    airflow/energy bottlenecks.
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      The synergy between Air Curve Design and TurboSilent BLDC
+                      Motors ensures that every component is optimized for
+                      efficiency and performance, eliminating bottlenecks in
+                      airflow or energy transfer.
+                    </span>
                   </span>
                 </motion.li>
 
@@ -319,13 +366,21 @@ export default function SilentHASS() {
                   <span className="mr-2">•</span>
                   <span>
                     <span className="text-[#315858] font-semibold">
-                      Advanced Blade Aerodynamics:{" "}
+                      Energy Optimization :{" "}
                     </span>{" "}
-                    CFD optimizes airflow pathways for max delivery per watt.
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      Combined with energy-efficient motor controls and low-drag
+                      blade designs, Silent M.A.S.S Technology reduces power
+                      consumption significantly, contributing to lower
+                      operational costs and a smaller carbon footprint.
+                    </span>
                   </span>
                 </motion.li>
 
-                <motion.li
+                {/* <motion.li
                   className="text-black flex"
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -340,7 +395,7 @@ export default function SilentHASS() {
                     Silent H.A.S.S is a proprietary Haneri pillar for
                     performance + efficiency.
                   </span>
-                </motion.li>
+                </motion.li> */}
               </motion.ul>
             </motion.div>
           </div>

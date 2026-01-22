@@ -1,5 +1,8 @@
-// app/page.tsx
+"use client";
+
+import { useEffect, useState } from "react";
 import { BrandSection } from "./components/brandsection";
+
 export const brandSections = [
   {
     id: "haneri",
@@ -10,7 +13,7 @@ export const brandSections = [
     reverse: false,
   },
   {
-    id: "bespoke",
+    id: "fancraft",
     title: "FanCraft embodies",
     description:
       "personalization at its finest, bringing individuality and style to your living or workspace. With a focus on allowing consumers to select colors, finishes, and materials crafted to their preferences, it bridges the gap between functionality and self-expression. Whether you're refreshing your home décor or conceptualizing a modern office, “FanCraft” transforms your vision into reality. It is more than a product; it's an extension of your personality, crafted to reflect your unique identity while seamlessly blending with your environment. Experience the art of personalized luxury, designed exclusively for you.",
@@ -26,8 +29,57 @@ export const brandSections = [
   },
 ];
 
-
 export default function Page() {
+  const [hash, setHash] = useState("");
+
+  // Listen for URL hash changes
+  useEffect(() => {
+    // Set initial hash
+    if (typeof window !== "undefined") {
+      setHash(window.location.hash.replace("#", ""));
+    }
+
+    const handleHashChange = () => {
+      setHash(window.location.hash.replace("#", ""));
+    };
+
+    // Listen for native hashchange event
+    window.addEventListener("hashchange", handleHashChange);
+
+    // Also poll for hash changes to catch Next.js Link navigation
+    const checkHashInterval = setInterval(() => {
+      const currentHash = window.location.hash.replace("#", "");
+      setHash((prevHash) => {
+        if (prevHash !== currentHash) {
+          return currentHash;
+        }
+        return prevHash;
+      });
+    }, 100);
+
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+      clearInterval(checkHashInterval);
+    };
+  }, []);
+
+  // Scroll to section when hash changes
+  useEffect(() => {
+    if (!hash) return;
+
+    const element = document.getElementById(hash);
+    if (element) {
+      const headerOffset = 100; // Space for fixed header
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  }, [hash]);
+
   return (
     <div className="mt-20">
       {brandSections.map((item) => (

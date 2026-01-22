@@ -67,7 +67,7 @@ const aboutUsMenu = [
     href: "/our-brands",
     subLinks: [
       { name: "Haneri", href: "/our-brands#haneri" },
-      { name: "Bespoke", href: "/our-brands#bespoke" },
+      { name: "Fancraft", href: "/our-brands#fancraft" },
       { name: "Professional", href: "/our-brands#professional" },
     ],
   },
@@ -85,9 +85,9 @@ const supportMenu = [
     isClickable: false,
     subLinks: [
       { name: "FAQs", href: "/faqs" },
-      { name: "Videos", href: "/videos" },
-      { name: "Catalogues", href: "/catalogues" },
-      { name: "Manuals", href: "/manuals" },
+      // { name: "Videos", href: "/videos" },
+      // { name: "Catalogues", href: "/catalogues" },
+      // { name: "Manuals", href: "/manuals" },
     ],
   },
   {
@@ -237,11 +237,12 @@ export default function Header() {
                             >
                               <Link
                                 href={item.href}
-                                className={`${
-                                  item.subLinks.length > 0
-                                    ? "font-semibold text-[14px] text-primary-green inline-block mb-1 hover:text-brand uppercase"
-                                    : "text-primary-green hover:text-brand uppercase"
-                                }`}
+                                className="font-semibold text-[14px] text-primary-green inline-block mb-1 hover:text-brand uppercase"
+                                // className={`${
+                                //   item.subLinks.length > 0
+                                //     ? "font-semibold text-[14px] text-primary-green inline-block mb-1 hover:text-brand uppercase"
+                                //     : "text-primary-green hover:text-brand uppercase"
+                                // }`}
                               >
                                 {item.title}
                               </Link>
@@ -288,7 +289,7 @@ export default function Header() {
                               {item.isClickable ? (
                                 <Link
                                   href={item.href!}
-                                  className="text-primary-green hover:text-brand uppercase"
+                                  className="font-semibold text-[14px] text-primary-green inline-block mb-1 uppercase"
                                 >
                                   {item.title}
                                 </Link>

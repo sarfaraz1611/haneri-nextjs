@@ -488,6 +488,29 @@ export default function FeaturedProducts() {
           </div>
         </div>
       </div>
+      <div className="absolute bottom-4 md:bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
+        <span className="text-xs text-gray-500 tracking-widest uppercase">
+          Scroll to Explore
+        </span>
+        <div className="relative">
+          <div className="absolute inset-0 rounded-full border-2 border-yellow-400/30 animate-ping" />
+          <div className="relative p-2 rounded-full border border-gray-200 bg-white/50 backdrop-blur-sm animate-bounce">
+            <svg
+              className="w-5 h-5 text-[#CA5D27]"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 14l-7 7m0 0l-7-7m7 7V3"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

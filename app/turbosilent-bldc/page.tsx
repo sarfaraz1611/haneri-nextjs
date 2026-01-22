@@ -39,17 +39,16 @@ export default function TurbosilentBLDC() {
                 <br />
                 Unleashing Unmatched Power and Efficiency
               </h2>
-              <p className="mt-4 text-black">
-                At Haneri, we redefine engineering excellence with our
+              <p
+                className="text-[16px] mt-4 font-normal text-gray-500 "
+                style={{ fontFamily: "'Montserrat', sans-serif" }}
+              >
+                At HANERI, we redefine engineering excellence with our
                 proprietary TurboSilent BLDC Technology. This advanced motor
                 design not only delivers higher torque and exceptional
                 durability but also ensures unmatched energy efficiency, setting
                 a new benchmark for ceiling fan performance and contributing to
-                a greener environment. Our innovative technology guarantees
-                whisper-quiet operation, providing a peaceful and comfortable
-                atmosphere in your home or office. Additionally, the low
-                maintenance requirements and long-lasting build make our fans a
-                reliable and cost-effective choice for modern living.
+                a greener environment.
               </p>
             </motion.div>
           </div>
@@ -57,7 +56,7 @@ export default function TurbosilentBLDC() {
           {/* Section 2 - Text Left, Image Right */}
           <div className="grid grid-cols-1 items-center gap-x-16 gap-y-10 lg:grid-cols-2 mt-15">
             <motion.div
-            className="order-2 md:order-1"
+              className="order-2 md:order-1"
               initial={{ opacity: 0, x: -60 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
@@ -66,24 +65,18 @@ export default function TurbosilentBLDC() {
               <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
                 Why TurboSilent BLDC Technology?
               </h2>
-              <p className="mt-4 text-black">
-                TurboSilent BLDC Technology also features advanced thermal
-                management solutions, allowing the motor to operate efficiently
-                across a wide range of temperatures. Its compact and lightweight
-                design facilitates easy integration into various applications,
-                from industrial machinery to consumer electronics. Additionally,
-                the system incorporates sophisticated control algorithms that
-                optimize performance and responsiveness, providing smooth and
-                quiet operation even under demanding conditions. With its
-                innovative features, TurboSilent BLDC motors set a new standard
-                for durability, efficiency, and performance in modern motor
-                technology. The integration of intelligent sensors and feedback
-                systems enhances real-time monitoring, enabling predictive
-                diagnostics and further optimizing operational efficiency.
-                Overall, TurboSilent BLDC motors represent a cutting-edge
-                solution that combines innovation, durability, and versatility
-                to meet the evolving demands of modern industries and electronic
-                devices.
+              <p
+                className="text-[16px] mt-4 font-normal text-gray-500 "
+                style={{ fontFamily: "'Montserrat', sans-serif" }}
+              >
+                TurboSilent BLDC (Brushless Direct Current) Technology is an
+                in-house developed motor system that employs high-tech
+                electromagnetic and mechanical design principles. This
+                cutting-edge innovation enhances torque delivery, minimizes
+                energy losses, and ensures extended motor lifespan. TurboSilent
+                motors are engineered to outperform conventional systems,
+                offering industry-leading reliability and precision that you can
+                trust.
               </p>
             </motion.div>
 
@@ -154,9 +147,14 @@ export default function TurbosilentBLDC() {
                     <span className="text-[#315858] font-semibold">
                       Electromagnetic Optimization:
                     </span>{" "}
-                    Uses Finite Element Analysis (FEA) to design and validate
-                    the magnetic circuit, maximizing flux density while
-                    minimizing losses.
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      Uses Finite Element Analysis (FEA) to design and validate
+                      the magnetic circuit, maximizing flux density while
+                      minimizing losses.
+                    </span>
                   </span>
                 </motion.li>
 
@@ -172,9 +170,14 @@ export default function TurbosilentBLDC() {
                     <span className="text-[#315858] font-semibold">
                       Thermal Management:
                     </span>{" "}
-                    Employs advanced cooling designs, including optimized
-                    ventilation paths and materials, to maintain motor
-                    efficiency under continuous operation.
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      Employs advanced cooling designs, including optimized
+                      ventilation paths and materials, to maintain motor
+                      efficiency under continuous operation.
+                    </span>
                   </span>
                 </motion.li>
 
@@ -190,11 +193,16 @@ export default function TurbosilentBLDC() {
                     <span className="text-[#315858] font-semibold">
                       Smart Power Electronics:{" "}
                     </span>{" "}
-                    Integrated drivers, meticulously designed for seamless
-                    operation, instil confidence with precise speed control and
-                    minimal switching losses. Advanced motor control algorithms,
-                    including Field-Oriented Control (FOC), enable precise
-                    torque and speed regulation.
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      Integrated drivers, meticulously designed for seamless
+                      operation, instil confidence with precise speed control
+                      and minimal switching losses. Advanced motor control
+                      algorithms, including Field-Oriented Control (FOC), enable
+                      precise torque and speed regulation.
+                    </span>
                   </span>
                 </motion.li>
 
@@ -210,12 +218,17 @@ export default function TurbosilentBLDC() {
                     <span className="text-[#315858] font-semibold">
                       Structural Engineering:{" "}
                     </span>{" "}
-                    The magnet rotor dynamics are meticulously optimized,
-                    providing reassuring stability and minimizing resonance at
-                    all operating speeds. Lightweight, high-strength materials
-                    not only reduce the motor&apos;s overall weight but also
-                    enhance its durability and performance, achieving the
-                    perfect balance between these factors.
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      The magnet rotor dynamics are meticulously optimized,
+                      providing reassuring stability and minimizing resonance at
+                      all operating speeds. Lightweight, high-strength materials
+                      not only reduce the motor&apos;s overall weight but also
+                      enhance its durability and performance, achieving the
+                      perfect balance between these factors.
+                    </span>
                   </span>
                 </motion.li>
               </motion.ul>
@@ -255,12 +268,17 @@ export default function TurbosilentBLDC() {
                     <span className="text-[#315858] font-semibold">
                       Higher Torque for Optimized Performance :{" "}
                     </span>{" "}
-                    The TurboSilent motor stands out with its superior
-                    performance. It achieves higher torque through optimized
-                    magnetic flux density and reduced electromagnetic losses.
-                    Advanced stator and magnet designs enhance the torque
-                    constant (kT), providing superior air circulation, even at
-                    varying speeds.
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      The TurboSilent motor stands out with its superior
+                      performance. It achieves higher torque through optimized
+                      magnetic flux density and reduced electromagnetic losses.
+                      Advanced stator and magnet designs enhance the torque
+                      constant (kT), providing superior air circulation, even at
+                      varying speeds.
+                    </span>
                   </span>
                 </motion.li>
 
@@ -276,12 +294,18 @@ export default function TurbosilentBLDC() {
                     <span className="text-[#315858] font-semibold">
                       Long-Term Durability :{" "}
                     </span>{" "}
-                    Designed for long-term durability, the TurboSilent motors
-                    are constructed with premium-grade laminations and
-                    heat-resistant winding materials to minimize core losses and
-                    thermal degradation. The motor is fitted with high-precision
-                    ball bearings and balanced rotor assemblies, reducing
-                    mechanical wear and extending operational life.
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      Designed for long-term durability, the TurboSilent motors
+                      are constructed with premium-grade laminations and
+                      heat-resistant winding materials to minimize core losses
+                      and thermal degradation. The motor is fitted with
+                      high-precision ball bearings and balanced rotor
+                      assemblies, reducing mechanical wear and extending
+                      operational life.
+                    </span>
                   </span>
                 </motion.li>
 
@@ -297,10 +321,16 @@ export default function TurbosilentBLDC() {
                     <span className="text-[#315858] font-semibold">
                       Enhanced Energy Efficiency :{" "}
                     </span>{" "}
-                    TurboSilent motors utilize sinusoidal commutation to reduce
-                    current ripple and improve efficiency. Power electronics are
-                    optimized to deliver consistent performance while consuming
-                    up to 65% less energy than traditional motors.
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      TurboSilent motors utilize sinusoidal commutation to
+                      reduce current ripple and improve efficiency. Power
+                      electronics are optimized to deliver consistent
+                      performance while consuming up to 65% less energy than
+                      traditional motors.
+                    </span>
                   </span>
                 </motion.li>
 
@@ -316,10 +346,15 @@ export default function TurbosilentBLDC() {
                     <span className="text-[#315858] font-semibold">
                       Thermal Management of Electronics :{" "}
                     </span>{" "}
-                    Electronics PCBs are made in India and have been tested
-                    according to Indian conditions. A key focus is the thermal
-                    management of critical components to ensure longer life and
-                    better performance.
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      Electronics PCBs are made in India and have been tested
+                      according to Indian conditions. A key focus is the thermal
+                      management of critical components to ensure longer life
+                      and better performance.
+                    </span>
                   </span>
                 </motion.li>
 
@@ -335,10 +370,15 @@ export default function TurbosilentBLDC() {
                     <span className="text-[#315858] font-semibold">
                       In-House Innovation and Testing :{" "}
                     </span>{" "}
-                    Developed using simulation tools for computational
-                    electromagnetic analysis (CEM). Rigorously validated under
-                    real-world conditions to ensure robustness across a wide
-                    range of operating environments.
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      Developed using simulation tools for computational
+                      electromagnetic analysis (CEM). Rigorously validated under
+                      real-world conditions to ensure robustness across a wide
+                      range of operating environments.
+                    </span>
                   </span>
                 </motion.li>
               </motion.ul>
@@ -363,7 +403,8 @@ export default function TurbosilentBLDC() {
               Why Choose HANERI TurboSilent Ceiling Fans?
             </motion.h2>
             <motion.p
-              className="text-black"
+              className="text-[16px] mt-4 font-normal text-gray-500 "
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}

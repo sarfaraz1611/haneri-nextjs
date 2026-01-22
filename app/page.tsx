@@ -58,9 +58,9 @@ export default function Home() {
 
         <InnovationsSection />
 
-        <div className=" ">
+        {/* <div className=" ">
           <ServicesSlider />
-        </div>
+        </div> */}
 
         <div className="container mt-8">
           <SteelFanSlider />

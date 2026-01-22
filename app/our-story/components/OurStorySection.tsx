@@ -49,7 +49,6 @@ export default function OurStorySection({
   const [isMobile, setIsMobile] = useState(false);
   const [hash, setHash] = useState("");
 
-
   // 2. LISTEN FOR URL HASH CHANGES
   // This detects when a user clicks a Navbar link while already on the page
   useEffect(() => {
@@ -62,8 +61,25 @@ export default function OurStorySection({
       setHash(window.location.hash.replace("#", ""));
     };
 
+    // Listen for native hashchange event
     window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
+
+    // Also poll for hash changes to catch Next.js Link navigation
+    // Next.js Link doesn't always trigger hashchange event
+    const checkHashInterval = setInterval(() => {
+      const currentHash = window.location.hash.replace("#", "");
+      setHash((prevHash) => {
+        if (prevHash !== currentHash) {
+          return currentHash;
+        }
+        return prevHash;
+      });
+    }, 100);
+
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+      clearInterval(checkHashInterval);
+    };
   }, []);
 
   // 3. CHECK FOR MOBILE VIEWPORT
@@ -133,7 +149,7 @@ export default function OurStorySection({
         {
           yPercent: 0,
         },
-        0
+        0,
       );
 
       currentIndexRef.current = index;
@@ -590,8 +606,9 @@ export default function OurStorySection({
                 </h3>
                 <p className="text-md text-center md:text-left sm:text-[14px] font-['Open_Sans'] leading-[1.8] sm:leading-[1.75] text-black">
                   We will achieve our mission through thoughtful design, lasting
-                  quality, inclusive pricing, and exceptional customer care—making
-                  luxury accessible and elevating everyday living for all.
+                  quality, inclusive pricing, and exceptional customer
+                  care—making luxury accessible and elevating everyday living
+                  for all.
                 </p>
                 <p className="text-md text-center md:text-left sm:text-[14px] font-['Open_Sans'] leading-[1.8] sm:leading-[1.75] text-black font-semibold">
                   We will achieve our mission by focusing on four key pillars:
@@ -629,8 +646,8 @@ export default function OurStorySection({
                       We believe luxury should be accessible to everyone. By
                       designing products with a broad range of price points and
                       functionality, we will make our solutions available to
-                      diverse consumers, considering various lifestyles, budgets,
-                      and preferences.
+                      diverse consumers, considering various lifestyles,
+                      budgets, and preferences.
                     </p>
                   </div>
                   <div className="text-center md:text-left">
@@ -640,21 +657,24 @@ export default function OurStorySection({
                     <p className="text-[13px] font-['Open_Sans'] leading-[1.75] text-black">
                       We are dedicated to supporting our customers throughout
                       their journey, from purchase to daily use and beyond.
-                      Through responsive customer service, educational resources,
-                      and aftercare support, we will ensure our customers feel
-                      valued and equipped to enjoy our solutions' benefits fully.
+                      Through responsive customer service, educational
+                      resources, and aftercare support, we will ensure our
+                      customers feel valued and equipped to enjoy our solutions'
+                      benefits fully.
                     </p>
                   </div>
                 </div>
                 <p className="text-md text-center md:text-left sm:text-[14px] font-['Open_Sans'] leading-[1.8] sm:leading-[1.75] text-black mt-2">
                   Focusing on these pillars will transform aspirational living
-                  into a reality for every space, continuously elevating everyday
-                  experiences.
+                  into a reality for every space, continuously elevating
+                  everyday experiences.
                 </p>
               </div>
               <div
                 className={
-                  isMobile ? "w-1/2 mx-auto order-1" : "w-full my-auto md:w-[30%] flex-shrink-0 order-1 md:order-2"
+                  isMobile
+                    ? "w-1/2 mx-auto order-1"
+                    : "w-full my-auto md:w-[30%] flex-shrink-0 order-1 md:order-2"
                 }
               >
                 <img
@@ -711,8 +731,8 @@ export default function OurStorySection({
                       Human-Centric Design
                     </h4>
                     <p className="text-[13px] font-['Open_Sans'] leading-[1.75] text-black">
-                      We focus on creating products that are intuitive, inclusive,
-                      and designed with real people in mind.
+                      We focus on creating products that are intuitive,
+                      inclusive, and designed with real people in mind.
                     </p>
                   </div>
                   <div className="text-center md:text-left">
@@ -721,7 +741,8 @@ export default function OurStorySection({
                     </h4>
                     <p className="text-[13px] font-['Open_Sans'] leading-[1.75] text-black">
                       We uphold the highest standards of craftsmanship, using
-                      durable materials for products that stand the test of time.
+                      durable materials for products that stand the test of
+                      time.
                     </p>
                   </div>
                   <div className="text-center md:text-left">
@@ -729,8 +750,9 @@ export default function OurStorySection({
                       Accessibility and Inclusivity
                     </h4>
                     <p className="text-[13px] font-['Open_Sans'] leading-[1.75] text-black">
-                      We believe luxury should be attainable for everyone, creating
-                      products that suit diverse lifestyles, needs, and budgets.
+                      We believe luxury should be attainable for everyone,
+                      creating products that suit diverse lifestyles, needs, and
+                      budgets.
                     </p>
                   </div>
                   <div className="text-center md:text-left">
@@ -765,7 +787,9 @@ export default function OurStorySection({
               </div>
               <div
                 className={
-                  isMobile ? "w-1/2 mx-auto order-1" : "w-full my-auto md:w-[30%] flex-shrink-0 order-1 md:order-2"
+                  isMobile
+                    ? "w-1/2 mx-auto order-1"
+                    : "w-full my-auto md:w-[30%] flex-shrink-0 order-1 md:order-2"
                 }
               >
                 <img
@@ -864,11 +888,11 @@ export default function OurStorySection({
                       design, precision, and purpose.
                     </p>
                     <p className="text-white mb-6 text-[16px] leading-[1.8]">
-                      We promise innovation that lasts, experiences that inspire,
-                      and quality that defines every space you live in.
+                      We promise innovation that lasts, experiences that
+                      inspire, and quality that defines every space you live in.
                     </p>
                     <a
-                      href="shop.php"
+                      href="shop"
                       className="inline-block bg-white text-[#2b2b2b] font-semibold text-xs font-['Open_Sans'] uppercase tracking-[0.4px] py-2.5 px-4 no-underline transition-all duration-[0.25s] border-2 border-white hover:bg-[#00473E] hover:text-white hover:border-white"
                     >
                       Explore Products

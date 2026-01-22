@@ -5,7 +5,7 @@ export default function Footer() {
     name: "Haneri",
     address: `HANERI ELECTRICALS LLP
 A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
-    phone: "+91 1234567890",
+    phone: "+91-8377826826",
     email: "info@haneri.com",
   };
 
@@ -121,9 +121,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
               <div className="flex flex-col gap-[15px]">
                 <div className="flex gap-3 items-start text-sm text-neutral-300">
                   <i className="fas fa-home text-brand mt-1 shrink-0"></i>
-                  <span>
-                    {companyInfo.address}
-                  </span>
+                  <span>{companyInfo.address}</span>
                 </div>
                 <div className="flex gap-3 items-start text-sm text-neutral-300">
                   <i className="fas fa-phone text-brand mt-1 shrink-0"></i>

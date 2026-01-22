@@ -12,6 +12,7 @@ if (typeof window !== "undefined") {
 }
 
 interface Props {
+  id: string;
   title: string;
   description: string;
   image: string;
@@ -20,6 +21,7 @@ interface Props {
 
 
 export function BrandSection({
+  id,
   title,
   description,
   image,
@@ -47,7 +49,7 @@ export function BrandSection({
   }, []);
 
   return (
-    <section className="w-full py-[50px]">
+    <section id={id} className="w-full py-[50px]">
       <div
         className={`mx-auto flex max-w-[1200px] items-center 
         ${reverse ? "flex-row-reverse" : ""}`}
