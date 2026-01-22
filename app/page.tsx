@@ -46,13 +46,13 @@ export default function Home() {
   }, [isLoaded]);
 
   return (
-    <div className=" overflow-x-hidden">
+    <div className=" ">
       <Preloader />
       <main className="main" style={{ opacity: 0 }}>
         {/* <HeroSlider /> */}
         {/* <BlowupShot /> */}
         <HeroSection />
-        <div className="">
+        <div className="overflow-x-hidden">
           <FeaturedProducts />
         </div>
 
