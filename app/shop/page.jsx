@@ -823,14 +823,26 @@ function ShopPageContent() {
                   <p className="mt-4 text-gray-600">Loading products...</p>
                 </div>
               ) : products.length === 0 ? (
-                <div className=" h-full flex flex-col justify-center text-center py-12">
-                  <h3 className="text-2xl font-semibold text-gray-900">
-                    No products found
-                  </h3>
-                  <p className="mt-2 text-gray-600">
-                    Try adjusting your filters
-                  </p>
-                </div>
+                [
+                  "Table Wall Pedestals",
+                  "Domestic Exhaust",
+                  "Personal",
+                ].includes(decodeURIComponent(category)) ? (
+                  <div className="h-full flex flex-col justify-center text-center py-12">
+                    <h3 className="text-3xl font-semibold text-red-800">
+                      Coming Soon!
+                    </h3>
+                  </div>
+                ) : (
+                  <div className="h-full flex flex-col justify-center text-center py-12">
+                    <h3 className="text-2xl font-semibold text-gray-900">
+                      No products found
+                    </h3>
+                    <p className="mt-2 text-gray-600">
+                      Try adjusting your filters
+                    </p>
+                  </div>
+                )
               ) : (
                 <ul
                   role="list"

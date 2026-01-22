@@ -46,7 +46,7 @@ export default function Home() {
   }, [isLoaded]);
 
   return (
-    <>
+    <div className=" overflow-x-hidden">
       <Preloader />
       <main className="main" style={{ opacity: 0 }}>
         {/* <HeroSlider /> */}
@@ -70,6 +70,6 @@ export default function Home() {
           <BlogsSection />
         </div>
       </main>
-    </>
+    </div>
   );
 }

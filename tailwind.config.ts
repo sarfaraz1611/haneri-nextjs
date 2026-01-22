@@ -106,6 +106,7 @@ const config: Config = {
       animation: {
         slideIn: "slideIn 0.3s ease",
         shimmer: "shimmer 1.3s infinite",
+        marquee: "marquee 20s linear infinite",
       },
 
       keyframes: {
@@ -125,6 +126,14 @@ const config: Config = {
           },
           "100%": {
             backgroundPosition: "0 0",
+          },
+        },
+        marquee: {
+          "0%": {
+            transform: "translateX(0)",
+          },
+          "100%": {
+            transform: "translateX(-50%)",
           },
         },
       },

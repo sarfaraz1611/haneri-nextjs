@@ -43,7 +43,6 @@
   html,
   body {
     max-width: 100%;
-    overflow-x: hidden;
   }
 
   body {
@@ -277,6 +276,20 @@
 
 /* Utilities Layer */
 @layer utilities {
+  /* Marquee Animation for Feature Slider */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 20s linear infinite;
+  }
+
   /* Featured Products Hero Animations */
   @keyframes float {
     0%, 100% {
