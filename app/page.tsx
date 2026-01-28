@@ -13,6 +13,8 @@ import BlogsSection from "@/components/BlogsSection";
 import Preloader from "@/components/Preloader";
 // import HeroSlider from "@/components/HeroSlider";
 import HeroSection from "@/components/HeroSection";
+// import HeroSlider from "@/components/HeroSlider";
+import VideoSlider from "@/components/VideoSlider";
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -56,15 +58,21 @@ export default function Home() {
           <FeaturedProducts />
         </div>
 
-        <InnovationsSection />
+        {/* video Section */}
+        <VideoSlider />
+
+        <WhyChoose />
+        <div className="container mt-8">
+          <InnovationsSection />
+        </div>
 
         {/* <div className=" ">
           <ServicesSlider />
         </div> */}
 
         <div className="container mt-8">
-          <SteelFanSlider />
-          <WhyChoose />
+          {/* <SteelFanSlider /> */}
+
           <Fancraft />
 
           <BlogsSection />

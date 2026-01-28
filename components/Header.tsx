@@ -71,11 +71,11 @@ const aboutUsMenu = [
       { name: "Professional", href: "/our-brands#professional" },
     ],
   },
-  {
-    title: "Capabilities",
-    href: "/capabilities",
-    subLinks: [],
-  },
+  // {
+  //   title: "Capabilities",
+  //   href: "/capabilities",
+  //   subLinks: [],
+  // },
 ];
 
 // Support Menu data
