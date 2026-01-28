@@ -65,7 +65,7 @@ export default function AirCurveDesign() {
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
               <h2 className="text-4xl font-semibold  tracking-tight text-[#315858]">
-                Why is Air Curve Design?
+                What is Air Curve Design?
               </h2>
               <p
                 className="text-[16px] mt-4 font-normal text-gray-500 "
