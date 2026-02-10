@@ -127,7 +127,7 @@ export default function CartPage() {
         payload.cart_id = tempId;
       }
 
-      await axios.delete(`${BASE_URL}/cart/remove/${itemId}`, {
+      await axios.delete(`${BASE_URL}/api/cart/remove/${itemId}`, {
         headers: getAuthHeaders(),
         data: payload,
       });
