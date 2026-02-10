@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { gsap } from "gsap";
 
-export default function aPreloader() {
+export default function Preloader() {
   const [progress, setProgress] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
   const logoRef = useRef<HTMLImageElement>(null);
@@ -11,6 +11,8 @@ export default function aPreloader() {
   useEffect(() => {
     let isMounted = true;
     let progressInterval: NodeJS.Timeout;
+    let finalInterval: NodeJS.Timeout;
+    let hasStartedCompletion = false;
 
     // Simulate smooth loading progress
     let currentProgress = 0;
@@ -18,18 +20,21 @@ export default function aPreloader() {
       if (!isMounted) return;
 
       if (currentProgress < 90) {
-        // Increment progress smoothly
         currentProgress += Math.random() * 15;
         setProgress(Math.min(currentProgress, 90));
       }
     }, 300);
 
-    // Check when page is fully loaded
     const completeLoading = () => {
-      if (!isMounted) return;
+      if (!isMounted || hasStartedCompletion) return;
+      hasStartedCompletion = true;
+      clearInterval(progressInterval);
 
-      // Smoothly go from current progress to 100%
-      const finalInterval = setInterval(() => {
+      finalInterval = setInterval(() => {
+        if (!isMounted) {
+          clearInterval(finalInterval);
+          return;
+        }
         setProgress((prev) => {
           if (prev >= 100) {
             clearInterval(finalInterval);
@@ -40,26 +45,23 @@ export default function aPreloader() {
       }, 50);
     };
 
-    // Wait for window load or timeout
+    const onLoad = () => setTimeout(completeLoading, 1000);
+
     if (document.readyState === "complete") {
       setTimeout(completeLoading, 1000);
     } else {
-      window.addEventListener("load", () => {
-        setTimeout(completeLoading, 1000);
-      });
+      window.addEventListener("load", onLoad);
     }
 
-    // Maximum wait time: force completion after 4 seconds
-    const maxWaitTime = setTimeout(() => {
-      if (isMounted) {
-        completeLoading();
-      }
-    }, 4000);
+    // Fallback: force completion after 4 seconds
+    const maxWaitTime = setTimeout(completeLoading, 4000);
 
     return () => {
       isMounted = false;
-      if (progressInterval) clearInterval(progressInterval);
+      clearInterval(progressInterval);
+      clearInterval(finalInterval);
       clearTimeout(maxWaitTime);
+      window.removeEventListener("load", onLoad);
     };
   }, []);
 
