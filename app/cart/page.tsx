@@ -98,7 +98,7 @@ export default function CartPage() {
         payload.cart_id = tempId;
       }
 
-      await axios.post(`${BASE_URL}/cart/update/${itemId}`, payload, {
+      await axios.post(`${BASE_URL}/api/cart/update/${itemId}`, payload, {
         headers: getAuthHeaders(),
       });
 

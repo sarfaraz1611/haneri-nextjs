@@ -664,7 +664,7 @@ function ShopPageContent() {
       };
       if (!token && tempId) payload.cart_id = tempId;
 
-      const res = await axios.post(`${BASE_URL}/api/cart/add`, payload, {
+      const res = await axios.post(`${BASE_URL}/cart/add`, payload, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
 
