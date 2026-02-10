@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 // Decorative circles component with more visible elements
 const DecorativeElements = () => (
@@ -11,8 +11,8 @@ const DecorativeElements = () => (
     <div className="absolute top-1/2 left-1/4 w-64 h-64 rounded-full bg-gradient-to-r from-orange-200/20 to-transparent blur-2xl" />
 
     {/* Decorative rings */}
-    <div className="absolute top-20 right-1/3 w-32 h-32 rounded-full border border-[#315859]/10 hidden lg:block" />
-    <div className="absolute top-24 right-1/3 w-24 h-24 rounded-full border border-[#CA5D27]/15 hidden lg:block" />
+    {/* <div className="absolute top-20 right-1/3 w-32 h-32 rounded-full border border-[#315859]/10 hidden lg:block" />
+    <div className="absolute top-24 right-1/3 w-24 h-24 rounded-full border border-[#CA5D27]/15 hidden lg:block" /> */}
 
     {/* Floating geometric shapes */}
     <div className="absolute top-1/4 left-20 w-4 h-4 rotate-45 bg-[#CA5D27]/20 hidden lg:block" style={{ animation: 'floatSlow 6s ease-in-out infinite' }} />
@@ -67,9 +67,66 @@ export default function BlowupShotClean() {
   const currentFrameRef = useRef(0);
   const targetFrameRef = useRef(0);
   const rafRef = useRef<number>(0);
+  const isScrollingRef = useRef(false);
+  const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
   const [isLoaded, setIsLoaded] = useState(false);
+  const [canvasReady, setCanvasReady] = useState(false);
 
   const frameCount = 250;
+
+  // Lerp for smooth interpolation
+  const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+
+  // Render current frame
+  const render = useCallback(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const frame = Math.floor(currentFrameRef.current);
+    const img = imagesRef.current[frame];
+    if (!img?.complete) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const scale = Math.min(
+      canvas.width / img.width,
+      canvas.height / img.height
+    );
+    const x = (canvas.width - img.width * scale) / 2;
+    const y = (canvas.height - img.height * scale) / 2;
+    ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+  }, []);
+
+  // Animation loop — only runs while scrolling
+  const animate = useCallback(() => {
+    const diff = Math.abs(currentFrameRef.current - targetFrameRef.current);
+
+    currentFrameRef.current = lerp(
+      currentFrameRef.current,
+      targetFrameRef.current,
+      0.15
+    );
+    render();
+
+    // Keep looping until we've settled close enough to target
+    if (diff > 0.1) {
+      rafRef.current = requestAnimationFrame(animate);
+    } else {
+      // Snap to target and stop
+      currentFrameRef.current = targetFrameRef.current;
+      render();
+      isScrollingRef.current = false;
+    }
+  }, [render]);
+
+  // Kick off animation loop on scroll (if not already running)
+  const startAnimating = useCallback(() => {
+    if (!isScrollingRef.current) {
+      isScrollingRef.current = true;
+      rafRef.current = requestAnimationFrame(animate);
+    }
+  }, [animate]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -77,98 +134,121 @@ export default function BlowupShotClean() {
     const sticky = stickyRef.current;
     if (!canvas || !container || !sticky) return;
 
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    // ── 1. Defer canvas setup until after first paint (text paints first) ──
+    // Use requestIdleCallback (or setTimeout fallback) so the browser finishes
+    // painting text / LCP content before we touch the canvas or start loading images.
+    const scheduleInit = typeof requestIdleCallback !== "undefined"
+      ? requestIdleCallback
+      : (cb: () => void) => setTimeout(cb, 1);
 
-    // Lerp for smooth interpolation
-    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+    scheduleInit(() => {
+      setCanvasReady(true);
 
-    // Render current frame
-    const render = () => {
-      const frame = Math.floor(currentFrameRef.current);
-      const img = imagesRef.current[frame];
-      if (!img?.complete) return;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const scale = Math.min(
-        canvas.width / img.width,
-        canvas.height / img.height
-      );
-      const x = (canvas.width - img.width * scale) / 2;
-      const y = (canvas.height - img.height * scale) / 2;
-      ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-    };
+      // Resize canvas — responsive sizing
+      const resize = () => {
+        const isMobile = window.innerWidth < 768;
+        if (isMobile) {
+          canvas.width = window.innerWidth * 0.9;
+          canvas.height = window.innerHeight * 0.45;
+        } else {
+          canvas.width = window.innerWidth * 0.5;
+          canvas.height = window.innerHeight * 0.7;
+        }
+        render();
+      };
 
-    // Resize canvas - responsive sizing
-    const resize = () => {
-      const isMobile = window.innerWidth < 768;
-      if (isMobile) {
-        canvas.width = window.innerWidth * 0.9; // 90% width on mobile
-        canvas.height = window.innerHeight * 0.45; // 45% height on mobile
-      } else {
-        canvas.width = window.innerWidth * 0.5; // Half width on desktop
-        canvas.height = window.innerHeight * 0.7; // 70% height on desktop
-      }
-      render();
-    };
+      resize();
+      window.addEventListener("resize", resize);
 
-    resize();
-    window.addEventListener("resize", resize);
+      // ── 2 & 3. Lazy-load images with async decoding ──
+      // Load first frame eagerly so we can show something quickly,
+      // then load remaining frames in small batches during idle time.
+      const loadImage = (i: number): Promise<void> => {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.decoding = "async"; // ← defer heavy decode off main thread
+          img.src = `/blowup_shot/webmp/${String(i + 1).padStart(4, "0")}.webp`;
+          imagesRef.current[i] = img;
 
-    // Load images
-    for (let i = 0; i < frameCount; i++) {
-      const img = new Image();
-      img.src = `/blowup_shot/webmp/${String(i + 1).padStart(4, "0")}.webp`;
-      imagesRef.current[i] = img;
-      if (i === 0) {
-        img.onload = () => {
-          // Ensure frame 0 is rendered initially
-          currentFrameRef.current = 0;
-          targetFrameRef.current = 0;
-          render();
-          setIsLoaded(true);
+          img.onload = () => {
+            // Use decode() to push bitmap decoding off the main thread
+            if (img.decode) {
+              img.decode().then(() => resolve()).catch(() => resolve());
+            } else {
+              resolve();
+            }
+          };
+          img.onerror = () => resolve();
+        });
+      };
+
+      // Load frame 0 first, then batch-load the rest during idle
+      loadImage(0).then(() => {
+        currentFrameRef.current = 0;
+        targetFrameRef.current = 0;
+        render();
+        setIsLoaded(true);
+
+        // Load remaining frames in small batches to avoid jank
+        const BATCH_SIZE = 6;
+        let nextIndex = 1;
+
+        const loadNextBatch = () => {
+          if (nextIndex >= frameCount) return;
+
+          const batch: Promise<void>[] = [];
+          for (let j = 0; j < BATCH_SIZE && nextIndex < frameCount; j++, nextIndex++) {
+            batch.push(loadImage(nextIndex));
+          }
+
+          Promise.all(batch).then(() => {
+            // Schedule next batch during idle time
+            if (typeof requestIdleCallback !== "undefined") {
+              requestIdleCallback(loadNextBatch);
+            } else {
+              setTimeout(loadNextBatch, 0);
+            }
+          });
         };
-      }
-    }
 
-    // Animation loop
-    const animate = () => {
-      currentFrameRef.current = lerp(
-        currentFrameRef.current,
-        targetFrameRef.current,
-        0.15
-      );
-      render();
-      rafRef.current = requestAnimationFrame(animate);
-    };
+        // Kick off batch loading during idle
+        if (typeof requestIdleCallback !== "undefined") {
+          requestIdleCallback(loadNextBatch);
+        } else {
+          setTimeout(loadNextBatch, 0);
+        }
+      });
 
-    // Scroll handler - based on scroll position within the tall container
-    const onScroll = () => {
-      const rect = container.getBoundingClientRect();
+      // ── 4. Scroll handler — only updates target, RAF runs on demand ──
+      const onScroll = () => {
+        const rect = container.getBoundingClientRect();
+        const scrollableDistance = container.offsetHeight - window.innerHeight;
+        const scrolled = -rect.top;
+        const progress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
+        targetFrameRef.current = progress * (frameCount - 1);
 
-      // Calculate how much we've scrolled through the container
-      // The scrollable distance is container height minus viewport height
-      const scrollableDistance = container.offsetHeight - window.innerHeight;
+        startAnimating();
+      };
 
-      // How far into the container we've scrolled (0 at top, scrollableDistance at bottom)
-      const scrolled = -rect.top;
+      window.addEventListener("scroll", onScroll, { passive: true });
+      requestAnimationFrame(onScroll);
 
-      // Progress from 0 to 1
-      const progress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
-      targetFrameRef.current = progress * (frameCount - 1);
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    animate();
-    // Initial scroll check
-    requestAnimationFrame(onScroll);
+      // Store cleanup references
+      (canvas as any).__cleanup = () => {
+        window.removeEventListener("resize", resize);
+        window.removeEventListener("scroll", onScroll);
+        cancelAnimationFrame(rafRef.current);
+      };
+    });
 
     return () => {
-      window.removeEventListener("resize", resize);
-      window.removeEventListener("scroll", onScroll);
-      cancelAnimationFrame(rafRef.current);
+      (canvas as any).__cleanup?.();
+      clearTimeout(scrollTimeoutRef.current);
     };
-  }, []);
+  }, [render, startAnimating]);
 
   return (
     <div
@@ -189,7 +269,7 @@ export default function BlowupShotClean() {
         {/* Canvas for frame animation - right on desktop, bottom on mobile */}
         <canvas
           ref={canvasRef}
-          className={`absolute md:right-0 md:top-1/2 md:-translate-y-1/2 bottom-10 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+          className={`absolute md:right-0 md:top-1/2 md:-translate-y-1/2 bottom-10 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 transition-opacity duration-1000 ${isLoaded && canvasReady ? 'opacity-100' : 'opacity-0'}`}
           style={{ width: "90%", height: "45%" }}
         />
         <style jsx>{`
