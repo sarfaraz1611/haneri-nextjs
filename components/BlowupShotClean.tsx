@@ -68,7 +68,7 @@ export default function BlowupShotClean() {
   const targetFrameRef = useRef(0);
   const rafRef = useRef<number>(0);
   const isScrollingRef = useRef(false);
-  const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [canvasReady, setCanvasReady] = useState(false);
 
@@ -246,7 +246,7 @@ export default function BlowupShotClean() {
 
     return () => {
       (canvas as any).__cleanup?.();
-      clearTimeout(scrollTimeoutRef.current);
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
     };
   }, [render, startAnimating]);
 
