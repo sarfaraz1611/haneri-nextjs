@@ -69,23 +69,23 @@ export default function InnovationsSection() {
 
   return (
     <section
-      className="py-2 max-[1199px]:relative"
+      className="py-2 relative"
       aria-label="Innovations that take Haneri further"
     >
-      <div className="container">
+      <div className="">
       {/* <div className="container mx-auto px-4 max-[1199px]:sticky max-[1199px]:top-0 max-[1199px]:bg-white max-[1199px]:h-screen max-[1199px]:flex max-[1199px]:flex-col max-[1199px]:justify-center max-[1199px]:z-30"> */}
         <h2 className="heading_1 mb-6">
           Innovations that take Haneri further
         </h2>
 
         <div className="overflow-hidden">
-          <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 list-none m-0 p-0 max-[1199px]:flex max-[1199px]:gap-5 max-[1199px]:min-w-max">
+          <ul className="flex gap-4 flex-wrap md:flex-nowrap">
             {innovations.map((item, index) => (
               <li
                 key={item.id}
-                className="rounded-[var(--radius)] overflow-hidden bg-black shadow-DEFAULT max-[1199px]:shrink-0 max-[1199px]:w-[200px] max-[1199px]:sm:w-[240px] max-[1199px]:md:w-[280px] transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:-translate-y-2 min-[1200px]:cursor-pointer"
+                className="rounded-[var(--radius)] mx-auto overflow-hidden bg-black shadow-DEFAULT shrink-0 md:shrink w-[200px] sm:w-[240px] md:w-[280px] transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:-translate-y-2 min-[1200px]:cursor-pointer"
               >
-                <div className="relative w-full pt-[177.78%] bg-[#111] max-[1199px]:pt-0 max-[1199px]:aspect-9/16">
+                <div className="relative w-full pt-[177.78%] bg-[#111] aspect-9/16">
                   <iframe
                     ref={(el) => {
                       if (el) cardsRef.current[index] = el;

@@ -49,7 +49,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <div className="page-wrapper">
+        <div className="page-wrapper overflow-x-hidden">
           <Header />
           {children}
           <Footer />

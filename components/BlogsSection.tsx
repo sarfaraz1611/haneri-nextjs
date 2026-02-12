@@ -34,7 +34,7 @@ export default function BlogsSection() {
       aria-label="Latest articles"
     >
       <div className="">
-        <div className="w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch justify-items-stretch">
+        <div className="w-full mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogs.map((post) => (
             <Link
               key={post.id}
@@ -51,11 +51,11 @@ export default function BlogsSection() {
                     className="absolute inset-0 w-full h-full object-cover"
                   />
                 </div>
-                <div className="p-3.5  grid gap-2 pb-4">
-                  <h3 className="font-barlow font-medium text-[clamp(18px,2.2vw,22px)] leading-[1.15] text-[#2a5b57] m-0 text-left line-clamp-2">
+                <div className="p-3.5 grid gap-2 pb-4">
+                  <h3 className="font-barlow font-medium text-[clamp(18px,2.2vw,22px)] leading-[1.2] text-[#2a5b57] m-0 text-left line-clamp-2">
                     {post.title}
                   </h3>
-                  <p className="m-0 text-[#4a505e] text-sm leading-[1.55] font-normal line-clamp-5 p-1.5">
+                  <p className="m-0 text-[#4a505e] text-sm leading-[1.55] font-normal line-clamp-5 px-1.5">
                     {post.description}
                   </p>
                 </div>

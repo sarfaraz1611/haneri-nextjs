@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 // Decorative circles component with more visible elements
 const DecorativeElements = () => (
@@ -250,42 +252,46 @@ export default function BlowupShotClean() {
     };
   }, [render, startAnimating]);
 
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    ScrollTrigger.create({
+      trigger: stickyRef.current,
+      start: "top top",
+      end: "+=300vh", // 300dvh scroll distance
+      pin: true,
+      scrub: true,
+    });
+  }, []);
+
   return (
     <div
       ref={containerRef}
       className="relative w-full bg-gradient-to-br from-white via-gray-50/50 to-orange-50/30"
-      style={{ height: "300vh" }} // Tall container to allow scrolling through frames
     >
+
       <div
         ref={stickyRef}
-        className="sticky top-0 w-full h-screen flex items-center justify-center overflow-hidden"
+        className="top-0 w-full py-4 flex flex-col-reverse md:flex-row-reverse items-center justify-center overflow-hidden"
       >
-        {/* Background decorative elements */}
         <DecorativeElements />
 
-        {/* Subtle radial gradient behind content */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(202,93,39,0.03)_0%,_transparent_70%)]" />
+        {/* Background decorative elements */}
+
+        <div>        {/* Subtle radial gradient behind content */}
+        {/* <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(202,93,39,0.03)_0%,_transparent_70%)]" /> */}
 
         {/* Canvas for frame animation - right on desktop, bottom on mobile */}
         <canvas
           ref={canvasRef}
-          className={`absolute md:right-0 md:top-1/2 md:-translate-y-1/2 bottom-10 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 transition-opacity duration-1000 ${isLoaded && canvasReady ? 'opacity-100' : 'opacity-0'}`}
-          style={{ width: "90%", height: "45%" }}
-        />
-        <style jsx>{`
-          @media (min-width: 768px) {
-            canvas {
-              width: 50% !important;
-              height: 70% !important;
-            }
-          }
-        `}</style>
+          className={`transition-opacity duration-1000 ${isLoaded && canvasReady ? 'opacity-100' : 'opacity-0'}`}
+        /></div>
 
         {/* Hero content overlay */}
-        <div className="relative z-10 mt-32 container mx-auto px-6 flex items-start md:items-center h-full pt-8 md:pt-0">
-          <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
+        <div className="relative z-10 mt-34 mx-auto px-6 flex items-start h-full pt-8 md:pt-0">
+          <div className="gap-12 items-center w-full">
             {/* Content */}
-            <div className="space-y-4 md:space-y-8">
+            <div className="space-y-4 md:space-y-4">
               {/* Enhanced badge with glow effect */}
               <div className="relative inline-block group">
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100" />
@@ -311,7 +317,7 @@ export default function BlowupShotClean() {
 
               {/* Title with gradient underline accent */}
               <div className="relative">
-                <h1 className="text-2xl text-[#315859] md:text-4xl lg:text-7xl font-bold leading-tight">
+                <h1 className="text-5xl text-[#315859] md:text-4xl lg:text-7xl font-bold leading-tight">
                   Elegance in
                   <span className="block text-[#CA5D27] relative">
                     Every Breeze
@@ -341,11 +347,10 @@ export default function BlowupShotClean() {
             </div>
 
             {/* Empty right column - fan animation fills the background */}
-            <div />
           </div>
         </div>
 
-        {/* Enhanced scroll indicator with ring animation */}
+        {/* Enhanced scroll indicator with ring animation
         <div className="absolute bottom-4 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
           <span className="text-xs text-gray-500 tracking-widest uppercase">
             Scroll to Explore
@@ -368,7 +373,7 @@ export default function BlowupShotClean() {
               </svg>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

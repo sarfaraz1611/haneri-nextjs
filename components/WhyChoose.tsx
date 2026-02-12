@@ -32,7 +32,7 @@ export default function WhyChoose() {
       <div className="container">
         <h2 className="heading_1">Why To Choose Haneri Fans?</h2>
 
-        <ul className="list-none pt-2.5 m-0 grid grid-cols-5 gap-x-9 gap-y-10 items-start justify-items-stretch max-[1100px]:grid-cols-4 max-[900px]:grid-cols-3 max-sm:grid-cols-2 max-sm:gap-x-6 max-sm:gap-y-7 max-sm:justify-center [&>li:last-child:nth-child(odd)]:max-sm:col-span-full [&>li:last-child:nth-child(odd)]:max-sm:justify-self-center">
+        <ul className="flex flex-wrap gap-10 justify-around">
           {features.map((feature) => (
             <li key={feature.id} className="text-center group">
               <div className="w-full h-[100px] flex items-center justify-center">
