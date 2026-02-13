@@ -264,6 +264,7 @@ useEffect(() => {
       end: "+=300vh",
       pin: true,
       scrub: true,
+      pinSpacing: true,
     });
   }, stickyRef); 
 
@@ -276,7 +277,7 @@ useEffect(() => {
   return (
     <div
       ref={containerRef}
-      className="relative w-full bg-gradient-to-br from-white via-gray-50/50 to-orange-50/30"
+      className="relative w-full flex items-center justify-center min-h-dvh bg-gradient-to-br from-white via-gray-50/50 to-orange-50/30"
     >
 
       <div
