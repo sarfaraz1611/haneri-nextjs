@@ -252,17 +252,26 @@ export default function BlowupShotClean() {
     };
   }, [render, startAnimating]);
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+useEffect(() => {
+  if (!stickyRef.current) return;
 
+  gsap.registerPlugin(ScrollTrigger);
+
+  const ctx = gsap.context(() => {
     ScrollTrigger.create({
       trigger: stickyRef.current,
       start: "top top",
-      end: "+=300vh", // 300dvh scroll distance
+      end: "+=300vh",
       pin: true,
       scrub: true,
     });
-  }, []);
+  }, stickyRef); 
+
+  return () => {
+    ctx.revert();
+  };
+}, []);
+
 
   return (
     <div
@@ -284,7 +293,7 @@ export default function BlowupShotClean() {
         {/* Canvas for frame animation - right on desktop, bottom on mobile */}
         <canvas
           ref={canvasRef}
-          className={`transition-opacity duration-1000 ${isLoaded && canvasReady ? 'opacity-100' : 'opacity-0'}`}
+          className={`transition-opacity duration-1000 opacity-100`}
         /></div>
 
         {/* Hero content overlay */}
