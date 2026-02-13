@@ -195,7 +195,7 @@ export default function BlowupShotClean() {
         setIsLoaded(true);
 
         // Load remaining frames in small batches to avoid jank
-        const BATCH_SIZE = 6;
+        const BATCH_SIZE = 250;
         let nextIndex = 1;
 
         const loadNextBatch = () => {
@@ -319,7 +319,7 @@ useEffect(() => {
                     />
                   </svg>
                   <span className="text-sm text-[#315859] font-medium">
-                    Premium Collection 2026
+                    Premium Collection 2026 AP Test Version
                   </span>
                 </div>
               </div>
