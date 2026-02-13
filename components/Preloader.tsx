@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 
 export default function Preloader() {
@@ -65,7 +65,11 @@ export default function Preloader() {
     };
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    if (sessionStorage.getItem("myAnimation") === "loaded") {
+      setIsComplete(true);
+      return;
+    }
     if (progress >= 100) {
       // Small delay before starting exit animation
       const timer = setTimeout(() => {
@@ -92,6 +96,7 @@ export default function Preloader() {
           const tl = gsap.timeline({
             onComplete: () => {
               setIsComplete(true);
+              sessionStorage.setItem("myAnimation", "loaded");
               document.body.style.overflow = "unset";
             },
           });
@@ -135,6 +140,7 @@ export default function Preloader() {
             ease: "power2.inOut",
             onComplete: () => {
               setIsComplete(true);
+              sessionStorage.setItem("myAnimation", "loaded");
               document.body.style.overflow = "unset";
             },
           });
@@ -144,15 +150,6 @@ export default function Preloader() {
       return () => clearTimeout(timer);
     }
   }, [progress]);
-
-  useEffect(() => {
-    // Prevent scrolling while preloader is active
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, []);
 
   if (isComplete) {
     return null;
@@ -178,17 +175,17 @@ export default function Preloader() {
           </p> */}
 
           {/* Progress Bar */}
-          <div className="w-64 md:w-80 h-1 bg-gray-200 rounded-full overflow-hidden mx-auto">
+          {/* <div className="w-64 md:w-80 h-1 bg-gray-200 rounded-full overflow-hidden mx-auto">
             <div
               className="h-full bg-[#00473E] transition-all duration-300 ease-out"
               style={{ width: `${Math.min(progress, 100)}%` }}
             />
-          </div>
+          </div> */}
 
           {/* Progress Percentage */}
-          <div className="mt-4 text-lg font-semibold text-[#00473E]">
+          {/* <div className="mt-4 text-lg font-semibold text-[#00473E]">
             {Math.floor(Math.min(progress, 100))}%
-          </div>
+          </div> */}
 
           {/* Loading Animation */}
           <div className="mt-8 flex justify-center gap-2">

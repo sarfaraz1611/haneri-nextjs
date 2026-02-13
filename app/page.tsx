@@ -17,40 +17,11 @@ import HeroSection from "@/components/HeroSection";
 import VideoSlider from "@/components/VideoSlider";
 
 export default function Home() {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    // Check if page is fully loaded
-    if (document.readyState === "complete") {
-      setTimeout(() => setIsLoaded(true), 1500);
-    } else {
-      window.addEventListener("load", () => {
-        setTimeout(() => setIsLoaded(true), 1500);
-      });
-    }
-  }, []);
-
-  useEffect(() => {
-    if (isLoaded) {
-      // Animate content in after preloader
-      gsap.fromTo(
-        ".main",
-        {
-          opacity: 0,
-        },
-        {
-          opacity: 1,
-          duration: 1,
-          ease: "power2.out",
-        },
-      );
-    }
-  }, [isLoaded]);
 
   return (
     <div className=" ">
       <Preloader />
-      <main className="main" style={{ opacity: 0 }}>
+      <main className="main" style={{ opacity: 1 }}>
         {/* <HeroSlider /> */}
         {/* <BlowupShot /> */}
         <HeroSection />
