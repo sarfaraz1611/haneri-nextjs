@@ -277,12 +277,12 @@ useEffect(() => {
   return (
     <div
       ref={containerRef}
-      className="relative w-full flex items-center justify-center min-h-dvh bg-gradient-to-br from-white via-gray-50/50 to-orange-50/30"
+      className="relative w-full min-h-dvh bg-gradient-to-br from-white via-gray-50/50 to-orange-50/30"
     >
+      <div        ref={stickyRef}       className="relative md:flex md:items-center md:justify-center"
 
-      <div
-        ref={stickyRef}
-        className="top-0 w-full py-4 flex flex-col-reverse md:flex-row-reverse items-center justify-center overflow-hidden"
+>      <div
+        className="w-full flex flex-col-reverse md:flex-row-reverse items-center justify-center overflow-hidden"
       >
         <DecorativeElements />
 
@@ -298,7 +298,7 @@ useEffect(() => {
         /></div>
 
         {/* Hero content overlay */}
-        <div className="relative z-10 mt-34 mx-auto px-6 flex items-start h-full pt-8 md:pt-0">
+        <div className="relative mt-16 md:mt-28 lg:mt-32 z-10 mx-auto px-6 flex items-start h-full pt-8 md:pt-0">
           <div className="gap-12 items-center w-full">
             {/* Content */}
             <div className="space-y-4 md:space-y-4">
@@ -384,7 +384,10 @@ useEffect(() => {
             </div>
           </div>
         </div> */}
-      </div>
+      </div></div>
+
     </div>
   );
 }
+
+
