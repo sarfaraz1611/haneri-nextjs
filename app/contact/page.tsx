@@ -12,14 +12,57 @@ export default function ContactPage() {
     message: "",
   });
 
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+
+  const validate = (name: string, value: string): string => {
+    switch (name) {
+      case "fullName":
+        if (!value.trim()) return "Full name is required";
+        if (value.trim().length < 2) return "Full name must be at least 2 characters";
+        return "";
+      case "email":
+        if (!value.trim()) return "Email is required";
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "Please enter a valid email";
+        return "";
+      case "phone":
+        if (!value.trim()) return "Phone number is required";
+        if (!/^\+?[\d\s-]{7,15}$/.test(value)) return "Please enter a valid phone number";
+        return "";
+      case "message":
+        if (!value.trim()) return "Message is required";
+        if (value.trim().length < 10) return "Message must be at least 10 characters";
+        return "";
+      default:
+        return "";
+    }
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (touched[name]) {
+      setErrors((prev) => ({ ...prev, [name]: validate(name, value) }));
+    }
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+    setErrors((prev) => ({ ...prev, [name]: validate(name, value) }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic here
+    const newErrors: Record<string, string> = {};
+    const allTouched: Record<string, boolean> = {};
+    for (const [key, value] of Object.entries(formData)) {
+      newErrors[key] = validate(key, value);
+      allTouched[key] = true;
+    }
+    setErrors(newErrors);
+    setTouched(allTouched);
+    if (Object.values(newErrors).some((err) => err)) return;
     console.log("Form submitted:", formData);
   };
 
@@ -43,44 +86,64 @@ export default function ContactPage() {
             <h2 className="contact_105 heading1 mb-6">Get In Touch</h2>
             <form className="contact_106" onSubmit={handleSubmit}>
               <div className="contact_107 flex flex-col sm:flex-row gap-4 mb-4">
-                <input
-                  type="text"
-                  name="fullName"
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  className="contact_108 flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#315859] transition-colors"
-                  placeholder="Full Name"
-                  required
-                />
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="contact_109 flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#315859] transition-colors"
-                  placeholder="Email"
-                  required
-                />
+                <div className="flex-1">
+                  <input
+                    type="text"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={`contact_108 w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-[#315859] transition-colors ${errors.fullName && touched.fullName ? "border-red-500" : "border-gray-300"}`}
+                    placeholder="Full Name"
+                  />
+                  {errors.fullName && touched.fullName && (
+                    <p className="text-red-500 text-sm mt-1">{errors.fullName}</p>
+                  )}
+                </div>
+                <div className="flex-1">
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={`contact_109 w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-[#315859] transition-colors ${errors.email && touched.email ? "border-red-500" : "border-gray-300"}`}
+                    placeholder="Email"
+                  />
+                  {errors.email && touched.email && (
+                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  )}
+                </div>
               </div>
               <div className="contact_110 flex flex-col sm:flex-row gap-4 mb-4">
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="contact_111 flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#315859] transition-colors"
-                  placeholder="Phone Number"
-                  required
-                />
-                <input
-                  type="text"
+                <div className="flex-1">
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={`contact_111 w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-[#315859] transition-colors ${errors.phone && touched.phone ? "border-red-500" : "border-gray-300"}`}
+                    placeholder="Phone Number"
+                  />
+                  {errors.phone && touched.phone && (
+                    <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                  )}
+                </div>
+              </div>
+              <div className="mb-4">
+                <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  className="contact_112 flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#315859] transition-colors"
+                  onBlur={handleBlur}
+                  rows={4}
+                  className={`contact_112 w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-[#315859] transition-colors resize-none ${errors.message && touched.message ? "border-red-500" : "border-gray-300"}`}
                   placeholder="Your Message"
-                  required
                 />
+                {errors.message && touched.message && (
+                  <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+                )}
               </div>
               <button
                 type="submit"

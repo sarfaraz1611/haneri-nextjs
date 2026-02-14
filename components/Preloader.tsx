@@ -6,9 +6,19 @@ import { gsap } from "gsap";
 export default function Preloader() {
   const [progress, setProgress] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
+  const [alreadyLoaded, setAlreadyLoaded] = useState(false);
   const logoRef = useRef<HTMLImageElement>(null);
 
+  // Check if preloader has already been shown this session
   useEffect(() => {
+    if (sessionStorage.getItem("preloaderShown")) {
+      setAlreadyLoaded(true);
+      setIsComplete(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (alreadyLoaded) return;
     let isMounted = true;
     let progressInterval: NodeJS.Timeout;
     let finalInterval: NodeJS.Timeout;
@@ -63,10 +73,12 @@ export default function Preloader() {
       clearTimeout(maxWaitTime);
       window.removeEventListener("load", onLoad);
     };
-  }, []);
+  }, [alreadyLoaded]);
 
   useEffect(() => {
+    if (alreadyLoaded) return;
     if (progress >= 100) {
+      sessionStorage.setItem("preloaderShown", "true");
       // Small delay before starting exit animation
       const timer = setTimeout(() => {
         const logo = logoRef.current;
@@ -143,16 +155,17 @@ export default function Preloader() {
 
       return () => clearTimeout(timer);
     }
-  }, [progress]);
+  }, [progress, alreadyLoaded]);
 
   useEffect(() => {
+    if (alreadyLoaded) return;
     // Prevent scrolling while preloader is active
     document.body.style.overflow = "hidden";
 
     return () => {
       document.body.style.overflow = "unset";
     };
-  }, []);
+  }, [alreadyLoaded]);
 
   if (isComplete) {
     return null;

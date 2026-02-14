@@ -18,8 +18,16 @@ import VideoSlider from "@/components/VideoSlider";
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [skipPreloader, setSkipPreloader] = useState(false);
 
   useEffect(() => {
+    // If preloader was already shown this session, skip it
+    if (sessionStorage.getItem("preloaderShown")) {
+      setSkipPreloader(true);
+      setIsLoaded(true);
+      return;
+    }
+
     // Check if page is fully loaded
     if (document.readyState === "complete") {
       setTimeout(() => setIsLoaded(true), 1500);
@@ -31,6 +39,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    if (skipPreloader) return;
     if (isLoaded) {
       // Animate content in after preloader
       gsap.fromTo(
@@ -45,12 +54,12 @@ export default function Home() {
         },
       );
     }
-  }, [isLoaded]);
+  }, [isLoaded, skipPreloader]);
 
   return (
     <div className=" ">
-      <Preloader />
-      <main className="main" style={{ opacity: 0 }}>
+      {!skipPreloader && <Preloader />}
+      <main className="main" style={{ opacity: skipPreloader ? 1 : 0 }}>
         {/* <HeroSlider /> */}
         {/* <BlowupShot /> */}
         <HeroSection />
@@ -70,10 +79,9 @@ export default function Home() {
           <ServicesSlider />
         </div> */}
 
+        <Fancraft />
         <div className="container mt-8">
           {/* <SteelFanSlider /> */}
-
-          <Fancraft />
 
           <BlogsSection />
         </div>

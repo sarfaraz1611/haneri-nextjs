@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FaHome, FaPhone, FaEnvelope, FaClock } from "react-icons/fa";
 
 export default function Footer() {
   const companyInfo = {
@@ -120,11 +121,11 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
               </h4>
               <div className="flex flex-col gap-[15px]">
                 <div className="flex gap-3 items-start text-sm text-neutral-300">
-                  <i className="fas fa-home text-brand mt-1 shrink-0"></i>
+                  <FaHome className="text-brand mt-1 shrink-0" />
                   <span>{companyInfo.address}</span>
                 </div>
                 <div className="flex gap-3 items-start text-sm text-neutral-300">
-                  <i className="fas fa-phone text-brand mt-1 shrink-0"></i>
+                  <FaPhone className="text-brand mt-1 shrink-0" />
                   <a
                     href={`tel:${companyInfo.phone}`}
                     className="text-neutral-300 transition-colors hover:text-brand"
@@ -133,7 +134,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                   </a>
                 </div>
                 <div className="flex gap-3 items-start text-sm text-neutral-300">
-                  <i className="fas fa-envelope text-brand mt-1 shrink-0"></i>
+                  <FaEnvelope className="text-brand mt-1 shrink-0" />
                   <a
                     href={`mailto:${companyInfo.email}`}
                     className="text-neutral-300 transition-colors hover:text-brand"
@@ -142,7 +143,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                   </a>
                 </div>
                 <div className="flex gap-3 items-start text-sm text-neutral-300">
-                  <i className="fas fa-clock text-brand mt-1 shrink-0"></i>
+                  <FaClock className="text-brand mt-1 shrink-0" />
                   <span>Mon - Sun / 9:00 AM - 8:00 PM</span>
                 </div>
               </div>
