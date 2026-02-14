@@ -4,18 +4,18 @@ export default function Fancraft() {
   return (
     <section className="py-6 " aria-label="Fan Craft by Haneri">
       <div className="mx-auto mt-15 ">
-        <div className="relative overflow-hidden bg-gray-900 px-6 py-32 shadow-xl rounded-xl min-h-[600px] sm:min-h-0 sm:rounded-3xl sm:px-10 sm:py-24 md:px-12 lg:px-20">
+        <div className="relative overflow-hidden bg-gray-900 px-6 py-32 shadow-xl  min-h-[600px] sm:min-h-0  sm:px-10 sm:py-24 md:px-12 lg:px-20">
           {/* Mobile image */}
           <img
             alt="Fancraft by Haneri background"
             src="/images/fancraft_mobile.jpg"
-            className="absolute inset-0 size-full object-cover sm:hidden"
+            className="absolute inset-0 size-full object-cover md:hidden"
           />
           {/* Desktop image */}
           <img
             alt="Fancraft by Haneri background"
             src="/images/Fancraft.png"
-            className="absolute inset-0 size-full object-cover hidden sm:block"
+            className="absolute inset-0 size-full object-cover hidden md:block"
           />
           <div className="absolute inset-0 " />
       

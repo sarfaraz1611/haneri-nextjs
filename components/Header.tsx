@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { FaBars, FaTimes, FaPlus, FaWhatsapp } from "react-icons/fa";
+import { FiUser } from "react-icons/fi";
 
 // Category data
 const categories = [
@@ -107,11 +109,46 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [cartCount, setCartCount] = useState(0);
+
+  const fetchCartCount = async () => {
+    try {
+      const token = localStorage.getItem("auth_token");
+      const tempId = localStorage.getItem("temp_id");
+
+      const payload: { cart_id?: string } = {};
+      if (!token && tempId) {
+        payload.cart_id = tempId;
+      }
+
+      const res = await fetch("https://api.haneri.com/api/cart/fetch", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      console.log("Cart API response:", data);
+      console.log("count value:", data?.count, typeof data?.count);
+
+      if (data?.count) {
+        setCartCount(data.count);
+        console.log("setCartCount called with:", data.count);
+      }
+    } catch {
+      // silently fail
+    }
+  };
 
   useEffect(() => {
     // Check if user is logged in
     const authToken = localStorage.getItem("auth_token");
     setIsLoggedIn(!!authToken);
+    fetchCartCount();
   }, []);
 
   const handleLogout = () => {
@@ -127,6 +164,8 @@ export default function Header() {
     setActiveDropdown(activeDropdown === menu ? null : menu);
   };
 
+  console.log("Header render - cartCount:", cartCount);
+
   return (
     // Ensure header has high z-index relative to page
     <header className="fixed w-full top-0 z-50 bg-white backdrop-blur-md shadow-sm">
@@ -135,17 +174,18 @@ export default function Header() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-[30px] max-lg:gap-[15px]">
               <button
-                className="hidden max-xl:block bg-transparent border-none text-2xl cursor-pointer z-50 relative p-2 text-[#00473E]"
+                className="hidden max-lg:block bg-transparent border-none text-2xl cursor-pointer z-50 relative p-2 text-[#00473E]"
                 type="button"
                 onClick={() => {
                   setMobileMenuOpen(!mobileMenuOpen);
                 }}
                 aria-label="Toggle menu"
               >
-                <i
-                  className={`fas ${mobileMenuOpen ? "fa-times" : "fa-bars"}`}
-                  style={{ pointerEvents: "none" }}
-                ></i>
+                {mobileMenuOpen ? (
+                  <FaTimes style={{ pointerEvents: "none" }} />
+                ) : (
+                  <FaBars style={{ pointerEvents: "none" }} />
+                )}
               </button>
 
               <Link href="/" className="block">
@@ -156,7 +196,7 @@ export default function Header() {
                 />
               </Link>
 
-              <nav className="flex max-xl:hidden">
+              <nav className="flex max-lg:hidden">
                 <ul className="list-none flex gap-[30px] m-0 p-0 pl-10 ">
                   {/* Categories Menu */}
                   <li className="relative group">
@@ -336,10 +376,7 @@ export default function Header() {
                     className="text-sm cursor-pointer transition-colors duration-300 p-1 hover:text-brand  text-primary"
                     title="Profile"
                   >
-                    <i
-                      className="far fa-user"
-                      style={{ fontWeight: 300, strokeWidth: "0.2px" }}
-                    ></i>
+                    <FiUser />
                   </Link>
                   <span className="max-sm:text-sm text-primary">|</span>
                   <a
@@ -348,15 +385,12 @@ export default function Header() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i
-                      className="fab fa-whatsapp"
-                      style={{ fontWeight: 300, strokeWidth: "0.1px" }}
-                    ></i>
+                    <FaWhatsapp />
                   </a>
                   <span className="max-sm:text-sm text-primary">|</span>
                   <Link
                     href="/cart"
-                    className="text-xl cursor-pointer transition-colors duration-300 p-1 hover:text-brand text-primary"
+                    className="relative text-xl cursor-pointer transition-colors duration-300 p-1 hover:text-brand text-primary"
                     title="Cart"
                   >
                     <svg
@@ -373,6 +407,23 @@ export default function Header() {
                         d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
                       />
                     </svg>
+                    {cartCount > 0 && (
+                      <span
+                        className="absolute -top-1 -right-2 rounded-full flex items-center justify-center z-10 pointer-events-none"
+                        style={{
+                          backgroundColor: "#CA5D27",
+                          color: "#fff",
+                          fontSize: "9px",
+                          fontWeight: 700,
+                          minWidth: "18px",
+                          height: "18px",
+                          lineHeight: 1,
+                          padding: "0 4px",
+                        }}
+                      >
+                        {cartCount}
+                      </span>
+                    )}
                   </Link>
                   <span className="max-sm:text-sm text-primary">|</span>
                   <button
@@ -403,15 +454,12 @@ export default function Header() {
                     className="text-sm cursor-pointer transition-colors duration-300 p-1 hover:text-brand  max-sm:p-[3px] text-primary"
                     title="Login"
                   >
-                    <i
-                      className="far fa-user"
-                      style={{ fontWeight: 300, strokeWidth: "0.2px" }}
-                    ></i>
+                    <FiUser />
                   </Link>
                   <span className="max-sm:text-sm text-primary">|</span>
                   <Link
                     href="/cart"
-                    className="text-sm cursor-pointer transition-colors duration-300 p-1 hover:text-brand  max-sm:p-[3px] text-primary"
+                    className="relative text-sm cursor-pointer transition-colors duration-300 p-1 hover:text-brand  max-sm:p-[3px] text-primary"
                     title="Cart"
                   >
                     <svg
@@ -428,6 +476,23 @@ export default function Header() {
                         d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
                       />
                     </svg>
+                    {cartCount > 0 && (
+                      <span
+                        className="absolute -top-2 -right-2 rounded-full flex items-center justify-center z-10 pointer-events-none"
+                        style={{
+                          backgroundColor: "#CA5D27",
+                          color: "#fff",
+                          fontSize: "9px",
+                          fontWeight: 700,
+                          minWidth: "18px",
+                          height: "18px",
+                          lineHeight: 1,
+                          padding: "0 4px",
+                        }}
+                      >
+                        {cartCount}
+                      </span>
+                    )}
                   </Link>
                   <span className="max-sm:text-sm text-primary">|</span>
                   <a
@@ -436,10 +501,7 @@ export default function Header() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i
-                      className="fab fa-whatsapp"
-                      style={{ fontWeight: 300, strokeWidth: "0.2px" }}
-                    ></i>
+                    <FaWhatsapp />
                   </a>
                 </>
               )}
@@ -482,11 +544,11 @@ export default function Header() {
                     className="w-full py-4 px-6 bg-transparent border-none text-left text-base font-normal tracking-wide uppercase cursor-pointer flex justify-between items-center text-white"
                   >
                     CATEGORIES
-                    <i
-                      className={`fas fa-plus text-sm transition-transform duration-300 ${
+                    <FaPlus
+                      className={`text-sm transition-transform duration-300 ${
                         activeDropdown === "categories" ? "rotate-45" : ""
                       }`}
-                    ></i>
+                    />
                   </button>
                   {activeDropdown === "categories" && (
                     <ul className="list-none py-2 m-0 bg-primary-dark">
@@ -512,11 +574,11 @@ export default function Header() {
                     className="w-full py-4 px-6 bg-transparent border-none text-left text-base font-normal tracking-wide uppercase cursor-pointer flex justify-between items-center text-white"
                   >
                     PILLAR TECHNOLOLGY
-                    <i
-                      className={`fas fa-plus text-sm transition-transform duration-300 ${
+                    <FaPlus
+                      className={`text-sm transition-transform duration-300 ${
                         activeDropdown === "pillar" ? "rotate-45" : ""
                       }`}
-                    ></i>
+                    />
                   </button>
                   {activeDropdown === "pillar" && (
                     <ul className="list-none py-2 m-0 bg-primary-dark">
@@ -542,11 +604,11 @@ export default function Header() {
                     className="w-full py-4 px-6 bg-transparent border-none text-left text-base font-normal tracking-wide uppercase cursor-pointer flex justify-between items-center text-white"
                   >
                     ABOUT US
-                    <i
-                      className={`fas fa-plus text-sm transition-transform duration-300 ${
+                    <FaPlus
+                      className={`text-sm transition-transform duration-300 ${
                         activeDropdown === "about" ? "rotate-45" : ""
                       }`}
-                    ></i>
+                    />
                   </button>
                   {activeDropdown === "about" && (
                     <ul className="list-none py-2 m-0 bg-primary-dark">

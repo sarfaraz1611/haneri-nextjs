@@ -388,7 +388,7 @@ export default function FeaturedProducts() {
                     opacity: 1,
                   }}
                 >
-                  <div className="relative h-[340px] grid place-items-center mb-3 overflow-hidden">
+                  <div className="relative h-[180px] xl:h-[340px] grid place-items-center mb-3 overflow-hidden">
                     <Link
                       href={`/product_detail?id=${product.id}&v_id=${first.id}`}
                       className="block w-full h-full relative"
@@ -488,13 +488,40 @@ export default function FeaturedProducts() {
           </div>
         </div>
       </div>
-      <div className="absolute bottom-4 md:bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
+      <div
+        className="absolute bottom-4 md:bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
+        onClick={() => {
+          if (sectionRef.current) {
+      
+            let el: HTMLElement | null = sectionRef.current;
+            let nextSection: Element | null = null;
+            while (el && el !== document.body) {
+              if (el.nextElementSibling) {
+                nextSection = el.nextElementSibling;
+                break;
+              }
+              el = el.parentElement;
+            }
+            if (nextSection) {
+              nextSection.scrollIntoView({ behavior: "smooth" });
+            } else {
+              // Fallback: scroll past the container
+              window.scrollTo({
+                top:
+                  sectionRef.current.offsetTop +
+                  sectionRef.current.offsetHeight,
+                behavior: "smooth",
+              });
+            }
+          }
+        }}
+      >
         <span className="text-xs text-gray-500 tracking-widest uppercase">
           Scroll to Explore
         </span>
         <div className="relative">
           <div className="absolute inset-0 rounded-full border-2 border-yellow-400/30 animate-ping" />
-          <div className="relative p-2 rounded-full border border-gray-200 bg-white/50 backdrop-blur-sm animate-bounce">
+          <div className="relative p-2 rounded-full border border-gray-200 bg-white/50 backdrop-blur-sm ">
             <svg
               className="w-5 h-5 text-[#CA5D27]"
               fill="none"

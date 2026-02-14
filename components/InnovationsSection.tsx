@@ -55,7 +55,7 @@ export default function InnovationsSection() {
             }
           });
         },
-        { root: null, rootMargin: "100px", threshold: 0.25 }
+        { root: null, rootMargin: "100px", threshold: 0.25 },
       );
 
       observer.observe(iframe);
@@ -73,19 +73,17 @@ export default function InnovationsSection() {
       aria-label="Innovations that take Haneri further"
     >
       <div className="container">
-      {/* <div className="container mx-auto px-4 max-[1199px]:sticky max-[1199px]:top-0 max-[1199px]:bg-white max-[1199px]:h-screen max-[1199px]:flex max-[1199px]:flex-col max-[1199px]:justify-center max-[1199px]:z-30"> */}
-        <h2 className="heading_1 mb-6">
-          Innovations that take Haneri further
-        </h2>
+        {/* <div className="container mx-auto px-4 max-[1199px]:sticky max-[1199px]:top-0 max-[1199px]:bg-white max-[1199px]:h-screen max-[1199px]:flex max-[1199px]:flex-col max-[1199px]:justify-center max-[1199px]:z-30"> */}
+        <h2 className="heading_1 mb-6">Innovations that take Haneri further</h2>
 
         <div className="overflow-hidden">
-          <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-5 list-none m-0 p-0 max-[1199px]:flex max-[1199px]:gap-5 max-[1199px]:min-w-max">
+          <ul className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-5 list-none m-0 p-0">
             {innovations.map((item, index) => (
               <li
                 key={item.id}
-                className="rounded-[var(--radius)] overflow-hidden bg-black shadow-DEFAULT max-[1199px]:shrink-0 max-[1199px]:w-[200px] max-[1199px]:sm:w-[240px] max-[1199px]:md:w-[280px] transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:-translate-y-2 min-[1200px]:cursor-pointer"
+                className="rounded-[var(--radius)] overflow-hidden bg-black shadow-DEFAULT transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:-translate-y-2 cursor-pointer"
               >
-                <div className="relative w-full pt-[177.78%] bg-[#111] max-[1199px]:pt-0 max-[1199px]:aspect-9/16">
+                <div className="group relative w-full pt-[177.78%] bg-[#111]">
                   <iframe
                     ref={(el) => {
                       if (el) cardsRef.current[index] = el;
@@ -96,6 +94,9 @@ export default function InnovationsSection() {
                     title={item.title}
                     className="absolute inset-0 w-full h-full block border-0"
                   ></iframe>
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                    <span className="text-white text-lg font-semibold">{item.title}</span>
+                  </div>
                 </div>
               </li>
             ))}

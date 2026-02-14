@@ -346,13 +346,31 @@ export default function BlowupShotClean() {
         </div>
 
         {/* Enhanced scroll indicator with ring animation */}
-        <div className="absolute bottom-4 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
+        <div
+          className="absolute bottom-4 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10 cursor-pointer"
+          onClick={() => {
+            if (containerRef.current) {
+              // Find the next section after the hero by traversing up to the parent section
+              const parentSection = containerRef.current.closest("section");
+              const nextSection = parentSection?.nextElementSibling ?? containerRef.current.nextElementSibling;
+              if (nextSection) {
+                nextSection.scrollIntoView({ behavior: "smooth" });
+              } else {
+                // Fallback: scroll past the container
+                window.scrollTo({
+                  top: containerRef.current.offsetTop + containerRef.current.offsetHeight,
+                  behavior: "smooth",
+                });
+              }
+            }
+          }}
+        >
           <span className="text-xs text-gray-500 tracking-widest uppercase">
             Scroll to Explore
           </span>
           <div className="relative">
             <div className="absolute inset-0 rounded-full border-2 border-yellow-400/30 animate-ping" />
-            <div className="relative p-2 rounded-full border border-gray-200 bg-white/50 backdrop-blur-sm animate-bounce">
+            <div className="relative p-2 rounded-full border border-gray-200 bg-white/50 backdrop-blur-sm ">
               <svg
                 className="w-5 h-5 text-[#CA5D27]"
                 fill="none"
