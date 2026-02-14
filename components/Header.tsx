@@ -10,21 +10,21 @@ const categories = [
     image: "/images/Ceilimg Fan.png",
     href: "/shop?category=Ceiling Fan",
   },
-  {
-    name: "Table Wall Pedestals",
-    image: "/images/Table Wall Pedestals.png",
-    href: "/shop?category=Table Wall Pedestals",
-  },
-  {
-    name: "Domestic Exhaust",
-    image: "/images/Domestic Exhaust.png",
-    href: "/shop?category=Domestic Exhaust",
-  },
-  {
-    name: "Personal",
-    image: "/images/Personal.png",
-    href: "/shop?category=Personal",
-  },
+  // {
+  //   name: "Table Wall Pedestals",
+  //   image: "/images/Table Wall Pedestals.png",
+  //   href: "/shop?category=Table Wall Pedestals",
+  // },
+  // {
+  //   name: "Domestic Exhaust",
+  //   image: "/images/Domestic Exhaust.png",
+  //   href: "/shop?category=Domestic Exhaust",
+  // },
+  // {
+  //   name: "Personal",
+  //   image: "/images/Personal.png",
+  //   href: "/shop?category=Personal",
+  // },
 ];
 
 // Pillar Technology data
@@ -135,7 +135,7 @@ export default function Header() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-[30px] max-lg:gap-[15px]">
               <button
-                className="hidden max-xl:block bg-transparent border-none text-2xl cursor-pointer z-50 relative p-2 text-[#00473E]"
+                className="md:hidden bg-transparent border-none text-2xl cursor-pointer z-50 relative p-2 text-[#00473E]"
                 type="button"
                 onClick={() => {
                   setMobileMenuOpen(!mobileMenuOpen);
@@ -156,8 +156,8 @@ export default function Header() {
                 />
               </Link>
 
-              <nav className="flex max-xl:hidden">
-                <ul className="list-none flex gap-[30px] m-0 p-0 pl-10 ">
+              <nav className="hidden md:block">
+                <ul className="list-none flex gap-[20px] m-0 p-0 justify-around">
                   {/* Categories Menu */}
                   <li className="relative group">
                     <Link
@@ -169,7 +169,7 @@ export default function Header() {
 
                     <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 transition-all duration-300 invisible opacity-0 group-hover:visible group-hover:opacity-100 z-50">
                       <div className="bg-white min-w-1000 px-[30px] py-[25px] rounded-lg shadow-lg ">
-                        <div className="flex justify-center items-center gap-5">
+                        <div className="flex justify-center items-center">
                           {categories.map((category) => (
                             <Link
                               key={category.name}
