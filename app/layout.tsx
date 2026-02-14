@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SmoothScrollProvider from "@/components/smooth-scroll";
 
 export const metadata: Metadata = {
   title: "Haneri - Premium Ceiling Fans",
@@ -49,11 +50,11 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <div className="page-wrapper overflow-x-hidden">
+        <SmoothScrollProvider>        <div className="page-wrapper overflow-x-hidden">
           <Header />
           {children}
           <Footer />
-        </div>
+        </div></SmoothScrollProvider>
       </body>
     </html>
   );
