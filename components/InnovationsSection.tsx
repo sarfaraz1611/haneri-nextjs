@@ -83,9 +83,9 @@ export default function InnovationsSection() {
             {innovations.map((item, index) => (
               <li
                 key={item.id}
-                className="rounded-[var(--radius)] mx-auto overflow-hidden bg-black shadow-DEFAULT shrink-0 md:shrink w-[200px] sm:w-[240px] md:w-[280px] transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:-translate-y-2 min-[1200px]:cursor-pointer"
+                className="group rounded-[var(--radius)] mx-auto overflow-hidden bg-black shadow-DEFAULT shrink-0 md:shrink w-[200px] sm:w-[240px] md:w-[280px] transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:-translate-y-2 min-[1200px]:cursor-pointer"
               >
-                <div className="group relative w-full pt-[177.78%] bg-[#111] aspect-9/16">
+                <div className="relative w-full pt-[177.78%] bg-[#111] aspect-9/16">
                   <iframe
                     ref={(el) => {
                       if (el) cardsRef.current[index] = el;
@@ -96,7 +96,7 @@ export default function InnovationsSection() {
                     title={item.title}
                     className="absolute inset-0 w-full h-full block border-0"
                   ></iframe>                  
-                  <p className="group-hover:translate-y-0 group-hover:opacity-100 group-focus:translate-y-0 group-focus:opacity-100 opacity-0 transition-all duration-300 flex items-center justify-center absolute bottom-0 w-full text-4xl text-white bg-black/50 h-full">{item.title}</p>
+                  <p className="group-hover:translate-y-0 group-hover:opacity-100 group-active:translate-y-0 group-active:opacity-100 opacity-0 transition-all duration-300 flex items-center justify-center absolute bottom-0 w-full text-4xl text-white bg-black/50 h-full">{item.title}</p>
                 </div>
               </li>
             ))}
