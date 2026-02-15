@@ -1,22 +1,17 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import * as React from "react";
 import gsap from "gsap";
-import { Observer } from "gsap/Observer";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Register GSAP Plugin safely
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(Observer);
-}
+gsap.registerPlugin(ScrollTrigger);
 
 interface OurStorySectionProps {
   onShowFooter?: () => void;
   onHideFooter?: () => void;
 }
 
-// 1. CONFIGURATION: Map URL Hash IDs to Section Indices
-// Example: connecting /about#mission to Slide 5
+// Map URL hash IDs to section indices
 const SECTION_IDS: Record<string, number> = {
   top: 0,
   heart: 1,
@@ -32,217 +27,195 @@ export default function OurStorySection({
   onShowFooter,
   onHideFooter,
 }: OurStorySectionProps) {
-  // -- Refs --
-  const containerRef = useRef<HTMLDivElement>(null);
-  const sectionsRef = useRef<HTMLElement[]>([]);
-  const outerWrappersRef = useRef<HTMLDivElement[]>([]);
-  const innerWrappersRef = useRef<HTMLDivElement[]>([]);
-  const currentIndexRef = useRef(-1);
-  const animatingRef = useRef(false);
+  const containerRef = React.useRef<HTMLDivElement | null>(null);
 
-  // Ref to hold the navigation function so we can access it outside the GSAP effect
-  const gotoSectionRef = useRef<
-    ((index: number, direction: number) => void) | null
-  >(null);
+  // Each index corresponds to one <section>
+  const sectionsRef = React.useRef<HTMLElement[]>([]);
+  const outerWrappersRef = React.useRef<HTMLDivElement[]>([]);
+  const innerWrappersRef = React.useRef<HTMLDivElement[]>([]);
 
-  // -- State --
-  const [isMobile, setIsMobile] = useState(false);
-  const [hash, setHash] = useState("");
+  const animatingRef = React.useRef(false);
+  const currentIndexRef = React.useRef(-1);
 
-  // 2. LISTEN FOR URL HASH CHANGES
-  // This detects when a user clicks a Navbar link while already on the page
-  useEffect(() => {
-    // Set initial hash
-    if (typeof window !== "undefined") {
-      setHash(window.location.hash.replace("#", ""));
-    }
+  const [isMobile, setIsMobile] = React.useState(false);
+  const [hash, setHash] = React.useState("");
 
-    const handleHashChange = () => {
-      setHash(window.location.hash.replace("#", ""));
-    };
+  // Hide footer globally for this page
+  React.useEffect(() => {
+    onHideFooter?.();
+  }, [onHideFooter]);
 
-    // Listen for native hashchange event
-    window.addEventListener("hashchange", handleHashChange);
-
-    // Also poll for hash changes to catch Next.js Link navigation
-    // Next.js Link doesn't always trigger hashchange event
-    const checkHashInterval = setInterval(() => {
-      const currentHash = window.location.hash.replace("#", "");
-      setHash((prevHash) => {
-        if (prevHash !== currentHash) {
-          return currentHash;
-        }
-        return prevHash;
-      });
-    }, 100);
-
-    return () => {
-      window.removeEventListener("hashchange", handleHashChange);
-      clearInterval(checkHashInterval);
-    };
-  }, []);
-
-  // 3. CHECK FOR MOBILE VIEWPORT
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-
+  // Mobile detection
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // 4. MAIN GSAP SCROLL LOGIC (Desktop Only)
-  useEffect(() => {
-    if (!containerRef.current || isMobile) return;
+  // Hash tracking (simplified + reliable)
+  React.useEffect(() => {
+    const readHash = () => setHash(window.location.hash.replace("#", ""));
+    readHash();
+    window.addEventListener("hashchange", readHash);
+    return () => window.removeEventListener("hashchange", readHash);
+  }, []);
+
+  React.useLayoutEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    // Mobile: do not pin/hijack — allow normal scrolling
+    if (isMobile) return;
 
     const sections = sectionsRef.current.filter(Boolean);
     const outerWrappers = outerWrappersRef.current.filter(Boolean);
     const innerWrappers = innerWrappersRef.current.filter(Boolean);
-    const totalSections = sections.length;
 
-    if (totalSections === 0) return;
+    const total = sections.length;
+    if (total === 0) return;
 
-    // -- Initial State --
-    gsap.set(outerWrappers, { yPercent: 100 });
-    gsap.set(innerWrappers, { yPercent: -100 });
+    // IMPORTANT:
+    // Do NOT block wheel/touch scroll (no Observer.preventDefault).
+    // ScrollTrigger needs real scroll updates to advance progress.
 
-    // -- The Navigation Function --
-    const gotoSection = (index: number, direction: number) => {
-      // Prevent going out of bounds
-      index = Math.max(0, Math.min(index, totalSections - 1));
+    const ctx = gsap.context(() => {
+      // Initial layout state
+      gsap.set(sections, { autoAlpha: 0, zIndex: 0 });
+      gsap.set(outerWrappers, { yPercent: 100 });
+      gsap.set(innerWrappers, { yPercent: -100 });
 
-      // Prevent animating to the same section
-      if (index === currentIndexRef.current) return;
+      const gotoSection = (index: number, direction: number) => {
+        const clamped = Math.max(0, Math.min(index, total - 1));
+        if (clamped === currentIndexRef.current) return;
+        if (animatingRef.current) return;
 
-      animatingRef.current = true;
+        animatingRef.current = true;
 
-      const fromTop = direction === -1;
-      const dFactor = fromTop ? -1 : 1;
+        const fromTop = direction === -1;
+        const dFactor = fromTop ? -1 : 1;
 
-      const tl = gsap.timeline({
-        defaults: { duration: 1.25, ease: "power1.inOut" },
-        onComplete: () => {
-          animatingRef.current = false;
+        const prev = currentIndexRef.current;
+
+        const tl = gsap.timeline({
+          defaults: { duration: 1.1, ease: "power2.inOut" },
+          onComplete: () => {
+            animatingRef.current = false;
+          },
+        });
+
+        // Hide previous
+        if (prev >= 0 && prev < total) {
+          gsap.set(sections[prev], { zIndex: 0 });
+          tl.set(sections[prev], { autoAlpha: 0 }, 0);
+        }
+
+        // Show next
+        gsap.set(sections[clamped], { autoAlpha: 1, zIndex: 1 });
+
+        // Slide wrappers
+        tl.fromTo(
+          [outerWrappers[clamped], innerWrappers[clamped]],
+          {
+            yPercent: (i) => (i ? -100 * dFactor : 100 * dFactor),
+          },
+          { yPercent: 0 },
+          0
+        );
+
+        currentIndexRef.current = clamped;
+      };
+
+      // Start index (hash-aware)
+      const initialHash = window.location.hash.replace("#", "");
+      const initialIndex =
+        SECTION_IDS[initialHash] !== undefined ? SECTION_IDS[initialHash] : 0;
+
+      // Jump to initial without animation jank
+      currentIndexRef.current = -1;
+      gotoSection(initialIndex, 1);
+
+      // Pin + drive index by scroll progress
+      const st = ScrollTrigger.create({
+        trigger: container,
+        start: "top top",
+        // One viewport per transition (N-1 transitions for N sections)
+        end: () => `+=${window.innerHeight * (total - 1)}`,
+        pin: true,
+        pinSpacing: true,
+
+        // Use scrub so progress changes continuously as user scrolls
+        scrub: 0.35,
+
+        // Snap to the nearest section
+        snap: total > 1 ? 1 / (total - 1) : 1,
+
+        onUpdate: (self) => {
+          const idx = Math.round(self.progress * (total - 1));
+          const dir = idx > currentIndexRef.current ? 1 : -1;
+          gotoSection(idx, dir);
         },
       });
 
-      // Fade out current section if valid
-      if (
-        currentIndexRef.current >= 0 &&
-        currentIndexRef.current < totalSections
-      ) {
-        gsap.set(sections[currentIndexRef.current], { zIndex: 0 });
-        tl.set(sections[currentIndexRef.current], { autoAlpha: 0 });
-      }
+      // Keep end distance correct on resize
+      const onRefreshInit = () => {
+        // no-op: ScrollTrigger recalculates end via function
+      };
+      ScrollTrigger.addEventListener("refreshInit", onRefreshInit);
 
-      // Prepare next section
-      gsap.set(sections[index], { autoAlpha: 1, zIndex: 1 });
+      // Hash navigation while pinned:
+      // Convert hash -> index, then scroll to the snapped progress point.
+      const jumpToHash = () => {
+        const h = window.location.hash.replace("#", "");
+        const targetIndex = SECTION_IDS[h];
+        if (targetIndex === undefined) return;
 
-      // Animate next section
-      tl.fromTo(
-        [outerWrappers[index], innerWrappers[index]],
-        {
-          yPercent: (i) => (i ? -100 * dFactor : 100 * dFactor),
-        },
-        {
-          yPercent: 0,
-        },
-        0,
-      );
+        // Compute desired progress point
+        const targetProgress = total > 1 ? targetIndex / (total - 1) : 0;
 
-      currentIndexRef.current = index;
-    };
+        // ScrollTrigger gives start/end scroll positions
+        const start = st.start;
+        const end = st.end;
 
-    // Store function in ref for access by hash listener
-    gotoSectionRef.current = gotoSection;
+        const y = start + (end - start) * targetProgress;
 
-    // -- Scroll/Swipe Observer --
-    const observer = Observer.create({
-      type: "wheel,touch,pointer",
-      wheelSpeed: -1,
-      onDown: () =>
-        !animatingRef.current && gotoSection(currentIndexRef.current - 1, -1),
-      onUp: () =>
-        !animatingRef.current && gotoSection(currentIndexRef.current + 1, 1),
-      tolerance: 10,
-      preventDefault: true,
-    });
+        // Use native scroll so ScrollTrigger updates normally
+        window.scrollTo({ top: y, behavior: "smooth" });
+      };
 
-    // -- Keyboard Navigation --
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (animatingRef.current) return;
-      if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
-        gotoSection(currentIndexRef.current - 1, -1);
-      } else if (e.key === "ArrowDown" || e.key === "ArrowRight") {
-        gotoSection(currentIndexRef.current + 1, 1);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
+      window.addEventListener("hashchange", jumpToHash);
 
-    // -- Handle Page Load with Hash --
-    const initialHash = window.location.hash.replace("#", "");
-    const initialIndex =
-      SECTION_IDS[initialHash] !== undefined ? SECTION_IDS[initialHash] : 0;
+      return () => {
+        window.removeEventListener("hashchange", jumpToHash);
+        ScrollTrigger.removeEventListener("refreshInit", onRefreshInit);
+        st.kill();
+      };
+    }, container);
 
-    // Jump to initial section immediately
-    gotoSection(initialIndex, 1);
+    return () => ctx.revert();
+  }, [isMobile]);
 
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      if (observer) observer.kill();
-    };
-  }, [onShowFooter, onHideFooter, isMobile]); // Effect dependency array
+  // If you still want React state hash-driven navigation (optional),
+  // you can keep it, but the hashchange handler above already covers it.
+  React.useEffect(() => {
+    void hash;
+  }, [hash]);
 
-  // 5. REACT TO HASH CHANGES (Dynamic Navigation)
-  useEffect(() => {
-    // Only run if not mobile and the GSAP function is ready
-    if (isMobile || !gotoSectionRef.current || animatingRef.current) return;
-
-    const targetIndex = SECTION_IDS[hash];
-
-    // If valid hash and not current section, navigate
-    if (targetIndex !== undefined && targetIndex !== currentIndexRef.current) {
-      const direction = targetIndex > currentIndexRef.current ? 1 : -1;
-      gotoSectionRef.current(targetIndex, direction);
-    }
-  }, [hash, isMobile]); // Runs whenever 'hash' state updates
-
-  // Hide footer globally for this page
-  useEffect(() => {
-    onHideFooter?.();
-  }, [onHideFooter]);
-
-  // -- RENDER --
   return (
     <div
       ref={containerRef}
-      className={`relative w-full ${
-        isMobile ? "overflow-visible" : "overflow-hidden"
-      }`}
-      style={
-        isMobile
-          ? { paddingTop: "80px" }
-          : { height: "100vh", paddingTop: "80px" }
-      }
+      className={isMobile ? "relative w-full" : "relative w-full h-dvh"}
+      style={{ paddingTop: "80px" }}
     >
       {/* Background Image with Blur (Desktop only) */}
       {!isMobile && (
         <div
-          className="absolute inset-0 w-full h-full z-0"
-          style={{
-            backgroundImage: "url(/backgroundImage.jpeg)",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            filter: "blur(10px)",
-            transform: "scale(1.1)",
-          }}
+          className="pointer-events-none absolute inset-0 -z-10 bg-cover bg-center blur-[10px] scale-110"
+          style={{ backgroundImage: "url(/backgroundImage.jpeg)" }}
         />
       )}
 
-      {/* --- Section 1: About top_block (Index 0) --- */}
+{/* --- Section 1: About top_block (Index 0) --- */}
       <section
         id="top"
         ref={(el) => {
@@ -251,7 +224,7 @@ export default function OurStorySection({
         className={
           isMobile
             ? "relative w-full py-8"
-            : "absolute inset-0 w-full h-full opacity-0 invisible z-10"
+            : "absolute inset-0 w-full h-full scale-80 top-10 z-10"
         }
       >
         <div
@@ -271,10 +244,10 @@ export default function OurStorySection({
             className={
               isMobile
                 ? "relative w-full bg-white flex items-center justify-center"
-                : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center"
+                : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center rounded-xl"
             }
           >
-            <div className="container w-full px-4 py-8 text-center max-w-6xl">
+            <div className=" w-full px-4 py-8 text-center max-w-6xl scale-80">
               <h1 className="text-[20px] sm:text-[42px] text-[#00473E] leading-none font-medium mb-5">
                 Designing Tomorrow's Comfort
               </h1>
@@ -305,7 +278,7 @@ export default function OurStorySection({
         className={
           isMobile
             ? "relative w-full"
-            : "absolute inset-0 w-full h-full opacity-0 invisible"
+            : "absolute inset-0 w-full h-full scale-80 top-10 z-10"
         }
       >
         <div
@@ -325,10 +298,10 @@ export default function OurStorySection({
             className={
               isMobile
                 ? "relative w-full bg-white flex items-center justify-center"
-                : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center"
+                : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center rounded-xl"
             }
           >
-            <div className="flex items-center gap-8 flex-col lg:flex-row max-w-7xl w-full p-8">
+            <div className="flex items-center gap-8 flex-col lg:flex-row max-w-7xl w-full p-8 scale-80">
               <div className="w-full lg:w-1/2">
                 <h2 className="text-[20px] sm:text-[42px] text-[#00473E] leading-none font-medium mb-4">
                   The Heart of Who We Are
@@ -375,7 +348,7 @@ export default function OurStorySection({
         className={
           isMobile
             ? "relative w-full py-8"
-            : "absolute inset-0 w-full h-full opacity-0 invisible"
+            : "absolute inset-0 w-full h-full scale-80 top-10 z-10"
         }
       >
         <div
@@ -395,10 +368,10 @@ export default function OurStorySection({
             className={
               isMobile
                 ? "relative w-full flex items-center justify-center"
-                : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center"
+                : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center rounded-xl"
             }
           >
-            <div className="flex items-stretch w-full max-w-[80%] flex-col md:flex-row overflow-hidden rounded-lg shadow-lg">
+            <div className="flex items-stretch w-full max-w-[80%] flex-col md:flex-row overflow-hidden rounded-lg shadow-lg scale-80">
               <div className="w-full md:w-3/4">
                 <img
                   src="images/about_sustainability.png"
@@ -434,7 +407,7 @@ export default function OurStorySection({
         className={
           isMobile
             ? "relative w-full py-8"
-            : "absolute inset-0 w-full h-full opacity-0 invisible"
+            : "absolute inset-0 w-full h-full scale-80 top-10 z-10"
         }
       >
         <div
@@ -454,10 +427,11 @@ export default function OurStorySection({
             className={
               isMobile
                 ? "relative w-full bg-white flex items-center justify-center p-4"
-                : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center p-4"
+                : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center rounded-xl"
+                
             }
           >
-            <div className="w-full max-w-6xl">
+            <div className="w-full max-w-6xl scale-80">
               <h1 className="text-[24px] sm:text-[42px] text-[#00473E] leading-none font-medium text-center mb-5">
                 Innovation and Design Philosophy
               </h1>
@@ -519,7 +493,7 @@ export default function OurStorySection({
         className={
           isMobile
             ? "relative w-full py-8"
-            : "absolute inset-0 w-full h-full opacity-0 invisible"
+            : "absolute inset-0 w-full h-full scale-80 top-10 z-10"
         }
       >
         <div
@@ -539,10 +513,10 @@ export default function OurStorySection({
             className={
               isMobile
                 ? "relative w-full bg-white flex items-center justify-center p-4"
-                : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center p-4"
+                : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center rounded-xl"
             }
           >
-            <div className="flex flex-col md:flex-row gap-8 items-center max-w-6xl w-full">
+            <div className="flex flex-col md:flex-row gap-8 items-center max-w-6xl w-full scale-80">
               <div className={isMobile ? "w-1/2" : "w-full md:w-[35%]"}>
                 <img
                   src="images/section/Haneri_haVision_Image.jpg"
@@ -576,7 +550,7 @@ export default function OurStorySection({
         className={
           isMobile
             ? "relative w-full py-8"
-            : "absolute inset-0 w-full h-full opacity-0 invisible"
+            : "absolute inset-0 w-full h-full scale-80 top-10 z-10"
         }
       >
         <div
@@ -596,10 +570,10 @@ export default function OurStorySection({
             className={
               isMobile
                 ? "relative w-full bg-white flex items-center justify-center p-4"
-                : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center p-4"
+                : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center rounded-xl"
             }
           >
-            <div className="flex flex-col md:flex-row gap-8 items-start max-w-6xl w-full">
+            <div className="flex flex-col md:flex-row gap-8 items-start max-w-6xl w-full scale-70">
               <div className="w-full md:flex-1 flex flex-col gap-4 order-2 md:order-1">
                 <h3 className="text-[32px] text-center md:text-left sm:text-[34px] font-light font-['Barlow_Condensed'] text-[#00473E] mb-2">
                   Our Mission
@@ -697,7 +671,7 @@ export default function OurStorySection({
         className={
           isMobile
             ? "relative w-full py-8"
-            : "absolute inset-0 w-full h-full opacity-0 invisible"
+            : "absolute inset-0 w-full h-full scale-80 top-10 z-10"
         }
       >
         <div
@@ -717,10 +691,10 @@ export default function OurStorySection({
             className={
               isMobile
                 ? "relative w-full bg-white flex items-center justify-center p-4"
-                : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center p-4"
+                : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center rounded-xl"
             }
           >
-            <div className="flex flex-col md:flex-row gap-8 items-start max-w-6xl w-full">
+            <div className="flex flex-col md:flex-row gap-8 items-start max-w-6xl w-full scale-80">
               <div className="w-full md:flex-1 flex flex-col gap-4 order-2 md:order-1">
                 <h3 className="text-[32px] text-center md:text-left sm:text-[34px] font-light font-['Barlow_Condensed'] text-[#00473E] mb-2">
                   Our Values
@@ -812,7 +786,7 @@ export default function OurStorySection({
         className={
           isMobile
             ? "relative w-full py-8"
-            : "absolute inset-0 w-full h-full opacity-0 invisible"
+            : "absolute inset-0 w-full h-full scale-80 top-10 z-10"
         }
       >
         <div
@@ -865,7 +839,7 @@ export default function OurStorySection({
                 </div>
               </div>
             ) : (
-              <div className="relative w-full max-w-[80%] overflow-hidden rounded-lg shadow-lg h-[520px]">
+              <div className="relative w-full max-w-[80%] overflow-hidden rounded-lg shadow-lg h-[520px] scale-80">
                 <img
                   src="images/about_top_last.png"
                   alt="The Haneri Promise"
@@ -904,26 +878,6 @@ export default function OurStorySection({
           </div>
         </div>
       </section>
-
-      {/* --- Scroll Indicator (Desktop Only) --- */}
-      {!isMobile && (
-        <div className="fixed bottom-14 left-1/2 transform -translate-x-1/2 z-40 text-center text-[#00473E] animate-bounce">
-          <div className="text-sm mb-2 opacity-70">Scroll to explore</div>
-          <svg
-            className="w-6 h-6 mx-auto"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
-          </svg>
-        </div>
-      )}
     </div>
   );
 }
