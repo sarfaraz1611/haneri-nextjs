@@ -78,8 +78,8 @@ export default function ProductDetailClient({
           />
 
           {/* Right: Product Info */}
-          <div className="mt-6 lg:mt-0">
-            <div className="sticky top-24">
+          <div className="mt-6 lg:mt-20">
+            <div className="sticky top-24 xl:top-40">
               <ProductInfo product={product} />
 
               <VariantSelector
