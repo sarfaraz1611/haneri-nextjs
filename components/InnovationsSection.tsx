@@ -81,7 +81,7 @@ export default function InnovationsSection() {
             {innovations.map((item, index) => (
               <li
                 key={item.id}
-                className="rounded-[var(--radius)] overflow-hidden bg-black shadow-DEFAULT transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:-translate-y-2 cursor-pointer"
+                className="rounded-md overflow-hidden bg-black shadow-DEFAULT transition-all duration-300 hover:scale-95 hover:rounded-md hover:shadow-2xl hover:-translate-y-2 cursor-pointer"
               >
                 <div className="group relative w-full pt-[177.78%] bg-[#111]">
                   <iframe
@@ -92,7 +92,7 @@ export default function InnovationsSection() {
                     allow="autoplay; fullscreen; picture-in-picture"
                     referrerPolicy="strict-origin-when-cross-origin"
                     title={item.title}
-                    className="absolute inset-0 w-full h-full block border-0"
+                    className="absolute inset-0 w-full h-full block border-0 pointer-events-none"
                   ></iframe>
                   <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                     <span className="text-white text-lg font-semibold">{item.title}</span>
