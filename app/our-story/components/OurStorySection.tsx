@@ -247,7 +247,7 @@ export default function OurStorySection({
                 : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center rounded-xl"
             }
           >
-            <div className=" w-full px-4 py-8 text-center max-w-6xl scale-80">
+            <div className=" w-full px-4 py-8 text-center max-w-6xl md:scale-80">
               <h1 className="text-[20px] sm:text-[42px] text-[#00473E] leading-none font-medium mb-5">
                 Designing Tomorrow's Comfort
               </h1>
@@ -301,7 +301,7 @@ export default function OurStorySection({
                 : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center rounded-xl"
             }
           >
-            <div className="flex items-center gap-8 flex-col lg:flex-row max-w-7xl w-full p-8 scale-80">
+            <div className="flex items-center gap-8 flex-col lg:flex-row max-w-7xl w-full p-8 md:scale-80">
               <div className="w-full lg:w-1/2">
                 <h2 className="text-[20px] sm:text-[42px] text-[#00473E] leading-none font-medium mb-4">
                   The Heart of Who We Are
@@ -371,7 +371,7 @@ export default function OurStorySection({
                 : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center rounded-xl"
             }
           >
-            <div className="flex items-stretch w-full max-w-[80%] flex-col md:flex-row overflow-hidden rounded-lg shadow-lg scale-80">
+            <div className="flex items-stretch w-full max-w-[80%] flex-col md:flex-row overflow-hidden rounded-lg shadow-lg md:scale-80">
               <div className="w-full md:w-3/4">
                 <img
                   src="images/about_sustainability.png"
@@ -431,7 +431,7 @@ export default function OurStorySection({
                 
             }
           >
-            <div className="w-full max-w-6xl scale-80">
+            <div className="w-full max-w-6xl md:scale-80">
               <h1 className="text-[24px] sm:text-[42px] text-[#00473E] leading-none font-medium text-center mb-5">
                 Innovation and Design Philosophy
               </h1>
@@ -516,7 +516,7 @@ export default function OurStorySection({
                 : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center rounded-xl"
             }
           >
-            <div className="flex flex-col md:flex-row gap-8 items-center max-w-6xl w-full scale-80">
+            <div className="flex flex-col md:flex-row gap-8 items-center max-w-6xl w-full md:scale-80">
               <div className={isMobile ? "w-1/2" : "w-full md:w-[35%]"}>
                 <img
                   src="images/section/Haneri_haVision_Image.jpg"
@@ -573,7 +573,7 @@ export default function OurStorySection({
                 : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center rounded-xl"
             }
           >
-            <div className="flex flex-col md:flex-row gap-8 items-start max-w-6xl w-full scale-70">
+            <div className="flex flex-col md:flex-row gap-8 items-start max-w-6xl w-full md:scale-70">
               <div className="w-full md:flex-1 flex flex-col gap-4 order-2 md:order-1">
                 <h3 className="text-[32px] text-center md:text-left sm:text-[34px] font-light font-['Barlow_Condensed'] text-[#00473E] mb-2">
                   Our Mission
@@ -694,7 +694,7 @@ export default function OurStorySection({
                 : "inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center rounded-xl"
             }
           >
-            <div className="flex flex-col md:flex-row gap-8 items-start max-w-6xl w-full scale-80">
+            <div className="flex flex-col md:flex-row gap-8 items-start max-w-6xl w-full md:scale-80">
               <div className="w-full md:flex-1 flex flex-col gap-4 order-2 md:order-1">
                 <h3 className="text-[32px] text-center md:text-left sm:text-[34px] font-light font-['Barlow_Condensed'] text-[#00473E] mb-2">
                   Our Values
@@ -839,7 +839,7 @@ export default function OurStorySection({
                 </div>
               </div>
             ) : (
-              <div className="relative w-full max-w-[80%] overflow-hidden rounded-lg shadow-lg h-[520px] scale-80">
+              <div className="relative w-full max-w-[80%] overflow-hidden rounded-lg shadow-lg h-[520px] md:scale-80">
                 <img
                   src="images/about_top_last.png"
                   alt="The Haneri Promise"

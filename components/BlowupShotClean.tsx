@@ -282,7 +282,7 @@ useEffect(() => {
       <div        ref={stickyRef}       className="relative md:flex md:items-center md:justify-center"
 
 >      <div
-        className="w-full flex flex-col-reverse md:flex-row-reverse items-center justify-center overflow-hidden"
+        className="w-full flex flex-col-reverse md:flex-row-reverse items-center justify-center overflow-hidden md:pb-8"
       >
         <DecorativeElements />
 
