@@ -81,7 +81,7 @@ export default function InnovationsSection() {
             {innovations.map((item, index) => (
               <li
                 key={item.id}
-                className="rounded-md overflow-hidden bg-black shadow-DEFAULT transition-all duration-300 hover:scale-95 hover:rounded-md hover:shadow-2xl hover:-translate-y-2 cursor-pointer"
+                className="rounded-md overflow-hidden bg-black transition-all duration-300 hover:scale-95 hover:rounded-md hover:-translate-y-2 cursor-pointer"
               >
                 <div className="group relative w-full pt-[177.78%] bg-[#111]">
                   <iframe
