@@ -193,18 +193,18 @@ export default function Preloader() {
           {/* Progress Bar */}
           <div className="w-64 md:w-80 h-1 bg-gray-200 rounded-full overflow-hidden mx-auto">
             <div
-              className="h-full bg-[#00473E] transition-all duration-300 ease-out"
+              className="h-full bg-[#CA5D27] transition-all duration-300 ease-out"
               style={{ width: `${Math.min(progress, 100)}%` }}
             />
           </div>
 
           {/* Progress Percentage */}
-          <div className="mt-4 text-lg font-semibold text-[#00473E]">
+          {/* <div className="mt-4 text-lg font-semibold text-[#00473E]">
             {Math.floor(Math.min(progress, 100))}%
-          </div>
+          </div> */}
 
           {/* Loading Animation */}
-          <div className="mt-8 flex justify-center gap-2">
+          {/* <div className="mt-8 flex justify-center gap-2">
             <div
               className="w-2 h-2 bg-[#00473E] rounded-full animate-bounce"
               style={{ animationDelay: "0ms" }}
@@ -217,7 +217,7 @@ export default function Preloader() {
               className="w-2 h-2 bg-[#00473E] rounded-full animate-bounce"
               style={{ animationDelay: "300ms" }}
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

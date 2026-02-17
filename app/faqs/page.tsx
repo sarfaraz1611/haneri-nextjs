@@ -230,7 +230,10 @@ export default function FAQs() {
       >
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center text-white">
-          <h2 className="text-2xl font-semibold leading-tight sm:text-4xl lg:text-5xl">
+          <h2
+            className="font-heading font-medium leading-none text-white"
+            style={{ fontSize: "clamp(34px, 5vw, 70px)" }}
+          >
             Everything you wanted to know
             <br />
             about the art of air
