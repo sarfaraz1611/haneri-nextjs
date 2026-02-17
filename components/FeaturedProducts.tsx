@@ -332,25 +332,29 @@ export default function FeaturedProducts() {
       {/* Interactive animated header - stays visible */}
       <DiscoverHero
         centered={false}
-        className="absolute top-0 left-0 w-full pointer-events-none overflow-hidden featured-hero"
-        style={{ height: "50vh", zIndex: 20 }}
+        className=" absolute h-30  top-0 left-0 w-full pointer-events-none overflow-hidden featured-hero z-20"
       />
 
-      <div
-        className="w-full  sticky top-0"
-        style={{
-          // This container is the viewport for the pinned content
-          height: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          zIndex: 10,
-        }}
-      >
+      <div className="w-full sticky top-0 flex flex-col justify-center  md:justify-end lg:justify-center items-center z-10 min-h-screen">
         {/* Horizontal scrolling container (The viewport wrapper) */}
+        {/* <div className="container">
+          <h2
+            className="lg:-mt-10 2xl:-mt-20 uppercase tracking-wider"
+            style={{
+              fontFamily: "var(--font-barlow-condensed), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif",
+              fontWeight: 600,
+              fontSize: "clamp(28px, 4vw, 36px)",
+              lineHeight: 1.2,
+              color: "#315859",
+              marginBottom: "20px",
+            }}
+          >
+            Discover
+          </h2>
+        </div> */}
         <div
           ref={contentWrapperRef}
-          className="overflow-hidden pb-4 mt-20 md:mt-24 w-full" // Use overflow-hidden to hide the native scrollbar
+          className="overflow-hidden mt-20 md:mt-24 pb-4 w-full " // Use overflow-hidden to hide the native scrollbar
           style={{
             // Removed scrollbar-related CSS since we hide overflow
             overflowX: "hidden",
@@ -388,7 +392,7 @@ export default function FeaturedProducts() {
                     opacity: 1,
                   }}
                 >
-                  <div className="relative h-[180px] xl:h-[340px] grid place-items-center mb-3 overflow-hidden">
+                  <div className="relative h-[20vh] 2xl:h-[290px] grid place-items-center mb-3 overflow-hidden">
                     <Link
                       href={`/product_detail?id=${product.id}&v_id=${first.id}`}
                       className="block w-full h-full relative"
@@ -408,7 +412,7 @@ export default function FeaturedProducts() {
                     </Link>
                   </div>
 
-                  <h3 className="font-['Barlow_Condensed'] font-semibold text-[27px] leading-[1.05] text-[#CA5D27] uppercase mb-2.5">
+                  <h3 className="font-['Barlow_Condensed'] font-semibold text-[27px] leading-[1.05] text-[#CA5D27] uppercase mb-2.5 line-clamp-2 min-h-[2.1em]">
                     <Link href={`/product_detail?id=${product.id}`}>
                       {product.name}
                     </Link>
@@ -489,10 +493,9 @@ export default function FeaturedProducts() {
         </div>
       </div>
       <div
-        className="absolute bottom-4 md:bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
+        className={`hidden 2xl:block absolute bottom-4 md:bottom-16 left-1/2 -translate-x-1/2 xl:flex flex-col items-center gap-2 z-10 `}
         onClick={() => {
           if (sectionRef.current) {
-      
             let el: HTMLElement | null = sectionRef.current;
             let nextSection: Element | null = null;
             while (el && el !== document.body) {
@@ -516,12 +519,12 @@ export default function FeaturedProducts() {
           }
         }}
       >
-        <span className="text-xs text-gray-500 tracking-widest uppercase">
+        <span className="hidden 2xl:block text-xs text-gray-500 tracking-widest uppercase">
           Scroll to Explore
         </span>
-        <div className="relative">
-          <div className="absolute inset-0 rounded-full border-2 border-yellow-400/30 animate-ping" />
-          <div className="relative p-2 rounded-full border border-gray-200 bg-white/50 backdrop-blur-sm ">
+        <div className=" hidden   relative 2xl:flex justify-center">
+          <div className="absolute  w-10 inset-0 rounded-full border-2 border-yellow-400/30 animate-ping" />
+          <div className="relative w-10 p-2 rounded-full border border-gray-200 bg-white/50 backdrop-blur-sm ">
             <svg
               className="w-5 h-5 text-[#CA5D27]"
               fill="none"

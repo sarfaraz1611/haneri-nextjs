@@ -23,7 +23,7 @@ export default function DiscoverHero({
         }`}
       >
         <div className={`space-y-4 ${centered ? "text-center" : ""}`}>
-          <h2 className=" flex justify-center  text-[30px] lg:text-[36px] text-[#315859] font-bold font-['Barlow_Condensed'] uppercase tracking-wider animate-float leading-none">
+          <h2 className=" flex justify-center  text-[30px] lg:text-[36px] text-[#315859] font-bold font-['Barlow_Condensed'] uppercase tracking-wider md:animate-float leading-none">
             Discover
           </h2>
           <div
@@ -31,12 +31,12 @@ export default function DiscoverHero({
               centered ? "justify-center" : "justify-center "
             }`}
           >
-            <div className="h-[2px] w-16 bg-[#CA5D27] animate-expand-right"></div>
-            <p className="text-[#CA5D27] text-[16px] md:text-[20px] lg:text-[24px] font-medium animate-pulse-slow uppercase">
-              {/* <span className="md:hidden">Trending</span> */}
+            <div className="h-[2px] w-4 md:w-16 bg-[#CA5D27] animate-expand-right"></div>
+            <p className="text-[#CA5D27]  text-[14px] sm:text-[16px] md:text-[20px] lg:text-[24px] font-medium animate-pulse-slow uppercase">
+              <span className="md:hidden">Trending</span>
               <span className="hidden md:inline">Trending Now</span>
             </p>
-            <div className="h-[2px] w-16 bg-[#CA5D27] animate-expand-left"></div>
+            <div className="h-[2px] w-4 md:w-16 bg-[#CA5D27] animate-expand-left"></div>
           </div>
           {dotted && (
             <div
