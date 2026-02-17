@@ -52,7 +52,7 @@ export default function BlogsSection() {
                   />
                 </div>
                 <div className="p-3.5  grid gap-2 pb-4">
-                  <h3 className="font-barlow font-medium text-[clamp(18px,2.2vw,22px)] leading-[1.15] text-[#2a5b57] m-0 text-left line-clamp-2">
+                  <h3 className="font-barlow font-medium text-[clamp(18px,2.2vw,22px)]  text-[#2a5b57] m-0 text-left line-clamp-2">
                     {post.title}
                   </h3>
                   <p className="m-0 text-[#4a505e] text-sm leading-[1.55] font-normal line-clamp-5 p-1.5">
