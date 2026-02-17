@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface FAQ {
@@ -193,28 +193,13 @@ const faqs: FAQ[] = [
 ];
 
 const categories = [
-  "All",
   ...Array.from(new Set(faqs.map((faq) => faq.category))),
 ];
 
 export default function FAQs() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [activeCategory, setActiveCategory] = useState("About Haneri");
   const [searchQuery, setSearchQuery] = useState("");
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const searchInputRef = useRef<HTMLInputElement>(null);
-  const modalRef = useRef<HTMLDivElement>(null);
-  const categoryScrollRef = useRef<HTMLDivElement>(null);
-
-  const scrollCategories = (direction: "left" | "right") => {
-    if (categoryScrollRef.current) {
-      const scrollAmount = 200;
-      categoryScrollRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
-    }
-  };
 
   const searchResults = searchQuery.trim()
     ? faqs.filter(
@@ -224,29 +209,6 @@ export default function FAQs() {
           faq.category.toLowerCase().includes(searchQuery.toLowerCase()),
       )
     : [];
-
-  useEffect(() => {
-    if (isSearchOpen) {
-      document.body.style.overflow = "hidden";
-      setTimeout(() => searchInputRef.current?.focus(), 100);
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isSearchOpen]);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setIsSearchOpen(false);
-        setSearchQuery("");
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -260,62 +222,104 @@ export default function FAQs() {
         );
 
   return (
-    <div className="bg-white mt-20 sm:mt-4">
-      <div className="mx-auto max-w-[90%] px-6 py-8 sm:py-24 lg:px-8 lg:py-24">
-        <div className="mx-auto">
-          <div className="flex items-center justify-between gap-4">
-            <motion.h2
-              className="text-lg xl:text-4xl font-semibold tracking-tight text-primary sm:text-5xl"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-            >
-              Frequently asked questions
-            </motion.h2>
-            <button
-              onClick={() => setIsSearchOpen(true)}
-              className="flex items-center gap-2 rounded-full border border-neutral-300 px-4 py-2 text-sm text-neutral-500 transition-all duration-300 hover:border-primary hover:text-primary"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-                stroke="currentColor"
-                className="size-4"
-              >
-                <path
+    <div className="bg-white mt-20 min-h-screen xl:min-h-[50%]">
+      {/* Hero Section */}
+      <section
+        className="relative bg-cover bg-center bg-no-repeat py-24 sm:py-32 lg:py-40"
+        style={{ backgroundImage: "url('/images/faq_top_img.png')" }}
+      >
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center text-white">
+          <h2 className="text-2xl font-semibold leading-tight sm:text-4xl lg:text-5xl">
+            Everything you wanted to know
+            <br />
+            about the art of air
+          </h2>
+          <p className="mt-4 text-sm sm:text-base text-white/80">
+            From technology to trust, innovation to installation — explore how
+            Haneri redefines comfort, craftsmanship, and performance.
+          </p>
+
+          <div className="relative mx-auto mt-8 max-w-lg">
+            <div className="flex items-center overflow-hidden rounded-full bg-white shadow-lg">
+              <input
+                type="text"
+                placeholder="Type your question here..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="flex-1 bg-transparent px-5 py-3 text-sm text-gray-900 placeholder:text-gray-400 outline-none"
+              />
+              <div className="flex items-center justify-center px-4 py-3 text-gray-400">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-                />
-              </svg>
-              <span className="hidden sm:inline">Search</span>
-            </button>
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+              </div>
+            </div>
+
+            {searchQuery.trim() && (
+              <div
+                className="absolute left-0 right-0 top-full mt-2 max-h-80 overflow-y-auto rounded-2xl bg-white shadow-2xl"
+                style={{ scrollbarWidth: "thin" }}
+              >
+                {searchResults.length === 0 ? (
+                  <div className="px-5 py-6 text-center text-sm text-gray-400">
+                    No results found for &ldquo;{searchQuery}&rdquo;
+                  </div>
+                ) : (
+                  <div className="divide-y divide-gray-100">
+                    {searchResults.map((faq, index) => (
+                      <div
+                        key={index}
+                        className="px-5 py-4 transition-colors hover:bg-gray-50 cursor-pointer"
+                        onClick={() => {
+                          setActiveCategory(faq.category);
+                          setSearchQuery("");
+                          const faqIndex = faqs.indexOf(faq);
+                          setOpenIndex(faqIndex);
+                        }}
+                      >
+                        <span className="mb-1 inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600">
+                          {faq.category}
+                        </span>
+                        <h4 className="text-sm font-semibold text-gray-900">
+                          {faq.question}
+                        </h4>
+                        <p className="mt-1 text-sm text-gray-500 line-clamp-2">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                <div className="border-t border-gray-200 px-5 py-2 text-center text-xs text-gray-400">
+                  {searchResults.length} result
+                  {searchResults.length !== 1 && "s"} found
+                </div>
+              </div>
+            )}
           </div>
+        </div>
+      </section>
+      <div className="mx-auto max-w-[90%] px-6 py-8 sm:py-16 lg:px-8 lg:py-10 min-h-[70vh] ">
+        <div className="mx-auto">
+          <h2 className="journal-title heading1">
+            Categories you would love to discover
+          </h2>
 
           {/* Scrollable Category Section */}
-          <div className="mt-8 flex items-center gap-2">
-            {/* <button
-              onClick={() => scrollCategories("left")}
-              className="shrink-0 flex items-center justify-center size-8 rounded-full border border-neutral-300 text-neutral-500 transition-all duration-300 hover:border-primary hover:text-primary"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-                stroke="currentColor"
-                className="size-4"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-              </svg>
-            </button> */}
-
-            <div
-              className=""
-            >
+          <div className="mt-6 flex items-center gap-2">
+            <div className="">
               <div className="flex gap-3 pb-2  flex-wrap">
                 {categories.map((category) => (
                   <button
@@ -335,7 +339,7 @@ export default function FAQs() {
                     }}
                     className={`whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 ${
                       activeCategory === category
-                        ? "bg-gray-500 text-white shadow-md"
+                        ? "bg-[#00473E] text-white shadow-md"
                         : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
                     }`}
                   >
@@ -440,125 +444,6 @@ export default function FAQs() {
           </dl>
         </div>
       </div>
-
-      {/* Search Modal */}
-      <AnimatePresence>
-        {isSearchOpen && (
-          <motion.div
-            className="fixed inset-0 z-50 flex items-start justify-center bg-black/50 backdrop-blur-sm pt-20 px-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            onClick={(e) => {
-              if (e.target === e.currentTarget) {
-                setIsSearchOpen(false);
-                setSearchQuery("");
-              }
-            }}
-          >
-            <motion.div
-              ref={modalRef}
-              className="w-full max-w-2xl rounded-2xl bg-white shadow-2xl overflow-hidden"
-              initial={{ opacity: 0, y: -20, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -20, scale: 0.95 }}
-              transition={{ duration: 0.2 }}
-            >
-              {/* Search Input */}
-              <div className="flex items-center gap-3 border-b border-gray-200 px-5 py-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={2}
-                  stroke="currentColor"
-                  className="size-5 shrink-0 text-gray-400"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-                  />
-                </svg>
-                <input
-                  ref={searchInputRef}
-                  type="text"
-                  placeholder="Search FAQs..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="flex-1 bg-transparent text-base text-gray-900 placeholder:text-gray-400 outline-none"
-                />
-                <button
-                  onClick={() => {
-                    setIsSearchOpen(false);
-                    setSearchQuery("");
-                  }}
-                  className="rounded-lg p-1 text-gray-400 transition-colors hover:text-gray-900"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2}
-                    stroke="currentColor"
-                    className="size-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6 18 18 6M6 6l12 12"
-                    />
-                  </svg>
-                </button>
-              </div>
-
-              {/* Search Results */}
-              <div
-                className="max-h-[60vh] overflow-y-auto"
-                style={{ scrollbarWidth: "thin" }}
-              >
-                {searchQuery.trim() === "" ? (
-                  <div className="px-5 py-10 text-center text-gray-400">
-                    Type to search across all FAQs
-                  </div>
-                ) : searchResults.length === 0 ? (
-                  <div className="px-5 py-10 text-center text-gray-400">
-                    No results found for &ldquo;{searchQuery}&rdquo;
-                  </div>
-                ) : (
-                  <div className="divide-y divide-gray-100">
-                    {searchResults.map((faq, index) => (
-                      <div
-                        key={index}
-                        className="px-5 py-4 transition-colors hover:bg-gray-50"
-                      >
-                        <span className="mb-1 inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600">
-                          {faq.category}
-                        </span>
-                        <h4 className="text-sm font-semibold text-gray-900">
-                          {faq.question}
-                        </h4>
-                        <p className="mt-1 text-sm text-gray-500 line-clamp-2">
-                          {faq.answer}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* Footer */}
-              {searchResults.length > 0 && (
-                <div className="border-t border-gray-200 px-5 py-3 text-center text-xs text-gray-400">
-                  {searchResults.length} result
-                  {searchResults.length !== 1 && "s"} found
-                </div>
-              )}
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }
