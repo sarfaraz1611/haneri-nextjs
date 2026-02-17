@@ -397,11 +397,11 @@ export default function FAQs() {
                         stroke="currentColor"
                         strokeWidth="1.5"
                         aria-hidden="true"
-                        className={`size-6 transition-transform duration-300 ${
+                        className={`size-6 text-[#00473E] transition-transform duration-300 ${
                           openIndex === index ? "hidden" : "block"
                         }`}
                       >
-                        <path
+                      <path
                           d="M12 6v12m6-6H6"
                           strokeLinecap="round"
                           strokeLinejoin="round"
