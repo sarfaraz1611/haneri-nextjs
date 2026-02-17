@@ -326,7 +326,7 @@ export default function FeaturedProducts() {
     <section
       ref={sectionRef}
       // Increased min-height to provide vertical scroll space for the animation to run
-      className=" py-6  pt-0 relative"
+      className=" pt-6  relative"
       aria-label="Featured Products"
     >
       {/* Interactive animated header - stays visible */}
