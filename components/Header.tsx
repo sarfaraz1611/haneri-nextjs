@@ -197,7 +197,7 @@ export default function Header() {
               </Link>
 
               <nav className="flex max-lg:hidden">
-                <ul className="list-none flex gap-[30px] m-0 p-0 pl-10 ">
+                <ul className="list-none flex gap-[30px] lg:gap-0 m-0 p-0 pl-10 ">
                   {/* Categories Menu */}
                   <li className="relative group">
                     <Link
