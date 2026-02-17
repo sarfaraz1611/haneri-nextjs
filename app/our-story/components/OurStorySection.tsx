@@ -30,7 +30,6 @@ const SECTION_IDS: Record<string, number> = {
 };
 
 export default function OurStorySection({
-  onShowFooter,
   onHideFooter,
 }: OurStorySectionProps) {
   // -- Refs --
@@ -329,22 +328,28 @@ export default function OurStorySection({
                 }}
                 className="inner absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center"
               >
-                <div className="container w-full px-4 py-8 text-center max-w-6xl">
-                  <h1 className="text-[20px] sm:text-[42px] text-[#00473E] leading-none font-medium mb-5">
-                    Designing Tomorrow's Comfort
-                  </h1>
-                  <p className="text-base sm:text-[14px] text-black leading-[1.6] sm:leading-[1.75] max-w-[450px] mx-auto mb-8 font-['Open_Sans']">
-                    Thoughtful innovation, enduring quality, and timeless design
-                    - crafted to elevate everyday living.
-                  </p>
-                  <div className="video-wrapper relative w-full mx-auto pt-[40.25%] overflow-hidden rounded-[5px]">
+                <div className="container w-full px-4 pt-10 max-w-7xl">
+                  <div className="video-wrapper relative w-full mx-auto pt-[56.25%] overflow-hidden rounded-[5px]">
                     <iframe
                       src="https://player.vimeo.com/video/1131575735?autoplay=1&muted=1&loop=1&autopause=0&background=1&playsinline=1&title=0&byline=0&portrait=0&badge=0&controls=0&dnt=1"
                       frameBorder="0"
                       allow="autoplay; fullscreen; picture-in-picture"
                       allowFullScreen
-                      className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none"
+                      className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none "
                     ></iframe>
+                    <div className="absolute top-[20vh] left-8 text-left bg-black/10 p-4 rounded-md">
+                      <h1 className="text-[20px] sm:text-[42px] text-white leading-14 font-medium mb-5">
+                        Designing Tomorrow's
+                        <br />{" "}
+                        <span className="text-[20px] sm:text-[42px] text-[#E07339] font-bold">
+                          Comfort
+                        </span>
+                      </h1>
+                      <p className="text-base sm:text-[14px] text-white leading-[1.6] sm:leading-[1.75] max-w-[450px] mb-8 font-['Open_Sans']">
+                        Thoughtful innovation, enduring quality, and timeless
+                        design - crafted to elevate everyday living.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -373,10 +378,15 @@ export default function OurStorySection({
               >
                 <div className="flex items-center gap-8 flex-col lg:flex-row max-w-7xl w-full p-8">
                   <div className="w-full lg:w-1/2">
-                    <h2 className="text-[20px] sm:text-[42px] text-[#00473E] leading-none font-medium mb-4">
-                      The Heart of Who We Are
+                    <h2 className="text-[20px] sm:text-[42px] lg:text-[52px] font-['Barlow_Condensed']  text-[#00473E] font-medium mb-4 leading-12">
+                      The Heart of
+                      <br />
+                      <span className=" font-bold text-[#CA5D27]  font-['Open_Sans'] lg:text-[42px]">Who We Are</span> <span className="h-2 w-2 text-[#CA5D27]">_______________</span>
                     </h2>
-                    <p className="text-[15px] text-[#CA5D27] font-['Barlow_Condensed'] mb-5">
+
+                    {/* <div className=" flex  gap-5"> */}
+
+                    <p className="text-[15px] text-black/70 font-['Open_Sans'] mb-5 font-bold">
                       Haneri is the culmination of over 75 years of collective
                       expertise in design, engineering, and manufacturing.
                     </p>
@@ -388,20 +398,21 @@ export default function OurStorySection({
                       purposeful design — created to enhance the way people
                       experience their spaces.
                     </p>
+                    {/* </div> */}
                   </div>
-                  <div className="flex flex-col md:flex-row gap-4 lg:w-1/2 h-[400px] lg:h-[570px]">
-                    <div className="w-full h-full rounded-[10px] overflow-hidden">
+                  <div className="flex flex-row gap-4 lg:w-1/2 items-center h-[400px] lg:h-[570px]">
+                    <div className="w-1/2 -translate-y-4 rounded-[10px] overflow-hidden">
                       <img
                         src="images/The_heart_image_1.png"
                         alt="img"
-                        className="w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-[1.03]"
+                        className="w-full h-[300px] object-cover transition-transform duration-300 ease-in-out hover:scale-[1.03]"
                       />
                     </div>
-                    <div className="w-full h-full rounded-[10px] overflow-hidden">
+                    <div className="w-1/2 translate-y-8 rounded-[10px] overflow-hidden">
                       <img
                         src="images/The_heart_image_2.png"
                         alt="img"
-                        className="w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-[1.03]"
+                        className="w-full h-[300px] object-cover transition-transform duration-300 ease-in-out hover:scale-[1.03]"
                       />
                     </div>
                   </div>
@@ -458,7 +469,7 @@ export default function OurStorySection({
           </section>
 
           {/* Scroll Indicator */}
-          <div className="fixed bottom-14 left-1/2 transform -translate-x-1/2 z-40 text-center text-[#00473E] animate-bounce">
+          {/* <div className="fixed bottom-14 left-1/2 transform -translate-x-1/2 z-40 text-center text-[#00473E] animate-bounce">
             <div className="text-sm mb-2 opacity-70">Scroll to explore</div>
             <svg
               className="w-6 h-6 mx-auto"
@@ -473,7 +484,7 @@ export default function OurStorySection({
                 d="M19 14l-7 7m0 0l-7-7m7 7V3"
               />
             </svg>
-          </div>
+          </div> */}
         </div>
       )}
 
@@ -587,11 +598,7 @@ export default function OurStorySection({
       <div
         ref={normalContainerRef}
         className={
-          isMobile
-            ? "relative w-full"
-            : gsapDone
-              ? "relative w-full"
-              : "hidden"
+          isMobile ? "relative w-full" : gsapDone ? "relative w-full" : "hidden"
         }
         style={!isMobile && gsapDone ? { paddingTop: "0px" } : undefined}
       >
@@ -706,8 +713,8 @@ export default function OurStorySection({
                     craft solutions that are as aesthetically pleasing as they
                     are functional. By staying ahead of design trends and
                     technological advancements, we ensure that each product is
-                    thoughtfully crafted to meet the evolving needs of the modern
-                    consumer.
+                    thoughtfully crafted to meet the evolving needs of the
+                    modern consumer.
                   </p>
                 </div>
                 <div className="text-center md:text-left">
@@ -738,17 +745,17 @@ export default function OurStorySection({
                     Exceptional Customer Experience
                   </h4>
                   <p className="text-[13px] font-['Open_Sans'] leading-[1.75] text-black">
-                    We are dedicated to supporting our customers throughout their
-                    journey, from purchase to daily use and beyond. Through
-                    responsive customer service, educational resources, and
-                    aftercare support, we will ensure our customers feel valued
-                    and equipped to enjoy our solutions' benefits fully.
+                    We are dedicated to supporting our customers throughout
+                    their journey, from purchase to daily use and beyond.
+                    Through responsive customer service, educational resources,
+                    and aftercare support, we will ensure our customers feel
+                    valued and equipped to enjoy our solutions' benefits fully.
                   </p>
                 </div>
               </div>
               <p className="text-md text-center md:text-left sm:text-[14px] font-['Open_Sans'] leading-[1.8] sm:leading-[1.75] text-black mt-2">
-                Focusing on these pillars will transform aspirational living into
-                a reality for every space, continuously elevating everyday
+                Focusing on these pillars will transform aspirational living
+                into a reality for every space, continuously elevating everyday
                 experiences.
               </p>
             </div>
@@ -802,8 +809,9 @@ export default function OurStorySection({
                     Accessibility and Inclusivity
                   </h4>
                   <p className="text-[13px] font-['Open_Sans'] leading-[1.75] text-black">
-                    We believe luxury should be attainable for everyone, creating
-                    products that suit diverse lifestyles, needs, and budgets.
+                    We believe luxury should be attainable for everyone,
+                    creating products that suit diverse lifestyles, needs, and
+                    budgets.
                   </p>
                 </div>
                 <div className="text-center md:text-left">
@@ -858,7 +866,7 @@ export default function OurStorySection({
           className="relative w-full  flex items-center justify-center bg-white/80 backdrop-blur-sm py-8"
         >
           {isMobile ? (
-            <div className="w-full max-w-[90%] mx-auto overflow-hidden rounded-lg shadow-lg bg-[#00473E]">
+            <div className="w-full max-w-[90%] mx-auto overflow-hidden rounded-lg shadow-lg bg-[#4F5D44]">
               <div className="relative w-full h-[200px]">
                 <img
                   src="images/about_top_last.png"
@@ -875,8 +883,8 @@ export default function OurStorySection({
                   design, precision, and purpose.
                 </p>
                 <p className="text-white mb-4 text-[14px] leading-[1.75]">
-                  We promise innovation that lasts, experiences that inspire, and
-                  quality that defines every space you live in.
+                  We promise innovation that lasts, experiences that inspire,
+                  and quality that defines every space you live in.
                 </p>
                 <a
                   href="shop"

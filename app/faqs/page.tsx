@@ -197,7 +197,7 @@ const categories = [
 ];
 
 export default function FAQs() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
   const [activeCategory, setActiveCategory] = useState("About Haneri");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -335,7 +335,7 @@ export default function FAQs() {
                     }}
                     onClick={() => {
                       setActiveCategory(category);
-                      setOpenIndex(null);
+                      setOpenIndex(0);
                     }}
                     className={`whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 ${
                       activeCategory === category
@@ -397,11 +397,11 @@ export default function FAQs() {
                         stroke="currentColor"
                         strokeWidth="1.5"
                         aria-hidden="true"
-                        className={`size-6 transition-transform duration-300 ${
+                        className={`size-6 text-[#00473E] transition-transform duration-300 ${
                           openIndex === index ? "hidden" : "block"
                         }`}
                       >
-                        <path
+                      <path
                           d="M12 6v12m6-6H6"
                           strokeLinecap="round"
                           strokeLinejoin="round"
