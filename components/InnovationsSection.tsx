@@ -34,6 +34,13 @@ export default function InnovationsSection() {
   const cardsRef = useRef<HTMLIFrameElement[]>([]);
   const [activeId, setActiveId] = useState<number | null>(null);
 
+  // Auto-dismiss active state after 3 seconds
+  useEffect(() => {
+    if (activeId === null) return;
+    const timer = setTimeout(() => setActiveId(null), 1000);
+    return () => clearTimeout(timer);
+  }, [activeId]);
+
   // Intersection Observer for video visibility
   useEffect(() => {
     // Pause videos that are off-screen for performance
