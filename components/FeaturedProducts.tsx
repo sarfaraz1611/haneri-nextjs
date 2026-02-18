@@ -332,7 +332,7 @@ export default function FeaturedProducts() {
       {/* Interactive animated header - stays visible */}
       <DiscoverHero
         centered={false}
-        className=" absolute h-30  top-0 left-0 w-full pointer-events-none overflow-hidden featured-hero z-20"
+        className=" absolute  h-30 2xl:h-auto  top-0 left-0 w-full pointer-events-none overflow-hidden featured-hero "
       />
 
       <div className="w-full sticky top-0 flex flex-col justify-center  md:justify-end lg:justify-center items-center z-10 min-h-screen">
@@ -519,11 +519,11 @@ export default function FeaturedProducts() {
           }
         }}
       >
-        <span className="hidden 2xl:block text-xs text-gray-500 tracking-widest uppercase">
+        {/* <span className="hidden 3xl:block text-xs text-gray-500 tracking-widest uppercase">
           Scroll to Explore
         </span>
-        <div className=" hidden   relative 2xl:flex justify-center">
-          <div className="absolute  w-10 inset-0 rounded-full border-2 border-yellow-400/30 animate-ping" />
+        <div className=" hidden   relative 3xl:flex justify-center">
+          <div className="absolute inset-0 rounded-full border-2 border-yellow-400/30 animate-ping" />
           <div className="relative w-10 p-2 rounded-full border border-gray-200 bg-white/50 backdrop-blur-sm ">
             <svg
               className="w-5 h-5 text-[#CA5D27]"
@@ -539,7 +539,7 @@ export default function FeaturedProducts() {
               />
             </svg>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
