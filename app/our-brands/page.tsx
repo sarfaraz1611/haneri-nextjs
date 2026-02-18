@@ -22,8 +22,8 @@ export const brandSections = [
   },
   {
     id: "professional",
-    title: "Haneri Professional",
-    description: `solutions are purpose-built to address the diverse and large-scale needs of industries and businesses. Engineered with precision, these products are designed to deliver exceptional performance and unwavering reliability, even in the most challenging environments. Crafted to endure rigorous demands, they combine robust durability with cutting-edge technology. By ensuring seamless functionality and consistent results, "Haneri Professional" empowers enterprises to enhance productivity, optimize operations, and achieve sustainable success with confidence.`,
+    title: "Haneri Professionals",
+    description: `solutions are purpose-built to address the diverse and large-scale needs of industries and businesses. Engineered with precision, these products are designed to deliver exceptional performance and unwavering reliability, even in the most challenging environments. Crafted to endure rigorous demands, they combine robust durability with cutting-edge technology. By ensuring seamless functionality and consistent results, "Haneri Professionals" empowers enterprises to enhance productivity, optimize operations, and achieve sustainable success with confidence.`,
     image: "/images/section/Haneri_Professional.jpg",
     reverse: false,
   },

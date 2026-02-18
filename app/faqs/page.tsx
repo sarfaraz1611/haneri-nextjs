@@ -31,10 +31,10 @@ const faqs: FAQ[] = [
   },
   // Personalisation & Design
   {
-    question: "What is Haneri BeSpoke™?",
+    question: "What is FanCraft™?",
     category: "Personalization & Design",
     answer:
-      "Haneri BeSpoke™ lets you personalise select fan models with your choice of colours, patterns, finishes—and on select models, even materials, built in smaller lots with a nominal premium.",
+      "FanCraft™ allows you to personalize select Haneri fan models with your choice of colours, finishes, and materials. Crafted in smaller batches, FanCraft™ bridges individuality with performance-driven design.",
   },
   {
     question: "What is Air Curve Design™?",
@@ -44,11 +44,10 @@ const faqs: FAQ[] = [
   },
   // Core Technologies
   {
-    question: "What is Silent H.A.S.S.™ Technology?",
+    question: "What is HASS Technology™",
     category: "Core Technologies",
     answer:
-      "Silent H.A.S.S.™ integrates two Haneri pillars—Air Curve Design™ blades + TurboSilent BLDC™ motor, delivering exceptional air at reduced RPM with quiet operation.",
-  },
+      "HASS Technology™ (High Air Slow Speed) integrates two Haneri pillars - Air Curve Design™ blades and the TurboSilent BLDC™ motor - delivering exceptional airflow at reduced RPM with near-silent performance"},
   {
     question: "What is TurboSilent BLDC™?",
     category: "Core Technologies",
@@ -57,10 +56,10 @@ const faqs: FAQ[] = [
   },
   {
     question:
-      "What is More Air Slow Speed Technology™ (High Air at Low Speed)?",
+      "What is High Air Slow Speed Technology™ (High Air at Low Speed)?",
     category: "Core Technologies",
     answer:
-      "This innovation delivers excellent airflow at lower speeds, enabling comfort while saving energy.",
+      "HASS Technology™ (High Air Slow Speed) delivers exceptional airflow at lower RPM, enabling superior comfort while reducing energy consumption.",
   },
   {
     question: "What is LumiAmbience™(Mood Lighting)?",
@@ -91,7 +90,7 @@ const faqs: FAQ[] = [
     question: "Do Haneri fans run quietly?",
     category: "Products & Performance",
     answer:
-      "Yes, featuring TurboSilent BLDC™ motors and Silent H.A.S.S.™ integration for low sound levels.",
+      "Yes, featuring TurboSilent BLDC™ motors and HASS.™ integration for low sound levels.",
   },
   {
     question: "Do Haneri fans have remote control?",

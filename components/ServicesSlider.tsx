@@ -20,7 +20,7 @@ const slides = [
   },
   {
     id: 3,
-    heading: "H.A.S.S®",
+    heading: "HASS®",
     bgColor: "#00473E", // brand
     slideImage: "/images/hass_1.png",
     overlayImage: "/images/hass_2.png",
@@ -34,7 +34,7 @@ const slides = [
   },
   {
     id: 5,
-    heading: "S.C.A.N",
+    heading: "SCAN",
     bgColor: "#315859", // brand-dark
     slideImage: "/images/scan_1.png",
     overlayImage: "/images/scan_3.png",

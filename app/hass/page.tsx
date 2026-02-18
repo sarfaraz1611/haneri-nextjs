@@ -18,7 +18,7 @@ export default function SilentHASS() {
             >
               <Image
                 src="/images/hass_1.png"
-                alt="Silent H.A.S.S Technology"
+                alt="HASS Technology"
                 width={800}
                 height={533}
                 className="aspect-[3/2] w-full rounded-lg bg-gray-100 object-cover lg:order-1"
@@ -34,7 +34,7 @@ export default function SilentHASS() {
             >
               <h2 className="text-4xl tracking-tight text-[#315858] xl:max-w-3/4">
                 <span className="text-[#bb6125] font-semibold">
-                  Introducing Silent H.A.S.S Technology:
+                  Introducing HASS Technology:{" "}
                 </span>
                 {/* <br /> */}
                 High Air, Slow Speed
@@ -45,11 +45,11 @@ export default function SilentHASS() {
               >
                 At Haneri, we believe that true innovation lies in challenging
                 common misconceptions and delivering solutions that redefine
-                industry standards. Our Silent H.A.S.S Technology (More Air,
+                industry standards. Our HASS Technology (More Air,
                 Slow Speed) embodies this philosophy, and debunks the myth that
                 you don’t need high speed (RPM) to achieve superior air
                 delivery. Leveraging our advanced Air Curve Design and
-                TurboSilent BLDC Motor Technology, Silent H.A.S.S delivers
+                TurboSilent BLDC Motor Technology, HASS delivers
                 unparalleled performance, offering powerful airflow with
                 near-silent operation at lower rotational speeds.
               </p>
@@ -66,13 +66,13 @@ export default function SilentHASS() {
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
               <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
-                What is Silent H.A.S.S Technology?
+                What is HASS Technology?{" "}
               </h2>
               <p
                 className="text-[16px] mt-4 font-normal text-gray-500 "
                 style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
-                Silent H.A.S.S Technology is a revolutionary integration of
+               HASS Technology is a revolutionary integration of
                 Haneri’s two engineering marvels—Air Curve Design and
                 TurboSilent BLDC Motor Technology. By combining aerodynamically
                 optimized blades with high-torque, energy-efficient motors, this
@@ -91,7 +91,7 @@ export default function SilentHASS() {
             >
               <Image
                 src="/images/hass_2.png"
-                alt="Silent H.A.S.S Technology Features"
+                alt="HASS Technology Features"
                 width={800}
                 height={533}
                 className="aspect-[3/2] w-full rounded-lg bg-gray-100 object-cover"
@@ -109,7 +109,7 @@ export default function SilentHASS() {
             >
               <Image
                 src="/images/hass_3.png"
-                alt="Key Features of Silent H.A.S.S"
+                alt="Key Features of HASS"
                 width={800}
                 height={533}
                 className="aspect-[3/2] w-full rounded-lg bg-gray-100 object-cover lg:order-1"
@@ -124,7 +124,7 @@ export default function SilentHASS() {
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
               <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
-                Key Features of Silent H.A.S.S Technology
+                Key Features of HASS Technology
               </h2>
 
               <motion.ul
@@ -252,7 +252,7 @@ export default function SilentHASS() {
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      Silent M.A.S.S Technology is a Trademark Registered Pillar
+                     HASS Technology is a Trademark Registered Pillar
                       of Haneri, integrating proprietary engineering solutions
                       to deliver performance and efficiency.
                     </span>
@@ -271,7 +271,7 @@ export default function SilentHASS() {
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
               <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
-                The Science Behind H.A.S.S Technology
+                The Science Behind HASS Technology
               </h2>
               <motion.ul
                 className="mt-4 space-y-3"
@@ -373,7 +373,7 @@ export default function SilentHASS() {
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
                       Combined with energy-efficient motor controls and low-drag
-                      blade designs, Silent M.A.S.S Technology reduces power
+                      blade designs, Silent HASS Technology reduces power
                       consumption significantly, contributing to lower
                       operational costs and a smaller carbon footprint.
                     </span>
@@ -392,7 +392,7 @@ export default function SilentHASS() {
                     <span className="text-[#315858] font-semibold">
                       Trademarked Technology:{" "}
                     </span>{" "}
-                    Silent H.A.S.S is a proprietary Haneri pillar for
+                    Silent HASS is a proprietary Haneri pillar for
                     performance + efficiency.
                   </span>
                 </motion.li> */}
@@ -402,7 +402,7 @@ export default function SilentHASS() {
           {/* Benefits For Customers Section */}
           <div className="mt-20 flex flex-col items-start">
             <h2 className="text-4xl  mb-10 font-semibold  tracking-tight text-[#315858]">
-              Benefits For Customers
+              Benefits for Customers
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2  gap-8 w-full">
               <motion.div
@@ -496,12 +496,10 @@ export default function SilentHASS() {
                 />
                 <div>
                   <h3 className="text-xl font-semibold text-[#CA5C27]">
-                    Quiet Operation
+                    Optimized Airflow
                   </h3>
                   <p className="mt-2 text-black">
-                    Reduced turbulence and noise make Silent M.A.S.S ideal for
-                    bedrooms, offices, and libraries where silence is a
-                    priority.
+                  Air Curve technology refines blade aerodynamics to deliver smoother, wider air circulation with improved efficiency - ensuring consistent, balanced comfort across every space.
                   </p>
                 </div>
               </motion.div>

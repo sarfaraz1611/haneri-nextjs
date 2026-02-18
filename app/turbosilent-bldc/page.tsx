@@ -122,7 +122,7 @@ export default function TurbosilentBLDC() {
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
               <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
-                The Science Behind Turbosilent BLDC Technology
+                The Science Behind TurboSilent BLDC Technology
               </h2>
 
               <motion.ul
@@ -421,7 +421,7 @@ export default function TurbosilentBLDC() {
           {/* Benefits For Customers Section */}
           <div className="mt-20 flex flex-col items-start">
             <h2 className="text-4xl  mb-10 font-semibold  tracking-tight text-[#315858]">
-              Benefits For Customers
+              Benefits for Customers
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2  gap-8 w-full">
               <motion.div
@@ -518,7 +518,7 @@ export default function TurbosilentBLDC() {
                     Quiet Operation
                   </h3>
                   <p className="mt-2 text-black">
-                    Reduced turbulence and noise make Silent M.A.S.S ideal for
+                    Reduced turbulence and noise make Silent HASS ideal for
                     bedrooms, offices, and libraries where silence is a
                     priority.
                   </p>

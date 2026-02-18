@@ -18,7 +18,7 @@ export default function SCANTechnology() {
             >
               <Image
                 src="/images/scan_1.png"
-                alt="S.C.A.N Technology"
+                alt="SCAN Technology"
                 width={800}
                 height={533}
                 className="aspect-[3/2] w-full rounded-lg bg-gray-100 object-cover lg:order-1"
@@ -37,13 +37,20 @@ export default function SCANTechnology() {
                   Discover the Future of Fan with:
                 </span>
                 <br />
-                <span className="text-[#bb6125]">S.C.A.N Technology</span>
+                <span className="text-[#bb6125]">SCAN Technology</span>
               </h2>
-       <p
+              <p
                 className="text-[16px] mt-4 font-normal text-gray-500 "
                 style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
-               At HANERI, we've combined innovation with convenience in our state-of-the-art S.C.A.N Technology (Smooth Control , Advance Navigation). This technology, designed for the modern home, redefines your interaction with ceiling fans, offering an optional LED light for added convenience. With its sleek aesthetics and advanced functionality, this futuristic remote controller ensures seamless control, an enhanced user experience, and cutting-edge technology, all at your fingertips.
+                At HANERI, we've combined innovation with convenience in our
+                state-of-the-art SCAN Technology (Smooth Control , Advanced
+                Navigation). This technology, designed for the modern home,
+                redefines your interaction with ceiling fans, offering an
+                optional LED light for added convenience. With its sleek
+                aesthetics and advanced functionality, this futuristic remote
+                controller ensures seamless control, an enhanced user
+                experience, and cutting-edge technology, all at your fingertips.
               </p>
             </motion.div>
           </div>
@@ -58,13 +65,18 @@ export default function SCANTechnology() {
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
               <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
-                What is S.C.A.N Technology?
+                What is SCAN Technology?
               </h2>
-       <p
+              <p
                 className="text-[16px] mt-4 font-normal text-gray-500 "
                 style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
-            S.C.A.N Technology is a next-generation radio frequency (RF) control system that offers unparalleled convenience and precision when operating ceiling fans. With advanced control features such as speed adjustment, lighting control, timer settings, and unique operating modes, S.C.A.N Technology brings futuristic functionality into the palm of your hand.
+                SCAN Technology is a next-generation radio frequency (RF)
+                control system that offers unparalleled convenience and
+                precision when operating ceiling fans. With advanced control
+                features such as speed adjustment, lighting control, timer
+                settings, and unique operating modes, SCAN Technology brings
+                futuristic functionality into the palm of your hand.
               </p>
             </motion.div>
 
@@ -77,7 +89,7 @@ export default function SCANTechnology() {
             >
               <Image
                 src="/images/scan_2.png"
-                alt="S.C.A.N Technology Features"
+                alt="SCAN Technology Features"
                 width={800}
                 height={533}
                 className="aspect-[3/2] w-full rounded-lg bg-gray-100 object-cover"
@@ -95,7 +107,7 @@ export default function SCANTechnology() {
             >
               <Image
                 src="/images/scan_3.png"
-                alt="Key Features of S.C.A.N Technology"
+                alt="Key Features of SCAN Technology"
                 width={800}
                 height={533}
                 className="aspect-[3/2] w-full rounded-lg bg-gray-100 object-cover lg:order-1"
@@ -110,7 +122,7 @@ export default function SCANTechnology() {
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
               <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
-                Key Features of Silent S.C.A.N Technology
+                Key Features of SCAN Technology
               </h2>
 
               <motion.ul
@@ -139,7 +151,7 @@ export default function SCANTechnology() {
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      The S.C.A.N remote controller, with its ergonomic design,
+                      The SCAN remote controller, with its ergonomic design,
                       intuitive button placement, and sleek, modern look, offers
                       a convenient and comfortable user experience.
                     </span>
@@ -216,10 +228,8 @@ export default function SCANTechnology() {
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
                       Control LED lights (where available) with the same remote,
-                      including switching on/off and changing the Colour Tones
-                      if the product is equipped with Haneri&apos;s LumiAmbience
-                      Technology. Synchronizes seamlessly with fans, offering
-                      complete control and convenience.
+                      including switching on/off and adjusting colour tones when
+                      paired with Haneri’s LumiAmbience Technology.
                     </span>
                   </span>
                 </motion.li>
@@ -240,11 +250,8 @@ export default function SCANTechnology() {
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      Control LED lights (where available) with the same remote,
-                      including switching on/off and changing the Colour Tones
-                      if the product is equipped with Haneri&apos;s LumiAmbience
-                      Technology. Synchronizes seamlessly with fans, offering
-                      complete control and convenience.
+                      Set customized timers for fan operation, enabling
+                      automated shut-off and improved energy efficiency.
                     </span>
                   </span>
                 </motion.li>
@@ -265,7 +272,7 @@ export default function SCANTechnology() {
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      The S.C.A.N remote controller operates on advanced RF
+                      The SCAN remote controller operates on advanced RF
                       technology, ensuring reliable control from greater
                       distances without requiring line-of-sight. This gives you
                       a secure and confident experience, and it eliminates
@@ -308,7 +315,7 @@ export default function SCANTechnology() {
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
               <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
-                The Science behind S.C.A.N Technology
+                The Science behind SCAN Technology
               </h2>
               <motion.ul
                 className="mt-4 space-y-3"
@@ -407,8 +414,8 @@ export default function SCANTechnology() {
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      Breeze Mode Powered by dynamic speed variation algorithms
-                      to mimic natural airflow.
+                      Breeze Mode, powered by dynamic speed variation
+                      algorithms, mimics natural airflow.
                       <br /> Turbo Mode Leverages direct motor communication to
                       maximize fan performance instantly.
                     </span>
@@ -420,7 +427,7 @@ export default function SCANTechnology() {
 
           <div className="mt-20 flex flex-col items-start">
             <h2 className="text-4xl  mb-10 font-semibold  tracking-tight text-[#315858]">
-              Benefits For Customers
+              Benefits for Customers
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2  gap-8 w-full">
               <motion.div
@@ -514,12 +521,10 @@ export default function SCANTechnology() {
                 />
                 <div>
                   <h3 className="text-xl font-semibold text-[#CA5C27]">
-                    Quiet Operation
+               Effortless Precision Control
                   </h3>
                   <p className="mt-2 text-black">
-                    Reduced turbulence and noise make Silent M.A.S.S ideal for
-                    bedrooms, offices, and libraries where silence is a
-                    priority.
+                   Seamless remote control functionality enhances convenience and precision for everyday use.
                   </p>
                 </div>
               </motion.div>

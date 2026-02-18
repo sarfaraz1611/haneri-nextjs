@@ -40,7 +40,7 @@ const pillarTechnologies = [
     href: "/turbosilent-bldc",
   },
   {
-    name: "H.A.S.S®",
+    name: "HASS®",
     href: "/hass",
   },
   {
@@ -48,7 +48,7 @@ const pillarTechnologies = [
     href: "/lumiambience",
   },
   {
-    name: "S.C.A.N",
+    name: "SCAN",
     href: "/scan",
   },
 ];

@@ -53,7 +53,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                     href="/hass"
                     className="text-neutral-300 text-sm transition-colors hover:text-brand"
                   >
-                    H.A.S.S
+                    HASS
                   </Link>
                 </li>
                 <li className="mb-3">
@@ -69,7 +69,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                     href="/scan"
                     className="text-neutral-300 text-sm transition-colors hover:text-brand"
                   >
-                    S.C.A.N
+                    SCAN
                   </Link>
                 </li>
               </ul>

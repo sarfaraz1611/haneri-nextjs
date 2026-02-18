@@ -4,7 +4,7 @@ export default function Fancraft() {
   return (
     <section className="py-6 " aria-label="Fan Craft by Haneri">
       <div className="mx-auto mt-15 ">
-        <div className="relative overflow-hidden bg-gray-900 px-6 py-32 shadow-xl  min-h-[600px] sm:min-h-0  sm:px-10 sm:py-24 md:px-12 lg:px-20">
+        <div className="relative overflow-hidden bg-gray-900 px-6 py-32 shadow-xl  min-h-[800px] sm:min-h-0  sm:px-10 sm:py-24 md:px-12 lg:px-20">
           {/* Mobile image */}
           <img
             alt="Fancraft by Haneri background"
@@ -28,14 +28,14 @@ export default function Fancraft() {
               FANCRAFT
             </h2>
             <figure>
-              <blockquote className="text-[16px] font-normal text-[#e9e3dc] sm:text-xl/8 line-clamp-6">
+              <blockquote className="text-[16px] font-normal text-[#e9e3dc] sm:text-xl/8 line-clamp-10">
                 <p>
-                  Fancraft by Haneri is our bespoke design offering — a specialised service
+                  FanCraft by Haneri is our bespoke design offering — a specialised service
                   that allows you to personalise the aesthetic of any Haneri
                   ceiling fan. With complete in-house design and manufacturing
                   capabilities, we customise colours, finishes, textures, and
                   accents to match the exact mood and character of your home.
-                  Every Fancraft creation is crafted with the same precision,
+                  Every FanCraft creation is crafted with the same precision,
                   balance, and quiet performance that define Haneri, but elevated
                   with your personal touch. It transforms the fan from a utility
                   into a curated design statement — exclusive, intentional, and

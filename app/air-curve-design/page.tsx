@@ -164,9 +164,7 @@ export default function AirCurveDesign() {
                       fontWeight: 400,
                     }}
                   >
-                    The aerodynamic profile of Air Curve blades optimizing drag,
-                    reducing the load on the motor and ensuring energy-efficient
-                    operation. Thanks to their energy-efficient operation, you
+                   The aerodynamic profile of Air Curve blades optimizes drag, reducing the load on the motor and ensuring energy-efficient operation. Thanks to their energy-efficient operation, you
                     can enjoy a powerful cooling experience while saving on
                     electricity bills.
                   </p>
@@ -345,7 +343,7 @@ export default function AirCurveDesign() {
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
                     Continuous refinement based on data-driven insights ensures
-                    that AirCurve blades exceed industry benchmarks for
+                    that Air Curve blades exceed industry benchmarks for
                     performance and reliability.
                   </span>
                   </span>
@@ -357,7 +355,7 @@ export default function AirCurveDesign() {
           {/* Benefits For Customers Section */}
           <div className="mt-20 flex flex-col items-start">
             <h2 className="text-4xl  mb-10 font-semibold  tracking-tight text-[#315858]">
-              Benefits For Customers
+              Benefits for Customers
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2  gap-8 w-full">
               <motion.div
@@ -482,7 +480,7 @@ export default function AirCurveDesign() {
                       fontWeight: 400,
                     }}
                   >
-                    Reduced turbulence and noise make Silent M.A.S.S ideal for
+                    Reduced turbulence and noise make Silent HASS ideal for
                     bedrooms, offices, and libraries where silence is a
                     priority.
                   </p>

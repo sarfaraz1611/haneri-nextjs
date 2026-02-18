@@ -627,7 +627,7 @@ export default function OurStorySection({
                   />
                 </div>
                 <span className="text-[26px] sm:text-[15px] text-[#CA5D27] font-['Barlow_Condensed']">
-                  Design To Delivery
+                  Design to Delivery
                 </span>
               </div>
               <div className="flex-1 text-center min-w-[200px]">

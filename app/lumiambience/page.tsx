@@ -34,7 +34,7 @@ export default function LumiAmbience() {
             >
               <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
                 <span className="text-[#bb6125]">
-                  Introducing LumiAmbience Technology:
+                  Introducing LumiAmbience Technology:{" "}
                 </span>{" "}
                 Revolutionizing Lighting with Precision
               </h2>
@@ -122,7 +122,7 @@ export default function LumiAmbience() {
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
               <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
-                Key Features of Silent LumiAmbience Technology
+                Key Features of LumiAmbience Technology
               </h2>
 
               <motion.ul
@@ -249,9 +249,9 @@ export default function LumiAmbience() {
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      Silent M.A.S.S Technology is a trademarked pillar of
-                      Haneri, integrating proprietary engineering solutions to
-                      deliver performance and efficiency.
+                      LumiAmbience Technology is a trademarked pillar of Haneri,
+                      integrating advanced lighting engineering to deliver
+                      precision illumination and refined ambience
                     </span>
                   </span>
                 </motion.li>
@@ -426,7 +426,7 @@ export default function LumiAmbience() {
 
           <div className="mt-20 flex flex-col items-start">
             <h2 className="text-4xl  mb-10 font-semibold  tracking-tight text-[#315858]">
-              Benefits For Customers
+              Benefits for Customers
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2  gap-8 w-full">
               <motion.div
@@ -520,12 +520,12 @@ export default function LumiAmbience() {
                 />
                 <div>
                   <h3 className="text-xl font-semibold text-[#CA5C27]">
-                    Quiet Operation
+                    Ambient Illumination
                   </h3>
                   <p className="mt-2 text-black">
-                    Reduced turbulence and noise make Silent M.A.S.S ideal for
-                    bedrooms, offices, and libraries where silence is a
-                    priority.
+                    Integrated ambient lighting that delivers soft, balanced
+                    illumination - enhancing mood, visual comfort, and modern
+                    interiors with seamless precision.
                   </p>
                 </div>
               </motion.div>
