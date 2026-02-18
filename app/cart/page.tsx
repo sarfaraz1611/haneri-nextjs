@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com/api";
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com";
 
 interface CartItem {
   id: number;
@@ -98,7 +98,7 @@ export default function CartPage() {
         payload.cart_id = tempId;
       }
 
-      await axios.post(`${BASE_URL}/api/cart/update/${itemId}`, payload, {
+      await axios.post(`${BASE_URL}/cart/update/${itemId}`, payload, {
         headers: getAuthHeaders(),
       });
 
@@ -127,7 +127,7 @@ export default function CartPage() {
         payload.cart_id = tempId;
       }
 
-      await axios.delete(`${BASE_URL}/api/cart/remove/${itemId}`, {
+      await axios.delete(`${BASE_URL}/cart/remove/${itemId}`, {
         headers: getAuthHeaders(),
         data: payload,
       });
