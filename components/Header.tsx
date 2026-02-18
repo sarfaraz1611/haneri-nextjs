@@ -514,7 +514,7 @@ export default function Header() {
       {mobileMenuOpen && (
         <>
           {/* Sidebar */}
-          <div className="  bg-[#00473E] z-50 overflow-y-auto">
+          <div className="bg-[#00473E] z-50 max-h-[calc(100vh-60px)] overflow-y-auto">
             {/* Close Button */}
             {/* <button
               onClick={() => setMobileMenuOpen(false)}

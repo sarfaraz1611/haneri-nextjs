@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com";
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com/api";
 
 interface CartItem {
   id: number;
@@ -63,7 +63,7 @@ export default function CartPage() {
         payload.cart_id = tempId;
       }
 
-      const response = await axios.post(`${BASE_URL}/api/cart/fetch`, payload, {
+      const response = await axios.post(`${BASE_URL}/cart/fetch`, payload, {
         headers: getAuthHeaders(),
       });
 

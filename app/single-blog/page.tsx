@@ -109,7 +109,9 @@ function ContentRenderer({ content }: { content: BlogContent[] }) {
                     <h4 className="text-[#00473E] font-semibold text-lg mb-2">
                       {feature.title}
                     </h4>
-                    <p className="text-gray-600 text-sm">{feature.description}</p>
+                    <p className="text-gray-600 text-sm">
+                      {feature.description}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -123,7 +125,10 @@ function ContentRenderer({ content }: { content: BlogContent[] }) {
               >
                 <ul className="space-y-3">
                   {block.items?.map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-gray-700">
+                    <li
+                      key={i}
+                      className="flex items-center gap-3 text-gray-700"
+                    >
                       <svg
                         className="w-5 h-5 text-[#00473E] flex-shrink-0"
                         fill="currentColor"
@@ -171,7 +176,9 @@ function FAQSection({ faqs }: { faqs: BlogFAQ[] }) {
             }}
           >
             <summary className="flex items-center justify-between p-5 cursor-pointer font-medium text-[#00473E] hover:bg-gray-50 transition-colors">
-              <span>Q{index + 1}. {faq.question}</span>
+              <span>
+                Q{index + 1}. {faq.question}
+              </span>
               <svg
                 className={`w-5 h-5 transition-transform ${openIndex === index ? "rotate-180" : ""}`}
                 fill="none"
@@ -187,27 +194,11 @@ function FAQSection({ faqs }: { faqs: BlogFAQ[] }) {
               </svg>
             </summary>
             {openIndex === index && (
-              <div className="px-5 pb-5 text-gray-600">
-                {faq.answer}
-              </div>
+              <div className="px-5 pb-5 text-gray-600">{faq.answer}</div>
             )}
           </details>
         ))}
       </div>
-    </div>
-  );
-}
-
-function SEOBox({ seo }: { seo: { metaTitle: string; metaDescription: string } }) {
-  return (
-    <div className="bg-gray-100 rounded-xl p-6 my-8 border border-gray-200">
-      <h3 className="text-gray-800 font-semibold text-lg mb-4">SEO Meta</h3>
-      <p className="text-gray-600 text-sm mb-2">
-        <strong>Meta Title:</strong> {seo.metaTitle}
-      </p>
-      <p className="text-gray-600 text-sm">
-        <strong>Meta Description:</strong> {seo.metaDescription}
-      </p>
     </div>
   );
 }
@@ -219,10 +210,7 @@ function BlogNotFound() {
       <p className="text-gray-600 mb-8">
         The blog you're looking for doesn't exist or has been removed.
       </p>
-      <Link
-        href="/"
-        className="btn-haneri"
-      >
+      <Link href="/" className="btn-haneri">
         Back to Home
       </Link>
     </div>
@@ -254,13 +242,8 @@ function BlogPageContent() {
 
             <FAQSection faqs={blog.faqs} />
 
-            <SEOBox seo={blog.seo} />
-
             <div className="flex justify-center mt-12">
-              <Link
-                href="/"
-                className="btn-haneri"
-              >
+              <Link href="/" className="btn-haneri">
                 Explore Products
               </Link>
             </div>

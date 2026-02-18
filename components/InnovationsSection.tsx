@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const innovations = [
   {
@@ -32,6 +32,14 @@ const innovations = [
 
 export default function InnovationsSection() {
   const cardsRef = useRef<HTMLIFrameElement[]>([]);
+  const [activeId, setActiveId] = useState<number | null>(null);
+
+  // Auto-dismiss active state after 3 seconds
+  useEffect(() => {
+    if (activeId === null) return;
+    const timer = setTimeout(() => setActiveId(null), 1000);
+    return () => clearTimeout(timer);
+  }, [activeId]);
 
   // Intersection Observer for video visibility
   useEffect(() => {
@@ -82,6 +90,7 @@ export default function InnovationsSection() {
               <li
                 key={item.id}
                 className="rounded-md overflow-hidden bg-black transition-all duration-300 hover:scale-95 hover:rounded-md hover:-translate-y-2 cursor-pointer"
+                onClick={() => setActiveId(activeId === item.id ? null : item.id)}
               >
                 <div className="group relative w-full pt-[177.78%] bg-[#111]">
                   <iframe
@@ -94,7 +103,7 @@ export default function InnovationsSection() {
                     title={item.title}
                     className="absolute inset-0 w-full h-full block border-0 pointer-events-none"
                   ></iframe>
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  <div className={`absolute inset-0 flex items-center justify-center bg-black/50 transition-opacity duration-300 pointer-events-none ${activeId === item.id ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>
                     <span className="text-white text-lg font-semibold">{item.title}</span>
                   </div>
                 </div>
