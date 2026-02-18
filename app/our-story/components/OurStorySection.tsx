@@ -381,7 +381,7 @@ export default function OurStorySection({
                     <h2 className="text-[20px] sm:text-[42px] lg:text-[52px] font-['Barlow_Condensed']  text-[#00473E] font-medium mb-4 leading-12">
                       The Heart of
                       <br />
-                      <span className=" font-bold text-[#CA5D27]  font-['Open_Sans'] lg:text-[42px]">Who We Are</span> <span className="h-2 w-2 text-[#CA5D27]">_______________</span>
+                      <span className=" font-bold text-[#CA5D27]  font-['Open_Sans'] lg:text-[42px]">Who We Are</span> 
                     </h2>
 
                     {/* <div className=" flex  gap-5"> */}

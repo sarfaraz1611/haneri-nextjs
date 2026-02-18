@@ -744,7 +744,7 @@ function ShopPageContent() {
   // ==================== Render ====================
 
   return (
-    <div className="bg-white overflow-x-hidden">
+    <div className="bg-white">
       {/* Mobile Filters Dialog */}
       <MobileFiltersDialog
         isOpen={mobileFiltersOpen}
@@ -759,9 +759,9 @@ function ShopPageContent() {
       />
 
       {/* Main Content */}
-      <main className="mx-auto xl:max-w-[90%]  2xl:max-w-[82%]  px-4 sm:px-6 lg:px-8 pt-20">
+      <main className=" px-4 sm:px-6  lg:px-8 pt-20">
         {/* Header */}
-        <div className="flex items-baseline justify-between border-b border-gray-200 pt-10 pb-6">
+        <div className="flex z-20 items-baseline justify-between border-b border-gray-200 pt-6 pb-6 sticky top-[60px] md:top-[70px] bg-white ">
           <h1 className="text-[20px]  md:text-[30px] xl:text-4xl font-bold tracking-tight text-[#315858]">
             Our Products
           </h1>
@@ -790,14 +790,14 @@ function ShopPageContent() {
         </div>
 
         {/* Products Section */}
-        <section aria-labelledby="products-heading" className="pt-6 pb-24">
+        <section aria-labelledby="products-heading" className="pt-6 ">
           <h2 id="products-heading" className="sr-only">
             Products
           </h2>
 
           <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
             {/* Desktop Filters */}
-            <form className="hidden lg:block">
+            <form className="hidden lg:block sticky top-[180px] self-start max-h-[calc(100vh-180px)] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
               {filters.map((section) => (
                 <FilterSection
                   key={section.id}
@@ -816,7 +816,7 @@ function ShopPageContent() {
             </form>
 
             {/* Product Grid */}
-            <div className="pb-4 pr-1 lg:col-span-3 lg:border-l lg:border-gray-200 lg:pl-8 lg:max-h-[calc(100vh-200px)] lg:overflow-y-auto scrollbar-hide">
+            <div className="pb-4 pr-1 lg:col-span-3 lg:border-l lg:border-gray-200 lg:pl-8">
               {loading ? (
                 <div className="text-center py-12">
                   <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-[#315858] border-r-transparent"></div>
@@ -846,7 +846,7 @@ function ShopPageContent() {
               ) : (
                 <ul
                   role="list"
-                  className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 xl:grid-cols-3 xl:gap-x-8"
+                  className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 xl:grid-cols-3 xl:gap-x-8  mx-auto max-xl:mx-5 2xl:mx-[8%] "
                 >
                   {products.map((product) => {
                     return (
