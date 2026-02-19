@@ -56,9 +56,12 @@ export default function ProductGallery({
         />
       )}
 
-      {selectedVariant?.banner_urls && selectedVariant.banner_urls.length > 0 && (
-        <BannerImages bannerUrls={selectedVariant.banner_urls} />
-      )}
+      {selectedVariant?.banner_urls &&
+        selectedVariant.banner_urls.length > 0 && (
+          <div className="hidden lg:block">
+            <BannerImages bannerUrls={selectedVariant.banner_urls} />
+          </div>
+        )}
     </div>
   );
 }
@@ -112,9 +115,7 @@ function Thumbnails({
           key={i}
           onClick={() => onSelect(i)}
           className={`aspect-square rounded-lg border overflow-hidden relative ${
-            currentIndex === i
-              ? "border-[#075E5E] border-2"
-              : "border-gray-200"
+            currentIndex === i ? "border-[#075E5E] border-2" : "border-gray-200"
           }`}
         >
           <Image
@@ -134,7 +135,7 @@ interface BannerImagesProps {
   bannerUrls: string[];
 }
 
-function BannerImages({ bannerUrls }: BannerImagesProps) {
+export function BannerImages({ bannerUrls }: BannerImagesProps) {
   return (
     <div className="mt-6 space-y-3">
       {bannerUrls.map((bannerUrl, index) => (

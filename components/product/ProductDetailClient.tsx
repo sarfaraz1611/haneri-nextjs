@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
-import ProductGallery from "./ProductGallery";
+import ProductGallery, { BannerImages } from "./ProductGallery";
 import ProductInfo from "./ProductInfo";
 import VariantSelector from "./VariantSelector";
 import PriceDisplay from "./PriceDisplay";
@@ -35,6 +35,21 @@ export default function ProductDetailClient({
 
   const { quantity, setQuantity, addingToCart, addedToCart, handleAddToCart } =
     useCart({ productId, variantId: selectedVariantId });
+
+  const priceRef = useRef<HTMLDivElement>(null);
+  const [showStickyCart, setShowStickyCart] = useState(false);
+
+  // Show sticky cart when price section scrolls out of view
+  useEffect(() => {
+    const el = priceRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowStickyCart(!entry.isIntersecting),
+      { threshold: 0 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [loading, selectedVariant]);
 
   // Reset image index when variant changes
   useEffect(() => {
@@ -88,7 +103,9 @@ export default function ProductDetailClient({
                 onVariantSelect={setSelectedVariantId}
               />
 
-              {selectedVariant && <PriceDisplay variant={selectedVariant} />}
+              <div ref={priceRef}>
+                {selectedVariant && <PriceDisplay variant={selectedVariant} />}
+              </div>
 
               {/* Quantity + CTA */}
               <div className="flex items-center gap-4 mt-6">
@@ -113,6 +130,12 @@ export default function ProductDetailClient({
           </div>
         </div>
       </section>
+      {selectedVariant?.banner_urls &&
+        selectedVariant.banner_urls.length > 0 && (
+          <div className="block lg:hidden">
+            <BannerImages bannerUrls={selectedVariant.banner_urls} />
+          </div>
+        )}
 
       {product.description && (
         <DescriptionSection description={product.description} />
@@ -123,6 +146,64 @@ export default function ProductDetailClient({
       )}
 
       <ProductFAQ />
+
+      {/* Mobile Sticky Cart */}
+      {selectedVariant && (
+        <div
+          className={`fixed left-0 right-0 z-40 bg-white transition-transform duration-300 bottom-0 border-t border-gray-200 shadow-[0_-4px_12px_rgba(0,0,0,0.1)] lg:bottom-auto lg:top-20 lg:border-t-0 lg:border-b lg:shadow-[0_4px_12px_rgba(0,0,0,0.1)] ${
+            showStickyCart ? "translate-y-0" : "translate-y-full lg:-translate-y-[200%]"
+          }`}
+        >
+          <div className="flex items-center justify-around gap-3 px-4  py-4">
+            {/* Quantity */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                className="w-9 h-9 rounded-lg border border-gray-300 flex items-center justify-center text-lg font-bold"
+                aria-label="Decrease quantity"
+              >
+                −
+              </button>
+              <span className="w-7 text-center font-semibold">{quantity}</span>
+              <button
+                onClick={() => setQuantity(quantity + 1)}
+                className="w-9 h-9 rounded-lg border border-gray-300 flex items-center justify-center text-lg font-bold"
+                aria-label="Increase quantity"
+              >
+                +
+              </button>
+            </div>
+
+            {/* Total */}
+            <div className="text-center">
+              <div className="text-lg font-bold text-[#075E5E]">
+                ₹
+                {(selectedVariant.selling_price * quantity).toLocaleString(
+                  "en-IN",
+                )}
+              </div>
+              <small className="text-xs text-gray-500">Incl. taxes</small>
+            </div>
+
+            {/* Add to Cart / View Cart */}
+            <button
+              onClick={handleCartAction}
+              disabled={addingToCart}
+              className={`px-5 py-2.5 rounded-lg font-bold text-sm text-white transition-colors disabled:opacity-50 ${
+                addedToCart
+                  ? "bg-[#CA5D27] hover:bg-[#b54d1f]"
+                  : "bg-[#075E5E] hover:bg-[#064d4d]"
+              }`}
+            >
+              {addingToCart
+                ? "Adding..."
+                : addedToCart
+                  ? "View Cart"
+                  : "Add to Cart"}
+            </button>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
