@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com/api";
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com";
 
 interface CartItem {
   id: number;
@@ -519,9 +519,12 @@ export default function CartPage() {
                   </span>
                 </div>
 
-                <button className="w-full bg-[#075E5E] hover:bg-[#064d4d] text-white font-semibold py-4 rounded-lg transition-colors uppercase tracking-wide">
+                <Link
+                  href="/checkout"
+                  className="block w-full bg-[#075E5E] hover:bg-[#064d4d] text-white font-semibold py-4 rounded-lg transition-colors uppercase tracking-wide text-center"
+                >
                   Proceed to Checkout
-                </button>
+                </Link>
 
                 <p className="text-xs text-gray-500 text-center mt-4">
                   Inclusive of all taxes
