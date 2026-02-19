@@ -258,7 +258,7 @@ export default function BlowupShotClean() {
     >
       <div
         ref={stickyRef}
-        className="sticky top-0 w-full h-screen flex items-center justify-center overflow-hidden"
+        className="sticky top-0 w-full h-screen flex flex-col md:flex-row items-center justify-around md:justify-around overflow-hidden"
       >
         {/* Background decorative elements */}
         <DecorativeElements />
@@ -269,8 +269,8 @@ export default function BlowupShotClean() {
         {/* Canvas for frame animation - right on desktop, bottom on mobile */}
         <canvas
           ref={canvasRef}
-          className={`absolute md:right-0 md:top-1/2 md:-translate-y-1/2 bottom-10 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 transition-opacity duration-1000 ${isLoaded && canvasReady ? 'opacity-100' : 'opacity-0'}`}
-          style={{ width: "90%", height: "45%" }}
+          className={`relative md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 order-1 md:order-0 transition-opacity duration-1000 ${isLoaded && canvasReady ? 'opacity-100' : 'opacity-0'}`}
+          style={{ width: "85%", height: "40vh" }}
         />
         <style jsx>{`
           @media (min-width: 768px) {
@@ -282,8 +282,9 @@ export default function BlowupShotClean() {
         `}</style>
 
         {/* Hero content overlay */}
-        <div className="relative z-10 mt-32 container mx-auto px-6 flex items-start md:items-center h-full pt-8 md:pt-0">
-          <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
+        <div className="relative z-10 container mx-auto px-6 flex items-end md:items-center h-auto md:h-full pb-4 md:pb-0 md:pt-0 order-2 md:order-0">
+          {/* <div className="grid lg:grid-cols-2 gap-6 md:gap-12 items-center justify-items-center w-full"> */}
+          <div className=" grid lg:grid-cols-2  gap-6 md:gap-12 items-center justify-items-center">
             {/* Content */}
             <div className="space-y-4 md:space-y-8">
               {/* Enhanced badge with glow effect */}
@@ -340,8 +341,8 @@ export default function BlowupShotClean() {
               </div>
             </div>
 
-            {/* Empty right column - fan animation fills the background */}
-            <div />
+            {/* Empty right column - fan animation fills the background on desktop */}
+            <div className="hidden lg:block" />
           </div>
         </div>
 
