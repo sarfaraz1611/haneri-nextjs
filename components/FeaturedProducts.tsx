@@ -262,7 +262,7 @@ export default function FeaturedProducts() {
 
     try {
       const BASE_URL =
-        process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com";
+        process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com/api";
       const token = localStorage.getItem("auth_token");
       const tempId = localStorage.getItem("temp_id");
 

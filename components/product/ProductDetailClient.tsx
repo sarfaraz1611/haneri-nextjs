@@ -132,7 +132,7 @@ export default function ProductDetailClient({
       </section>
       {selectedVariant?.banner_urls &&
         selectedVariant.banner_urls.length > 0 && (
-          <div className="block lg:hidden">
+          <div className="block lg:hidden mx-2">
             <BannerImages bannerUrls={selectedVariant.banner_urls} />
           </div>
         )}

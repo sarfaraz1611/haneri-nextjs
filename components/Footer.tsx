@@ -152,7 +152,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
         </div>
 
         <div className="border-t border-[#333] pt-5 text-center">
-          <span className="text-sm text-[#999]">&copy; 2025 | Haneri</span>
+          <span className="text-sm text-[#999]">&copy; 2026 | Haneri</span>
         </div>
       </div>
     </footer>
