@@ -157,7 +157,7 @@ export default function Header() {
     localStorage.removeItem("user_role");
     localStorage.removeItem("user_id");
     setIsLoggedIn(false);
-    window.location.href = "/login";
+    window.location.href = "/old/login.php";
   };
 
   const toggleDropdown = (menu: string) => {
@@ -372,7 +372,7 @@ export default function Header() {
               {isLoggedIn ? (
                 <div className="hidden sm:flex items-center gap-2.5">
                   <Link
-                    href="/profile"
+                    href="/old/profile.php"
                     className="text-sm cursor-pointer transition-colors duration-300 p-1 hover:text-brand  text-primary"
                     title="Profile"
                   >
@@ -389,7 +389,7 @@ export default function Header() {
                   </a>
                   <span className="max-sm:text-sm text-primary">|</span>
                   <Link
-                    href="/cart"
+                    href="/old/cart.php"
                     className="relative text-xl cursor-pointer transition-colors duration-300 p-1 hover:text-brand text-primary"
                     title="Cart"
                   >
@@ -450,7 +450,7 @@ export default function Header() {
               ) : (
                 <>
                   <Link
-                    href="/login"
+                    href="/old/login.php"
                     className="text-sm cursor-pointer transition-colors duration-300 p-1 hover:text-brand  max-sm:p-[3px] text-primary"
                     title="Login"
                   >
@@ -458,7 +458,7 @@ export default function Header() {
                   </Link>
                   <span className="max-sm:text-sm text-primary">|</span>
                   <Link
-                    href="/cart"
+                    href="/old/cart.php"
                     className="relative text-sm cursor-pointer transition-colors duration-300 p-1 hover:text-brand  max-sm:p-[3px] text-primary"
                     title="Cart"
                   >
