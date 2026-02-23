@@ -32,10 +32,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
       {product.description && (
         <div className="text-[#777] font-normal mt-3 text-[14px]">
-          Ratings/Reviews section - Not present in current code Feature Slider -
-          A horizontal scrolling carousel showing product features with icons
-          Discount percentage badge - Shows the percentage off MRP label and
-          better price formatting
+          {product.description.match(/[^.!?]+[.!?]+/g)?.slice(0, 2).join(" ") ?? product.description}
         </div>
       )}
     </div>
