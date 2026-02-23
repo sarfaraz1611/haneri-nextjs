@@ -1,6 +1,8 @@
 export const BASE_URL =
   process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com/api";
 
+export const LEGACY_BASE_URL = "/account";
+
 export const CART_BASE_URL = "https://api.haneri.com/api";
 
 export const COLOR_OPTIONS = [

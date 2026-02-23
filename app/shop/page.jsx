@@ -23,6 +23,7 @@ import {
 } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
+import { LEGACY_BASE_URL } from "@/components/product/constants";
 
 // ==================== Constants ====================
 
@@ -689,7 +690,7 @@ function ShopPageContent() {
   };
 
   const handleViewCart = () => {
-    router.push("/cart");
+    router.push(`${LEGACY_BASE_URL}/cart`);
   };
 
   const showFlash = (msg, bg = "#b3e3dd", color = "#00473E") => {

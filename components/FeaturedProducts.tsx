@@ -431,7 +431,7 @@ export default function FeaturedProducts() {
                       </del>
                     )}
                   </div>
-                  <div className="flex gap-2.5 mb-[18px] pl-1">
+                  <div className="flex gap-2.5 mb-[18px] pl-1 overflow-auto ">
                     {variants.map((v) => {
                       const color = getColorHex(v.variant_value);
                       const isActive = v.id === first.id;

@@ -14,6 +14,7 @@ import ProductFAQ from "./ProductFAQ";
 import DescriptionSection from "./DescriptionSection";
 import { useProduct, useCart } from "./hooks";
 import { ProductDetailClientProps } from "./types";
+import { LEGACY_BASE_URL } from "./constants";
 
 export default function ProductDetailClient({
   productId,
@@ -73,7 +74,7 @@ export default function ProductDetailClient({
 
   const handleCartAction = () => {
     if (addedToCart) {
-      router.push("/cart");
+      router.push(`${LEGACY_BASE_URL}/cart`);
     } else {
       handleAddToCart();
     }

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { gsap } from "gsap";
 import BlowupShot from "@/components/BlowupShot";
 import FeaturedProducts from "@/components/FeaturedProducts";
+import FeaturedProductsMobile from "@/components/FeaturedProductsMobile";
 import InnovationsSection from "@/components/InnovationsSection";
 import ServicesSlider from "@/components/ServicesSlider";
 import SteelFanSlider from "@/components/SteelFanSlider";
@@ -63,9 +64,14 @@ export default function Home() {
         {/* <HeroSlider /> */}
         {/* <BlowupShot /> */}
         <HeroSection />
-        <div className="overflow-x-hidden">
-          <FeaturedProducts />
+        
+        <div className="">
+          <FeaturedProductsMobile />
         </div>
+        {/* Desktop: horizontal scroll with animation (2xl and above) */}
+        {/* <div className="hidden 2xl:block overflow-x-hidden">
+          <FeaturedProducts />
+        </div> */}
 
         {/* video Section */}
         <VideoSlider />
