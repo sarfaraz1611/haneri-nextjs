@@ -536,6 +536,70 @@ function SortMenu({ currentSort, onSortChange, onPageReset }) {
 //   );
 // }
 
+// Recommended Products Section Component
+function RecommendedProducts({ currentProductIds, onAddToCart, addingToCart, addedToCart, onViewCart }) {
+  const [recommended, setRecommended] = useState([]);
+  const [loadingRec, setLoadingRec] = useState(true);
+
+  useEffect(() => {
+    const token =
+      typeof window !== "undefined" ? localStorage.getItem("auth_token") : null;
+    const headers = {
+      "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    };
+
+    fetch("/api/products/get_products", {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ limit: 12, offset: 0 }),
+    })
+      .then((r) => r.json())
+      .then((result) => {
+        if (result.success && Array.isArray(result.data)) {
+          // Filter out products already shown on the page
+          const filtered = result.data.filter(
+            (p) => !currentProductIds.has(String(p.id))
+          );
+          // One card per product (first variant), limit to 4
+          const cards = filtered.slice(0, 4).map((product) => {
+            const variant = product.variants?.[0] || {};
+            return {
+              ...product,
+              activeVariantId: variant.id,
+              activeVariant: variant,
+            };
+          });
+          setRecommended(cards);
+        }
+      })
+      .catch(() => {})
+      .finally(() => setLoadingRec(false));
+  }, []);
+
+  if (loadingRec || recommended.length === 0) return null;
+
+  return (
+    <section className="mt-12 border-t border-gray-200 pt-10 pb-8">
+      <h2 className="text-2xl font-bold tracking-tight text-[#315858] mb-6">
+        Recommended Products
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4 w-full">
+        {recommended.map((product) => (
+          <ProductCard
+            key={`rec-${product.id}-${product.activeVariantId}`}
+            product={product}
+            onAddToCart={onAddToCart}
+            addingToCart={addingToCart}
+            addedToCart={addedToCart}
+            onViewCart={onViewCart}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
 // ==================== Main Component ====================
 
 function ShopPageContent() {
@@ -745,7 +809,7 @@ function ShopPageContent() {
   // ==================== Render ====================
 
   return (
-    <div className="bg-white">
+    <div className="bg-white container ">
       {/* Mobile Filters Dialog */}
       <MobileFiltersDialog
         isOpen={mobileFiltersOpen}
@@ -760,7 +824,7 @@ function ShopPageContent() {
       />
 
       {/* Main Content */}
-      <main className=" px-4 sm:px-6  lg:px-8 pt-20">
+      <main className=" pt-20">
         {/* Header */}
         <div className="flex z-20 items-baseline justify-between border-b border-gray-200 pt-6 pb-6 sticky top-[60px] md:top-[70px] bg-white ">
           <h1 className="text-[20px]  md:text-[30px] xl:text-4xl font-bold tracking-tight text-[#315858]">
@@ -847,7 +911,7 @@ function ShopPageContent() {
               ) : (
                 <ul
                   role="list"
-                  className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 xl:grid-cols-3 xl:gap-x-8  mx-auto max-xl:mx-5 2xl:mx-[8%] "
+                  className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 xl:grid-cols-3 xl:gap-x-8 w-full"
                 >
                   {products.map((product) => {
                     return (
@@ -866,6 +930,15 @@ function ShopPageContent() {
             </div>
           </div>
         </section>
+
+        {/* Recommended Products */}
+        <RecommendedProducts
+          currentProductIds={new Set(products.map((p) => String(p.id)))}
+          onAddToCart={handleAddToCart}
+          addingToCart={addingToCart}
+          addedToCart={addedToCart}
+          onViewCart={handleViewCart}
+        />
       </main>
 
       {/* Flash Message */}

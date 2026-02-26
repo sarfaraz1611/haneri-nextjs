@@ -206,7 +206,7 @@ export default function FeaturedProductsMobile() {
     );
   if (!products.length) return null;
 
-  const displayProducts = [...products].slice(0, 4);
+  const displayProducts = [...products,...products].slice(0, 6);
 
   return (
     <section className="pt-6 relative px-6" aria-label="Featured Products">
@@ -232,7 +232,7 @@ export default function FeaturedProductsMobile() {
             return (
               <article
                 key={`${product.id}-${index}`}
-                className="group relative bg-white inset-shadow-2xs  rounded-xl shadow-md p-4 border-0 overflow-hidden cursor-default hover:scale-95 transition duration-300 ease-in-out"
+                className={`group relative bg-white inset-shadow-2xs rounded-xl shadow-md p-4 border-0 overflow-hidden cursor-default hover:scale-95 transition duration-300 ease-in-out${index >= 4 ? " hidden lg:block xl:hidden" : ""}`}
                 style={{ opacity: 1 }}
               >
                 <div className="relative h-[20vh] 2xl:h-[290px] grid place-items-center mb-3 overflow-hidden">

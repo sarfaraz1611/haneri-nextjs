@@ -152,6 +152,13 @@ export default function Header() {
     fetchCartCount();
   }, []);
 
+  useEffect(() => {
+    if (!activeDropdown?.startsWith("desktop-")) return;
+    const handleClickOutside = () => setActiveDropdown(null);
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [activeDropdown]);
+
   const handleLogout = () => {
     localStorage.removeItem("auth_token");
     localStorage.removeItem("user_name");
@@ -200,21 +207,22 @@ export default function Header() {
               <nav className="flex max-lg:hidden">
                 <ul className="list-none flex gap-[30px] lg:gap-0 m-0 p-0 pl-10 ">
                   {/* Categories Menu */}
-                  <li className="relative group">
-                    <Link
-                      href="/shop"
-                      className="text-[#464646] font-semibold text-[14px] font-sans transition-colors duration-300 py-[15px] px-[15px] block hover:text-brand uppercase tracking-[-0.25px]"
+                  <li className="relative group" onMouseEnter={() => { if (activeDropdown && activeDropdown !== "desktop-categories") setActiveDropdown(null); }}>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); toggleDropdown("desktop-categories"); }}
+                      className="text-[#464646] font-semibold text-[14px] font-sans transition-colors duration-300 py-[15px] px-[15px] block hover:text-brand uppercase tracking-[-0.25px] bg-transparent border-none cursor-pointer"
                     >
                       Categories
-                    </Link>
+                    </button>
 
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 transition-all duration-300 invisible opacity-0 group-hover:visible group-hover:opacity-100 z-50">
+                    <div onClick={(e) => e.stopPropagation()} className={`absolute top-full left-1/2 -translate-x-1/2 pt-2.5 transition-all duration-300 z-50 ${activeDropdown === "desktop-categories" ? "visible opacity-100" : "invisible opacity-0 group-hover:visible group-hover:opacity-100"}`}>
                       <div className="bg-white min-w-1000 px-[30px] py-[25px] rounded-lg shadow-lg ">
                         <div className="flex justify-center items-center gap-5">
                           {categories.map((category) => (
                             <Link
                               key={category.name}
                               href={category.href}
+                              onClick={() => setActiveDropdown(null)}
                               className="text-center  p-[15px]  w-[150px] rounded-lg transition-all duration-300 border border-transparent hover:bg-neutral-50 hover:border-brand hover:-translate-y-1"
                             >
                               <div className="w-10 h-10 mx-auto mb-2.5 flex items-center justify-center max-[1200px]:w-[60px] max-[1200px]:h-[60px]">
@@ -235,20 +243,21 @@ export default function Header() {
                   </li>
 
                   {/* Pillar Technology Menu */}
-                  <li className="relative group">
-                    <Link
-                      href="/air-curve-design"
-                      className="text-[#464646] font-semibold text-[14px] font-sans transition-colors duration-300 py-[15px] px-[15px] block hover:text-brand uppercase tracking-[-0.25px]"
+                  <li className="relative group" onMouseEnter={() => { if (activeDropdown && activeDropdown !== "desktop-pillar") setActiveDropdown(null); }}>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); toggleDropdown("desktop-pillar"); }}
+                      className="text-[#464646] font-semibold text-[14px] font-sans transition-colors duration-300 py-[15px] px-[15px] block hover:text-brand uppercase tracking-[-0.25px] bg-transparent border-none cursor-pointer"
                     >
                       Pillar Technology
-                    </Link>
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 transition-all duration-300 invisible opacity-0 group-hover:visible group-hover:opacity-100 z-50">
+                    </button>
+                    <div onClick={(e) => e.stopPropagation()} className={`absolute top-full left-1/2 -translate-x-1/2 pt-2.5 transition-all duration-300 z-50 ${activeDropdown === "desktop-pillar" ? "visible opacity-100" : "invisible opacity-0 group-hover:visible group-hover:opacity-100"}`}>
                       <div className="bg-white min-w-[300px] px-[30px] py-[25px] rounded-lg shadow-lg">
                         <ul className="list-none p-0 m-0 flex flex-col gap-[5px] ">
                           {pillarTechnologies.map((tech) => (
                             <li key={tech.name}>
                               <Link
                                 href={tech.href}
+                                onClick={() => setActiveDropdown(null)}
                                 className="text-[14px] font-sans hover:text-brand transition-colors uppercase"
                               >
                                 {tech.name}
@@ -261,14 +270,14 @@ export default function Header() {
                   </li>
 
                   {/* About Us Menu */}
-                  <li className="relative group">
-                    <Link
-                      href="/our-story"
-                      className="text-[#464646] font-semibold text-[14px] font-sans transition-colors duration-300 py-[15px] px-[15px] block hover:text-brand uppercase tracking-[-0.25px]"
+                  <li className="relative group" onMouseEnter={() => { if (activeDropdown && activeDropdown !== "desktop-about") setActiveDropdown(null); }}>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); toggleDropdown("desktop-about"); }}
+                      className="text-[#464646] font-semibold text-[14px] font-sans transition-colors duration-300 py-[15px] px-[15px] block hover:text-brand uppercase tracking-[-0.25px] bg-transparent border-none cursor-pointer"
                     >
                       About Us
-                    </Link>
-                    <div className="absolute top-full left-1/2 -translate-x-1/2  transition-all duration-300 invisible opacity-0 group-hover:visible group-hover:opacity-100 z-50">
+                    </button>
+                    <div onClick={(e) => e.stopPropagation()} className={`absolute top-full left-1/2 -translate-x-1/2 transition-all duration-300 z-50 ${activeDropdown === "desktop-about" ? "visible opacity-100" : "invisible opacity-0 group-hover:visible group-hover:opacity-100"}`}>
                       <div className="bg-white min-w-[300px] px-[30px] py-[25px] rounded-lg shadow-lg">
                         <ul className="list-none p-0 m-0 flex flex-col gap-[15px]">
                           {aboutUsMenu.map((item) => (
@@ -278,12 +287,8 @@ export default function Header() {
                             >
                               <Link
                                 href={item.href}
+                                onClick={() => setActiveDropdown(null)}
                                 className="font-semibold text-[14px] text-primary-green inline-block mb-1 hover:text-brand uppercase"
-                                // className={`${
-                                //   item.subLinks.length > 0
-                                //     ? "font-semibold text-[14px] text-primary-green inline-block mb-1 hover:text-brand uppercase"
-                                //     : "text-primary-green hover:text-brand uppercase"
-                                // }`}
                               >
                                 {item.title}
                               </Link>
@@ -293,6 +298,7 @@ export default function Header() {
                                     <span key={subLink.name}>
                                       <Link
                                         href={subLink.href}
+                                        onClick={() => setActiveDropdown(null)}
                                         className="text-neutral-600 text-xs font-light hover:text-brand hover:underline uppercase"
                                       >
                                         {subLink.name}
@@ -312,14 +318,14 @@ export default function Header() {
                   </li>
 
                   {/* Support Menu */}
-                  <li className="relative group">
-                    <Link
-                      href="/contact"
-                      className="text-[#464646] font-semibold text-[14px] font-sans transition-colors duration-300 py-[15px] px-[15px] block hover:text-brand uppercase tracking-[-0.25px]"
+                  <li className="relative group" onMouseEnter={() => { if (activeDropdown && activeDropdown !== "desktop-support") setActiveDropdown(null); }}>
+                    <button
+                      onClick={() => toggleDropdown("desktop-support")}
+                      className="text-[#464646] font-semibold text-[14px] font-sans transition-colors duration-300 py-[15px] px-[15px] block hover:text-brand uppercase tracking-[-0.25px] bg-transparent border-none cursor-pointer"
                     >
                       Support
-                    </Link>
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 transition-all duration-300 invisible opacity-0 group-hover:visible group-hover:opacity-100 z-50">
+                    </button>
+                    <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-2.5 transition-all duration-300 z-50 ${activeDropdown === "desktop-support" ? "visible opacity-100" : "invisible opacity-0 group-hover:visible group-hover:opacity-100"}`}>
                       <div className="bg-white min-w-[300px] px-[30px] py-[25px] rounded-lg shadow-lg">
                         <ul className="list-none p-0 m-0 flex flex-col gap-[15px]">
                           {supportMenu.map((item) => (
@@ -330,6 +336,7 @@ export default function Header() {
                               {item.isClickable ? (
                                 <Link
                                   href={item.href!}
+                                  onClick={() => setActiveDropdown(null)}
                                   className="font-semibold text-[14px] text-primary-green inline-block mb-1 uppercase"
                                 >
                                   {item.title}
@@ -345,6 +352,7 @@ export default function Header() {
                                         <span key={subLink.name}>
                                           <Link
                                             href={subLink.href}
+                                            onClick={() => setActiveDropdown(null)}
                                             className="text-neutral-600 text-xs font-light hover:text-brand hover:underline uppercase"
                                           >
                                             {subLink.name}

@@ -4,23 +4,23 @@ export default function Fancraft() {
   return (
     <section className="py-6 " aria-label="Fan Craft by Haneri">
       <div className="mx-auto mt-15 ">
-        <div className="relative overflow-hidden bg-gray-900 px-6 py-32 shadow-xl  min-h-[800px] sm:min-h-0  sm:px-10 sm:py-24 md:px-12 lg:px-20">
+        <div className="relative overflow-hidden bg-gray-900 px-6 py-32 shadow-xl  min-h-[800px] xl:min-h-0  sm:px-10 sm:py-24 md:px-12 lg:px-20">
           {/* Mobile image */}
           <img
             alt="Fancraft by Haneri background"
             src="/images/fancraft_mobile.jpg"
-            className="absolute inset-0 size-full object-cover md:hidden"
+            className="absolute inset-0 size-full object-cover xl:hidden"
           />
           {/* Desktop image */}
           <img
             alt="Fancraft by Haneri background"
             src="/images/Fancraft.png"
-            className="absolute inset-0 size-full object-cover hidden md:block"
+            className="absolute inset-0 size-full object-cover hidden xl:block"
           />
           <div className="absolute inset-0 " />
       
      
-          <div className="absolute bottom-6 left-6 right-6 sm:relative sm:bottom-auto sm:left-auto sm:right-auto mx-auto max-w-2xl lg:mx-0">
+          <div className="absolute bottom-6 left-6 right-6 xl:relative xl:bottom-auto xl:left-auto xl:right-auto mx-auto xl:max-w-xl 2xl:max-w-2xl lg:mx-0">
             <h2
               className="m-0 mb-6 font-ailerons text-[clamp(42px,6.6vw,76px)] tracking-[0.28em] leading-[1.02] text-white max-sm:tracking-[0.22em]"
               aria-label="FANCRAFT"
