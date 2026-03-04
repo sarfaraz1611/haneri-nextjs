@@ -7,26 +7,31 @@ const innovations = [
     id: 1,
     title: "Air Curve",
     videoId: "1127434008",
+    icon: "/Air curve.png",
   },
   {
     id: 2,
     title: "BLDC",
     videoId: "1127434068",
+    icon: "/BLDC.png",
   },
   {
     id: 3,
     title: "HASS",
     videoId: "1127434033",
+    icon: "/Hass.png",
   },
   {
     id: 4,
     title: "Lumi",
     videoId: "1127435632",
+    icon: "/Lumi ambience.png",
   },
   {
     id: 5,
     title: "Scan",
     videoId: "1127434145",
+    icon: "/Scan.png",
   },
 ];
 
@@ -103,8 +108,8 @@ export default function InnovationsSection() {
                     title={item.title}
                     className="absolute inset-0 w-full h-full block border-0 pointer-events-none"
                   ></iframe>
-                  <div className={`absolute inset-0 flex items-center justify-center bg-black/50 transition-opacity duration-300 pointer-events-none ${activeId === item.id ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>
-                    <span className="text-white text-lg font-semibold">{item.title}</span>
+                  <div className={`absolute inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm transition-opacity duration-300 pointer-events-none ${activeId === item.id ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>
+                    <img src={item.icon} alt={item.title} className="max-h-28 max-w-[85%] object-contain drop-shadow-lg" />
                   </div>
                 </div>
               </li>
