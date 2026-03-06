@@ -379,24 +379,15 @@ export default function Header() {
             {/* Right Side Actions */}
             <div className="flex items-center gap-2.5">
               {isLoggedIn ? (
-                <div className="hidden sm:flex items-center gap-2.5">
+                <div className="flex items-center gap-2.5">
                   <Link
                     href={`${LEGACY_BASE_URL}/profile.php`}
-                    className="text-sm cursor-pointer transition-colors duration-300 p-1 hover:text-brand  text-primary"
+                    className="text-lg cursor-pointer transition-colors duration-300 p-1 hover:text-brand  text-primary"
                     title="Profile"
                   >
                     <FiUser />
                   </Link>
-                  <span className="max-sm:text-sm text-primary">|</span>
-                  <a
-                    href="https://wa.me/"
-                    className="text-xl cursor-pointer transition-colors duration-300 p-1 hover:text-brand text-primary"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <FaWhatsapp />
-                  </a>
-                  <span className="max-sm:text-sm text-primary">|</span>
+                   <span className="max-sm:text-sm text-primary">|</span>
                   <Link
                     href={`${LEGACY_BASE_URL}/cart.php`}
                     className="relative text-xl cursor-pointer transition-colors duration-300 p-1 hover:text-brand text-primary"
@@ -406,14 +397,14 @@ export default function Header() {
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
-                      strokeWidth={1.7}
+                      strokeWidth="1.5"
                       stroke="currentColor"
-                      className="w-5 h-5"
+                      className="size-5"
                     >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+                        d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
                       />
                     </svg>
                     {cartCount > 0 && (
@@ -435,7 +426,17 @@ export default function Header() {
                     )}
                   </Link>
                   <span className="max-sm:text-sm text-primary">|</span>
-                  <button
+                  <a
+                    href="https://wa.me/"
+                    className="text-xl cursor-pointer transition-colors duration-300 p-1 hover:text-brand text-primary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FaWhatsapp />
+                  </a>
+                 
+                  {/* <span className="max-sm:text-sm text-primary">|</span> */}
+                  {/* <button
                     onClick={handleLogout}
                     className="text-xl cursor-pointer transition-colors duration-300 bg-transparent border-none p-1 hover:text-brand text-primary"
                     title="Logout"
@@ -454,13 +455,13 @@ export default function Header() {
                         d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
                       />
                     </svg>
-                  </button>
+                  </button> */}
                 </div>
               ) : (
                 <>
                   <Link
                     href={`${LEGACY_BASE_URL}/login.php`}
-                    className="text-sm cursor-pointer transition-colors duration-300 p-1 hover:text-brand  max-sm:p-[3px] text-primary"
+                    className="text-lg cursor-pointer transition-colors duration-300 p-1 hover:text-brand  max-sm:p-[3px] text-primary"
                     title="Login"
                   >
                     <FiUser />

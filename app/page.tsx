@@ -42,56 +42,67 @@ export default function Home() {
   useEffect(() => {
     if (skipPreloader) return;
     if (isLoaded) {
-      // Animate content in after preloader
-      gsap.fromTo(
-        ".main",
-        {
-          opacity: 0,
-        },
-        {
-          opacity: 1,
-          duration: 1,
-          ease: "power2.out",
-        },
-      );
+      gsap.fromTo(".main", { opacity: 0 }, { opacity: 1, duration: 1, ease: "power2.out" });
     }
   }, [isLoaded, skipPreloader]);
 
+  useEffect(() => {
+    // Entrance animations
+    gsap.fromTo(".cs-logo", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" });
+    gsap.fromTo(".cs-title", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out", delay: 0.5 });
+
+    // Continuous float on logo
+    gsap.to(".cs-logo", {
+      y: -10,
+      duration: 2,
+      ease: "sine.inOut",
+      yoyo: true,
+      repeat: -1,
+      delay: 0.8,
+    });
+
+    // Pulsing opacity on title
+    gsap.to(".cs-title", {
+      opacity: 0.5,
+      duration: 1.5,
+      ease: "sine.inOut",
+      yoyo: true,
+      repeat: -1,
+      delay: 1.3,
+    });
+  }, []);
+
   return (
     <div className=" ">
+      {/* COMING SOON */}
+      {/* <main className="flex flex-col items-center justify-center min-h-screen bg-white">
+        <img
+          src="/images/Haneri Logo.png"
+          alt="Ha"
+          className="cs-logo h-16 md:h-24 w-auto mx-auto mb-10 opacity-0"
+        />
+        <h1 className="cs-title text-3xl font-heading tracking-widest text-gray-700 uppercase opacity-0">
+          Coming Soon
+        </h1>
+      </main> */}
+
       {!skipPreloader && <Preloader />}
       <main className="main" style={{ opacity: skipPreloader ? 1 : 0 }}>
-        {/* <HeroSlider /> */}
-        {/* <BlowupShot /> */}
         <HeroSection />
-        
         <div className="">
           <FeaturedProductsMobile />
         </div>
-        {/* Desktop: horizontal scroll with animation (2xl and above) */}
-        {/* <div className="hidden 2xl:block overflow-x-hidden">
-          <FeaturedProducts />
-        </div> */}
-
-        {/* video Section */}
         <VideoSlider />
-
         <WhyChoose />
         <div className="container mt-8">
           <InnovationsSection />
         </div>
-
-        {/* <div className=" ">
-          <ServicesSlider />
-        </div> */}
-
         <Fancraft />
         <div className="container mt-8">
-          {/* <SteelFanSlider /> */}
-
           <BlogsSection />
         </div>
       </main>
+     
     </div>
   );
 }
