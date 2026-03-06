@@ -15,9 +15,18 @@ const DecorativeElements = () => (
     <div className="absolute top-24 right-1/3 w-24 h-24 rounded-full border border-[#CA5D27]/15 hidden lg:block" /> */}
 
     {/* Floating geometric shapes */}
-    <div className="absolute top-1/4 left-20 w-4 h-4 rotate-45 bg-[#CA5D27]/20 hidden lg:block" style={{ animation: 'floatSlow 6s ease-in-out infinite' }} />
-    <div className="absolute top-1/3 left-32 w-3 h-3 rotate-45 bg-[#315859]/15 hidden lg:block" style={{ animation: 'floatSlow 8s ease-in-out infinite 1s' }} />
-    <div className="absolute bottom-1/3 left-16 w-2 h-2 rounded-full bg-[#CA5D27]/30 hidden lg:block" style={{ animation: 'floatSlow 5s ease-in-out infinite 0.5s' }} />
+    <div
+      className="absolute top-1/4 left-20 w-4 h-4 rotate-45 bg-[#CA5D27]/20 hidden lg:block"
+      style={{ animation: "floatSlow 6s ease-in-out infinite" }}
+    />
+    <div
+      className="absolute top-1/3 left-32 w-3 h-3 rotate-45 bg-[#315859]/15 hidden lg:block"
+      style={{ animation: "floatSlow 8s ease-in-out infinite 1s" }}
+    />
+    <div
+      className="absolute bottom-1/3 left-16 w-2 h-2 rounded-full bg-[#CA5D27]/30 hidden lg:block"
+      style={{ animation: "floatSlow 5s ease-in-out infinite 0.5s" }}
+    />
 
     {/* Decorative lines */}
     <div className="absolute top-1/4 left-8 w-32 h-[2px] bg-gradient-to-r from-[#CA5D27]/30 via-[#CA5D27]/10 to-transparent hidden lg:block" />
@@ -46,7 +55,8 @@ const DecorativeElements = () => (
 
     <style jsx>{`
       @keyframes floatSlow {
-        0%, 100% {
+        0%,
+        100% {
           transform: translateY(0) rotate(45deg);
           opacity: 0.5;
         }
@@ -91,7 +101,7 @@ export default function BlowupShotClean() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     const scale = Math.min(
       canvas.width / img.width,
-      canvas.height / img.height
+      canvas.height / img.height,
     );
     const x = (canvas.width - img.width * scale) / 2;
     const y = (canvas.height - img.height * scale) / 2;
@@ -105,7 +115,7 @@ export default function BlowupShotClean() {
     currentFrameRef.current = lerp(
       currentFrameRef.current,
       targetFrameRef.current,
-      0.15
+      0.15,
     );
     render();
 
@@ -137,9 +147,10 @@ export default function BlowupShotClean() {
     // ── 1. Defer canvas setup until after first paint (text paints first) ──
     // Use requestIdleCallback (or setTimeout fallback) so the browser finishes
     // painting text / LCP content before we touch the canvas or start loading images.
-    const scheduleInit = typeof requestIdleCallback !== "undefined"
-      ? requestIdleCallback
-      : (cb: () => void) => setTimeout(cb, 1);
+    const scheduleInit =
+      typeof requestIdleCallback !== "undefined"
+        ? requestIdleCallback
+        : (cb: () => void) => setTimeout(cb, 1);
 
     scheduleInit(() => {
       setCanvasReady(true);
@@ -176,7 +187,10 @@ export default function BlowupShotClean() {
           img.onload = () => {
             // Use decode() to push bitmap decoding off the main thread
             if (img.decode) {
-              img.decode().then(() => resolve()).catch(() => resolve());
+              img
+                .decode()
+                .then(() => resolve())
+                .catch(() => resolve());
             } else {
               resolve();
             }
@@ -200,7 +214,11 @@ export default function BlowupShotClean() {
           if (nextIndex >= frameCount) return;
 
           const batch: Promise<void>[] = [];
-          for (let j = 0; j < BATCH_SIZE && nextIndex < frameCount; j++, nextIndex++) {
+          for (
+            let j = 0;
+            j < BATCH_SIZE && nextIndex < frameCount;
+            j++, nextIndex++
+          ) {
             batch.push(loadImage(nextIndex));
           }
 
@@ -227,7 +245,10 @@ export default function BlowupShotClean() {
         const rect = container.getBoundingClientRect();
         const scrollableDistance = container.offsetHeight - window.innerHeight;
         const scrolled = -rect.top;
-        const progress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
+        const progress = Math.max(
+          0,
+          Math.min(1, scrolled / scrollableDistance),
+        );
         targetFrameRef.current = progress * (frameCount - 1);
 
         startAnimating();
@@ -258,7 +279,7 @@ export default function BlowupShotClean() {
     >
       <div
         ref={stickyRef}
-        className="sticky top-0 w-full h-screen flex flex-col md:flex-row items-center justify-around md:justify-around overflow-hidden"
+        className="sticky top-0 w-full h-screen flex flex-col md:flex-row items-center justify-center md:justify-around overflow-hidden"
       >
         {/* Background decorative elements */}
         <DecorativeElements />
@@ -269,7 +290,7 @@ export default function BlowupShotClean() {
         {/* Canvas for frame animation - right on desktop, bottom on mobile */}
         <canvas
           ref={canvasRef}
-          className={`relative md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 order-1 md:order-0 transition-opacity duration-1000 ${isLoaded && canvasReady ? 'opacity-100' : 'opacity-0'}`}
+          className={`relative md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 order-1 md:order-0 transition-opacity duration-1000 ${isLoaded && canvasReady ? "opacity-100" : "opacity-0"}`}
           style={{ width: "85%", height: "40vh" }}
         />
         <style jsx>{`
@@ -312,11 +333,11 @@ export default function BlowupShotClean() {
 
               {/* Title with gradient underline accent */}
               <div className="relative">
-                <h1 className="text-2xl text-[#315859] md:text-4xl lg:text-7xl font-bold leading-tight">
+                <h1 className="text-3xl heading text-[#315859]  md:text-4xl lg:text-7xl  leading-tight">
                   Elegance in
                   <span className="block text-[#CA5D27] relative">
                     Every Breeze
-                    <span className="absolute -bottom-2 left-0 w-1/3 h-1 bg-gradient-to-r from-[#CA5D27] to-yellow-400 rounded-full hidden md:block" />
+                    {/* <span className="absolute -bottom-2 left-0 w-1/3 h-1 bg-gradient-to-r from-[#CA5D27] to-yellow-400 rounded-full hidden md:block" /> */}
                   </span>
                 </h1>
               </div>
@@ -329,7 +350,10 @@ export default function BlowupShotClean() {
                   with whisper-quiet performance.
                 </p>
                 <p className="text-sm text-gray-600 leading-relaxed md:hidden">
-                  Premium ceiling fans with whisper-quiet performance.
+                  {/* Premium ceiling fans with whisper-quiet performance. */}
+                  Experience the perfect harmony of cutting-edge technology and
+                  timeless design. Our premium ceiling fans transform your space
+                  with whisper-quiet performance.
                 </p>
               </div>
 
@@ -353,13 +377,17 @@ export default function BlowupShotClean() {
             if (containerRef.current) {
               // Find the next section after the hero by traversing up to the parent section
               const parentSection = containerRef.current.closest("section");
-              const nextSection = parentSection?.nextElementSibling ?? containerRef.current.nextElementSibling;
+              const nextSection =
+                parentSection?.nextElementSibling ??
+                containerRef.current.nextElementSibling;
               if (nextSection) {
                 nextSection.scrollIntoView({ behavior: "smooth" });
               } else {
                 // Fallback: scroll past the container
                 window.scrollTo({
-                  top: containerRef.current.offsetTop + containerRef.current.offsetHeight,
+                  top:
+                    containerRef.current.offsetTop +
+                    containerRef.current.offsetHeight,
                   behavior: "smooth",
                 });
               }

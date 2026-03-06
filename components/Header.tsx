@@ -136,9 +136,12 @@ export default function Header() {
       console.log("Cart API response:", data);
       console.log("count value:", data?.count, typeof data?.count);
 
-      if (data?.count) {
+      if (data?.count !== undefined && data?.count !== null) {
         setCartCount(data.count);
         console.log("setCartCount called with:", data.count);
+      } else if (Array.isArray(data?.data)) {
+        setCartCount(data.data.length);
+        console.log("setCartCount from data.data.length:", data.data.length);
       }
     } catch {
       // silently fail
@@ -150,6 +153,9 @@ export default function Header() {
     const authToken = localStorage.getItem("auth_token");
     setIsLoggedIn(!!authToken);
     fetchCartCount();
+
+    window.addEventListener("cartUpdated", fetchCartCount);
+    return () => window.removeEventListener("cartUpdated", fetchCartCount);
   }, []);
 
   useEffect(() => {
@@ -159,14 +165,14 @@ export default function Header() {
     return () => document.removeEventListener("click", handleClickOutside);
   }, [activeDropdown]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("auth_token");
-    localStorage.removeItem("user_name");
-    localStorage.removeItem("user_role");
-    localStorage.removeItem("user_id");
-    setIsLoggedIn(false);
-    window.location.href = `${LEGACY_BASE_URL}/login.php`;
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem("auth_token");
+  //   localStorage.removeItem("user_name");
+  //   localStorage.removeItem("user_role");
+  //   localStorage.removeItem("user_id");
+  //   setIsLoggedIn(false);
+  //   window.location.href = `${LEGACY_BASE_URL}/login.php`;
+  // };
 
   const toggleDropdown = (menu: string) => {
     setActiveDropdown(activeDropdown === menu ? null : menu);

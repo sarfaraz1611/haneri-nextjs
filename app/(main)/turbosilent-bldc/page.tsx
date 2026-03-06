@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-export default function LumiAmbience() {
+export default function TurbosilentBLDC() {
   return (
     <div className="bg-gray-50">
       <div className="mx-auto max-w-[90%] py-24 sm:px-2 sm:py-32 lg:px-4">
@@ -17,8 +17,8 @@ export default function LumiAmbience() {
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
               <Image
-                src="/images/lumi_1.png"
-                alt="LumiAmbience Technology"
+                src="/images/turbo_2.png"
+                alt="TurboSilent BLDC Technology"
                 width={800}
                 height={533}
                 className="aspect-[3/2] w-full rounded-lg bg-gray-100 object-cover lg:order-1"
@@ -32,23 +32,23 @@ export default function LumiAmbience() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
-                <span className="text-[#bb6125]">
-                  Introducing LumiAmbience Technology:{" "}
-                </span>{" "}
-                Revolutionizing Lighting with Precision
+              <h2 className="text-5xl  heading tracking-tight text-[#315858]">
+                <span className="text-[#bb6125] heading leading-16">
+                  Introducing TurboSilent BLDC:
+                </span>
+                <br />
+                Unleashing Unmatched Power and Efficiency
               </h2>
               <p
                 className="text-[16px] mt-4 font-normal text-gray-500 "
                 style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
-                At Haneri, we push the boundaries of innovation, not just in
-                cooling but also in creating holistic lifestyle solutions. Our
-                revolutionary LumiAmbience Technology transforms lighting into
-                an experience, offering unparalleled control, comfort, and a
-                sense of ease. Designed as an optional feature for select
-                ceiling fans, LumiAmbience combines advanced lighting
-                engineering with Haneri’s signature aesthetic excellence.{" "}
+                At HANERI, we redefine engineering excellence with our
+                proprietary TurboSilent BLDC Technology. This advanced motor
+                design not only delivers higher torque and exceptional
+                durability but also ensures unmatched energy efficiency, setting
+                a new benchmark for ceiling fan performance and contributing to
+                a greener environment.
               </p>
             </motion.div>
           </div>
@@ -62,21 +62,21 @@ export default function LumiAmbience() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
-                What is LumiAmbience Technology?
+              <h2 className="text-5xl heading tracking-tight text-[#315858]">
+                Why TurboSilent BLDC Technology?
               </h2>
               <p
                 className="text-[16px] mt-4 font-normal text-gray-500 "
                 style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
-                LumiAmbience Technology integrates a state-of-the-art 3-in-1 LED
-                lighting system into select Haneri ceiling fans, allowing you to
-                adapt your lighting to any mood or occasion. The system features
-                Warm White, Cool White, and Natural White light modes, each
-                engineered for specific settings. LumiAmbience stands apart with
-                its proprietary lens diffuser that ensures even light
-                distribution, eliminates harsh LED spots, and creates a soothing
-                ambience for your space.
+                TurboSilent BLDC (Brushless Direct Current) Technology is an
+                in-house developed motor system that employs high-tech
+                electromagnetic and mechanical design principles. This
+                cutting-edge innovation enhances torque delivery, minimizes
+                energy losses, and ensures extended motor lifespan. TurboSilent
+                motors are engineered to outperform conventional systems,
+                offering industry-leading reliability and precision that you can
+                trust.
               </p>
             </motion.div>
 
@@ -88,8 +88,8 @@ export default function LumiAmbience() {
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
               <Image
-                src="/images/lumi_2.png"
-                alt="LumiAmbience Technology Features"
+                src="/images/turbo_1.png"
+                alt="TurboSilent BLDC Technology Features"
                 width={800}
                 height={533}
                 className="aspect-[3/2] w-full rounded-lg bg-gray-100 object-cover"
@@ -106,8 +106,8 @@ export default function LumiAmbience() {
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
               <Image
-                src="/images/lumi_3.png"
-                alt="Key Features of LumiAmbience"
+                src="/images/turbo_3.png"
+                alt="Science Behind TurboSilent BLDC"
                 width={800}
                 height={533}
                 className="aspect-[3/2] w-full rounded-lg bg-gray-100 object-cover lg:order-1"
@@ -121,8 +121,8 @@ export default function LumiAmbience() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
-                Key Features of LumiAmbience Technology
+              <h2 className="text-5xl heading tracking-tight text-[#315858]">
+                The Science Behind TurboSilent BLDC Technology
               </h2>
 
               <motion.ul
@@ -144,18 +144,16 @@ export default function LumiAmbience() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
-                      High Air Delivery at Low RPM:{" "}
-                    </span>
+                    <span className=" heading text-[#315858] font-semibold">
+                      Electromagnetic Optimization:
+                    </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      Powered by Air Curve Design, the blades feature
-                      precision-engineered contours that maximize air
-                      displacement while optimizing drag. High torque from the
-                      TurboSilent BLDC Motor ensures efficient blade rotation,
-                      delivering consistent airflow even at reduced speeds.
+                      Uses Finite Element Analysis (FEA) to design and validate
+                      the magnetic circuit, maximizing flux density while
+                      minimizing losses.
                     </span>
                   </span>
                 </motion.li>
@@ -169,18 +167,16 @@ export default function LumiAmbience() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
-                      Ultra-Quiet Operation:{" "}
-                    </span>
+                    <span className="text-[#315858] font-semibold">
+                      Thermal Management:
+                    </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      The low RPM operation, combined with Efficient Torque
-                      output from the TurboSilent BLDC Motor, eliminates
-                      mechanical noise, creating an ultra-quiet cooling
-                      experience. Streamlined blade profiles reduce turbulence,
-                      further contributing to silent performance.
+                      Employs advanced cooling designs, including optimized
+                      ventilation paths and materials, to maintain motor
+                      efficiency under continuous operation.
                     </span>
                   </span>
                 </motion.li>
@@ -194,18 +190,18 @@ export default function LumiAmbience() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
-                      Enhanced Motor Efficiency:{" "}
-                    </span>
+                    <span className="text-[#315858] font-semibold">
+                      Smart Power Electronics:{" "}
+                    </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      TurboSilent BLDC motors utilize advanced electromagnetic
-                      design for optimal torque-to-RPM ratios, ensuring seamless
-                      operation at low speeds. The electronic controller, made
-                      in India for Indian conditions, minimizes energy losses,
-                      making the system highly efficient and cost-effective.
+                      Integrated drivers, meticulously designed for seamless
+                      operation, instil confidence with precise speed control
+                      and minimal switching losses. Advanced motor control
+                      algorithms, including Field-Oriented Control (FOC), enable
+                      precise torque and speed regulation.
                     </span>
                   </span>
                 </motion.li>
@@ -219,39 +215,19 @@ export default function LumiAmbience() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
-                      Advanced Blade Aerodynamics:{" "}
-                    </span>
+                    <span className="text-[#315858] font-semibold">
+                      Structural Engineering:{" "}
+                    </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      Blades designed with Air Curve Design use computational
-                      fluid dynamics (CFD) to optimize airflow pathways,
-                      ensuring maximum air delivery per watt of power consumed.
-                    </span>
-                  </span>
-                </motion.li>
-
-                <motion.li
-                  className="text-black flex"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
-                >
-                  <span className="mr-2">•</span>
-                  <span>
-                    <span className="text-[#315858] font-bold">
-                      Trademarked Technology:{" "}
-                    </span>
-                    <span
-                      className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
-                    >
-                      LumiAmbience Technology is a trademarked pillar of Haneri,
-                      integrating advanced lighting engineering to deliver
-                      precision illumination and refined ambience
+                      The magnet rotor dynamics are meticulously optimized,
+                      providing reassuring stability and minimizing resonance at
+                      all operating speeds. Lightweight, high-strength materials
+                      not only reduce the motor&apos;s overall weight but also
+                      enhance its durability and performance, achieving the
+                      perfect balance between these factors.
                     </span>
                   </span>
                 </motion.li>
@@ -267,8 +243,8 @@ export default function LumiAmbience() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
-              <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
-                The Science Behind LumiAmbience Technology
+              <h2 className="text-5xl heading tracking-tight text-[#315858]">
+                Unique Advantages of TurboSilent BLDC Technology
               </h2>
               <motion.ul
                 className="mt-4 space-y-3"
@@ -289,17 +265,19 @@ export default function LumiAmbience() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
-                      Advanced LED Engineering:{" "}
-                    </span>
+                    <span className="text-[#315858] font-semibold">
+                      Higher Torque for Optimized Performance :{" "}
+                    </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      LumiAmbience LEDs are crafted to produce precise colour
-                      temperatures, ensuring true-to-life illumination for each
-                      mode. High-quality diodes enhance durability and reduce
-                      power consumption, aligning with energy-saving standards.
+                      The TurboSilent motor stands out with its superior
+                      performance. It achieves higher torque through optimized
+                      magnetic flux density and reduced electromagnetic losses.
+                      Advanced stator and magnet designs enhance the torque
+                      constant (kT), providing superior air circulation, even at
+                      varying speeds.
                     </span>
                   </span>
                 </motion.li>
@@ -313,17 +291,20 @@ export default function LumiAmbience() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
-                      Proprietary Lens Diffuser Technology:{" "}
-                    </span>
+                    <span className="text-[#315858] font-semibold">
+                      Long-Term Durability :{" "}
+                    </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      The lens diffuser evenly distributes light, eliminating
-                      glare and harsh points of illumination. Optical-grade
-                      materials ensure consistent performance and long-term
-                      clarity.
+                      Designed for long-term durability, the TurboSilent motors
+                      are constructed with premium-grade laminations and
+                      heat-resistant winding materials to minimize core losses
+                      and thermal degradation. The motor is fitted with
+                      high-precision ball bearings and balanced rotor
+                      assemblies, reducing mechanical wear and extending
+                      operational life.
                     </span>
                   </span>
                 </motion.li>
@@ -337,16 +318,18 @@ export default function LumiAmbience() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
-                      Precision Circuitry:{" "}
-                    </span>
+                    <span className="text-[#315858] font-semibold">
+                      Enhanced Energy Efficiency :{" "}
+                    </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      Intelligent LED drivers enable smooth transitions between
-                      colour modes and brightness levels, offering users
-                      unparalleled control and customization.
+                      TurboSilent motors utilize sinusoidal commutation to
+                      reduce current ripple and improve efficiency. Power
+                      electronics are optimized to deliver consistent
+                      performance while consuming up to 65% less energy than
+                      traditional motors.
                     </span>
                   </span>
                 </motion.li>
@@ -360,15 +343,41 @@ export default function LumiAmbience() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
-                      Energy Optimization:{" "}
-                    </span>
+                    <span className="text-[#315858] font-semibold">
+                      Thermal Management of Electronics :{" "}
+                    </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      Advanced power management minimizes energy wastage,
-                      ensuring high brightness with low power consumption.
+                      Electronics PCBs are made in India and have been tested
+                      according to Indian conditions. A key focus is the thermal
+                      management of critical components to ensure longer life
+                      and better performance.
+                    </span>
+                  </span>
+                </motion.li>
+
+                <motion.li
+                  className="text-black flex"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
+                >
+                  <span className="mr-2">•</span>
+                  <span>
+                    <span className="text-[#315858] font-semibold">
+                      In-House Innovation and Testing :{" "}
+                    </span>{" "}
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      Developed using simulation tools for computational
+                      electromagnetic analysis (CEM). Rigorously validated under
+                      real-world conditions to ensure robustness across a wide
+                      range of operating environments.
                     </span>
                   </span>
                 </motion.li>
@@ -378,54 +387,40 @@ export default function LumiAmbience() {
 
           {/* Why Choose Section */}
           <motion.div
-            className="mt-15"
+            className="sm_h c01 mt-20 flex flex-col items-start"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <h2 className="text-4xl font-semibold tracking-tight text-[#315858] mb-4">
-              Why Choose Haneri LumiAmbience Ceiling Fans?
-            </h2>
-            <p
+            <motion.h2
+              className="text-5xl heading tracking-tight text-[#315858] mb-1"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+            >
+              Why Choose HANERI TurboSilent Ceiling Fans?
+            </motion.h2>
+            <motion.p
               className="text-[16px] mt-4 font-normal text-gray-500 "
               style={{ fontFamily: "'Montserrat', sans-serif" }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
             >
-              LumiAmbience Technology redefines what lighting can achieve,
-              delivering advanced functionality and unparalleled comfort. With
-              its unique lens diffuser, customizable colour options, and
-              seamless integration with Haneri ceiling fans, LumiAmbience sets a
-              new standard in lighting innovation. It&apos;s not just about
-              illumination—it&apos;s about creating the perfect atmosphere for
-              every moment.
-            </p>
+              HANERI'S TurboSilent BLDC Technology offers a sophisticated
+              combination of engineering precision and operational excellence.
+              Focusing on high torque, energy savings, and durability,
+              TurboSilent motors set the gold standard in modern ceiling fan
+              design.
+            </motion.p>
           </motion.div>
 
-          {/* Experience Section */}
-          <motion.div
-            className="mt-15"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-          >
-            <h2 className="text-4xl font-semibold tracking-tight text-[#315858] mb-4">
-              Experience LumiAmbience Technology Today!
-            </h2>
-            <p
-              className="text-[16px] mt-4 font-normal text-gray-500 "
-              style={{ fontFamily: "'Montserrat', sans-serif" }}
-            >
-              Transform your space with Haneri&apos;s LumiAmbience-enabled
-              ceiling fans. Experience lighting that adapts to your mood and
-              lifestyle with the added elegance of Haneri&apos;s cutting-edge
-              design. Choose LumiAmbience Technology—where innovation meets
-              ambience and lighting meets perfection.
-            </p>
-          </motion.div>
-
+          {/* Benefits For Customers Section */}
           <div className="mt-20 flex flex-col items-start">
-            <h2 className="text-4xl  mb-10 font-semibold  tracking-tight text-[#315858]">
+            <h2 className="text-5xl  mb-10 heading  tracking-tight text-[#315858]">
               Benefits for Customers
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2  gap-8 w-full">
@@ -520,12 +515,12 @@ export default function LumiAmbience() {
                 />
                 <div>
                   <h3 className="text-xl font-semibold text-[#CA5C27]">
-                    Ambient Illumination
+                    Quiet Operation
                   </h3>
                   <p className="mt-2 text-black">
-                    Integrated ambient lighting that delivers soft, balanced
-                    illumination - enhancing mood, visual comfort, and modern
-                    interiors with seamless precision.
+                    Reduced turbulence and noise make Silent HASS ideal for
+                    bedrooms, offices, and libraries where silence is a
+                    priority.
                   </p>
                 </div>
               </motion.div>

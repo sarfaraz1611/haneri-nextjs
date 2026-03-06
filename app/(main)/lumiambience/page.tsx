@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-export default function SCANTechnology() {
+export default function LumiAmbience() {
   return (
     <div className="bg-gray-50">
       <div className="mx-auto max-w-[90%] py-24 sm:px-2 sm:py-32 lg:px-4">
@@ -17,8 +17,8 @@ export default function SCANTechnology() {
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
               <Image
-                src="/images/scan_1.png"
-                alt="SCAN Technology"
+                src="/images/lumi_1.png"
+                alt="LumiAmbience Technology"
                 width={800}
                 height={533}
                 className="aspect-[3/2] w-full rounded-lg bg-gray-100 object-cover lg:order-1"
@@ -32,25 +32,23 @@ export default function SCANTechnology() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
-                <span className="text-[#315858]">
-                  Discover the Future of Fan with:
-                </span>
-                <br />
-                <span className="text-[#bb6125]">SCAN Technology</span>
+              <h2 className="text-5xl heading tracking-tight text-[#315858]">
+                <span className="text-[#bb6125]">
+                  Introducing LumiAmbience Technology:{" "}
+                </span>{" "}
+                Revolutionizing Lighting with Precision
               </h2>
               <p
                 className="text-[16px] mt-4 font-normal text-gray-500 "
                 style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
-                At HANERI, we've combined innovation with convenience in our
-                state-of-the-art SCAN Technology (Smooth Control , Advanced
-                Navigation). This technology, designed for the modern home,
-                redefines your interaction with ceiling fans, offering an
-                optional LED light for added convenience. With its sleek
-                aesthetics and advanced functionality, this futuristic remote
-                controller ensures seamless control, an enhanced user
-                experience, and cutting-edge technology, all at your fingertips.
+                At Haneri, we push the boundaries of innovation, not just in
+                cooling but also in creating holistic lifestyle solutions. Our
+                revolutionary LumiAmbience Technology transforms lighting into
+                an experience, offering unparalleled control, comfort, and a
+                sense of ease. Designed as an optional feature for select
+                ceiling fans, LumiAmbience combines advanced lighting
+                engineering with Haneri’s signature aesthetic excellence.{" "}
               </p>
             </motion.div>
           </div>
@@ -64,19 +62,21 @@ export default function SCANTechnology() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
-                What is SCAN Technology?
+              <h2 className="text-5xl heading tracking-tight text-[#315858]">
+                What is LumiAmbience Technology?
               </h2>
               <p
                 className="text-[16px] mt-4 font-normal text-gray-500 "
                 style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
-                SCAN Technology is a next-generation radio frequency (RF)
-                control system that offers unparalleled convenience and
-                precision when operating ceiling fans. With advanced control
-                features such as speed adjustment, lighting control, timer
-                settings, and unique operating modes, SCAN Technology brings
-                futuristic functionality into the palm of your hand.
+                LumiAmbience Technology integrates a state-of-the-art 3-in-1 LED
+                lighting system into select Haneri ceiling fans, allowing you to
+                adapt your lighting to any mood or occasion. The system features
+                Warm White, Cool White, and Natural White light modes, each
+                engineered for specific settings. LumiAmbience stands apart with
+                its proprietary lens diffuser that ensures even light
+                distribution, eliminates harsh LED spots, and creates a soothing
+                ambience for your space.
               </p>
             </motion.div>
 
@@ -88,8 +88,8 @@ export default function SCANTechnology() {
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
               <Image
-                src="/images/scan_2.png"
-                alt="SCAN Technology Features"
+                src="/images/lumi_2.png"
+                alt="LumiAmbience Technology Features"
                 width={800}
                 height={533}
                 className="aspect-[3/2] w-full rounded-lg bg-gray-100 object-cover"
@@ -106,8 +106,8 @@ export default function SCANTechnology() {
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
               <Image
-                src="/images/scan_3.png"
-                alt="Key Features of SCAN Technology"
+                src="/images/lumi_3.png"
+                alt="Key Features of LumiAmbience"
                 width={800}
                 height={533}
                 className="aspect-[3/2] w-full rounded-lg bg-gray-100 object-cover lg:order-1"
@@ -121,12 +121,12 @@ export default function SCANTechnology() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
-                Key Features of SCAN Technology
+              <h2 className="text-5xl heading tracking-tight text-[#315858]">
+                Key Features of LumiAmbience Technology
               </h2>
 
               <motion.ul
-                className="mt-4 space-y-2"
+                className="mt-4 space-y-3"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -145,15 +145,17 @@ export default function SCANTechnology() {
                   <span className="mr-2">•</span>
                   <span>
                     <span className="text-[#315858] font-bold">
-                      Futuristic Design:{" "}
+                      High Air Delivery at Low RPM:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      The SCAN remote controller, with its ergonomic design,
-                      intuitive button placement, and sleek, modern look, offers
-                      a convenient and comfortable user experience.
+                      Powered by Air Curve Design, the blades feature
+                      precision-engineered contours that maximize air
+                      displacement while optimizing drag. High torque from the
+                      TurboSilent BLDC Motor ensures efficient blade rotation,
+                      delivering consistent airflow even at reduced speeds.
                     </span>
                   </span>
                 </motion.li>
@@ -168,45 +170,17 @@ export default function SCANTechnology() {
                   <span className="mr-2">•</span>
                   <span>
                     <span className="text-[#315858] font-bold">
-                      Comprehensive Fan Control:{" "}
+                      Ultra-Quiet Operation:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      Effortlessly adjust fan speed across multiple levels,
-                      giving you complete control over your cooling experience.
-                      Includes two unique modes: Breeze Mode Simulates natural
-                      airflow patterns, creating a relaxing and refreshing
-                      environment. Turbo Speed Mode Activates maximum fan speed
-                      for quick and powerful cooling.
-                    </span>
-                    <br />
-                    <span className="mr-2">•</span>
-                    <span
-                      className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
-                    >
-                      <span className="text-[#315858] font-bold">
-                        {" "}
-                        Breeze Mode:{" "}
-                      </span>{" "}
-                      Simulates natural airflow patterns, creating a relaxing
-                      and refreshing environment.
-                    </span>
-
-                    <br />
-                    <span className="mr-2">•</span>
-                    <span
-                      className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
-                    >
-                      <span className="text-[#315858] font-bold">
-                        {" "}
-                        Turbo Speed Mode:{" "}
-                      </span>
-                      Activates maximum fan speed for quick and powerful
-                      cooling.
+                      The low RPM operation, combined with Efficient Torque
+                      output from the TurboSilent BLDC Motor, eliminates
+                      mechanical noise, creating an ultra-quiet cooling
+                      experience. Streamlined blade profiles reduce turbulence,
+                      further contributing to silent performance.
                     </span>
                   </span>
                 </motion.li>
@@ -221,15 +195,17 @@ export default function SCANTechnology() {
                   <span className="mr-2">•</span>
                   <span>
                     <span className="text-[#315858] font-bold">
-                      LED Light Integration:{" "}
+                      Enhanced Motor Efficiency:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      Control LED lights (where available) with the same remote,
-                      including switching on/off and adjusting colour tones when
-                      paired with Haneri’s LumiAmbience Technology.
+                      TurboSilent BLDC motors utilize advanced electromagnetic
+                      design for optimal torque-to-RPM ratios, ensuring seamless
+                      operation at low speeds. The electronic controller, made
+                      in India for Indian conditions, minimizes energy losses,
+                      making the system highly efficient and cost-effective.
                     </span>
                   </span>
                 </motion.li>
@@ -244,14 +220,15 @@ export default function SCANTechnology() {
                   <span className="mr-2">•</span>
                   <span>
                     <span className="text-[#315858] font-bold">
-                      Advanced Timer Functionality:{" "}
+                      Advanced Blade Aerodynamics:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      Set customized timers for fan operation, enabling
-                      automated shut-off and improved energy efficiency.
+                      Blades designed with Air Curve Design use computational
+                      fluid dynamics (CFD) to optimize airflow pathways,
+                      ensuring maximum air delivery per watt of power consumed.
                     </span>
                   </span>
                 </motion.li>
@@ -266,39 +243,15 @@ export default function SCANTechnology() {
                   <span className="mr-2">•</span>
                   <span>
                     <span className="text-[#315858] font-bold">
-                      Reliable Radio Frequency Control:{" "}
+                      Trademarked Technology:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      The SCAN remote controller operates on advanced RF
-                      technology, ensuring reliable control from greater
-                      distances without requiring line-of-sight. This gives you
-                      a secure and confident experience, and it eliminates
-                      signal interference for a smooth and responsive
-                      experience.
-                    </span>
-                  </span>
-                </motion.li>
-                <motion.li
-                  className="text-black flex"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
-                >
-                  <span className="mr-2">•</span>
-                  <span>
-                    <span className="text-[#315858] font-bold">
-                      Power Efficiency:{" "}
-                    </span>
-                    <span
-                      className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
-                    >
-                      Low-power RF communication ensures extended battery life
-                      for the remote controller.
+                      LumiAmbience Technology is a trademarked pillar of Haneri,
+                      integrating advanced lighting engineering to deliver
+                      precision illumination and refined ambience
                     </span>
                   </span>
                 </motion.li>
@@ -314,8 +267,8 @@ export default function SCANTechnology() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
-              <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
-                The Science behind SCAN Technology
+              <h2 className="text-5xl    heading tracking-tight text-[#315858]">
+                The Science Behind LumiAmbience Technology
               </h2>
               <motion.ul
                 className="mt-4 space-y-3"
@@ -336,17 +289,17 @@ export default function SCANTechnology() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
-                      Radio Frequency (RF) Innovation:{" "}
+                    <span className="text-[#315858] font-bold">
+                      Advanced LED Engineering:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      Operates on robust RF bands to provide uninterrupted
-                      control even through walls or obstructions. Advanced
-                      signal encoding prevents interference from other wireless
-                      devices, ensuring reliability.
+                      LumiAmbience LEDs are crafted to produce precise colour
+                      temperatures, ensuring true-to-life illumination for each
+                      mode. High-quality diodes enhance durability and reduce
+                      power consumption, aligning with energy-saving standards.
                     </span>
                   </span>
                 </motion.li>
@@ -360,17 +313,17 @@ export default function SCANTechnology() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
-                      Integrated Microcontroller System:{" "}
+                    <span className="text-[#315858] font-bold">
+                      Proprietary Lens Diffuser Technology:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      Embedded microcontroller units (MCUs) process user inputs
-                      for instantaneous response. The system supports
-                      multi-functional commands, enabling simultaneous fan speed
-                      and light adjustments.
+                      The lens diffuser evenly distributes light, eliminating
+                      glare and harsh points of illumination. Optical-grade
+                      materials ensure consistent performance and long-term
+                      clarity.
                     </span>
                   </span>
                 </motion.li>
@@ -384,16 +337,16 @@ export default function SCANTechnology() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
-                      Energy Optimization:{" "}
+                    <span className="text-[#315858] font-bold">
+                      Precision Circuitry:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      Timer algorithms and innovative sleep modes ensure
-                      energy-efficient operation of both the remote and
-                      connected devices.
+                      Intelligent LED drivers enable smooth transitions between
+                      colour modes and brightness levels, offering users
+                      unparalleled control and customization.
                     </span>
                   </span>
                 </motion.li>
@@ -407,17 +360,15 @@ export default function SCANTechnology() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
-                      Multi-Mode Control Logic:{" "}
+                    <span className="text-[#315858] font-bold">
+                      Energy Optimization:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      Breeze Mode, powered by dynamic speed variation
-                      algorithms, mimics natural airflow.
-                      <br /> Turbo Mode Leverages direct motor communication to
-                      maximize fan performance instantly.
+                      Advanced power management minimizes energy wastage,
+                      ensuring high brightness with low power consumption.
                     </span>
                   </span>
                 </motion.li>
@@ -425,8 +376,56 @@ export default function SCANTechnology() {
             </motion.div>
           </div>
 
+          {/* Why Choose Section */}
+          <motion.div
+            className="mt-15"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <h2 className="text-5xl heading tracking-tight text-[#315858] mb-4">
+              Why Choose Haneri LumiAmbience Ceiling Fans?
+            </h2>
+            <p
+              className="text-[16px] mt-4 font-normal text-gray-500 "
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
+            >
+              LumiAmbience Technology redefines what lighting can achieve,
+              delivering advanced functionality and unparalleled comfort. With
+              its unique lens diffuser, customizable colour options, and
+              seamless integration with Haneri ceiling fans, LumiAmbience sets a
+              new standard in lighting innovation. It&apos;s not just about
+              illumination—it&apos;s about creating the perfect atmosphere for
+              every moment.
+            </p>
+          </motion.div>
+
+          {/* Experience Section */}
+          <motion.div
+            className="mt-15"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+          >
+            <h2 className="text-5xl heading tracking-tight text-[#315858] mb-4">
+              Experience LumiAmbience Technology Today!
+            </h2>
+            <p
+              className="text-[16px] mt-4 font-normal text-gray-500 "
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
+            >
+              Transform your space with Haneri&apos;s LumiAmbience-enabled
+              ceiling fans. Experience lighting that adapts to your mood and
+              lifestyle with the added elegance of Haneri&apos;s cutting-edge
+              design. Choose LumiAmbience Technology—where innovation meets
+              ambience and lighting meets perfection.
+            </p>
+          </motion.div>
+
           <div className="mt-20 flex flex-col items-start">
-            <h2 className="text-4xl  mb-10 font-semibold  tracking-tight text-[#315858]">
+            <h2 className="text-5xl  mb-10 heading  tracking-tight text-[#315858]">
               Benefits for Customers
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2  gap-8 w-full">
@@ -521,10 +520,12 @@ export default function SCANTechnology() {
                 />
                 <div>
                   <h3 className="text-xl font-semibold text-[#CA5C27]">
-               Effortless Precision Control
+                    Ambient Illumination
                   </h3>
                   <p className="mt-2 text-black">
-                   Seamless remote control functionality enhances convenience and precision for everyday use.
+                    Integrated ambient lighting that delivers soft, balanced
+                    illumination - enhancing mood, visual comfort, and modern
+                    interiors with seamless precision.
                   </p>
                 </div>
               </motion.div>

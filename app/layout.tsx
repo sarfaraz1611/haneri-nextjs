@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Open_Sans, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -40,11 +38,7 @@ export default function RootLayout({
       className={`${openSans.variable} ${barlowCondensed.variable}`}
     >
       <body>
-        <div className="page-wrapper">
-          <Header />
-          {children}
-          <Footer />
-        </div>
+        {children}
       </body>
     </html>
   );

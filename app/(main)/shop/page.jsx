@@ -581,7 +581,7 @@ function RecommendedProducts({ currentProductIds, onAddToCart, addingToCart, add
 
   return (
     <section className="mt-12 border-t border-gray-200 pt-10 pb-8">
-      <h2 className="text-2xl font-bold tracking-tight text-[#315858] mb-6">
+      <h2 className="heading  md:text-[30px] xl:text-4xl tracking-tight text-[#315858] mb-6">
         Recommended Products
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4 w-full">
@@ -741,6 +741,7 @@ function ShopPageContent() {
           localStorage.setItem("temp_id", res.data.data.user_id);
         }
         setAddedToCart((prev) => new Set(prev).add(cartKey));
+        window.dispatchEvent(new Event("cartUpdated"));
         showFlash("Item added to cart!");
       } else {
         showFlash("Failed to add to cart", "#ffeaea", "#ff0000");
@@ -827,7 +828,7 @@ function ShopPageContent() {
       <main className=" pt-20">
         {/* Header */}
         <div className="flex z-20 items-baseline justify-between border-b border-gray-200 pt-6 pb-6 sticky top-[60px] md:top-[70px] bg-white ">
-          <h1 className="text-[20px]  md:text-[30px] xl:text-4xl font-bold tracking-tight text-[#315858]">
+          <h1 className=" heading text-[20px]  md:text-[30px] xl:text-4xl  tracking-tight text-[#315858]">
             Our Products
           </h1>
 

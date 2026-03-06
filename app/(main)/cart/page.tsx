@@ -107,6 +107,7 @@ export default function CartPage() {
           item.id === itemId ? { ...item, quantity: newQuantity } : item,
         ),
       );
+      window.dispatchEvent(new Event("cartUpdated"));
       setFlash({ type: "success", message: "Cart updated" });
     } catch (error) {
       console.error("Error updating cart:", error);
@@ -133,6 +134,7 @@ export default function CartPage() {
       });
 
       setCartItems((prev) => prev.filter((item) => item.id !== itemId));
+      window.dispatchEvent(new Event("cartUpdated"));
       setFlash({ type: "success", message: "Item removed from cart" });
     } catch (error) {
       console.error("Error removing item:", error);

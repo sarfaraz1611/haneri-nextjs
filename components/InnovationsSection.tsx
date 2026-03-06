@@ -85,7 +85,7 @@ export default function InnovationsSection() {
       className="py-2 max-[1199px]:relative"
       aria-label="Innovations that take Haneri further"
     >
-      <div className="container">
+      <div className="">
         {/* <div className="container mx-auto px-4 max-[1199px]:sticky max-[1199px]:top-0 max-[1199px]:bg-white max-[1199px]:h-screen max-[1199px]:flex max-[1199px]:flex-col max-[1199px]:justify-center max-[1199px]:z-30"> */}
         <h2 className="heading_1 mb-6">Innovations that take Haneri further</h2>
 

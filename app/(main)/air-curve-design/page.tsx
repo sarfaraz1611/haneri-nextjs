@@ -32,8 +32,8 @@ export default function AirCurveDesign() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-4xl tracking-tight  text-[#315858]">
-                <span className="text-[#bb6125] font-semibold mb-1 text-4xl  tracking-tight">
+              <h2 className="text-5xl  heading tracking-tight  text-[#315858]">
+                <span className="heading text-[#bb6125] mb-1 text-5xl  tracking-tight">
                   Introducing Air Curve Design:
                 </span>
                 <br />
@@ -64,7 +64,7 @@ export default function AirCurveDesign() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-4xl font-semibold  tracking-tight text-[#315858]">
+              <h2 className="text-5xl heading  tracking-tight text-[#315858]">
                 What is Air Curve Design?
               </h2>
               <p
@@ -100,7 +100,7 @@ export default function AirCurveDesign() {
 
           {/* Key Features Section */}
           <div className="mt-20">
-            <h2 className="text-4xl  mb-10 font-semibold  tracking-tight text-[#315858]">
+            <h2 className="text-5xl heading mb-10   tracking-tight text-[#315858]">
               Key Features of Air Curve Design
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -264,7 +264,7 @@ export default function AirCurveDesign() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
+              <h2 className="text-5xl heading tracking-tight text-[#315858]">
                 The Science Behind Air Curve Design
               </h2>
 
@@ -354,7 +354,7 @@ export default function AirCurveDesign() {
 
           {/* Benefits For Customers Section */}
           <div className="mt-20 flex flex-col items-start">
-            <h2 className="text-4xl  mb-10 font-semibold  tracking-tight text-[#315858]">
+            <h2 className="text-5xl  mb-10 heading  tracking-tight text-[#315858]">
               Benefits for Customers
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2  gap-8 w-full">

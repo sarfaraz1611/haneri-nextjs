@@ -32,8 +32,8 @@ export default function SilentHASS() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-4xl tracking-tight text-[#315858] xl:max-w-3/4">
-                <span className="text-[#bb6125] font-semibold">
+              <h2 className="text-5xl  heading tracking-tight text-[#315858] xl:max-w-3/4">
+                <span className="text-[#bb6125] heading">
                   Introducing HASS Technology:{" "}
                 </span>
                 {/* <br /> */}
@@ -65,7 +65,7 @@ export default function SilentHASS() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
+              <h2 className="text-5xl heading tracking-tight text-[#315858]">
                 What is HASS Technology?{" "}
               </h2>
               <p
@@ -123,7 +123,7 @@ export default function SilentHASS() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
+              <h2 className="text-5xl heading tracking-tight text-[#315858]">
                 Key Features of HASS Technology
               </h2>
 
@@ -270,7 +270,7 @@ export default function SilentHASS() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
-              <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
+              <h2 className="text-5xl heading tracking-tight text-[#315858]">
                 The Science Behind HASS Technology
               </h2>
               <motion.ul
@@ -401,7 +401,7 @@ export default function SilentHASS() {
           </div>
           {/* Benefits For Customers Section */}
           <div className="mt-20 flex flex-col items-start">
-            <h2 className="text-4xl  mb-10 font-semibold  tracking-tight text-[#315858]">
+            <h2 className="text-5xl  mb-10 heading  tracking-tight text-[#315858]">
               Benefits for Customers
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2  gap-8 w-full">

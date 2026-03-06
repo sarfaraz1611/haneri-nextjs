@@ -300,6 +300,7 @@ export default function FeaturedProducts() {
           localStorage.setItem("temp_id", data.data.user_id);
         }
         setAddedToCart((prev) => new Set(prev).add(productId));
+        window.dispatchEvent(new Event("cartUpdated"));
       } else {
         alert(data.message || "Failed to add to cart");
       }

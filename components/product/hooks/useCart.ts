@@ -67,6 +67,7 @@ export function useCart({
           localStorage.setItem("temp_id", data.data.user_id);
         }
         setAddedToCart(true);
+        window.dispatchEvent(new Event("cartUpdated"));
       }
     } catch (error) {
       console.error("Error adding to cart:", error);

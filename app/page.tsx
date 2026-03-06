@@ -2,20 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { gsap } from "gsap";
-import BlowupShot from "@/components/BlowupShot";
-import FeaturedProducts from "@/components/FeaturedProducts";
-import FeaturedProductsMobile from "@/components/FeaturedProductsMobile";
-import InnovationsSection from "@/components/InnovationsSection";
-import ServicesSlider from "@/components/ServicesSlider";
-import SteelFanSlider from "@/components/SteelFanSlider";
-import WhyChoose from "@/components/WhyChoose";
-import Fancraft from "@/components/Fancraft";
-import BlogsSection from "@/components/BlogsSection";
-import Preloader from "@/components/Preloader";
-// import HeroSlider from "@/components/HeroSlider";
-import HeroSection from "@/components/HeroSection";
-// import HeroSlider from "@/components/HeroSlider";
-import VideoSlider from "@/components/VideoSlider";
+
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -75,7 +62,7 @@ export default function Home() {
   return (
     <div className=" ">
       {/* COMING SOON */}
-      {/* <main className="flex flex-col items-center justify-center min-h-screen bg-white">
+      <main className="flex flex-col items-center justify-center min-h-screen bg-white">
         <img
           src="/images/Haneri Logo.png"
           alt="Ha"
@@ -84,25 +71,7 @@ export default function Home() {
         <h1 className="cs-title text-3xl font-heading tracking-widest text-gray-700 uppercase opacity-0">
           Coming Soon
         </h1>
-      </main> */}
-
-      {!skipPreloader && <Preloader />}
-      <main className="main" style={{ opacity: skipPreloader ? 1 : 0 }}>
-        <HeroSection />
-        <div className="">
-          <FeaturedProductsMobile />
-        </div>
-        <VideoSlider />
-        <WhyChoose />
-        <div className="container mt-8">
-          <InnovationsSection />
-        </div>
-        <Fancraft />
-        <div className="container mt-8">
-          <BlogsSection />
-        </div>
       </main>
-     
     </div>
   );
 }

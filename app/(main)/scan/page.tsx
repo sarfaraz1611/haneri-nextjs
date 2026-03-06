@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-export default function TurbosilentBLDC() {
+export default function SCANTechnology() {
   return (
     <div className="bg-gray-50">
       <div className="mx-auto max-w-[90%] py-24 sm:px-2 sm:py-32 lg:px-4">
@@ -17,8 +17,8 @@ export default function TurbosilentBLDC() {
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
               <Image
-                src="/images/turbo_2.png"
-                alt="TurboSilent BLDC Technology"
+                src="/images/scan_1.png"
+                alt="SCAN Technology"
                 width={800}
                 height={533}
                 className="aspect-[3/2] w-full rounded-lg bg-gray-100 object-cover lg:order-1"
@@ -32,23 +32,25 @@ export default function TurbosilentBLDC() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-4xl tracking-tight text-[#315858]">
-                <span className="text-[#bb6125] font-semibold leading-16">
-                  Introducing TurboSilent BLDC:
+              <h2 className="text-5xl heading tracking-tight text-[#315858]">
+                <span className="text-[#315858]">
+                  Discover the Future of Fan with:
                 </span>
                 <br />
-                Unleashing Unmatched Power and Efficiency
+                <span className="text-[#bb6125]">SCAN Technology</span>
               </h2>
               <p
                 className="text-[16px] mt-4 font-normal text-gray-500 "
                 style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
-                At HANERI, we redefine engineering excellence with our
-                proprietary TurboSilent BLDC Technology. This advanced motor
-                design not only delivers higher torque and exceptional
-                durability but also ensures unmatched energy efficiency, setting
-                a new benchmark for ceiling fan performance and contributing to
-                a greener environment.
+                At HANERI, we've combined innovation with convenience in our
+                state-of-the-art SCAN Technology (Smooth Control , Advanced
+                Navigation). This technology, designed for the modern home,
+                redefines your interaction with ceiling fans, offering an
+                optional LED light for added convenience. With its sleek
+                aesthetics and advanced functionality, this futuristic remote
+                controller ensures seamless control, an enhanced user
+                experience, and cutting-edge technology, all at your fingertips.
               </p>
             </motion.div>
           </div>
@@ -62,21 +64,19 @@ export default function TurbosilentBLDC() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
-                Why TurboSilent BLDC Technology?
+              <h2 className="text-5xl heading tracking-tight text-[#315858]">
+                What is SCAN Technology?
               </h2>
               <p
                 className="text-[16px] mt-4 font-normal text-gray-500 "
                 style={{ fontFamily: "'Montserrat', sans-serif" }}
               >
-                TurboSilent BLDC (Brushless Direct Current) Technology is an
-                in-house developed motor system that employs high-tech
-                electromagnetic and mechanical design principles. This
-                cutting-edge innovation enhances torque delivery, minimizes
-                energy losses, and ensures extended motor lifespan. TurboSilent
-                motors are engineered to outperform conventional systems,
-                offering industry-leading reliability and precision that you can
-                trust.
+                SCAN Technology is a next-generation radio frequency (RF)
+                control system that offers unparalleled convenience and
+                precision when operating ceiling fans. With advanced control
+                features such as speed adjustment, lighting control, timer
+                settings, and unique operating modes, SCAN Technology brings
+                futuristic functionality into the palm of your hand.
               </p>
             </motion.div>
 
@@ -88,8 +88,8 @@ export default function TurbosilentBLDC() {
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
               <Image
-                src="/images/turbo_1.png"
-                alt="TurboSilent BLDC Technology Features"
+                src="/images/scan_2.png"
+                alt="SCAN Technology Features"
                 width={800}
                 height={533}
                 className="aspect-[3/2] w-full rounded-lg bg-gray-100 object-cover"
@@ -106,8 +106,8 @@ export default function TurbosilentBLDC() {
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
               <Image
-                src="/images/turbo_3.png"
-                alt="Science Behind TurboSilent BLDC"
+                src="/images/scan_3.png"
+                alt="Key Features of SCAN Technology"
                 width={800}
                 height={533}
                 className="aspect-[3/2] w-full rounded-lg bg-gray-100 object-cover lg:order-1"
@@ -121,12 +121,12 @@ export default function TurbosilentBLDC() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
-                The Science Behind TurboSilent BLDC Technology
+              <h2 className="text-5xl heading  tracking-tight text-[#315858]">
+                Key Features of SCAN Technology
               </h2>
 
               <motion.ul
-                className="mt-4 space-y-3"
+                className="mt-4 space-y-2"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -144,16 +144,16 @@ export default function TurbosilentBLDC() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
-                      Electromagnetic Optimization:
-                    </span>{" "}
+                    <span className="text-[#315858] font-bold">
+                      Futuristic Design:{" "}
+                    </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      Uses Finite Element Analysis (FEA) to design and validate
-                      the magnetic circuit, maximizing flux density while
-                      minimizing losses.
+                      The SCAN remote controller, with its ergonomic design,
+                      intuitive button placement, and sleek, modern look, offers
+                      a convenient and comfortable user experience.
                     </span>
                   </span>
                 </motion.li>
@@ -167,16 +167,46 @@ export default function TurbosilentBLDC() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
-                      Thermal Management:
-                    </span>{" "}
+                    <span className="text-[#315858] font-bold">
+                      Comprehensive Fan Control:{" "}
+                    </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      Employs advanced cooling designs, including optimized
-                      ventilation paths and materials, to maintain motor
-                      efficiency under continuous operation.
+                      Effortlessly adjust fan speed across multiple levels,
+                      giving you complete control over your cooling experience.
+                      Includes two unique modes: Breeze Mode Simulates natural
+                      airflow patterns, creating a relaxing and refreshing
+                      environment. Turbo Speed Mode Activates maximum fan speed
+                      for quick and powerful cooling.
+                    </span>
+                    <br />
+                    <span className="mr-2">•</span>
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      <span className="text-[#315858] font-bold">
+                        {" "}
+                        Breeze Mode:{" "}
+                      </span>{" "}
+                      Simulates natural airflow patterns, creating a relaxing
+                      and refreshing environment.
+                    </span>
+
+                    <br />
+                    <span className="mr-2">•</span>
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      <span className="text-[#315858] font-bold">
+                        {" "}
+                        Turbo Speed Mode:{" "}
+                      </span>
+                      Activates maximum fan speed for quick and powerful
+                      cooling.
                     </span>
                   </span>
                 </motion.li>
@@ -190,18 +220,16 @@ export default function TurbosilentBLDC() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
-                      Smart Power Electronics:{" "}
-                    </span>{" "}
+                    <span className="text-[#315858] font-bold">
+                      LED Light Integration:{" "}
+                    </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      Integrated drivers, meticulously designed for seamless
-                      operation, instil confidence with precise speed control
-                      and minimal switching losses. Advanced motor control
-                      algorithms, including Field-Oriented Control (FOC), enable
-                      precise torque and speed regulation.
+                      Control LED lights (where available) with the same remote,
+                      including switching on/off and adjusting colour tones when
+                      paired with Haneri’s LumiAmbience Technology.
                     </span>
                   </span>
                 </motion.li>
@@ -215,19 +243,62 @@ export default function TurbosilentBLDC() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
-                      Structural Engineering:{" "}
-                    </span>{" "}
+                    <span className="text-[#315858] font-bold">
+                      Advanced Timer Functionality:{" "}
+                    </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      The magnet rotor dynamics are meticulously optimized,
-                      providing reassuring stability and minimizing resonance at
-                      all operating speeds. Lightweight, high-strength materials
-                      not only reduce the motor&apos;s overall weight but also
-                      enhance its durability and performance, achieving the
-                      perfect balance between these factors.
+                      Set customized timers for fan operation, enabling
+                      automated shut-off and improved energy efficiency.
+                    </span>
+                  </span>
+                </motion.li>
+
+                <motion.li
+                  className="text-black flex"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
+                >
+                  <span className="mr-2">•</span>
+                  <span>
+                    <span className="text-[#315858] font-bold">
+                      Reliable Radio Frequency Control:{" "}
+                    </span>
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      The SCAN remote controller operates on advanced RF
+                      technology, ensuring reliable control from greater
+                      distances without requiring line-of-sight. This gives you
+                      a secure and confident experience, and it eliminates
+                      signal interference for a smooth and responsive
+                      experience.
+                    </span>
+                  </span>
+                </motion.li>
+                <motion.li
+                  className="text-black flex"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
+                >
+                  <span className="mr-2">•</span>
+                  <span>
+                    <span className="text-[#315858] font-bold">
+                      Power Efficiency:{" "}
+                    </span>
+                    <span
+                      className="text-[16px] font-normal text-gray-500 "
+                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                    >
+                      Low-power RF communication ensures extended battery life
+                      for the remote controller.
                     </span>
                   </span>
                 </motion.li>
@@ -243,8 +314,8 @@ export default function TurbosilentBLDC() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
-              <h2 className="text-4xl font-semibold tracking-tight text-[#315858]">
-                Unique Advantages of TurboSilent BLDC Technology
+              <h2 className="text-5xl heading  tracking-tight text-[#315858]">
+                The Science behind SCAN Technology
               </h2>
               <motion.ul
                 className="mt-4 space-y-3"
@@ -266,18 +337,16 @@ export default function TurbosilentBLDC() {
                   <span className="mr-2">•</span>
                   <span>
                     <span className="text-[#315858] font-semibold">
-                      Higher Torque for Optimized Performance :{" "}
-                    </span>{" "}
+                      Radio Frequency (RF) Innovation:{" "}
+                    </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      The TurboSilent motor stands out with its superior
-                      performance. It achieves higher torque through optimized
-                      magnetic flux density and reduced electromagnetic losses.
-                      Advanced stator and magnet designs enhance the torque
-                      constant (kT), providing superior air circulation, even at
-                      varying speeds.
+                      Operates on robust RF bands to provide uninterrupted
+                      control even through walls or obstructions. Advanced
+                      signal encoding prevents interference from other wireless
+                      devices, ensuring reliability.
                     </span>
                   </span>
                 </motion.li>
@@ -292,19 +361,16 @@ export default function TurbosilentBLDC() {
                   <span className="mr-2">•</span>
                   <span>
                     <span className="text-[#315858] font-semibold">
-                      Long-Term Durability :{" "}
-                    </span>{" "}
+                      Integrated Microcontroller System:{" "}
+                    </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      Designed for long-term durability, the TurboSilent motors
-                      are constructed with premium-grade laminations and
-                      heat-resistant winding materials to minimize core losses
-                      and thermal degradation. The motor is fitted with
-                      high-precision ball bearings and balanced rotor
-                      assemblies, reducing mechanical wear and extending
-                      operational life.
+                      Embedded microcontroller units (MCUs) process user inputs
+                      for instantaneous response. The system supports
+                      multi-functional commands, enabling simultaneous fan speed
+                      and light adjustments.
                     </span>
                   </span>
                 </motion.li>
@@ -319,17 +385,15 @@ export default function TurbosilentBLDC() {
                   <span className="mr-2">•</span>
                   <span>
                     <span className="text-[#315858] font-semibold">
-                      Enhanced Energy Efficiency :{" "}
-                    </span>{" "}
+                      Energy Optimization:{" "}
+                    </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      TurboSilent motors utilize sinusoidal commutation to
-                      reduce current ripple and improve efficiency. Power
-                      electronics are optimized to deliver consistent
-                      performance while consuming up to 65% less energy than
-                      traditional motors.
+                      Timer algorithms and innovative sleep modes ensure
+                      energy-efficient operation of both the remote and
+                      connected devices.
                     </span>
                   </span>
                 </motion.li>
@@ -344,40 +408,16 @@ export default function TurbosilentBLDC() {
                   <span className="mr-2">•</span>
                   <span>
                     <span className="text-[#315858] font-semibold">
-                      Thermal Management of Electronics :{" "}
-                    </span>{" "}
-                    <span
-                      className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
-                    >
-                      Electronics PCBs are made in India and have been tested
-                      according to Indian conditions. A key focus is the thermal
-                      management of critical components to ensure longer life
-                      and better performance.
+                      Multi-Mode Control Logic:{" "}
                     </span>
-                  </span>
-                </motion.li>
-
-                <motion.li
-                  className="text-black flex"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
-                >
-                  <span className="mr-2">•</span>
-                  <span>
-                    <span className="text-[#315858] font-semibold">
-                      In-House Innovation and Testing :{" "}
-                    </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
                       style={{ fontFamily: "'Montserrat', sans-serif" }}
                     >
-                      Developed using simulation tools for computational
-                      electromagnetic analysis (CEM). Rigorously validated under
-                      real-world conditions to ensure robustness across a wide
-                      range of operating environments.
+                      Breeze Mode, powered by dynamic speed variation
+                      algorithms, mimics natural airflow.
+                      <br /> Turbo Mode Leverages direct motor communication to
+                      maximize fan performance instantly.
                     </span>
                   </span>
                 </motion.li>
@@ -385,42 +425,8 @@ export default function TurbosilentBLDC() {
             </motion.div>
           </div>
 
-          {/* Why Choose Section */}
-          <motion.div
-            className="sm_h c01 mt-20 flex flex-col items-start"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
-            <motion.h2
-              className="text-4xl font-semibold tracking-tight text-[#315858] mb-1"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
-            >
-              Why Choose HANERI TurboSilent Ceiling Fans?
-            </motion.h2>
-            <motion.p
-              className="text-[16px] mt-4 font-normal text-gray-500 "
-              style={{ fontFamily: "'Montserrat', sans-serif" }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-            >
-              HANERI'S TurboSilent BLDC Technology offers a sophisticated
-              combination of engineering precision and operational excellence.
-              Focusing on high torque, energy savings, and durability,
-              TurboSilent motors set the gold standard in modern ceiling fan
-              design.
-            </motion.p>
-          </motion.div>
-
-          {/* Benefits For Customers Section */}
           <div className="mt-20 flex flex-col items-start">
-            <h2 className="text-4xl  mb-10 font-semibold  tracking-tight text-[#315858]">
+            <h2 className="text-5xl heading  mb-10   tracking-tight text-[#315858]">
               Benefits for Customers
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2  gap-8 w-full">
@@ -515,12 +521,10 @@ export default function TurbosilentBLDC() {
                 />
                 <div>
                   <h3 className="text-xl font-semibold text-[#CA5C27]">
-                    Quiet Operation
+               Effortless Precision Control
                   </h3>
                   <p className="mt-2 text-black">
-                    Reduced turbulence and noise make Silent HASS ideal for
-                    bedrooms, offices, and libraries where silence is a
-                    priority.
+                   Seamless remote control functionality enhances convenience and precision for everyday use.
                   </p>
                 </div>
               </motion.div>
