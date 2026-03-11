@@ -261,7 +261,7 @@ export default function FeaturedProductsMobile() {
                 <p className="text-[#6F6F6F] text-sm leading-relaxed mb-4 max-w-[60ch] line-clamp-2">
                   {product.description}
                 </p>
-                <div className="font-['Barlow_Condensed'] text-[22px] sm:text-[24px] font-normal leading-none text-[#315859] text-left mb-4 flex gap-2 items-baseline flex-wrap">
+                <div className="font-['Barlow_Condensed'] text-[22px] sm:text-[24px] font-normal leading-none text-[#005d5a] text-left mb-4 flex gap-2 items-baseline flex-wrap">
                   <span className="font-semibold">MRP</span>
                   <span className="font-semibold">
                     ₹{formatPrice(sellingPrice)}
@@ -302,7 +302,7 @@ export default function FeaturedProductsMobile() {
                   className={`mt-2 w-full rounded-lg px-4 py-2 text-sm font-semibold text-white shadow-sm hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${
                     addedToCart.has(product.id)
                       ? "bg-[#CA5D27] hover:bg-[#b54d1f]"
-                      : "bg-[#00473E] hover:bg-[#244a46]"
+                      : "bg-[#005d5a] hover:bg-[#244a46]"
                   }`}
                 >
                   {addingToCart === product.id

@@ -26,7 +26,7 @@ export default function FanCraft() {
                   className="object-contain"
                 />
               </div>
-              <h2 className="text-2xl tracking-tight text-[#315858]">
+              <h2 className="text-2xl tracking-tight text-[#005d5a]">
                 <span className="text-[#bb6125] font-semibold">
                   Personalised Air. Perfected Aesthetics.
                 </span>
@@ -91,7 +91,7 @@ export default function FanCraft() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-2xl font-semibold tracking-tight text-[#315858]">
+              <h2 className="text-2xl font-semibold tracking-tight text-[#005d5a]">
                 Design the Air Around You
               </h2>
               <p className="mt-4 text-black">
@@ -135,7 +135,7 @@ export default function FanCraft() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-2xl font-semibold tracking-tight text-[#315858]">
+              <h2 className="text-2xl font-semibold tracking-tight text-[#005d5a]">
                 Where Art Meets Engineering
               </h2>
               <p className="mt-4 text-black">

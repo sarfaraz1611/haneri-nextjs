@@ -718,7 +718,7 @@ export default function CheckoutPage() {
         email: localStorage.getItem("user_email") || "",
         contact: localStorage.getItem("user_mobile") || "",
       },
-      theme: { color: "#00473E" },
+      theme: { color: "#005d5a" },
     };
 
     const rzp = new (window as unknown as Record<string, unknown> & { Razorpay: new (opts: typeof options) => { open: () => void } }).Razorpay(options);
@@ -767,7 +767,7 @@ export default function CheckoutPage() {
   // ── Address Form Inputs (reused in Add & Edit modals) ──
   const inputClass = (field: string) =>
     `w-full px-3.5 py-3 border rounded-md text-sm outline-none transition-colors ${
-      fieldErrors[field] ? "border-red-400 focus:border-red-500" : "border-gray-300 focus:border-[#00473E]"
+      fieldErrors[field] ? "border-red-400 focus:border-red-500" : "border-gray-300 focus:border-[#005d5a]"
     }`;
 
   const clearFieldError = (field: string) => {
@@ -896,7 +896,7 @@ export default function CheckoutPage() {
       {flash && (
         <div
           className={`fixed bottom-5 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-lg shadow-lg transition-all duration-300 ${
-            flash.type === "success" ? "bg-[#b3e3dd] text-[#00473E]" : "bg-red-100 text-red-700"
+            flash.type === "success" ? "bg-[#b3e3dd] text-[#005d5a]" : "bg-red-100 text-red-700"
           }`}
         >
           {flash.message}
@@ -949,7 +949,7 @@ export default function CheckoutPage() {
                   {authToken && (
                     <button
                       onClick={() => { setAddForm({ ...emptyForm }); setFormError(""); setFieldErrors({}); setShowAddModal(true); }}
-                      className="text-sm font-semibold text-[#00473E] hover:text-brand transition-colors"
+                      className="text-sm font-semibold text-[#005d5a] hover:text-brand transition-colors"
                     >
                       + Add New Address
                     </button>
@@ -969,7 +969,7 @@ export default function CheckoutPage() {
                         key={address.id}
                         className={`block border-2 rounded-lg p-4 cursor-pointer transition-colors ${
                           selectedAddressId === address.id
-                            ? "border-[#00473E] bg-[#f0f9f8]"
+                            ? "border-[#005d5a] bg-[#f0f9f8]"
                             : "border-gray-200 hover:border-gray-300"
                         }`}
                       >
@@ -979,7 +979,7 @@ export default function CheckoutPage() {
                             name="address_select"
                             checked={selectedAddressId === address.id}
                             onChange={() => handleSelectAddress(address.id)}
-                            className="mt-1 accent-[#00473E]"
+                            className="mt-1 accent-[#005d5a]"
                           />
                           <div className="flex-1">
                             <div className="flex items-center justify-between">
@@ -990,7 +990,7 @@ export default function CheckoutPage() {
                               <div className="flex gap-2">
                                 <button
                                   onClick={(e) => { e.preventDefault(); openEditModal(address); }}
-                                  className="text-xs px-3 py-1 border border-[#00473E] text-[#00473E] rounded hover:bg-[#00473E] hover:text-white transition-colors"
+                                  className="text-xs px-3 py-1 border border-[#005d5a] text-[#005d5a] rounded hover:bg-[#005d5a] hover:text-white transition-colors"
                                 >
                                   Edit
                                 </button>
@@ -1109,7 +1109,7 @@ export default function CheckoutPage() {
                           placeholder="Coupon Code"
                           value={couponCode}
                           onChange={(e) => { setCouponCode(e.target.value.toUpperCase()); setCouponError(""); }}
-                          className="flex-1 px-3 py-2.5 border border-gray-300 rounded-md text-sm outline-none focus:border-[#00473E] transition-colors"
+                          className="flex-1 px-3 py-2.5 border border-gray-300 rounded-md text-sm outline-none focus:border-[#005d5a] transition-colors"
                         />
                         <button
                           onClick={applyCoupon}
@@ -1165,7 +1165,7 @@ export default function CheckoutPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <h3 className="text-xl font-semibold text-[#00473E] mb-5">Add New Address</h3>
+            <h3 className="text-xl font-semibold text-[#005d5a] mb-5">Add New Address</h3>
             {renderAddressForm(addForm, setAddForm, !authToken)}
             {formError && <p className="text-sm text-red-500 mt-3">{formError}</p>}
             <div className="flex justify-end gap-3 mt-6">
@@ -1178,7 +1178,7 @@ export default function CheckoutPage() {
               <button
                 onClick={handleAddAddress}
                 disabled={formLoading}
-                className="px-6 py-2.5 text-sm bg-[#00473E] text-white rounded-md font-semibold hover:bg-[#1a3634] transition-colors disabled:opacity-70"
+                className="px-6 py-2.5 text-sm bg-[#005d5a] text-white rounded-md font-semibold hover:bg-[#1a3634] transition-colors disabled:opacity-70"
               >
                 {formLoading ? "Adding..." : "Add Address"}
               </button>
@@ -1191,7 +1191,7 @@ export default function CheckoutPage() {
       {showEditModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="bg-white rounded-xl p-6 sm:p-8 w-full max-w-[700px] max-h-[90vh] overflow-y-auto shadow-2xl">
-            <h3 className="text-xl font-semibold text-[#00473E] mb-5">Update Address</h3>
+            <h3 className="text-xl font-semibold text-[#005d5a] mb-5">Update Address</h3>
             {renderAddressForm(editForm, (f) => setEditForm({ ...f, id: editForm.id }), false)}
             {formError && <p className="text-sm text-red-500 mt-3">{formError}</p>}
             <div className="flex justify-end gap-3 mt-6">
@@ -1204,7 +1204,7 @@ export default function CheckoutPage() {
               <button
                 onClick={handleEditAddress}
                 disabled={formLoading}
-                className="px-6 py-2.5 text-sm bg-[#00473E] text-white rounded-md font-semibold hover:bg-[#1a3634] transition-colors disabled:opacity-70"
+                className="px-6 py-2.5 text-sm bg-[#005d5a] text-white rounded-md font-semibold hover:bg-[#1a3634] transition-colors disabled:opacity-70"
               >
                 {formLoading ? "Saving..." : "Save Changes"}
               </button>
@@ -1225,7 +1225,7 @@ export default function CheckoutPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
-            <div className="w-16 h-16 mx-auto mb-4 text-[#00473E]">
+            <div className="w-16 h-16 mx-auto mb-4 text-[#005d5a]">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
               </svg>
@@ -1258,7 +1258,7 @@ export default function CheckoutPage() {
       {otpStep !== "idle" && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 p-4">
           <div className="bg-white rounded-xl p-8 w-full max-w-[400px] shadow-2xl">
-            <h4 className="text-xl font-semibold text-[#00473E] mb-2">Enter OTP</h4>
+            <h4 className="text-xl font-semibold text-[#005d5a] mb-2">Enter OTP</h4>
             <p className="text-sm text-gray-600 mb-1">
               We have sent a 6-digit code to your mobile number.
             </p>
@@ -1267,7 +1267,7 @@ export default function CheckoutPage() {
             </p>
             <button
               type="button"
-              className="text-[13px] text-[#00473E] font-semibold hover:underline mb-5 cursor-pointer"
+              className="text-[13px] text-[#005d5a] font-semibold hover:underline mb-5 cursor-pointer"
               onClick={() => { setOtpStep("idle"); setOtpError(""); }}
             >
               Change number
@@ -1281,7 +1281,7 @@ export default function CheckoutPage() {
                   type="text"
                   inputMode="numeric"
                   maxLength={1}
-                  className="w-11 h-12 text-center text-lg font-semibold border border-gray-300 rounded-md outline-none transition-colors focus:border-[#00473E]"
+                  className="w-11 h-12 text-center text-lg font-semibold border border-gray-300 rounded-md outline-none transition-colors focus:border-[#005d5a]"
                   value={val}
                   onChange={(e) => handleOtpChange(i, e.target.value)}
                   onKeyDown={(e) => handleOtpKeyDown(i, e)}
@@ -1298,7 +1298,7 @@ export default function CheckoutPage() {
             <div className="flex items-center justify-between mt-4">
               <button
                 type="button"
-                className="text-sm text-[#00473E] font-semibold hover:underline cursor-pointer"
+                className="text-sm text-[#005d5a] font-semibold hover:underline cursor-pointer"
                 onClick={handleResendOtp}
                 disabled={otpStep === "verifying"}
               >
@@ -1306,7 +1306,7 @@ export default function CheckoutPage() {
               </button>
               <button
                 type="button"
-                className="px-6 py-2 text-sm bg-[#00473E] text-white rounded-md font-semibold hover:bg-[#1a3634] transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+                className="px-6 py-2 text-sm bg-[#005d5a] text-white rounded-md font-semibold hover:bg-[#1a3634] transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
                 onClick={handleVerifyOtp}
                 disabled={otpStep === "verifying"}
               >

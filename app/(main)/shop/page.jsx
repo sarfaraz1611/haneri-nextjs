@@ -142,7 +142,7 @@ function ProductCard({
 
         {/* Variant Display */}
         {activeVariant.variant_value && (
-          <p className="mt-1 text-sm text-[#315859] ">
+          <p className="mt-1 text-sm text-[#005d5a] ">
             {/* <span className="font-medium">{activeVariant.variant_type}:</span>{" "} */}
             {activeVariant.variant_value}
           </p>
@@ -155,7 +155,7 @@ function ProductCard({
         )}
 
         {/* Price Display */}
-        <div className="font-['Barlow_Condensed'] text-[24px] font-normal leading-none text-[#315859] text-left mb-4 flex gap-2 items-baseline">
+        <div className="font-['Barlow_Condensed'] text-[24px] font-normal leading-none text-[#005d5a] text-left mb-4 flex gap-2 items-baseline">
           <span className="font-semibold">MRP</span>
           <span className="font-semibold">₹{formatPrice(sellingPrice)}</span>
           {showStrike && (
@@ -222,7 +222,7 @@ function ProductCard({
         className={`mt-4 w-full rounded-lg px-4 py-2 text-sm font-semibold text-white shadow-sm hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${
           addedToCart.has(`${product.id}-${activeVariant.id}`)
             ? "bg-[#CA5D27] hover:bg-[#b54d1f]"
-            : "bg-[#00473E] hover:bg-[#244a46]"
+            : "bg-[#005d5a] hover:bg-[#244a46]"
         }`}
       >
         {addingToCart === `${product.id}-${activeVariant.id}`
@@ -453,14 +453,14 @@ function FeaturesBanner({ features }) {
       {features.map((feature, index) => (
         <div
           key={index}
-          className="flex-1 min-w-[200px] bg-gradient-to-b from-[#f9f9f9] to-[#eaeaea] rounded-[10px] p-2 flex items-center justify-start gap-3 shadow-[0_2px_5px_rgba(0,0,0,0.05)] transition-colors duration-300 ease-in-out"
+          className="flex-1 min-w-[200px]   p-2 flex items-center justify-start gap-3 transition-colors duration-300 ease-in-out"
         >
           <img
             src={feature.img}
             alt={feature.alt}
             className="w-[30px] h-[30px] object-contain"
           />
-          <span className="font-[Barlow_Condensed] text-[1.2rem] text-[#00473E] tracking-[0.02em]">
+          <span className="font-[Barlow_Condensed] text-[1.2rem] text-[#005d5a] tracking-[0.02em]">
             {feature.label}
           </span>
         </div>
@@ -581,7 +581,7 @@ function RecommendedProducts({ currentProductIds, onAddToCart, addingToCart, add
 
   return (
     <section className="mt-12 border-t border-gray-200 pt-10 pb-8">
-      <h2 className="heading  md:text-[30px] xl:text-4xl tracking-tight text-[#315858] mb-6">
+      <h2 className="heading  md:text-[30px] xl:text-4xl tracking-tight text-[#005d5a] mb-6">
         Recommended Products
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-4 w-full">
@@ -758,7 +758,7 @@ function ShopPageContent() {
     router.push(`${LEGACY_BASE_URL}/cart`);
   };
 
-  const showFlash = (msg, bg = "#b3e3dd", color = "#00473E") => {
+  const showFlash = (msg, bg = "#b3e3dd", color = "#005d5a") => {
     setFlashMsg({ msg, bg, color });
     setTimeout(() => setFlashMsg(null), 3000);
   };
@@ -828,7 +828,7 @@ function ShopPageContent() {
       <main className=" pt-20">
         {/* Header */}
         <div className="flex z-20 items-baseline justify-between border-b border-gray-200 pt-6 pb-6 sticky top-[60px] md:top-[70px] bg-white ">
-          <h1 className=" heading text-[20px]  md:text-[30px] xl:text-4xl  tracking-tight text-[#315858]">
+          <h1 className=" heading text-[20px]  md:text-[30px] xl:text-4xl  tracking-tight text-[#005d5a]">
             Our Products
           </h1>
 
@@ -885,7 +885,7 @@ function ShopPageContent() {
             <div className="pb-4 pr-1 lg:col-span-3 lg:border-l lg:border-gray-200 lg:pl-8">
               {loading ? (
                 <div className="text-center py-12">
-                  <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-[#315858] border-r-transparent"></div>
+                  <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-[#005d5a] border-r-transparent"></div>
                   <p className="mt-4 text-gray-600">Loading products...</p>
                 </div>
               ) : products.length === 0 ? (
@@ -895,7 +895,7 @@ function ShopPageContent() {
                   "Personal",
                 ].includes(decodeURIComponent(category)) ? (
                   <div className="h-full flex flex-col justify-center text-center py-12">
-                    <h3 className="text-3xl font-semibold text-red-800">
+                    <h3 className="text-3xl font-semibold text-[#ca5d27]">
                       Coming Soon!
                     </h3>
                   </div>
@@ -954,7 +954,7 @@ export default function ShopPage() {
       fallback={
         <div className="bg-white min-h-screen flex items-center justify-center">
           <div className="text-center">
-            <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-[#315858] border-r-transparent"></div>
+            <div className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-[#005d5a] border-r-transparent"></div>
             <p className="mt-4 text-gray-600">Loading...</p>
           </div>
         </div>

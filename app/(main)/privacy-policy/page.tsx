@@ -12,7 +12,7 @@ export default function PrivacyPolicyPage() {
       {/* Hero Banner */}
       <div className="relative bg-primary pt-20 md:pt-40 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
-          <h1 className="heading_1 text-center mb-8 uppercase text-[#315859]">
+          <h1 className="heading_1 text-center mb-8 uppercase text-[#005d5a]">
             Privacy Policy
           </h1>
           <p className="container mx-auto max-w-4xl text-neutral-600 leading-relaxed">
@@ -31,7 +31,7 @@ export default function PrivacyPolicyPage() {
       <div className="container mx-auto px-4 py-12 md:py-16 max-w-4xl">
         {/* Scope */}
         <section className="mb-10 pb-10 border-b border-neutral-200">
-          <h2 className="text-xl  text-[#315859] md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
+          <h2 className="text-xl  text-[#005d5a] md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
             Scope of this Policy
           </h2>
           <p className="text-neutral-600 mb-4 leading-relaxed">
@@ -98,7 +98,7 @@ export default function PrivacyPolicyPage() {
 
         {/* Information We Collect */}
         <section className="mb-10 pb-10 border-b border-neutral-200">
-          <h2 className="text-xl text-[#315859] md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
+          <h2 className="text-xl text-[#005d5a] md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
             Information We Collect
           </h2>
 
@@ -204,7 +204,7 @@ export default function PrivacyPolicyPage() {
 
         {/* Purpose and Legal Basis */}
         <section className="mb-10 pb-10 border-b border-neutral-200">
-          <h2 className="text-xl text-[#315859] md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
+          <h2 className="text-xl text-[#005d5a] md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
             Purpose and Legal Basis for Processing Personal Data
           </h2>
           <p className="text-neutral-600 mb-4 leading-relaxed">
@@ -252,7 +252,7 @@ export default function PrivacyPolicyPage() {
 
         {/* Sharing Personal Data */}
         <section className="mb-10 pb-10 border-b border-neutral-200">
-          <h2 className="text-xl  text-[#315859] md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
+          <h2 className="text-xl  text-[#005d5a] md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
             Sharing Personal Data
           </h2>
           <p className="text-neutral-600 mb-4 leading-relaxed">
@@ -300,7 +300,7 @@ export default function PrivacyPolicyPage() {
 
         {/* How We Use Your Information */}
         <section className="mb-10 pb-10 border-b border-neutral-200">
-          <h2 className="text-xl  text-[#315859] md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
+          <h2 className="text-xl  text-[#005d5a] md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
             How We Use Your Information
           </h2>
           <p className="text-neutral-600 mb-4 leading-relaxed">
@@ -333,7 +333,7 @@ export default function PrivacyPolicyPage() {
 
         {/* International Data Transfers */}
         <section className="mb-10 pb-10 border-b border-neutral-200">
-          <h2 className="text-xl text-[#315859]  md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
+          <h2 className="text-xl text-[#005d5a]  md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
             International Data Transfers
           </h2>
           <p className="text-neutral-600 leading-relaxed">
@@ -345,7 +345,7 @@ export default function PrivacyPolicyPage() {
 
         {/* Your Rights */}
         <section className="mb-10 pb-10 border-b border-neutral-200">
-          <h2 className="text-xl  text-[#315859] md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
+          <h2 className="text-xl  text-[#005d5a] md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
             Your Rights
           </h2>
           <p className="text-neutral-600 mb-4 leading-relaxed">
@@ -381,7 +381,7 @@ export default function PrivacyPolicyPage() {
 
         {/* Security Measures */}
         <section className="mb-10 pb-10 border-b border-neutral-200">
-          <h2 className="text-xl text-[#315859]  md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
+          <h2 className="text-xl text-[#005d5a]  md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
             Security Measures
           </h2>
           <p className="text-neutral-600 leading-relaxed">
@@ -400,7 +400,7 @@ export default function PrivacyPolicyPage() {
 
         {/* Data Retention */}
         <section className="mb-10 pb-10 border-b border-neutral-200">
-          <h2 className="text-xl text-[#315859] md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
+          <h2 className="text-xl text-[#005d5a] md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
             Data Retention
           </h2>
           <p className="text-neutral-600 leading-relaxed">
@@ -413,7 +413,7 @@ export default function PrivacyPolicyPage() {
 
         {/* Policy Updates */}
         <section className="mb-10 pb-10 border-b border-neutral-200">
-          <h2 className="text-xl text-[#315859] md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
+          <h2 className="text-xl text-[#005d5a] md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
             Policy Updates
           </h2>
           <p className="text-neutral-600 leading-relaxed">
@@ -426,7 +426,7 @@ export default function PrivacyPolicyPage() {
 
         {/* Contact */}
         <section className="mb-10">
-          <h2 className="text-xl text-[#315859] md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
+          <h2 className="text-xl text-[#005d5a] md:text-2xl font-heading font-bold mb-4 text-primary-green uppercase tracking-wide">
             Contact Us
           </h2>
           <p className="text-neutral-600 leading-relaxed">

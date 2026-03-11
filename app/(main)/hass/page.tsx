@@ -32,16 +32,16 @@ export default function SilentHASS() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-5xl  heading tracking-tight text-[#315858] xl:max-w-3/4">
+              <h2 className="text-5xl  heading tracking-tight text-[#005d5a] xl:max-w-3/4">
                 <span className="text-[#bb6125] heading">
-                  Introducing HASS Technology:{" "}
+                  Introducing HASS Technology{" "}
                 </span>
-                {/* <br /> */}
+                <br />
                 High Air, Slow Speed
               </h2>
               <p
                 className="text-[16px] mt-4 font-normal text-gray-500 "
-                style={{ fontFamily: "'Montserrat', sans-serif" }}
+                style={{ fontFamily: "var(--font-open-sans)" }}
               >
                 At Haneri, we believe that true innovation lies in challenging
                 common misconceptions and delivering solutions that redefine
@@ -65,12 +65,12 @@ export default function SilentHASS() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-5xl heading tracking-tight text-[#315858]">
+              <h2 className="text-5xl heading tracking-tight text-[#005d5a]">
                 What is HASS Technology?{" "}
               </h2>
               <p
                 className="text-[16px] mt-4 font-normal text-gray-500 "
-                style={{ fontFamily: "'Montserrat', sans-serif" }}
+                style={{ fontFamily: "var(--font-open-sans)" }}
               >
                HASS Technology is a revolutionary integration of
                 Haneri’s two engineering marvels—Air Curve Design and
@@ -123,7 +123,7 @@ export default function SilentHASS() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-5xl heading tracking-tight text-[#315858]">
+              <h2 className="text-5xl heading tracking-tight text-[#005d5a]">
                 Key Features of HASS Technology
               </h2>
 
@@ -146,12 +146,12 @@ export default function SilentHASS() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       High Air Delivery at Low RPM:
                     </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Powered by Air Curve Design, the blades feature
                       precision-engineered contours that maximize air
@@ -171,12 +171,12 @@ export default function SilentHASS() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       Ultra-Quiet Operation:
                     </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       The low RPM operation, combined with Efficient Torque
                       output from the TurboSilent BLDC Motor, eliminates
@@ -196,12 +196,12 @@ export default function SilentHASS() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       Enhanced Motor Efficiency:{" "}
                     </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       TurboSilent BLDC motors utilize advanced electromagnetic
                       design for optimal torque-to-RPM ratios, ensuring seamless
@@ -222,12 +222,12 @@ export default function SilentHASS() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       Advanced Blade Aerodynamics:{" "}
                     </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Blades designed with Air Curve Design use computational
                       fluid dynamics (CFD) to optimize airflow pathways,
@@ -245,12 +245,12 @@ export default function SilentHASS() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       Trademarked Technology:{" "}
                     </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                      HASS Technology is a Trademark Registered Pillar
                       of Haneri, integrating proprietary engineering solutions
@@ -270,7 +270,7 @@ export default function SilentHASS() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
-              <h2 className="text-5xl heading tracking-tight text-[#315858]">
+              <h2 className="text-5xl heading tracking-tight text-[#005d5a]">
                 The Science Behind HASS Technology
               </h2>
               <motion.ul
@@ -292,12 +292,12 @@ export default function SilentHASS() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       Aerodynamic Optimization with Air Curve Design:{" "}
                     </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Advanced blade profiles create an efficient pressure
                       differential, maximizing air displacement while operating
@@ -316,12 +316,12 @@ export default function SilentHASS() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       High-Torque Motor Performance:{" "}
                     </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       TurboSilent BLDC Motors leverage high torque generation to
                       power blades effectively at low RPM, ensuring consistent
@@ -341,12 +341,12 @@ export default function SilentHASS() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       Integrated System Design:{" "}
                     </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       The synergy between Air Curve Design and TurboSilent BLDC
                       Motors ensures that every component is optimized for
@@ -365,12 +365,12 @@ export default function SilentHASS() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       Energy Optimization :{" "}
                     </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Combined with energy-efficient motor controls and low-drag
                       blade designs, Silent HASS Technology reduces power
@@ -389,7 +389,7 @@ export default function SilentHASS() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       Trademarked Technology:{" "}
                     </span>{" "}
                     Silent HASS is a proprietary Haneri pillar for
@@ -401,7 +401,7 @@ export default function SilentHASS() {
           </div>
           {/* Benefits For Customers Section */}
           <div className="mt-20 flex flex-col items-start">
-            <h2 className="text-5xl  mb-10 heading  tracking-tight text-[#315858]">
+            <h2 className="text-5xl  mb-10 heading  tracking-tight text-[#005d5a]">
               Benefits for Customers
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2  gap-8 w-full">
@@ -420,7 +420,7 @@ export default function SilentHASS() {
                   className="object-contain mb-4"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                  <h3 className="text-xl font-semibold text-[#ca5d27]">
                     Enhanced Comfort
                   </h3>
                   <p className="mt-2 text-black">
@@ -445,7 +445,7 @@ export default function SilentHASS() {
                   className="object-contain mb-4"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                  <h3 className="text-xl font-semibold text-[#ca5d27]">
                     Cost Savings
                   </h3>
                   <p className="mt-2 text-black">
@@ -470,7 +470,7 @@ export default function SilentHASS() {
                   className="object-contain mb-4"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                  <h3 className="text-xl font-semibold text-[#ca5d27]">
                     Sustainable Choice
                   </h3>
                   <p className="mt-2 text-black">
@@ -495,7 +495,7 @@ export default function SilentHASS() {
                   className="object-contain mb-4"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                  <h3 className="text-xl font-semibold text-[#ca5d27]">
                     Optimized Airflow
                   </h3>
                   <p className="mt-2 text-black">

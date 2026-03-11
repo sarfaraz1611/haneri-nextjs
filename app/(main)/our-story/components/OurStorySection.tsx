@@ -227,15 +227,22 @@ export default function OurStorySection({
     };
   }, [isMobile, gsapDone, exitGsap]);
 
-  // Scroll listener to re-engage GSAP when scrolling back to top
+  // Scroll listener to re-engage GSAP when scrolling back to top (only when scrolling up)
   useEffect(() => {
     if (!gsapDone || isMobile) return;
 
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      if (window.scrollY <= 0) {
-        reEngageGsap();
-        // Reset to sustainability (index 2) when re-engaging
+      const currentScrollY = window.scrollY;
+      const scrollingUp = currentScrollY < lastScrollY;
+      lastScrollY = currentScrollY;
+
+      if (scrollingUp && currentScrollY <= 0) {
         currentIndexRef.current = GSAP_SECTION_COUNT - 1;
+        // Clear the hash so the hash-change effect doesn't immediately push back to a normal-scroll section
+        history.replaceState(null, "", window.location.pathname);
+        reEngageGsap();
       }
     };
 
@@ -378,7 +385,7 @@ export default function OurStorySection({
               >
                 <div className="flex items-center gap-8 flex-col lg:flex-row max-w-7xl w-full p-8">
                   <div className="w-full lg:w-1/2">
-                    <h2 className="text-[20px] sm:text-[42px] lg:text-[52px] font-['Barlow_Condensed']  text-[#00473E] font-medium mb-4 leading-12">
+                    <h2 className="text-[20px] sm:text-[42px] lg:text-[52px] font-['Barlow_Condensed']  text-[#005d5a] font-medium mb-4 leading-12">
                       The Heart of
                       <br />
                       <span className=" font-bold text-[#CA5D27]  font-['Open_Sans'] lg:text-[42px]">Who We Are</span> 
@@ -449,8 +456,8 @@ export default function OurStorySection({
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="w-full md:w-1/2 bg-[#00473E] p-8 sm:p-[40px_36px] flex flex-col justify-center">
-                    <h2 className="text-white text-[18px] sm:text-[28px] mb-5">
+                  <div className="w-full md:w-1/2 bg-[#005d5a] p-8 sm:p-[40px_36px] flex flex-col justify-center">
+                    <h2 className="text-white text-[18px] sm:text-[28px] font-heading mb-5">
                       SUSTAINABILITY & RESPONSIBILITY
                     </h2>
                     <p className="text-white mb-5 text-[12px] sm:text-[14px] sm:leading-[1.75]">
@@ -469,7 +476,7 @@ export default function OurStorySection({
           </section>
 
           {/* Scroll Indicator */}
-          {/* <div className="fixed bottom-14 left-1/2 transform -translate-x-1/2 z-40 text-center text-[#00473E] animate-bounce">
+          {/* <div className="fixed bottom-14 left-1/2 transform -translate-x-1/2 z-40 text-center text-[#005d5a] animate-bounce">
             <div className="text-sm mb-2 opacity-70">Scroll to explore</div>
             <svg
               className="w-6 h-6 mx-auto"
@@ -496,7 +503,7 @@ export default function OurStorySection({
             <div className="relative w-full">
               <div className="relative w-full bg-white flex items-center justify-center">
                 <div className="container w-full px-4 py-8 text-center max-w-6xl">
-                  <h1 className="text-[20px] sm:text-[42px] text-[#00473E] leading-none font-medium mb-5">
+                  <h1 className="text-[20px] sm:text-[42px] text-[#005d5a] font-heading leading-none font-medium mb-5">
                     Designing Tomorrow's Comfort
                   </h1>
                   <p className="text-base sm:text-[14px] text-black leading-[1.6] sm:leading-[1.75] max-w-[450px] mx-auto mb-8 font-['Open_Sans']">
@@ -523,7 +530,7 @@ export default function OurStorySection({
               <div className="relative w-full bg-white flex items-center justify-center">
                 <div className="flex items-center gap-8 flex-col lg:flex-row max-w-7xl w-full p-8">
                   <div className="w-full lg:w-1/2">
-                    <h2 className="text-[20px] sm:text-[42px] text-[#00473E] leading-none font-medium mb-4">
+                    <h2 className="text-[20px] sm:text-[42px] text-[#005d5a] font-heading leading-none font-medium mb-4">
                       The Heart of Who We Are
                     </h2>
                     <p className="text-[15px] text-[#CA5D27] font-['Barlow_Condensed'] mb-5">
@@ -572,8 +579,8 @@ export default function OurStorySection({
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <div className="w-full md:w-1/2 bg-[#00473E] p-8 sm:p-[40px_36px] flex flex-col justify-center">
-                    <h2 className="text-white text-[18px] sm:text-[28px] mb-5">
+                  <div className="w-full md:w-1/2 bg-[#005d5a] p-8 sm:p-[40px_36px] flex flex-col justify-center">
+                    <h2 className="text-white text-[18px] sm:text-[28px]  font-heading mb-5">
                       SUSTAINABILITY & RESPONSIBILITY
                     </h2>
                     <p className="text-white mb-5 text-[12px] sm:text-[14px] sm:leading-[1.75]">
@@ -608,7 +615,7 @@ export default function OurStorySection({
           className="relative w-full min-h-screen flex items-center justify-center bg-white/80 backdrop-blur-sm py-8"
         >
           <div className="w-full max-w-6xl px-4">
-            <h1 className="text-[24px] sm:text-[42px] text-[#00473E] leading-none font-medium text-center mb-5">
+            <h1 className="text-[24px]  font-heading sm:text-[42px] text-[#005d5a] leading-none font-medium text-center mb-5">
               Innovation and Design Philosophy
             </h1>
             <p className="text-base text-[14px] text-black leading-[1.6] sm:leading-[1.75] max-w-[650px] mx-auto mb-8 text-center font-['Open_Sans']">
@@ -672,7 +679,7 @@ export default function OurStorySection({
               />
             </div>
             <div className="w-full md:flex-1">
-              <h3 className="text-[32px] text-center md:text-left sm:text-[34px] font-light font-['Barlow_Condensed'] text-[#00473E] mb-4">
+              <h3 className="text-[32px] text-center md:text-left sm:text-[34px] font-light font-['Barlow_Condensed'] text-[#005d5a] mb-4">
                 Our Vision
               </h3>
               <p className="text-[14px] text-center md:text-left font-['Open_Sans'] leading-[1.8] sm:leading-[1.75] text-black">
@@ -692,7 +699,7 @@ export default function OurStorySection({
         >
           <div className="flex flex-col md:flex-row gap-8 items-start max-w-6xl w-full px-4">
             <div className="w-full md:flex-1 flex flex-col gap-4 order-2 md:order-1">
-              <h3 className="text-[32px] text-center md:text-left sm:text-[34px] font-light font-['Barlow_Condensed'] text-[#00473E] mb-2">
+              <h3 className="text-[32px] text-center md:text-left sm:text-[34px] font-light font-['Barlow_Condensed'] text-[#005d5a] mb-2">
                 Our Mission
               </h3>
               <p className="text-md text-center md:text-left sm:text-[14px] font-['Open_Sans'] leading-[1.8] sm:leading-[1.75] text-black">
@@ -782,7 +789,7 @@ export default function OurStorySection({
         >
           <div className="flex flex-col md:flex-row gap-8 items-start max-w-6xl w-full px-4">
             <div className="w-full md:flex-1 flex flex-col gap-4 order-2 md:order-1">
-              <h3 className="text-[32px] text-center md:text-left sm:text-[34px] font-light font-['Barlow_Condensed'] text-[#00473E] mb-2">
+              <h3 className="text-[32px] text-center md:text-left sm:text-[34px] font-light font-['Barlow_Condensed'] text-[#005d5a] mb-2">
                 Our Values
               </h3>
               <div className="space-y-3">
@@ -923,7 +930,7 @@ export default function OurStorySection({
                   </p>
                   <a
                     href="shop"
-                    className="inline-block bg-white text-[#2b2b2b] font-semibold text-xs font-['Open_Sans'] uppercase tracking-[0.4px] py-2.5 px-4 no-underline transition-all duration-[0.25s] border-2 border-white hover:bg-[#00473E] hover:text-white hover:border-white"
+                    className="inline-block bg-white text-[#2b2b2b] font-semibold text-xs font-['Open_Sans'] uppercase tracking-[0.4px] py-2.5 px-4 no-underline transition-all duration-[0.25s] border-2 border-white hover:bg-[#005d5a] hover:text-white hover:border-white"
                   >
                     Explore Products
                   </a>

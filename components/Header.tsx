@@ -188,7 +188,7 @@ export default function Header() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-[30px] max-lg:gap-[15px]">
               <button
-                className="hidden max-lg:block bg-transparent border-none text-2xl cursor-pointer z-50 relative p-2 text-[#00473E]"
+                className="hidden max-lg:block bg-transparent border-none text-2xl cursor-pointer z-50 relative p-2 text-[#005d5a]"
                 type="button"
                 onClick={() => {
                   setMobileMenuOpen(!mobileMenuOpen);
@@ -210,7 +210,7 @@ export default function Header() {
                 />
               </Link>
 
-              <nav className="flex max-lg:hidden">
+              <nav className="flex max-lg:hidden font-sans">
                 <ul className="list-none flex gap-[30px] lg:gap-0 m-0 p-0 pl-10 ">
                   {/* Categories Menu */}
                   <li className="relative group" onMouseEnter={() => { if (activeDropdown && activeDropdown !== "desktop-categories") setActiveDropdown(null); }}>
@@ -229,7 +229,7 @@ export default function Header() {
                               key={category.name}
                               href={category.href}
                               onClick={() => setActiveDropdown(null)}
-                              className="text-center  p-[15px]  w-[150px] rounded-lg transition-all duration-300 border border-transparent hover:bg-neutral-50 hover:border-brand hover:-translate-y-1"
+                              className="text-center   p-[15px]  w-[150px] rounded-lg transition-all duration-300 border border-transparent hover:bg-neutral-50  hover:-translate-y-1"
                             >
                               <div className="w-10 h-10 mx-auto mb-2.5 flex items-center justify-center max-[1200px]:w-[60px] max-[1200px]:h-[60px]">
                                 <img
@@ -238,7 +238,7 @@ export default function Header() {
                                   className="max-w-full max-h-full object-contain"
                                 />
                               </div>
-                              <p className="m-0 text-sm font-medium text-primary-green uppercase">
+                              <p className="m-0 text-sm font-medium uppercase ">
                                 {category.name}
                               </p>
                             </Link>
@@ -294,7 +294,7 @@ export default function Header() {
                               <Link
                                 href={item.href}
                                 onClick={() => setActiveDropdown(null)}
-                                className="font-semibold text-[14px] text-primary-green inline-block mb-1 hover:text-brand uppercase"
+                                className="font-semibold text-[14px]  inline-block mb-1 hover:text-brand uppercase"
                               >
                                 {item.title}
                               </Link>
@@ -305,7 +305,7 @@ export default function Header() {
                                       <Link
                                         href={subLink.href}
                                         onClick={() => setActiveDropdown(null)}
-                                        className="text-neutral-600 text-xs font-light hover:text-brand hover:underline uppercase"
+                                        className="text-neutral-600 text-xs font-light hover:text-brand uppercase"
                                       >
                                         {subLink.name}
                                       </Link>
@@ -343,13 +343,13 @@ export default function Header() {
                                 <Link
                                   href={item.href!}
                                   onClick={() => setActiveDropdown(null)}
-                                  className="font-semibold text-[14px] text-primary-green inline-block mb-1 uppercase"
+                                  className="font-semibold text-[14px]  inline-block mb-1 uppercase"
                                 >
                                   {item.title}
                                 </Link>
                               ) : (
                                 <>
-                                  <span className="font-semibold text-[14px] text-primary-green inline-block mb-1 uppercase">
+                                  <span className="font-semibold text-[14px]  inline-block mb-1 uppercase">
                                     {item.title}
                                   </span>
                                   {item.subLinks.length > 0 && (
@@ -359,7 +359,7 @@ export default function Header() {
                                           <Link
                                             href={subLink.href}
                                             onClick={() => setActiveDropdown(null)}
-                                            className="text-neutral-600 text-xs font-light hover:text-brand hover:underline uppercase"
+                                            className="text-neutral-600 text-xs font-light hover:text-brand  uppercase"
                                           >
                                             {subLink.name}
                                           </Link>
@@ -530,7 +530,7 @@ export default function Header() {
       {mobileMenuOpen && (
         <>
           {/* Sidebar */}
-          <div className="bg-[#00473E] z-50 max-h-[calc(100vh-60px)] overflow-y-auto">
+          <div className="bg-[#005d5a] z-50 max-h-[calc(100vh-60px)] overflow-y-auto">
             {/* Close Button */}
             {/* <button
               onClick={() => setMobileMenuOpen(false)}
@@ -627,7 +627,7 @@ export default function Header() {
                     />
                   </button>
                   {activeDropdown === "about" && (
-                    <ul className="list-none py-2 m-0 bg-primary-dark">
+                    <ul className="list-none py-2 m-0 ">
                       {aboutUsMenu.map((item) => (
                         <li key={item.title} className="py-2.5">
                           <Link

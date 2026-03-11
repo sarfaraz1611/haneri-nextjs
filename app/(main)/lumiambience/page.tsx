@@ -32,15 +32,15 @@ export default function LumiAmbience() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-5xl heading tracking-tight text-[#315858]">
+              <h2 className="text-5xl heading tracking-tight text-[#005d5a]">
                 <span className="text-[#bb6125]">
-                  Introducing LumiAmbience Technology:{" "}
+                  Introducing LumiAmbience Technology{" "}
                 </span>{" "}
                 Revolutionizing Lighting with Precision
               </h2>
               <p
                 className="text-[16px] mt-4 font-normal text-gray-500 "
-                style={{ fontFamily: "'Montserrat', sans-serif" }}
+                style={{ fontFamily: "var(--font-open-sans)" }}
               >
                 At Haneri, we push the boundaries of innovation, not just in
                 cooling but also in creating holistic lifestyle solutions. Our
@@ -62,12 +62,12 @@ export default function LumiAmbience() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-5xl heading tracking-tight text-[#315858]">
+              <h2 className="text-5xl heading tracking-tight text-[#005d5a]">
                 What is LumiAmbience Technology?
               </h2>
               <p
                 className="text-[16px] mt-4 font-normal text-gray-500 "
-                style={{ fontFamily: "'Montserrat', sans-serif" }}
+                style={{ fontFamily: "var(--font-open-sans)" }}
               >
                 LumiAmbience Technology integrates a state-of-the-art 3-in-1 LED
                 lighting system into select Haneri ceiling fans, allowing you to
@@ -121,7 +121,7 @@ export default function LumiAmbience() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-5xl heading tracking-tight text-[#315858]">
+              <h2 className="text-5xl heading tracking-tight text-[#005d5a]">
                 Key Features of LumiAmbience Technology
               </h2>
 
@@ -144,12 +144,12 @@ export default function LumiAmbience() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
+                    <span className="text-[#005d5a] font-bold">
                       High Air Delivery at Low RPM:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Powered by Air Curve Design, the blades feature
                       precision-engineered contours that maximize air
@@ -169,12 +169,12 @@ export default function LumiAmbience() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
+                    <span className="text-[#005d5a] font-bold">
                       Ultra-Quiet Operation:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       The low RPM operation, combined with Efficient Torque
                       output from the TurboSilent BLDC Motor, eliminates
@@ -194,12 +194,12 @@ export default function LumiAmbience() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
+                    <span className="text-[#005d5a] font-bold">
                       Enhanced Motor Efficiency:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       TurboSilent BLDC motors utilize advanced electromagnetic
                       design for optimal torque-to-RPM ratios, ensuring seamless
@@ -219,12 +219,12 @@ export default function LumiAmbience() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
+                    <span className="text-[#005d5a] font-bold">
                       Advanced Blade Aerodynamics:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Blades designed with Air Curve Design use computational
                       fluid dynamics (CFD) to optimize airflow pathways,
@@ -242,12 +242,12 @@ export default function LumiAmbience() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
+                    <span className="text-[#005d5a] font-bold">
                       Trademarked Technology:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       LumiAmbience Technology is a trademarked pillar of Haneri,
                       integrating advanced lighting engineering to deliver
@@ -267,7 +267,7 @@ export default function LumiAmbience() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
-              <h2 className="text-5xl    heading tracking-tight text-[#315858]">
+              <h2 className="text-5xl    heading tracking-tight text-[#005d5a]">
                 The Science Behind LumiAmbience Technology
               </h2>
               <motion.ul
@@ -289,12 +289,12 @@ export default function LumiAmbience() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
+                    <span className="text-[#005d5a] font-bold">
                       Advanced LED Engineering:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       LumiAmbience LEDs are crafted to produce precise colour
                       temperatures, ensuring true-to-life illumination for each
@@ -313,12 +313,12 @@ export default function LumiAmbience() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
+                    <span className="text-[#005d5a] font-bold">
                       Proprietary Lens Diffuser Technology:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       The lens diffuser evenly distributes light, eliminating
                       glare and harsh points of illumination. Optical-grade
@@ -337,12 +337,12 @@ export default function LumiAmbience() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
+                    <span className="text-[#005d5a] font-bold">
                       Precision Circuitry:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Intelligent LED drivers enable smooth transitions between
                       colour modes and brightness levels, offering users
@@ -360,12 +360,12 @@ export default function LumiAmbience() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
+                    <span className="text-[#005d5a] font-bold">
                       Energy Optimization:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Advanced power management minimizes energy wastage,
                       ensuring high brightness with low power consumption.
@@ -384,12 +384,12 @@ export default function LumiAmbience() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            <h2 className="text-5xl heading tracking-tight text-[#315858] mb-4">
+            <h2 className="text-5xl heading tracking-tight text-[#005d5a] mb-4">
               Why Choose Haneri LumiAmbience Ceiling Fans?
             </h2>
             <p
               className="text-[16px] mt-4 font-normal text-gray-500 "
-              style={{ fontFamily: "'Montserrat', sans-serif" }}
+              style={{ fontFamily: "var(--font-open-sans)" }}
             >
               LumiAmbience Technology redefines what lighting can achieve,
               delivering advanced functionality and unparalleled comfort. With
@@ -409,12 +409,12 @@ export default function LumiAmbience() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
           >
-            <h2 className="text-5xl heading tracking-tight text-[#315858] mb-4">
+            <h2 className="text-5xl heading tracking-tight text-[#005d5a] mb-4">
               Experience LumiAmbience Technology Today!
             </h2>
             <p
               className="text-[16px] mt-4 font-normal text-gray-500 "
-              style={{ fontFamily: "'Montserrat', sans-serif" }}
+              style={{ fontFamily: "var(--font-open-sans)" }}
             >
               Transform your space with Haneri&apos;s LumiAmbience-enabled
               ceiling fans. Experience lighting that adapts to your mood and
@@ -425,7 +425,7 @@ export default function LumiAmbience() {
           </motion.div>
 
           <div className="mt-20 flex flex-col items-start">
-            <h2 className="text-5xl  mb-10 heading  tracking-tight text-[#315858]">
+            <h2 className="text-5xl  mb-10 heading  tracking-tight text-[#005d5a]">
               Benefits for Customers
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2  gap-8 w-full">
@@ -444,7 +444,7 @@ export default function LumiAmbience() {
                   className="object-contain mb-4"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                  <h3 className="text-xl font-semibold text-[#ca5d27]">
                     Enhanced Comfort
                   </h3>
                   <p className="mt-2 text-black">
@@ -469,7 +469,7 @@ export default function LumiAmbience() {
                   className="object-contain mb-4"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                  <h3 className="text-xl font-semibold text-[#ca5d27]">
                     Cost Savings
                   </h3>
                   <p className="mt-2 text-black">
@@ -494,7 +494,7 @@ export default function LumiAmbience() {
                   className="object-contain mb-4"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                  <h3 className="text-xl font-semibold text-[#ca5d27]">
                     Sustainable Choice
                   </h3>
                   <p className="mt-2 text-black">
@@ -519,7 +519,7 @@ export default function LumiAmbience() {
                   className="object-contain mb-4"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                  <h3 className="text-xl font-semibold text-[#ca5d27]">
                     Ambient Illumination
                   </h3>
                   <p className="mt-2 text-black">

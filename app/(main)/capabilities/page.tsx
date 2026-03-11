@@ -89,7 +89,7 @@ export default function CapabilitiesPage() {
               <div
                 className="pointer-events-none absolute inset-0 rounded-xl
                            border-2 border-gray-200 transition-colors duration-300
-                           group-hover:border-[#00473E]"
+                           group-hover:border-[#005d5a]"
               />
             </div>
 
@@ -99,7 +99,7 @@ export default function CapabilitiesPage() {
                           ${isEven ? "md:order-2" : "md:order-1"}`}
             >
               <h2
-                className="font-['Barlow_Condensed'] font-light text-[#00473E]
+                className="font-['Barlow_Condensed'] font-light text-[#005d5a]
                            text-[34px] leading-tight
                            sm:text-[40px]
                            lg:text-[48px]"

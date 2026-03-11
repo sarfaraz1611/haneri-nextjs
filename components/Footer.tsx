@@ -11,7 +11,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
   };
 
   return (
-    <footer className="bg-[#00473E] text-white pt-[60px] pb-5  max-sm:pt-10">
+    <footer className="bg-[#005d5a] text-white pt-[60px] pb-5  max-sm:pt-10">
       <div className="container">
         <div className="mb-10">
           <div className="grid grid-cols-[2fr_1fr_1fr_2fr] gap-10 max-lg:grid-cols-2 max-sm:grid-cols-1 max-sm:gap-[30px]">
@@ -121,11 +121,11 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
               </h4>
               <div className="flex flex-col gap-[15px]">
                 <div className="flex gap-3 items-start text-sm text-neutral-300">
-                  <FaHome className="text-brand mt-1 shrink-0" />
+                  <FaHome className=" mt-1 shrink-0" />
                   <span>{companyInfo.address}</span>
                 </div>
                 <div className="flex gap-3 items-start text-sm text-neutral-300">
-                  <FaPhone className="text-brand mt-1 shrink-0" />
+                  <FaPhone className=" mt-1 shrink-0" />
                   <a
                     href={`tel:${companyInfo.phone}`}
                     className="text-neutral-300 transition-colors hover:text-brand"
@@ -134,7 +134,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                   </a>
                 </div>
                 <div className="flex gap-3 items-start text-sm text-neutral-300">
-                  <FaEnvelope className="text-brand mt-1 shrink-0" />
+                  <FaEnvelope className=" mt-1 shrink-0" />
                   <a
                     href={`mailto:${companyInfo.email}`}
                     className="text-neutral-300 transition-colors hover:text-brand"
@@ -143,7 +143,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                   </a>
                 </div>
                 <div className="flex gap-3 items-start text-sm text-neutral-300">
-                  <FaClock className="text-brand mt-1 shrink-0" />
+                  <FaClock className=" mt-1 shrink-0" />
                   <span>Mon - Sun / 9:00 AM - 8:00 PM</span>
                 </div>
               </div>

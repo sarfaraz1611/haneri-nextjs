@@ -22,6 +22,19 @@
   background-position: center;
 }
 
+.video-thumbnail {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  pointer-events: none;
+  animation: hide-thumbnail 1s ease 3s forwards;
+}
+
+@keyframes hide-thumbnail {
+  to { opacity: 0; }
+}
+
 .video-slide iframe {
   position: absolute;
   top: 0;

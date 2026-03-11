@@ -34,7 +34,11 @@ export default function Home() {
   useEffect(() => {
     if (skipPreloader) return;
     if (isLoaded) {
-      gsap.fromTo(".main", { opacity: 0 }, { opacity: 1, duration: 1, ease: "power2.out" });
+      gsap.fromTo(
+        ".main",
+        { opacity: 0 },
+        { opacity: 1, duration: 1, ease: "power2.out" },
+      );
     }
   }, [isLoaded, skipPreloader]);
 
@@ -43,7 +47,7 @@ export default function Home() {
       {!skipPreloader && <Preloader />}
       <main className="main" style={{ opacity: skipPreloader ? 1 : 0 }}>
         <HeroSection />
-        <div className="">
+        <div className="2xl:container mx-auto">
           <FeaturedProductsMobile />
         </div>
         <VideoSlider />

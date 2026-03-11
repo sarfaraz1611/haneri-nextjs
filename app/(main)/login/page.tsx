@@ -162,7 +162,7 @@ export default function LoginPage() {
     <div className="min-h-[80vh]  mt-20 flex items-center justify-center py-10 px-4 bg-gray-50">
       <div className="w-full max-w-[480px] mx-auto bg-white rounded-[10px] p-9 shadow-[0_6px_14px_rgba(0,0,0,0.12)] max-sm:p-7">
         <div className="mb-6">
-          <h2 className="font-heading font-semibold text-[32px] text-[#00473E]">
+          <h2 className="font-heading font-semibold text-[32px] text-[#005d5a]">
             Login
           </h2>
         </div>
@@ -178,7 +178,7 @@ export default function LoginPage() {
             <input
               type="email"
               id="login-email"
-              className="w-full px-3.5 py-3 border border-gray-300 rounded-md text-sm font-[inherit] outline-none transition-colors duration-200 focus:border-[#00473E]"
+              className="w-full px-3.5 py-3 border border-gray-300 rounded-md text-sm font-[inherit] outline-none transition-colors duration-200 focus:border-[#005d5a]"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -196,7 +196,7 @@ export default function LoginPage() {
               <input
                 type={showPassword ? "text" : "password"}
                 id="login-password"
-                className="w-full px-3.5 py-3 pr-11 border border-gray-300 rounded-md text-sm font-[inherit] outline-none transition-colors duration-200 focus:border-[#00473E]"
+                className="w-full px-3.5 py-3 pr-11 border border-gray-300 rounded-md text-sm font-[inherit] outline-none transition-colors duration-200 focus:border-[#005d5a]"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -216,7 +216,7 @@ export default function LoginPage() {
             <label className="flex items-center gap-2 cursor-pointer text-gray-800">
               <input
                 type="checkbox"
-                className="w-4 h-4 accent-[#00473E] cursor-pointer"
+                className="w-4 h-4 accent-[#005d5a] cursor-pointer"
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(e.target.checked)}
               />
@@ -224,7 +224,7 @@ export default function LoginPage() {
             </label>
             {/* <Link
               href="/forgot-password"
-              className="text-gray-800 font-semibold hover:text-[#00473E] transition-colors"
+              className="text-gray-800 font-semibold hover:text-[#005d5a] transition-colors"
             >
               Forgot Password?
             </Link> */}
@@ -246,7 +246,7 @@ export default function LoginPage() {
 
           <button
             type="button"
-            className="w-full py-3 border-2 border-[#00473E] rounded-md bg-transparent text-[#00473E] text-sm font-bold cursor-pointer mb-3 transition-all duration-300 font-[inherit] hover:bg-[#00473E] hover:text-white"
+            className="w-full py-3 border-2 border-[#005d5a] rounded-md bg-transparent text-[#005d5a] text-sm font-bold cursor-pointer mb-3 transition-all duration-300 font-[inherit] hover:bg-[#005d5a] hover:text-white"
             onClick={handleOtpLogin}
           >
             Login with OTP
@@ -265,7 +265,7 @@ export default function LoginPage() {
             Don&apos;t have an account yet?{" "}
             <Link
               href="/register"
-              className="text-[#00473E] font-bold hover:underline"
+              className="text-[#005d5a] font-bold hover:underline"
             >
               Register
             </Link>
@@ -281,7 +281,7 @@ export default function LoginPage() {
       {showOtpModal && otpStep === "mobile" && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <div className="bg-white rounded-xl p-8 w-full max-w-[400px] mx-4 shadow-2xl">
-            <h4 className="text-xl font-semibold text-[#00473E] mb-2">
+            <h4 className="text-xl font-semibold text-[#005d5a] mb-2">
               Login using OTP
             </h4>
             <p className="text-sm text-gray-600 mb-1">
@@ -294,7 +294,7 @@ export default function LoginPage() {
             <label className="block text-[13px] font-medium text-gray-600 mb-1.5">
               Mobile Number
             </label>
-            <div className="flex items-center border border-gray-300 rounded-md overflow-hidden focus-within:border-[#00473E] transition-colors">
+            <div className="flex items-center border border-gray-300 rounded-md overflow-hidden focus-within:border-[#005d5a] transition-colors">
               <span className="px-3 py-3 bg-gray-50 text-sm text-gray-600 border-r border-gray-300">
                 +91
               </span>
@@ -322,7 +322,7 @@ export default function LoginPage() {
               </button>
               <button
                 type="button"
-                className="px-5 py-2 text-sm bg-[#00473E] text-white rounded-md font-semibold hover:bg-[#1a3634] transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+                className="px-5 py-2 text-sm bg-[#005d5a] text-white rounded-md font-semibold hover:bg-[#1a3634] transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
                 onClick={handleSendOtp}
                 disabled={otpLoading}
               >
@@ -337,7 +337,7 @@ export default function LoginPage() {
       {showOtpModal && otpStep === "verify" && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
           <div className="bg-white rounded-xl p-8 w-full max-w-[400px] mx-4 shadow-2xl">
-            <h4 className="text-xl font-semibold text-[#00473E] mb-2">
+            <h4 className="text-xl font-semibold text-[#005d5a] mb-2">
               Enter OTP
             </h4>
             <p className="text-sm text-gray-600 mb-1">
@@ -348,7 +348,7 @@ export default function LoginPage() {
             </p>
             <button
               type="button"
-              className="text-[13px] text-[#00473E] font-semibold hover:underline mb-5 cursor-pointer"
+              className="text-[13px] text-[#005d5a] font-semibold hover:underline mb-5 cursor-pointer"
               onClick={() => setOtpStep("mobile")}
             >
               Change number
@@ -362,7 +362,7 @@ export default function LoginPage() {
                   type="text"
                   inputMode="numeric"
                   maxLength={1}
-                  className="w-11 h-12 text-center text-lg font-semibold border border-gray-300 rounded-md outline-none transition-colors focus:border-[#00473E]"
+                  className="w-11 h-12 text-center text-lg font-semibold border border-gray-300 rounded-md outline-none transition-colors focus:border-[#005d5a]"
                   value={val}
                   onChange={(e) => handleOtpChange(i, e.target.value)}
                   onKeyDown={(e) => handleOtpKeyDown(i, e)}
@@ -377,14 +377,14 @@ export default function LoginPage() {
             <div className="flex items-center justify-between mt-6">
               <button
                 type="button"
-                className="text-sm text-[#00473E] font-semibold hover:underline cursor-pointer"
+                className="text-sm text-[#005d5a] font-semibold hover:underline cursor-pointer"
                 onClick={handleResendOtp}
               >
                 Resend OTP
               </button>
               <button
                 type="button"
-                className="px-6 py-2 text-sm bg-[#00473E] text-white rounded-md font-semibold hover:bg-[#1a3634] transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+                className="px-6 py-2 text-sm bg-[#005d5a] text-white rounded-md font-semibold hover:bg-[#1a3634] transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
                 onClick={handleVerifyOtp}
                 disabled={verifyLoading}
               >

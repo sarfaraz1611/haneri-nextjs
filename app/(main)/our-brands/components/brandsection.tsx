@@ -51,23 +51,9 @@ export function BrandSection({
   return (
     <section id={id} className="w-full py-[50px]">
       <div
-        className={`mx-auto flex max-w-[1200px] items-center 
-        ${reverse ? "flex-row-reverse" : ""}`}
+        className={`mx-auto flex max-w-[1200px] items-center flex-col gap-6 px-4
+        ${reverse ? "md:flex-row-reverse" : "md:flex-row"}`}
       >
-        {/* TEXT */}
-        <motion.div
-          initial={{ opacity: 0, y: 48 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-120px" }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="flex-1"
-        >
-          <p className="text-[16px] leading-[1.8] text-[#2b2b2b] md:text-justify">
-            <span className="font-semibold text-[#00473E]">{title} </span>
-            {description}
-          </p>
-        </motion.div>
-
         {/* IMAGE */}
         <motion.div
           ref={imageRef}
@@ -75,7 +61,7 @@ export function BrandSection({
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-120px" }}
           transition={{ duration: 0.9, ease: "easeOut" }}
-          className="flex flex-1 justify-center md:max-w-[30%]"
+          className="flex w-full justify-center md:flex-1 md:max-w-[30%]"
         >
           <Image
             src={image}
@@ -85,6 +71,20 @@ export function BrandSection({
             className="w-full h-auto object-cover"
             priority
           />
+        </motion.div>
+
+        {/* TEXT */}
+        <motion.div
+          initial={{ opacity: 0, y: 48 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-120px" }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="flex-1"
+        >
+          <p className="text-[16px] leading-[1.8] text-[#2b2b2b] md:text-justify">
+            <span className="font-semibold text-[#005d5a]">{title} </span>
+            {description}
+          </p>
         </motion.div>
       </div>
     </section>

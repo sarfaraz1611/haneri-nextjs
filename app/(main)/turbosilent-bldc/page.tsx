@@ -32,16 +32,16 @@ export default function TurbosilentBLDC() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-5xl  heading tracking-tight text-[#315858]">
+              <h2 className="text-5xl  heading tracking-tight text-[#005d5a]">
                 <span className="text-[#bb6125] heading leading-16">
-                  Introducing TurboSilent BLDC:
+                  Introducing TurboSilent BLDC
                 </span>
                 <br />
                 Unleashing Unmatched Power and Efficiency
               </h2>
               <p
                 className="text-[16px] mt-4 font-normal text-gray-500 "
-                style={{ fontFamily: "'Montserrat', sans-serif" }}
+                style={{ fontFamily: "var(--font-open-sans)" }}
               >
                 At HANERI, we redefine engineering excellence with our
                 proprietary TurboSilent BLDC Technology. This advanced motor
@@ -62,12 +62,12 @@ export default function TurbosilentBLDC() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-5xl heading tracking-tight text-[#315858]">
+              <h2 className="text-5xl heading tracking-tight text-[#005d5a]">
                 Why TurboSilent BLDC Technology?
               </h2>
               <p
                 className="text-[16px] mt-4 font-normal text-gray-500 "
-                style={{ fontFamily: "'Montserrat', sans-serif" }}
+                style={{ fontFamily: "var(--font-open-sans)" }}
               >
                 TurboSilent BLDC (Brushless Direct Current) Technology is an
                 in-house developed motor system that employs high-tech
@@ -121,7 +121,7 @@ export default function TurbosilentBLDC() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-5xl heading tracking-tight text-[#315858]">
+              <h2 className="text-5xl heading tracking-tight text-[#005d5a]">
                 The Science Behind TurboSilent BLDC Technology
               </h2>
 
@@ -144,12 +144,12 @@ export default function TurbosilentBLDC() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className=" heading text-[#315858] font-semibold">
+                    <span className=" text-[#005d5a] font-semibold">
                       Electromagnetic Optimization:
                     </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Uses Finite Element Analysis (FEA) to design and validate
                       the magnetic circuit, maximizing flux density while
@@ -167,12 +167,12 @@ export default function TurbosilentBLDC() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       Thermal Management:
                     </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Employs advanced cooling designs, including optimized
                       ventilation paths and materials, to maintain motor
@@ -190,12 +190,12 @@ export default function TurbosilentBLDC() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       Smart Power Electronics:{" "}
                     </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Integrated drivers, meticulously designed for seamless
                       operation, instil confidence with precise speed control
@@ -215,12 +215,12 @@ export default function TurbosilentBLDC() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       Structural Engineering:{" "}
                     </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       The magnet rotor dynamics are meticulously optimized,
                       providing reassuring stability and minimizing resonance at
@@ -243,7 +243,7 @@ export default function TurbosilentBLDC() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
-              <h2 className="text-5xl heading tracking-tight text-[#315858]">
+              <h2 className="text-5xl heading tracking-tight text-[#005d5a]">
                 Unique Advantages of TurboSilent BLDC Technology
               </h2>
               <motion.ul
@@ -265,12 +265,12 @@ export default function TurbosilentBLDC() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       Higher Torque for Optimized Performance :{" "}
                     </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       The TurboSilent motor stands out with its superior
                       performance. It achieves higher torque through optimized
@@ -291,12 +291,12 @@ export default function TurbosilentBLDC() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       Long-Term Durability :{" "}
                     </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Designed for long-term durability, the TurboSilent motors
                       are constructed with premium-grade laminations and
@@ -318,12 +318,12 @@ export default function TurbosilentBLDC() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       Enhanced Energy Efficiency :{" "}
                     </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       TurboSilent motors utilize sinusoidal commutation to
                       reduce current ripple and improve efficiency. Power
@@ -343,12 +343,12 @@ export default function TurbosilentBLDC() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       Thermal Management of Electronics :{" "}
                     </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Electronics PCBs are made in India and have been tested
                       according to Indian conditions. A key focus is the thermal
@@ -367,12 +367,12 @@ export default function TurbosilentBLDC() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       In-House Innovation and Testing :{" "}
                     </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Developed using simulation tools for computational
                       electromagnetic analysis (CEM). Rigorously validated under
@@ -394,7 +394,7 @@ export default function TurbosilentBLDC() {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <motion.h2
-              className="text-5xl heading tracking-tight text-[#315858] mb-1"
+              className="text-5xl heading tracking-tight text-[#005d5a] mb-1"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
@@ -404,7 +404,7 @@ export default function TurbosilentBLDC() {
             </motion.h2>
             <motion.p
               className="text-[16px] mt-4 font-normal text-gray-500 "
-              style={{ fontFamily: "'Montserrat', sans-serif" }}
+              style={{ fontFamily: "var(--font-open-sans)" }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
@@ -420,7 +420,7 @@ export default function TurbosilentBLDC() {
 
           {/* Benefits For Customers Section */}
           <div className="mt-20 flex flex-col items-start">
-            <h2 className="text-5xl  mb-10 heading  tracking-tight text-[#315858]">
+            <h2 className="text-5xl  mb-10 heading  tracking-tight text-[#005d5a]">
               Benefits for Customers
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2  gap-8 w-full">
@@ -439,7 +439,7 @@ export default function TurbosilentBLDC() {
                   className="object-contain mb-4"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                  <h3 className="text-xl font-semibold text-[#ca5d27]">
                     Enhanced Comfort
                   </h3>
                   <p className="mt-2 text-black">
@@ -464,7 +464,7 @@ export default function TurbosilentBLDC() {
                   className="object-contain mb-4"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                  <h3 className="text-xl font-semibold text-[#ca5d27]">
                     Cost Savings
                   </h3>
                   <p className="mt-2 text-black">
@@ -489,7 +489,7 @@ export default function TurbosilentBLDC() {
                   className="object-contain mb-4"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                  <h3 className="text-xl font-semibold text-[#ca5d27]">
                     Sustainable Choice
                   </h3>
                   <p className="mt-2 text-black">
@@ -514,7 +514,7 @@ export default function TurbosilentBLDC() {
                   className="object-contain mb-4"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                  <h3 className="text-xl font-semibold text-[#ca5d27]">
                     Quiet Operation
                   </h3>
                   <p className="mt-2 text-black">

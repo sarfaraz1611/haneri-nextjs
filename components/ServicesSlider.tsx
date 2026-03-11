@@ -7,21 +7,21 @@ const slides = [
   {
     id: 1,
     heading: "Air Curve Design",
-    bgColor: "#00473E", // primary
+    bgColor: "#005d5a", // primary
     slideImage: "/images/air_1.png",
     overlayImage: "/images/air_2.png",
   },
   {
     id: 2,
     heading: "TurboSilent BLDC",
-    bgColor: "#315859", // primary-green
+    bgColor: "#005d5a", // primary-green
     slideImage: "/images/turbo_2.png",
     overlayImage: "/images/turbo_1.png",
   },
   {
     id: 3,
     heading: "HASS®",
-    bgColor: "#00473E", // brand
+    bgColor: "#005d5a", // brand
     slideImage: "/images/hass_1.png",
     overlayImage: "/images/hass_2.png",
   },
@@ -35,7 +35,7 @@ const slides = [
   {
     id: 5,
     heading: "SCAN",
-    bgColor: "#315859", // brand-dark
+    bgColor: "#005d5a", // brand-dark
     slideImage: "/images/scan_1.png",
     overlayImage: "/images/scan_3.png",
   },
@@ -307,7 +307,7 @@ export default function ServicesSlider() {
       <section
         ref={containerRef}
         className="relative h-screen w-full overflow-hidden bg-primary"
-        style={{ fontFamily: "'Sora', sans-serif" }}
+        style={{ fontFamily: "var(--font-open-sans)" }}
       >
         {/* Slides */}
         {slides.map((slide, index) => (
@@ -364,7 +364,7 @@ export default function ServicesSlider() {
               className="slide-heading absolute z-50 text-left text-[clamp(3rem,10vw,10rem)] font-black text-[#f2f1fc] mix-blend-difference left-4 md:left-12 top-32"
               style={
                 {
-                  fontFamily: "'Bandeins Sans & Strange Variable', sans-serif",
+                  fontFamily: "var(--font-open-sans)",
                   fontVariationSettings: "\"wdth\" var(--width, 200)",
                   "--width": "200",
                 } as React.CSSProperties

@@ -12,7 +12,7 @@ const FAQ_ITEMS = [
 export default function ProductFAQ() {
   return (
     <section className="container mx-auto px-4 py-10">
-      <h2 className="font-barlow text-3xl text-[#2a5b57] mb-4">
+      <h2 className="font-heading text-3xl text-[#2a5b57] mb-4">
         Frequently Asked Questions
       </h2>
 

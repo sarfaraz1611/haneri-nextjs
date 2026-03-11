@@ -19,7 +19,7 @@ function BlogHero({ blog }: { blog: BlogData }) {
             {blog.tags.map((tag, index) => (
               <span
                 key={index}
-                className="px-4 py-2 bg-[#e9f4f2] text-[#00473E] text-sm font-medium rounded-full"
+                className="px-4 py-2 bg-[#e9f4f2] text-[#005d5a] text-sm font-medium rounded-full"
               >
                 {tag}
               </span>
@@ -53,7 +53,7 @@ function ContentRenderer({ content }: { content: BlogContent[] }) {
             return (
               <h2
                 key={index}
-                className="text-[#00473E] font-semibold text-2xl md:text-3xl mt-10 mb-4 font-[var(--font-barlow-condensed)]"
+                className="text-[#005d5a] font-semibold text-2xl md:text-3xl mt-10 mb-4 font-heading"
               >
                 {block.text}
               </h2>
@@ -71,9 +71,9 @@ function ContentRenderer({ content }: { content: BlogContent[] }) {
             return (
               <div
                 key={index}
-                className="bg-[#e9f4f2] border-l-4 border-[#00473E] p-6 rounded-r-lg my-8"
+                className="bg-[#e9f4f2] border-l-4 border-[#005d5a] p-6 rounded-r-lg my-8"
               >
-                <h4 className="text-[#00473E] font-semibold text-lg mb-2">
+                <h4 className="text-[#005d5a] font-semibold text-lg mb-2">
                   {block.title}
                 </h4>
                 <p
@@ -88,7 +88,7 @@ function ContentRenderer({ content }: { content: BlogContent[] }) {
               <ul key={index} className="my-6 space-y-3">
                 {block.items?.map((item, i) => (
                   <li key={i} className="flex items-start gap-3 text-gray-700">
-                    <span className="w-2 h-2 bg-[#00473E] rounded-full mt-2 flex-shrink-0" />
+                    <span className="w-2 h-2 bg-[#005d5a] rounded-full mt-2 flex-shrink-0" />
                     <span dangerouslySetInnerHTML={{ __html: item }} />
                   </li>
                 ))}
@@ -106,7 +106,7 @@ function ContentRenderer({ content }: { content: BlogContent[] }) {
                     key={i}
                     className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow"
                   >
-                    <h4 className="text-[#00473E] font-semibold text-lg mb-2">
+                    <h4 className="text-[#005d5a] font-semibold text-lg mb-2">
                       {feature.title}
                     </h4>
                     <p className="text-gray-600 text-sm">
@@ -130,7 +130,7 @@ function ContentRenderer({ content }: { content: BlogContent[] }) {
                       className="flex items-center gap-3 text-gray-700"
                     >
                       <svg
-                        className="w-5 h-5 text-[#00473E] flex-shrink-0"
+                        className="w-5 h-5 text-[#005d5a] flex-shrink-0"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >
@@ -160,7 +160,7 @@ function FAQSection({ faqs }: { faqs: BlogFAQ[] }) {
 
   return (
     <div className="my-12 bg-[#f8faf9] rounded-2xl p-6 md:p-8">
-      <h2 className="text-[#00473E] font-semibold text-2xl md:text-3xl mb-6 font-[var(--font-barlow-condensed)]">
+      <h2 className="text-[#005d5a] font-semibold text-2xl md:text-3xl mb-6 font-heading">
         FAQs
       </h2>
 
@@ -175,7 +175,7 @@ function FAQSection({ faqs }: { faqs: BlogFAQ[] }) {
               setOpenIndex(openIndex === index ? -1 : index);
             }}
           >
-            <summary className="flex items-center justify-between p-5 cursor-pointer font-medium text-[#00473E] hover:bg-gray-50 transition-colors">
+            <summary className="flex items-center justify-between p-5 cursor-pointer font-medium text-[#005d5a] hover:bg-gray-50 transition-colors">
               <span>
                 Q{index + 1}. {faq.question}
               </span>
