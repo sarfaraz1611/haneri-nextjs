@@ -35,7 +35,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                 <li className="mb-3">
                   <Link
                     href="/air-curve-design"
-                    className="text-neutral-300 text-sm transition-colors hover:text-brand"
+                    className="text-white text-sm transition-colors hover:text-brand"
                   >
                     Air Curve Design
                   </Link>
@@ -43,7 +43,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                 <li className="mb-3">
                   <Link
                     href="/turbosilent-bldc"
-                    className="text-neutral-300 text-sm transition-colors hover:text-brand"
+                    className="text-white text-sm transition-colors hover:text-brand"
                   >
                     Turbosilent BLDC
                   </Link>
@@ -51,7 +51,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                 <li className="mb-3">
                   <Link
                     href="/hass"
-                    className="text-neutral-300 text-sm transition-colors hover:text-brand"
+                    className="text-white text-sm transition-colors hover:text-brand"
                   >
                     HASS
                   </Link>
@@ -59,7 +59,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                 <li className="mb-3">
                   <Link
                     href="/lumiambience"
-                    className="text-neutral-300 text-sm transition-colors hover:text-brand"
+                    className="text-white text-sm transition-colors hover:text-brand"
                   >
                     Lumiambience
                   </Link>
@@ -67,7 +67,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                 <li className="mb-3">
                   <Link
                     href="/scan"
-                    className="text-neutral-300 text-sm transition-colors hover:text-brand"
+                    className="text-white text-sm transition-colors hover:text-brand"
                   >
                     SCAN
                   </Link>
@@ -83,7 +83,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                 <li className="mb-3">
                   <Link
                     href="/faqs"
-                    className="text-neutral-300 text-sm transition-colors hover:text-brand"
+                    className="text-white text-sm transition-colors hover:text-brand"
                   >
                     FAQs
                   </Link>
@@ -91,7 +91,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                 <li className="mb-3">
                   <Link
                     href="/privacy-policy"
-                    className="text-neutral-300 text-sm transition-colors hover:text-brand"
+                    className="text-white text-sm transition-colors hover:text-brand"
                   >
                     Privacy Policy
                   </Link>
@@ -99,7 +99,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                 <li className="mb-3">
                   <Link
                     href="/shipping-policy"
-                    className="text-neutral-300 text-sm transition-colors hover:text-brand"
+                    className="text-white text-sm transition-colors hover:text-brand"
                   >
                     Shipping Policy
                   </Link>
@@ -107,7 +107,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                 <li className="mb-3">
                   <Link
                     href="/wir-policy"
-                    className="text-neutral-300 text-sm transition-colors hover:text-brand"
+                    className="text-white text-sm transition-colors hover:text-brand"
                   >
                     WIR Policy
                   </Link>
@@ -120,29 +120,29 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                 Company Info
               </h4>
               <div className="flex flex-col gap-[15px]">
-                <div className="flex gap-3 items-start text-sm text-neutral-300">
+                <div className="flex gap-3 items-start text-sm text-white">
                   <FaHome className=" mt-1 shrink-0" />
                   <span>{companyInfo.address}</span>
                 </div>
-                <div className="flex gap-3 items-start text-sm text-neutral-300">
+                <div className="flex gap-3 items-start text-sm text-white">
                   <FaPhone className=" mt-1 shrink-0" />
                   <a
                     href={`tel:${companyInfo.phone}`}
-                    className="text-neutral-300 transition-colors hover:text-brand"
+                    className="text-white transition-colors hover:text-brand"
                   >
                     {companyInfo.phone}
                   </a>
                 </div>
-                <div className="flex gap-3 items-start text-sm text-neutral-300">
+                <div className="flex gap-3 items-start text-sm text-white">
                   <FaEnvelope className=" mt-1 shrink-0" />
                   <a
                     href={`mailto:${companyInfo.email}`}
-                    className="text-neutral-300 transition-colors hover:text-brand"
+                    className="text-white transition-colors hover:text-brand"
                   >
                     {companyInfo.email}
                   </a>
                 </div>
-                <div className="flex gap-3 items-start text-sm text-neutral-300">
+                <div className="flex gap-3 items-start text-sm text-white">
                   <FaClock className=" mt-1 shrink-0" />
                   <span>Mon - Sun / 9:00 AM - 8:00 PM</span>
                 </div>
