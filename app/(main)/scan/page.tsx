@@ -32,16 +32,16 @@ export default function SCANTechnology() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-5xl heading tracking-tight text-[#315858]">
-                <span className="text-[#315858]">
-                  Discover the Future of Fan with:
+              <h2 className="text-5xl heading tracking-tight text-[#005d5a]">
+                <span className="text-[#005d5a]">
+                  Discover the Future of Fan with
                 </span>
                 <br />
                 <span className="text-[#bb6125]">SCAN Technology</span>
               </h2>
               <p
                 className="text-[16px] mt-4 font-normal text-gray-500 "
-                style={{ fontFamily: "'Montserrat', sans-serif" }}
+                style={{ fontFamily: "var(--font-open-sans)" }}
               >
                 At HANERI, we've combined innovation with convenience in our
                 state-of-the-art SCAN Technology (Smooth Control , Advanced
@@ -64,12 +64,12 @@ export default function SCANTechnology() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-5xl heading tracking-tight text-[#315858]">
+              <h2 className="text-5xl heading tracking-tight text-[#005d5a]">
                 What is SCAN Technology?
               </h2>
               <p
                 className="text-[16px] mt-4 font-normal text-gray-500 "
-                style={{ fontFamily: "'Montserrat', sans-serif" }}
+                style={{ fontFamily: "var(--font-open-sans)" }}
               >
                 SCAN Technology is a next-generation radio frequency (RF)
                 control system that offers unparalleled convenience and
@@ -121,7 +121,7 @@ export default function SCANTechnology() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-5xl heading  tracking-tight text-[#315858]">
+              <h2 className="text-5xl heading  tracking-tight text-[#005d5a]">
                 Key Features of SCAN Technology
               </h2>
 
@@ -144,12 +144,12 @@ export default function SCANTechnology() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
+                    <span className="text-[#005d5a] font-bold">
                       Futuristic Design:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       The SCAN remote controller, with its ergonomic design,
                       intuitive button placement, and sleek, modern look, offers
@@ -167,12 +167,12 @@ export default function SCANTechnology() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
+                    <span className="text-[#005d5a] font-bold">
                       Comprehensive Fan Control:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Effortlessly adjust fan speed across multiple levels,
                       giving you complete control over your cooling experience.
@@ -182,12 +182,12 @@ export default function SCANTechnology() {
                       for quick and powerful cooling.
                     </span>
                     <br />
-                    <span className="mr-2">•</span>
+                    <span className="mr-2">-</span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
-                      <span className="text-[#315858] font-bold">
+                      <span className="text-[#005d5a] font-bold">
                         {" "}
                         Breeze Mode:{" "}
                       </span>{" "}
@@ -196,12 +196,12 @@ export default function SCANTechnology() {
                     </span>
 
                     <br />
-                    <span className="mr-2">•</span>
+                    <span className="mr-2">-</span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
-                      <span className="text-[#315858] font-bold">
+                      <span className="text-[#005d5a] font-bold">
                         {" "}
                         Turbo Speed Mode:{" "}
                       </span>
@@ -220,12 +220,12 @@ export default function SCANTechnology() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
+                    <span className="text-[#005d5a] font-bold">
                       LED Light Integration:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Control LED lights (where available) with the same remote,
                       including switching on/off and adjusting colour tones when
@@ -243,12 +243,12 @@ export default function SCANTechnology() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
+                    <span className="text-[#005d5a] font-bold">
                       Advanced Timer Functionality:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Set customized timers for fan operation, enabling
                       automated shut-off and improved energy efficiency.
@@ -265,12 +265,12 @@ export default function SCANTechnology() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
+                    <span className="text-[#005d5a] font-bold">
                       Reliable Radio Frequency Control:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       The SCAN remote controller operates on advanced RF
                       technology, ensuring reliable control from greater
@@ -290,12 +290,12 @@ export default function SCANTechnology() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
+                    <span className="text-[#005d5a] font-bold">
                       Power Efficiency:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Low-power RF communication ensures extended battery life
                       for the remote controller.
@@ -314,7 +314,7 @@ export default function SCANTechnology() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
-              <h2 className="text-5xl heading  tracking-tight text-[#315858]">
+              <h2 className="text-5xl heading  tracking-tight text-[#005d5a]">
                 The Science behind SCAN Technology
               </h2>
               <motion.ul
@@ -336,12 +336,12 @@ export default function SCANTechnology() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       Radio Frequency (RF) Innovation:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Operates on robust RF bands to provide uninterrupted
                       control even through walls or obstructions. Advanced
@@ -360,12 +360,12 @@ export default function SCANTechnology() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       Integrated Microcontroller System:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Embedded microcontroller units (MCUs) process user inputs
                       for instantaneous response. The system supports
@@ -384,12 +384,12 @@ export default function SCANTechnology() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       Energy Optimization:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Timer algorithms and innovative sleep modes ensure
                       energy-efficient operation of both the remote and
@@ -407,12 +407,12 @@ export default function SCANTechnology() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-semibold">
+                    <span className="text-[#005d5a] font-semibold">
                       Multi-Mode Control Logic:{" "}
                     </span>
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Breeze Mode, powered by dynamic speed variation
                       algorithms, mimics natural airflow.
@@ -426,7 +426,7 @@ export default function SCANTechnology() {
           </div>
 
           <div className="mt-20 flex flex-col items-start">
-            <h2 className="text-5xl heading  mb-10   tracking-tight text-[#315858]">
+            <h2 className="text-5xl heading  mb-10   tracking-tight text-[#005d5a]">
               Benefits for Customers
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2  gap-8 w-full">
@@ -445,7 +445,7 @@ export default function SCANTechnology() {
                   className="object-contain mb-4"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                  <h3 className="text-xl font-semibold text-[#ca5d27]">
                     Enhanced Comfort
                   </h3>
                   <p className="mt-2 text-black">
@@ -470,7 +470,7 @@ export default function SCANTechnology() {
                   className="object-contain mb-4"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                  <h3 className="text-xl font-semibold text-[#ca5d27]">
                     Cost Savings
                   </h3>
                   <p className="mt-2 text-black">
@@ -495,7 +495,7 @@ export default function SCANTechnology() {
                   className="object-contain mb-4"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                  <h3 className="text-xl font-semibold text-[#ca5d27]">
                     Sustainable Choice
                   </h3>
                   <p className="mt-2 text-black">
@@ -520,7 +520,7 @@ export default function SCANTechnology() {
                   className="object-contain mb-4"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                  <h3 className="text-xl font-semibold text-[#ca5d27]">
                Effortless Precision Control
                   </h3>
                   <p className="mt-2 text-black">

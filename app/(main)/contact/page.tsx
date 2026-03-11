@@ -93,7 +93,7 @@ export default function ContactPage() {
                     value={formData.fullName}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`contact_108 w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-[#315859] transition-colors ${errors.fullName && touched.fullName ? "border-red-500" : "border-gray-300"}`}
+                    className={`contact_108 w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-[#005d5a] transition-colors ${errors.fullName && touched.fullName ? "border-red-500" : "border-gray-300"}`}
                     placeholder="Full Name"
                   />
                   {errors.fullName && touched.fullName && (
@@ -107,7 +107,7 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`contact_109 w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-[#315859] transition-colors ${errors.email && touched.email ? "border-red-500" : "border-gray-300"}`}
+                    className={`contact_109 w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-[#005d5a] transition-colors ${errors.email && touched.email ? "border-red-500" : "border-gray-300"}`}
                     placeholder="Email"
                   />
                   {errors.email && touched.email && (
@@ -123,7 +123,7 @@ export default function ContactPage() {
                     value={formData.phone}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className={`contact_111 w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-[#315859] transition-colors ${errors.phone && touched.phone ? "border-red-500" : "border-gray-300"}`}
+                    className={`contact_111 w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-[#005d5a] transition-colors ${errors.phone && touched.phone ? "border-red-500" : "border-gray-300"}`}
                     placeholder="Phone Number"
                   />
                   {errors.phone && touched.phone && (
@@ -138,7 +138,7 @@ export default function ContactPage() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   rows={4}
-                  className={`contact_112 w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-[#315859] transition-colors resize-none ${errors.message && touched.message ? "border-red-500" : "border-gray-300"}`}
+                  className={`contact_112 w-full px-4 py-3 border rounded-lg focus:outline-none focus:border-[#005d5a] transition-colors resize-none ${errors.message && touched.message ? "border-red-500" : "border-gray-300"}`}
                   placeholder="Your Message"
                 />
                 {errors.message && touched.message && (

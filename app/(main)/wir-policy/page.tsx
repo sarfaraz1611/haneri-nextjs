@@ -12,7 +12,7 @@ export default function WarrantyPolicyPage() {
       {/* Hero Banner */}
       <div className="relative bg-primary pt-20 md:pt-40 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
-          <h1 className="heading_1 text-center mb-8 uppercase text-[#315859]">
+          <h1 className="heading_1 text-center mb-8 uppercase text-[#005d5a]">
             Warranty, Installation &amp; Refund Policy
           </h1>
           <p className="container mx-auto max-w-4xl text-neutral-600 leading-relaxed">
@@ -29,7 +29,7 @@ export default function WarrantyPolicyPage() {
       <div className="container mx-auto px-4 py-12 md:py-16 max-w-4xl">
         {/* 1. Warranty Offering */}
         <section className="mb-10 pb-10 border-b border-neutral-200">
-          <h2 className="text-xl text-[#315859] md:text-2xl font-heading font-bold mb-4 uppercase tracking-wide">
+          <h2 className="text-xl text-[#005d5a] md:text-2xl font-heading font-bold mb-4 uppercase tracking-wide">
             1. Warranty Offering
           </h2>
 
@@ -65,7 +65,7 @@ export default function WarrantyPolicyPage() {
 
         {/* 2. Warranty Terms */}
         <section className="mb-10 pb-10 border-b border-neutral-200">
-          <h2 className="text-xl text-[#315859] md:text-2xl font-heading font-bold mb-4 uppercase tracking-wide">
+          <h2 className="text-xl text-[#005d5a] md:text-2xl font-heading font-bold mb-4 uppercase tracking-wide">
             2. Warranty Terms
           </h2>
 
@@ -229,7 +229,7 @@ export default function WarrantyPolicyPage() {
 
         {/* 3. Claim Process */}
         <section className="mb-10 pb-10 border-b border-neutral-200">
-          <h2 className="text-xl text-[#315859] md:text-2xl font-heading font-bold mb-4 uppercase tracking-wide">
+          <h2 className="text-xl text-[#005d5a] md:text-2xl font-heading font-bold mb-4 uppercase tracking-wide">
             3. Claim Process
           </h2>
 
@@ -303,7 +303,7 @@ export default function WarrantyPolicyPage() {
 
         {/* 4. Additional Terms */}
         <section className="mb-10 pb-10 border-b border-neutral-200">
-          <h2 className="text-xl text-[#315859] md:text-2xl font-heading font-bold mb-4 uppercase tracking-wide">
+          <h2 className="text-xl text-[#005d5a] md:text-2xl font-heading font-bold mb-4 uppercase tracking-wide">
             4. Additional Terms
           </h2>
           <ul className="text-neutral-600 space-y-3 pl-5">
@@ -346,7 +346,7 @@ export default function WarrantyPolicyPage() {
 
         {/* 5. Customer Responsibilities */}
         <section className="mb-10 pb-10 border-b border-neutral-200">
-          <h2 className="text-xl text-[#315859] md:text-2xl font-heading font-bold mb-4 uppercase tracking-wide">
+          <h2 className="text-xl text-[#005d5a] md:text-2xl font-heading font-bold mb-4 uppercase tracking-wide">
             5. Customer Responsibilities
           </h2>
           <ul className="text-neutral-600 space-y-2 pl-5">
@@ -368,7 +368,7 @@ export default function WarrantyPolicyPage() {
 
         {/* Refund and Replacement Policy */}
         <section className="mb-10 pb-10 border-b border-neutral-200">
-          <h2 className="text-xl text-[#315859] md:text-2xl font-heading font-bold mb-4 uppercase tracking-wide">
+          <h2 className="text-xl text-[#005d5a] md:text-2xl font-heading font-bold mb-4 uppercase tracking-wide">
             Refund and Replacement Policy
           </h2>
 
@@ -473,7 +473,7 @@ export default function WarrantyPolicyPage() {
 
         {/* Installation and Service Guidelines */}
         <section className="mb-10 pb-10 border-b border-neutral-200">
-          <h2 className="text-xl text-[#315859] md:text-2xl font-heading font-bold mb-4 uppercase tracking-wide">
+          <h2 className="text-xl text-[#005d5a] md:text-2xl font-heading font-bold mb-4 uppercase tracking-wide">
             Installation and Service Guidelines
           </h2>
 
@@ -593,7 +593,7 @@ export default function WarrantyPolicyPage() {
 
         {/* Contact Us */}
         <section className="mb-10 pb-10 border-b border-neutral-200">
-          <h2 className="text-xl text-[#315859] md:text-2xl font-heading font-bold mb-4 uppercase tracking-wide">
+          <h2 className="text-xl text-[#005d5a] md:text-2xl font-heading font-bold mb-4 uppercase tracking-wide">
             Contact Us
           </h2>
           <p className="text-neutral-600 mb-4 leading-relaxed">
@@ -619,7 +619,7 @@ export default function WarrantyPolicyPage() {
 
         {/* Amendments */}
         <section className="mb-10">
-          <h2 className="text-xl text-[#315859] md:text-2xl font-heading font-bold mb-4 uppercase tracking-wide">
+          <h2 className="text-xl text-[#005d5a] md:text-2xl font-heading font-bold mb-4 uppercase tracking-wide">
             Amendments
           </h2>
           <p className="text-neutral-600 leading-relaxed">

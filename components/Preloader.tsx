@@ -199,22 +199,22 @@ export default function Preloader() {
           </div>
 
           {/* Progress Percentage */}
-          {/* <div className="mt-4 text-lg font-semibold text-[#00473E]">
+          {/* <div className="mt-4 text-lg font-semibold text-[#005d5a]">
             {Math.floor(Math.min(progress, 100))}%
           </div> */}
 
           {/* Loading Animation */}
           {/* <div className="mt-8 flex justify-center gap-2">
             <div
-              className="w-2 h-2 bg-[#00473E] rounded-full animate-bounce"
+              className="w-2 h-2 bg-[#005d5a] rounded-full animate-bounce"
               style={{ animationDelay: "0ms" }}
             />
             <div
-              className="w-2 h-2 bg-[#00473E] rounded-full animate-bounce"
+              className="w-2 h-2 bg-[#005d5a] rounded-full animate-bounce"
               style={{ animationDelay: "150ms" }}
             />
             <div
-              className="w-2 h-2 bg-[#00473E] rounded-full animate-bounce"
+              className="w-2 h-2 bg-[#005d5a] rounded-full animate-bounce"
               style={{ animationDelay: "300ms" }}
             />
           </div> */}

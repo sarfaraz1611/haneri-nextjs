@@ -80,7 +80,7 @@ export default function RegisterPage() {
     <div className="min-h-[80vh] mt-20 flex items-center justify-center py-10 px-4 bg-gray-50">
       <div className="w-full max-w-[480px] mx-auto bg-white rounded-[10px] p-9 shadow-[0_6px_14px_rgba(0,0,0,0.12)] max-sm:p-7">
         <div className="mb-6">
-          <h2 className="font-heading font-semibold text-[32px] text-[#00473E]">
+          <h2 className="font-heading font-semibold text-[32px] text-[#005d5a]">
             Register
           </h2>
         </div>
@@ -96,7 +96,7 @@ export default function RegisterPage() {
             <input
               type="text"
               id="register-name"
-              className="w-full px-3.5 py-3 border border-gray-300 rounded-md text-sm outline-none transition-colors duration-200 focus:border-[#00473E]"
+              className="w-full px-3.5 py-3 border border-gray-300 rounded-md text-sm outline-none transition-colors duration-200 focus:border-[#005d5a]"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -113,7 +113,7 @@ export default function RegisterPage() {
             <input
               type="tel"
               id="register-mobile"
-              className="w-full px-3.5 py-3 border border-gray-300 rounded-md text-sm outline-none transition-colors duration-200 focus:border-[#00473E]"
+              className="w-full px-3.5 py-3 border border-gray-300 rounded-md text-sm outline-none transition-colors duration-200 focus:border-[#005d5a]"
               value={mobile}
               onChange={(e) => setMobile(e.target.value)}
               required
@@ -130,7 +130,7 @@ export default function RegisterPage() {
             <input
               type="email"
               id="register-email"
-              className="w-full px-3.5 py-3 border border-gray-300 rounded-md text-sm outline-none transition-colors duration-200 focus:border-[#00473E]"
+              className="w-full px-3.5 py-3 border border-gray-300 rounded-md text-sm outline-none transition-colors duration-200 focus:border-[#005d5a]"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -148,7 +148,7 @@ export default function RegisterPage() {
               <input
                 type={showPassword ? "text" : "password"}
                 id="register-password"
-                className="w-full px-3.5 py-3 pr-11 border border-gray-300 rounded-md text-sm outline-none transition-colors duration-200 focus:border-[#00473E]"
+                className="w-full px-3.5 py-3 pr-11 border border-gray-300 rounded-md text-sm outline-none transition-colors duration-200 focus:border-[#005d5a]"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -173,7 +173,7 @@ export default function RegisterPage() {
             </label>
             <select
               id="user-role"
-              className="w-full px-3.5 py-3 border border-gray-300 rounded-md text-sm outline-none transition-colors duration-200 focus:border-[#00473E] bg-white"
+              className="w-full px-3.5 py-3 border border-gray-300 rounded-md text-sm outline-none transition-colors duration-200 focus:border-[#005d5a] bg-white"
               value={role}
               onChange={(e) => setRole(e.target.value)}
             >
@@ -194,7 +194,7 @@ export default function RegisterPage() {
               <input
                 type="text"
                 id="register-gstin"
-                className="w-full px-3.5 py-3 border border-gray-300 rounded-md text-sm outline-none transition-colors duration-200 focus:border-[#00473E]"
+                className="w-full px-3.5 py-3 border border-gray-300 rounded-md text-sm outline-none transition-colors duration-200 focus:border-[#005d5a]"
                 value={gstin}
                 onChange={(e) => validateGstin(e.target.value.toUpperCase())}
                 maxLength={15}
@@ -242,7 +242,7 @@ export default function RegisterPage() {
             Already have an account?{" "}
             <Link
               href="/login"
-              className="text-[#00473E] font-bold hover:underline"
+              className="text-[#005d5a] font-bold hover:underline"
             >
               Login
             </Link>

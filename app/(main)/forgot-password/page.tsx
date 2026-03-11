@@ -68,7 +68,7 @@ export default function ForgotPasswordPage() {
     <div className="min-h-[80vh] mt-20 flex items-center justify-center py-10 px-4 bg-gray-50">
       <div className="w-full max-w-[480px] mx-auto bg-white rounded-[10px] p-9 shadow-[0_6px_14px_rgba(0,0,0,0.12)] max-sm:p-7">
         <div className="mb-4">
-          <h2 className="font-heading font-semibold text-[32px] text-[#00473E]">
+          <h2 className="font-heading font-semibold text-[32px] text-[#005d5a]">
             Forget Password
           </h2>
         </div>
@@ -91,7 +91,7 @@ export default function ForgotPasswordPage() {
             <input
               type="email"
               id="reset-email"
-              className="w-full px-3.5 py-3 border border-gray-300 rounded-md text-sm font-[inherit] outline-none transition-colors duration-200 focus:border-[#00473E]"
+              className="w-full px-3.5 py-3 border border-gray-300 rounded-md text-sm font-[inherit] outline-none transition-colors duration-200 focus:border-[#005d5a]"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -102,7 +102,7 @@ export default function ForgotPasswordPage() {
             <span>Remember Password?</span>
             <Link
               href="/login"
-              className="text-gray-800 font-semibold hover:text-[#00473E] transition-colors"
+              className="text-gray-800 font-semibold hover:text-[#005d5a] transition-colors"
             >
               Login
             </Link>

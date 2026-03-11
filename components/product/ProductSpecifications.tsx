@@ -13,7 +13,7 @@ export default function ProductSpecifications({
 
   return (
     <section className="container mx-auto px-4 py-6 md:py-10">
-      <h2 className="font-barlow text-2xl md:text-3xl text-[#2a5b57] mb-4 md:mb-6">
+      <h2 className="font-heading text-2xl md:text-3xl text-[#2a5b57] mb-4 md:mb-6">
         Technical Specifications
       </h2>
 

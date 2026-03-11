@@ -6,12 +6,12 @@ import { useEffect, useRef, useState, useCallback } from "react";
 const DecorativeElements = () => (
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
     {/* Large animated gradient orbs */}
-    <div className="absolute top-10 left-10 w-72 h-72 rounded-full bg-gradient-to-br from-[#315859]/20 to-[#315859]/5 blur-3xl animate-pulse" />
+    <div className="absolute top-10 left-10 w-72 h-72 rounded-full bg-gradient-to-br from-[#005d5a]/20 to-[#005d5a]/5 blur-3xl animate-pulse" />
     <div className="absolute bottom-20 right-20 w-96 h-96 rounded-full bg-gradient-to-tl from-[#CA5D27]/15 to-yellow-400/10 blur-3xl" />
     <div className="absolute top-1/2 left-1/4 w-64 h-64 rounded-full bg-gradient-to-r from-orange-200/20 to-transparent blur-2xl" />
 
     {/* Decorative rings */}
-    {/* <div className="absolute top-20 right-1/3 w-32 h-32 rounded-full border border-[#315859]/10 hidden lg:block" />
+    {/* <div className="absolute top-20 right-1/3 w-32 h-32 rounded-full border border-[#005d5a]/10 hidden lg:block" />
     <div className="absolute top-24 right-1/3 w-24 h-24 rounded-full border border-[#CA5D27]/15 hidden lg:block" /> */}
 
     {/* Floating geometric shapes */}
@@ -20,7 +20,7 @@ const DecorativeElements = () => (
       style={{ animation: "floatSlow 6s ease-in-out infinite" }}
     />
     <div
-      className="absolute top-1/3 left-32 w-3 h-3 rotate-45 bg-[#315859]/15 hidden lg:block"
+      className="absolute top-1/3 left-32 w-3 h-3 rotate-45 bg-[#005d5a]/15 hidden lg:block"
       style={{ animation: "floatSlow 8s ease-in-out infinite 1s" }}
     />
     <div
@@ -30,26 +30,26 @@ const DecorativeElements = () => (
 
     {/* Decorative lines */}
     <div className="absolute top-1/4 left-8 w-32 h-[2px] bg-gradient-to-r from-[#CA5D27]/30 via-[#CA5D27]/10 to-transparent hidden lg:block" />
-    <div className="absolute top-[30%] left-8 w-20 h-[1px] bg-gradient-to-r from-[#315859]/20 to-transparent hidden lg:block" />
-    <div className="absolute bottom-1/4 left-8 w-24 h-[1px] bg-gradient-to-r from-[#315859]/15 to-transparent hidden lg:block" />
+    <div className="absolute top-[30%] left-8 w-20 h-[1px] bg-gradient-to-r from-[#005d5a]/20 to-transparent hidden lg:block" />
+    <div className="absolute bottom-1/4 left-8 w-24 h-[1px] bg-gradient-to-r from-[#005d5a]/15 to-transparent hidden lg:block" />
 
     {/* Corner accents */}
-    <div className="absolute top-0 left-0 w-40 h-40 border-l-2 border-t-2 border-[#315859]/10 rounded-tl-3xl hidden lg:block" />
+    <div className="absolute top-0 left-0 w-40 h-40 border-l-2 border-t-2 border-[#005d5a]/10 rounded-tl-3xl hidden lg:block" />
     <div className="absolute bottom-0 right-0 w-40 h-40 border-r-2 border-b-2 border-[#CA5D27]/10 rounded-br-3xl hidden lg:block" />
 
     {/* Dot pattern cluster */}
     <div className="absolute bottom-40 left-20 hidden lg:flex flex-col gap-3">
       <div className="flex gap-3">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#315859]/20" />
-        <span className="w-1.5 h-1.5 rounded-full bg-[#315859]/15" />
-        <span className="w-1.5 h-1.5 rounded-full bg-[#315859]/10" />
+        <span className="w-1.5 h-1.5 rounded-full bg-[#005d5a]/20" />
+        <span className="w-1.5 h-1.5 rounded-full bg-[#005d5a]/15" />
+        <span className="w-1.5 h-1.5 rounded-full bg-[#005d5a]/10" />
       </div>
       <div className="flex gap-3">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#315859]/15" />
-        <span className="w-1.5 h-1.5 rounded-full bg-[#315859]/10" />
+        <span className="w-1.5 h-1.5 rounded-full bg-[#005d5a]/15" />
+        <span className="w-1.5 h-1.5 rounded-full bg-[#005d5a]/10" />
       </div>
       <div className="flex gap-3">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#315859]/10" />
+        <span className="w-1.5 h-1.5 rounded-full bg-[#005d5a]/10" />
       </div>
     </div>
 
@@ -199,16 +199,16 @@ export default function BlowupShotClean() {
         });
       };
 
-      // Load frame 0 first, then batch-load the rest during idle
-      loadImage(0).then(() => {
-        currentFrameRef.current = 0;
-        targetFrameRef.current = 0;
+      // Load frame 20 first, then batch-load the rest during idle
+      loadImage(20).then(() => {
+        currentFrameRef.current = 20;
+        targetFrameRef.current = 20;
         render();
         setIsLoaded(true);
 
         // Load remaining frames in small batches to avoid jank
         const BATCH_SIZE = 6;
-        let nextIndex = 1;
+        let nextIndex = 0;
 
         const loadNextBatch = () => {
           if (nextIndex >= frameCount) return;
@@ -249,7 +249,8 @@ export default function BlowupShotClean() {
           0,
           Math.min(1, scrolled / scrollableDistance),
         );
-        targetFrameRef.current = progress * (frameCount - 1);
+        const startFrame = 20;
+        targetFrameRef.current = startFrame + progress * (frameCount - 1 - startFrame);
 
         startAnimating();
       };
@@ -311,7 +312,7 @@ export default function BlowupShotClean() {
               {/* Enhanced badge with glow effect */}
               <div className="relative inline-block group">
                 <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 rounded-full blur-xl group-hover:blur-2xl transition-all duration-500 opacity-0 group-hover:opacity-100" />
-                <div className="relative inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border border-[#315859]/20 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300">
+                <div className="relative inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/80 border border-[#005d5a]/20 backdrop-blur-sm shadow-sm hover:shadow-md transition-all duration-300">
                   <svg
                     className="w-4 h-4 text-yellow-500 animate-pulse"
                     fill="none"
@@ -325,7 +326,7 @@ export default function BlowupShotClean() {
                       d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
                     />
                   </svg>
-                  <span className="text-sm text-[#315859] font-medium">
+                  <span className="text-sm text-[#005d5a] font-medium">
                     Premium Collection 2026
                   </span>
                 </div>
@@ -333,7 +334,7 @@ export default function BlowupShotClean() {
 
               {/* Title with gradient underline accent */}
               <div className="relative">
-                <h1 className="text-3xl heading text-[#315859]  md:text-4xl lg:text-7xl  leading-tight">
+                <h1 className="text-3xl heading text-[#005d5a]  md:text-4xl lg:text-7xl  leading-tight">
                   Elegance in
                   <span className="block text-[#CA5D27] relative">
                     Every Breeze
@@ -343,7 +344,7 @@ export default function BlowupShotClean() {
               </div>
 
               {/* Description with subtle left border accent */}
-              <div className="relative pl-4 border-l-2 border-gradient-to-b from-[#315859]/30 to-transparent">
+              <div className="relative pl-4 border-l-2 border-gradient-to-b from-[#005d5a]/30 to-transparent">
                 <p className="text-sm md:text-md lg:text-lg text-gray-600 max-w-md leading-relaxed hidden md:block">
                   Experience the perfect harmony of cutting-edge technology and
                   timeless design. Our premium ceiling fans transform your space

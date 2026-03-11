@@ -3,8 +3,30 @@
 
 /* Tailwind v4 Custom Theme */
 @theme {
-  --font-heading: 'Barlow Condensed', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-  --font-ailerons: 'Ailerons', sans-serif;
+  --font-sans: var(--font-open-sans);
+  --font-heading: 'Barlow Condensed';
+  --font-ailerons: 'Ailerons';
+
+  /* Brand colors */
+  --color-brand: #CA5D27;
+  --color-brand-light: #E07339;
+  --color-brand-dark: #B24F1F;
+
+  /* Primary colors */
+  --color-primary: #005d5a;
+  --color-primary-green: #005d5a;
+  --color-primary-dark: #244a46;
+  --color-primary-darker: #1a3634;
+
+  /* Neutral colors */
+  --color-neutral-50: #F8F8F8;
+  --color-neutral-100: #F5F5F5;
+  --color-neutral-200: #E0E0E0;
+  --color-neutral-300: #D4D4D4;
+  --color-neutral-400: #B8B8B8;
+  --color-neutral-500: #6F6F6F;
+  --color-neutral-600: #666666;
+  --color-neutral-700: #21201E;
 }
 
 /* Custom Local Font - Ailerons */
@@ -22,11 +44,10 @@
     --radius: 10px;
     --shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
     --brand: #CA5D27;
-    --primary-green: #315859;
+    --primary-green: #005d5a;
     --dark-green: #244a46;
-    --font-barlow-condensed: 'Barlow Condensed', ui-sans-serif, system-ui;
-    --font-open-sans: 'Open Sans', sans-serif, system-ui;
-    --color-haneri-green: #00473E;
+    --font-barlow-condensed: 'Barlow Condensed';
+    --color-haneri-green: #005d5a;
     --color-haneri-orange: #CA5D27;
     --color-haneri-gray: #464646;
   }
@@ -40,12 +61,17 @@
   html,
   body {
     max-width: 100%;
+    
   }
 
   body {
-    font-family: var(--font-open-sans), system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-family: var(--font-open-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  button, input, select, textarea {
+    font-family: inherit;
   }
 
   /* Custom Scrollbar Styles */
@@ -98,11 +124,11 @@
   }
 
   .heading_1 {
-    font-family: var(--font-barlow-condensed), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+    font-family: var(--font-barlow-condensed);
     font-weight: 500;
     font-size: clamp(28px, 4vw, 36px);
     line-height: 1.2;
-    color: #315859;
+    color: #005d5a;
     margin-bottom: 20px;
   }
 
@@ -206,7 +232,7 @@
   /* Button styles */
   .btn-haneri {
     display: inline-block;
-    background-color: #315858;
+    background-color: #005d5a;
     color: white;
     padding: 10px 20px;
     font-size: 16px;
@@ -218,7 +244,7 @@
   }
 
   .btn-haneri:hover {
-    background-color: #00473e;
+    background-color: #005d5a;
     border-color: rgba(0, 71, 62, 0.7);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);

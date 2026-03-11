@@ -23,9 +23,9 @@ export default function DiscoverHero({
         }`}
       >
         <div className={`space-y-4 ${centered ? "text-center" : ""}`}>
-          <h2 className=" flex justify-center  text-[30px] lg:text-[36px] text-[#315859] font-bold font-['Barlow_Condensed'] uppercase tracking-wider md:animate-float leading-none">
+          {/* <h2 className=" flex justify-center  text-[30px] lg:text-[36px] text-[#005d5a] font-bold font-['Barlow_Condensed'] uppercase tracking-wider md:animate-float leading-none">
             Discover
-          </h2>
+          </h2> */}
           <div
             className={`flex items-center gap-4  ${
               centered ? "justify-center" : "justify-center "
@@ -45,15 +45,15 @@ export default function DiscoverHero({
               }`}
             >
               <div
-                className="w-2 h-2 rounded-full bg-[#315859] animate-pulse"
+                className="w-2 h-2 rounded-full bg-[#005d5a] animate-pulse"
                 style={{ animationDelay: "0s" }}
               ></div>
               <div
-                className="w-2 h-2 rounded-full bg-[#315859] animate-pulse"
+                className="w-2 h-2 rounded-full bg-[#005d5a] animate-pulse"
                 style={{ animationDelay: "0.2s" }}
               ></div>
               <div
-                className="w-2 h-2 rounded-full bg-[#315859] animate-pulse"
+                className="w-2 h-2 rounded-full bg-[#005d5a] animate-pulse"
                 style={{ animationDelay: "0.4s" }}
               ></div>
             </div>

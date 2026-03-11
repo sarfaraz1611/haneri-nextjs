@@ -342,11 +342,11 @@ export default function FeaturedProducts() {
           <h2
             className="lg:-mt-10 2xl:-mt-20 uppercase tracking-wider"
             style={{
-              fontFamily: "var(--font-barlow-condensed), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif",
+              fontFamily: "var(--font-heading)",
               fontWeight: 600,
               fontSize: "clamp(28px, 4vw, 36px)",
               lineHeight: 1.2,
-              color: "#315859",
+              color: "#005d5a",
               marginBottom: "20px",
             }}
           >
@@ -421,7 +421,7 @@ export default function FeaturedProducts() {
                   <p className="text-[#6F6F6F] text-sm leading-relaxed mb-4 max-w-[60ch] line-clamp-2">
                     {product.description}
                   </p>
-                  <div className="font-['Barlow_Condensed'] text-[24px] font-normal leading-none text-[#315859] text-left mb-4 flex gap-2 items-baseline">
+                  <div className="font-['Barlow_Condensed'] text-[24px] font-normal leading-none text-[#005d5a] text-left mb-4 flex gap-2 items-baseline">
                     <span className="font-semibold">MRP</span>
                     <span className="font-semibold">
                       ₹{formatPrice(sellingPrice)}
@@ -472,7 +472,7 @@ export default function FeaturedProducts() {
                     className={`mt-2 w-full rounded-lg px-4 py-2 text-sm font-semibold text-white shadow-sm hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${
                       addedToCart.has(product.id)
                         ? "bg-[#CA5D27] hover:bg-[#b54d1f]"
-                        : "bg-[#00473E] hover:bg-[#244a46]"
+                        : "bg-[#005d5a] hover:bg-[#244a46]"
                     }`}
 
                     // className={` ${

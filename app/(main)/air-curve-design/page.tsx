@@ -32,16 +32,16 @@ export default function AirCurveDesign() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-5xl  heading tracking-tight  text-[#315858]">
+              <h2 className="text-5xl  heading tracking-tight  text-[#005d5a]">
                 <span className="heading text-[#bb6125] mb-1 text-5xl  tracking-tight">
-                  Introducing Air Curve Design:
+                  Introducing Air Curve Design
                 </span>
                 <br />
                 Redefining Ceiling Fan Efficiency
               </h2>
               <p
                 className="text-[16px] mt-4 font-normal text-gray-500 "
-                style={{ fontFamily: "'Montserrat', sans-serif" }}
+                style={{ fontFamily: "var(--font-open-sans)" }}
               >
                 At Haneri, innovation drives us to create products that are not
                 only stylish but also deliver superior performance. Our
@@ -64,12 +64,12 @@ export default function AirCurveDesign() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-5xl heading  tracking-tight text-[#315858]">
+              <h2 className="text-5xl heading  tracking-tight text-[#005d5a]">
                 What is Air Curve Design?
               </h2>
               <p
                 className="text-[16px] mt-4 font-normal text-gray-500 "
-                style={{ fontFamily: "'Montserrat', sans-serif" }}
+                style={{ fontFamily: "var(--font-open-sans)" }}
               >
                 Air Curve Design is a cutting-edge blade technology that
                 leverages advanced computational modelling and simulation to
@@ -100,7 +100,7 @@ export default function AirCurveDesign() {
 
           {/* Key Features Section */}
           <div className="mt-20">
-            <h2 className="text-5xl heading mb-10   tracking-tight text-[#315858]">
+            <h2 className="text-5xl heading mb-10   tracking-tight text-[#005d5a]">
               Key Features of Air Curve Design
             </h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -119,14 +119,13 @@ export default function AirCurveDesign() {
                   className="object-contain"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#315858]">
+                  <h3 className="text-xl font-semibold text-[#005d5a]">
                     High Air Delivery
                   </h3>
                   <p
                     className="mt-2 text-black"
                     style={{
-                      fontFamily:
-                        'Montserrat, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif',
+                      fontFamily: "var(--font-open-sans)",
                       fontWeight: 400,
                     }}
                   >
@@ -153,14 +152,13 @@ export default function AirCurveDesign() {
                   className="object-contain"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#315858]">
+                  <h3 className="text-xl font-semibold text-[#005d5a]">
                     Energy Efficiency
                   </h3>
                   <p
                     className="mt-2 text-black"
                     style={{
-                      fontFamily:
-                        'Montserrat, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif',
+                      fontFamily: "var(--font-open-sans)",
                       fontWeight: 400,
                     }}
                   >
@@ -186,14 +184,13 @@ export default function AirCurveDesign() {
                   className="object-contain"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#315858]">
+                  <h3 className="text-xl font-semibold text-[#005d5a]">
                     Advanced Materials
                   </h3>
                   <p
                     className="mt-2 text-black"
                     style={{
-                      fontFamily:
-                        'Montserrat, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif',
+                      fontFamily: "var(--font-open-sans)",
                       fontWeight: 400,
                     }}
                   >
@@ -220,14 +217,13 @@ export default function AirCurveDesign() {
                   className="object-contain"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#315858]">
+                  <h3 className="text-xl font-semibold text-[#005d5a]">
                     Silent Performance
                   </h3>
                   <p
                     className="mt-2 text-black"
                     style={{
-                      fontFamily:
-                        'Montserrat, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif',
+                      fontFamily: "var(--font-open-sans)",
                       fontWeight: 400,
                     }}
                   >
@@ -264,7 +260,7 @@ export default function AirCurveDesign() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
             >
-              <h2 className="text-5xl heading tracking-tight text-[#315858]">
+              <h2 className="text-5xl heading tracking-tight text-[#005d5a]">
                 The Science Behind Air Curve Design
               </h2>
 
@@ -287,12 +283,12 @@ export default function AirCurveDesign() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
+                    <span className="text-[#005d5a] font-bold">
                       Computational Fluid Dynamics (CFD):
                     </span>{" "}
                     <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                       Powered by Air Curve Design, the blades feature
                       precision-engineered contours that maximize air
@@ -312,12 +308,12 @@ export default function AirCurveDesign() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
+                    <span className="text-[#005d5a] font-bold">
                       Prototyping and Testing:{" "}
                     </span>{" "}
                       <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                     Multiple prototypes are tested under real-world conditions
                     to validate performance metrics such as air delivery, noise
@@ -335,12 +331,12 @@ export default function AirCurveDesign() {
                 >
                   <span className="mr-2">•</span>
                   <span>
-                    <span className="text-[#315858] font-bold">
+                    <span className="text-[#005d5a] font-bold">
                       Iterative Design:{" "}
                     </span>{" "}
                      <span
                       className="text-[16px] font-normal text-gray-500 "
-                      style={{ fontFamily: "'Montserrat', sans-serif" }}
+                      style={{ fontFamily: "var(--font-open-sans)" }}
                     >
                     Continuous refinement based on data-driven insights ensures
                     that Air Curve blades exceed industry benchmarks for
@@ -354,7 +350,7 @@ export default function AirCurveDesign() {
 
           {/* Benefits For Customers Section */}
           <div className="mt-20 flex flex-col items-start">
-            <h2 className="text-5xl  mb-10 heading  tracking-tight text-[#315858]">
+            <h2 className="text-5xl  mb-10 heading  tracking-tight text-[#005d5a]">
               Benefits for Customers
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2  gap-8 w-full">
@@ -373,14 +369,13 @@ export default function AirCurveDesign() {
                   className="object-contain mb-4"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                  <h3 className="text-xl font-semibold text-[#ca5d27]">
                     Enhanced Comfort
                   </h3>
                   <p
                     className="mt-2 text-black"
                     style={{
-                      fontFamily:
-                        'Montserrat, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif',
+                      fontFamily: "var(--font-open-sans)",
                       fontWeight: 400,
                     }}
                   >
@@ -405,14 +400,13 @@ export default function AirCurveDesign() {
                   className="object-contain mb-4"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                  <h3 className="text-xl font-semibold text-[#ca5d27]">
                     Cost Savings
                   </h3>
                   <p
                     className="mt-2 text-black"
                     style={{
-                      fontFamily:
-                        'Montserrat, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif',
+                      fontFamily: "var(--font-open-sans)",
                       fontWeight: 400,
                     }}
                   >
@@ -437,14 +431,13 @@ export default function AirCurveDesign() {
                   className="object-contain mb-4"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                  <h3 className="text-xl font-semibold text-[#ca5d27]">
                     Sustainable Choice
                   </h3>
                   <p
                     className="mt-2 text-black"
                     style={{
-                      fontFamily:
-                        'Montserrat, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif',
+                      fontFamily: "var(--font-open-sans)",
                       fontWeight: 400,
                     }}
                   >
@@ -469,14 +462,13 @@ export default function AirCurveDesign() {
                   className="object-contain mb-4"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#CA5C27]">
+                  <h3 className="text-xl font-semibold text-[#ca5d27]">
                     Quiet Operation
                   </h3>
                   <p
                     className="mt-2 text-black"
                     style={{
-                      fontFamily:
-                        'Montserrat, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif',
+                      fontFamily: "var(--font-open-sans)",
                       fontWeight: 400,
                     }}
                   >

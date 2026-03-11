@@ -341,7 +341,7 @@ export default function FAQs() {
                     }}
                     className={`whitespace-nowrap rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 ${
                       activeCategory === category
-                        ? "bg-[#00473E] text-white shadow-md"
+                        ? "bg-[#005d5a] text-white shadow-md"
                         : "bg-neutral-100 text-neutral-700 hover:bg-neutral-200"
                     }`}
                   >
@@ -399,7 +399,7 @@ export default function FAQs() {
                         stroke="currentColor"
                         strokeWidth="1.5"
                         aria-hidden="true"
-                        className={`size-6 text-[#00473E] transition-transform duration-300 ${
+                        className={`size-6 text-[#005d5a] transition-transform duration-300 ${
                           openIndex === index ? "hidden" : "block"
                         }`}
                       >

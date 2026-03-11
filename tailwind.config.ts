@@ -36,8 +36,8 @@ const config: Config = {
           dark: "#B24F1F",
         },
         primary: {
-          DEFAULT: "#00473E",
-          green: "#315859",
+          DEFAULT: "#005d5a",
+          green: "#005d5a",
           dark: "#244a46",
           darker: "#1a3634",
         },
@@ -56,26 +56,12 @@ const config: Config = {
       // Custom Font Families
       fontFamily: {
         sans: [
-          "Open Sans",
-          "system-ui",
-          "-apple-system",
-          "Segoe UI",
-          "Roboto",
-          "Helvetica",
-          "Arial",
-          "sans-serif",
+          "var(--font-open-sans)",
         ],
         heading: [
-          "Barlow Condensed",
-          "ui-sans-serif",
-          "system-ui",
-          "-apple-system",
-          "Segoe UI",
-          "Roboto",
-          "Arial",
-          "sans-serif",
+          "Barlow Condensed"
         ],
-        ailerons: ["Ailerons", "sans-serif"],
+        ailerons: ["Ailerons"],
       },
 
       // Custom Border Radius

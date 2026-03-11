@@ -228,7 +228,7 @@ export default function CartPage() {
         <div
           className={`fixed bottom-5 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-lg shadow-lg transition-all duration-300 ${
             flash.type === "success"
-              ? "bg-[#b3e3dd] text-[#00473E]"
+              ? "bg-[#b3e3dd] text-[#005d5a]"
               : "bg-red-100 text-red-700"
           }`}
         >
