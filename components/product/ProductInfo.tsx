@@ -11,7 +11,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   return (
     <div>
       <Image
-        src="/images/Haneri Logo.png"
+        src="/Haneri_Logo-.svg"
         alt="Haneri"
         width={120}
         height={28}
@@ -25,8 +25,8 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       <ProductRating rating={product.rating} reviewCount={product.review_count} />
 
       {product.category && (
-        <p className="uppercase text-sm font-bold text-[#075E5E] mt-3">
-          Category: <span className="font-bold">{product.category}</span>
+        <p className="text-sm font-bold text-[#075E5E] mt-3">
+          Category: <span className="font-bold">{product.category.toLowerCase().replace(/\b\w/g, c => c.toUpperCase())}</span>
         </p>
       )}
 

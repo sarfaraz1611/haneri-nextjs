@@ -64,7 +64,7 @@ export default function Home() {
       {/* COMING SOON */}
       <main className="flex flex-col items-center justify-center min-h-screen bg-white">
         <img
-          src="/images/Haneri Logo.png"
+          src="/Haneri_Logo-.svg"
           alt="Ha"
           className="cs-logo h-16 md:h-24 w-auto mx-auto mb-10 opacity-0"
         />

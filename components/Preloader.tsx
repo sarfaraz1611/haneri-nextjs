@@ -178,7 +178,7 @@ export default function Preloader() {
         <div className="mb-8">
           <img
             ref={logoRef}
-            src="/images/Haneri Logo.png"
+            src="/Haneri_Logo-.svg"
             alt="Haneri"
             className="h-16 md:h-24 w-auto mx-auto mb-4"
           />
