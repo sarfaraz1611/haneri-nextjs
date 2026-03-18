@@ -31,7 +31,6 @@ export const DEFAULT_FEATURE_ICONS = [
   { id: 2, icon_url: "/images/Breeze_model.png", label: "Breeze\nMode" },
   { id: 3, icon_url: "/images/Low_noise.png", label: "Low\nNoise" },
   { id: 4, icon_url: "/images/Timer_mode.png", label: "Timer\nMode" },
-  { id: 5, icon_url: "/images/Night_mode.png", label: "Night\nMode" },
   { id: 6, icon_url: "/images/Sweep_mm.png", label: "Sweep\n1320mm" },
   { id: 7, icon_url: "/images/Double_balt.png", label: "Double\nBall bearing" },
   { id: 8, icon_url: "/images/Eco_mode.png", label: "Eco\nMode" },
@@ -40,7 +39,6 @@ export const DEFAULT_FEATURE_ICONS = [
     icon_url: "/images/Forward_Reverse_mode.png",
     label: "Forward/\nReverse Mode",
   },
-  { id: 10, icon_url: "/images/3_in_1_led.png", label: "3 in 1 LED\nOption" },
   { id: 11, icon_url: "/images/Easy_clean.png", label: "Easy\nClean" },
   {
     id: 12,

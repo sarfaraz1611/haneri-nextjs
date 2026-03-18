@@ -204,7 +204,7 @@ export default function Header() {
 
               <Link href="/" className="block">
                 <img
-                  src="/images/Haneri Logo.png"
+                  src="/Haneri_Logo-.svg"
                   alt="Haneri"
                   className="h-10 w-auto max-lg:h-8 max-md:h-7 max-sm:h-6"
                 />

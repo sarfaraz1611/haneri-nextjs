@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import LOGO_SRC from "./../public/images/Haneri Logo.png";
+import LOGO_SRC from "./../public/Haneri_Logo-.svg";
 import DiscoverHero from "./DiscoverHero";
 
 // Import GSAP and ScrollTrigger

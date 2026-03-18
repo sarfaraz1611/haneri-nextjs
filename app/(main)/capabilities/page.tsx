@@ -15,7 +15,7 @@ export default function CapabilitiesPage() {
     gsap.fromTo(
       ".page",
       { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
+      { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
     );
 
     /* ---------- TEXT ANIMATION ---------- */
@@ -33,7 +33,7 @@ export default function CapabilitiesPage() {
             start: "top 80%",
             once: true,
           },
-        }
+        },
       );
     });
 
@@ -52,7 +52,7 @@ export default function CapabilitiesPage() {
             start: "top 80%",
             once: true,
           },
-        }
+        },
       );
     });
 
@@ -64,59 +64,55 @@ export default function CapabilitiesPage() {
 
   return (
     <div className="page w-full mt-20 space-y-12 px-4 sm:px-6 lg:px-10">
-      {DATA.map((item, index) => {
-        const isEven = index % 2 === 0;
-
-        return (
-          <section
-            key={index}
-            className="grid grid-cols-1 items-center gap-8 rounded-[14px] bg-white p-6
-                       md:grid-cols-2 md:gap-14 md:p-10"
-          >
-            {/* IMAGE */}
-            <div
-              className={`cap-image relative overflow-hidden rounded-xl group
-                          ${isEven ? "md:order-1" : "md:order-2"}`}
+      {DATA.map((item, index) => (
+        <section
+          key={index}
+          className="grid grid-cols-1  gap-8 rounded-[14px] bg-white p-6
+                     lg:grid-cols-2 lg:gap-14 lg:p-10"
+        >
+          {/* TEXT */}
+          <div className="cap-text flex flex-col gap-3 order-2 lg:order-1">
+            <h2
+              className="font-heading font-medium text-[#005d5a]
+                         text-[34px] leading-tight
+                         sm:text-[40px]
+                        "
             >
-              <img
-                src={item.img}
-                alt=""
-                className="w-full h-[220px] object-cover transition-transform duration-700
-                           sm:h-[260px] md:h-[320px] lg:h-[380px] xl:h-[420px]
-                           group-hover:scale-110"
-              />
+              {item.title}
+            </h2>
 
-              <div
-                className="pointer-events-none absolute inset-0 rounded-xl
-                           border-2 border-gray-200 transition-colors duration-300
-                           group-hover:border-[#005d5a]"
-              />
-            </div>
-
-            {/* TEXT */}
-            <div
-              className={`cap-text gap-5
-                          ${isEven ? "md:order-2" : "md:order-1"}`}
+            <p
+              className="font-['Open_Sans'] font-semibold text-[#c07a3a]
+                         text-base sm:text-lg leading-snug"
             >
-              <h2
-                className="font-['Barlow_Condensed'] font-light text-[#005d5a]
-                           text-[34px] leading-tight
-                           sm:text-[40px]
-                           lg:text-[48px]"
-              >
-                {item.title}
-              </h2>
+              {item.subtitle}
+            </p>
 
-              <p
-                className="mt-4 font-['Open_Sans'] text-black leading-relaxed
-                           text-base sm:text-lg lg:text-xl"
-              >
-                {item.desc}
-              </p>
-            </div>
-          </section>
-        );
-      })}
+            <p
+              className="mt-1 font-['Open_Sans'] text-[#005d5a] leading-relaxed
+                         text-sm sm:text-base"
+            >
+              {item.desc}
+            </p>
+          </div>
+
+          {/* IMAGE */}
+          <div className="cap-image relative overflow-hidden rounded-xl group order-1 lg:order-2">
+            <img
+              src={item.img}
+              alt=""
+              className="w-full h-[220px] object-cover transition-transform duration-700
+                         sm:h-[260px] lg:h-[365px] 
+                         group-hover:scale-110"
+            />
+            <div
+              className="pointer-events-none absolute inset-0 rounded-xl
+                         transition-colors duration-300
+                        "
+            />
+          </div>
+        </section>
+      ))}
     </div>
   );
 }
@@ -125,28 +121,33 @@ export default function CapabilitiesPage() {
 
 const DATA = [
   {
-    title: "Excellence in Manufacturing, R&D, and Innovation",
-    desc: "At Haneri, we seamlessly integrate design, innovation, and precision manufacturing, ensuring every product exemplifies quality, functionality, and elegance.",
-    img: "/images/capa_2.png",
+    title: "Innovation Begins with Research",
+    subtitle: "Advanced R&D that drives smarter cooling solutions",
+    desc: "At Haneri, innovation starts with deep engineering insight. Our research and development teams continuously explore new technologies, materials, and design approaches to create products that enhance everyday comfort. Through rigorous testing, airflow analysis, and performance optimization, we ensure every product is engineered for efficiency, reliability, and long-term performance.",
+    img: "/Mask(4).svg",
   },
   {
-    title: "Product-Specific R&D and Prototyping Facilities",
-    desc: "Innovation is at the heart of Haneri. Our dedicated research and development teams focus on creating products that redefine everyday living.",
-    img: "/images/capa_1.png",
+    title: "From Concept to Reality",
+    subtitle: "Rapid prototyping that accelerates innovation",
+    desc: "Our in-house design and prototyping capabilities allow ideas to move quickly from concept to functional models. By testing and refining prototypes early in the development process, we ensure that each design meets strict performance, usability, and aesthetic standards before entering production.",
+    img: "/Mask(5).svg",
   },
   {
-    title: "Comprehensive Manufacturing Processes",
-    desc: "Our robust manufacturing capabilities ensure end-to-end control, enabling consistent quality, quick turnarounds, and agile innovation.",
-    img: "/images/capa_3.png",
+    title: "Precision Built at Scale",
+    subtitle: "Comprehensive manufacturing with end-to-end control",
+    desc: "Haneri’s integrated manufacturing infrastructure enables complete oversight of the production process — from component fabrication to final assembly. This end-to-end approach ensures consistent quality, operational efficiency, and the flexibility to innovate rapidly.",
+    img: "/Mask(6).svg",
   },
   {
-    title: "Superior Surface Finishing Capabilities",
-    desc: "Haneri’s advanced surface finishing ensures every product meets the highest standards of aesthetics and longevity.",
-    img: "/images/capa_4.png",
+    title: "Finishing that Reflects Quality",
+    subtitle: "Advanced surface finishing for durability and elegance",
+    desc: "Every Haneri product undergoes advanced surface finishing processes designed to enhance both longevity and visual appeal. Our capabilities ensure durable coatings, refined textures, and finishes that meet the highest standards of quality and design.",
+    img: "/Mask(8).svg",
   },
   {
-    title: "Design & Tooling Expertise",
-    desc: "Our in-house tool room and advanced CAD design capabilities empower us to innovate with precision.",
-    img: "/images/capa_5.png",
+    title: "Quality Engineered into Every Detail",
+    subtitle: "Rigorous QA/QC systems that ensure reliability",
+    desc: "Quality is embedded at every stage of the production process. Our comprehensive quality assurance and quality control systems include systematic inspections, performance testing, and strict compliance standards to ensure every product meets Haneri’s benchmarks for precision and durability.",
+    img: "/Mask(7).svg",
   },
 ];
