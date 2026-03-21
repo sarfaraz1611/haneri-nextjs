@@ -14,6 +14,8 @@ export default function ContactPage() {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(null);
 
   const validate = (name: string, value: string): string => {
     switch (name) {
@@ -52,7 +54,7 @@ export default function ContactPage() {
     setErrors((prev) => ({ ...prev, [name]: validate(name, value) }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const newErrors: Record<string, string> = {};
     const allTouched: Record<string, boolean> = {};
@@ -63,7 +65,29 @@ export default function ContactPage() {
     setErrors(newErrors);
     setTouched(allTouched);
     if (Object.values(newErrors).some((err) => err)) return;
-    console.log("Form submitted:", formData);
+
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+    try {
+      const res = await fetch("https://api.haneri.com/api/contact/create", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.fullName,
+          email: formData.email,
+          mobile: formData.phone,
+          comments: formData.message,
+        }),
+      });
+      if (!res.ok) throw new Error("Failed to send message");
+      setSubmitStatus("success");
+      setFormData({ fullName: "", email: "", phone: "", message: "" });
+      setTouched({});
+    } catch {
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -145,11 +169,18 @@ export default function ContactPage() {
                   <p className="text-red-500 text-sm mt-1">{errors.message}</p>
                 )}
               </div>
+              {submitStatus === "success" && (
+                <p className="text-green-600 text-sm mb-3">Your message has been sent successfully!</p>
+              )}
+              {submitStatus === "error" && (
+                <p className="text-red-500 text-sm mb-3">Something went wrong. Please try again.</p>
+              )}
               <button
                 type="submit"
-                className="contact_113 btn-haneri px-8 py-3 rounded-lg font-semibold transition-all"
+                disabled={isSubmitting}
+                className="contact_113 btn-haneri px-8 py-3 rounded-lg font-semibold transition-all disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                Submit
+                {isSubmitting ? "Sending..." : "Submit"}
               </button>
             </form>
           </div>

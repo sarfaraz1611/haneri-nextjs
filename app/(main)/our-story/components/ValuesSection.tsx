@@ -50,9 +50,13 @@ export default function ValuesSection() {
             Values
           </h3>
           <p className="text-[13px] font-['Open_Sans'] leading-[1.75] text-black mb-2">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type.
+            To redefine aspirational product experiences by creating beautifully
+            crafted, technologically advanced, and accessible luxury solutions
+            that blend exceptional quality with inclusive design.
+            <br />
+            We envision a future where thoughtfully engineered products combine
+            innovation, refined aesthetics, and dependable performance to
+            transform ordinary spaces into meaningful environments.
           </p>
           <div className="flex flex-col">
             {values.map((value, index) => (

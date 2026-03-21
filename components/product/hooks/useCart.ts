@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CART_BASE_URL } from "../constants";
 
 interface UseCartOptions {
@@ -23,6 +23,10 @@ export function useCart({
   const [quantity, setQuantity] = useState(1);
   const [addingToCart, setAddingToCart] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
+
+  useEffect(() => {
+    setAddedToCart(false);
+  }, [variantId]);
 
   const handleAddToCart = async () => {
     if (addingToCart || !variantId) return;

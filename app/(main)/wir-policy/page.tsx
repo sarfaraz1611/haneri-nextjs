@@ -10,12 +10,12 @@ export default function WarrantyPolicyPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Banner */}
-      <div className="relative bg-primary pt-20 md:pt-40 overflow-hidden">
+      <div className="relative bg-primary pt-20 md:pt-40 pb-10 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
-          <h1 className="heading_1 text-center mb-8 uppercase text-[#005d5a]">
+          <h1 className="heading_1 text-center mb-8 uppercase text-white">
             Warranty, Installation &amp; Refund Policy
           </h1>
-          <p className="container mx-auto max-w-4xl text-neutral-600 leading-relaxed">
+          <p className="container mx-auto max-w-4xl text-white/80 leading-relaxed">
             Haneri Electricals LLP (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or
             &ldquo;us&rdquo;) is committed to ensuring customer satisfaction and
             confidence in our products. This Warranty and Refunds Policy provides
@@ -38,7 +38,7 @@ export default function WarrantyPolicyPage() {
           </h3>
           <ul className="text-neutral-600 mb-4 space-y-2 pl-5">
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 <strong className="text-neutral-700">
                   Remote Controls and Blade Sets:
@@ -47,7 +47,7 @@ export default function WarrantyPolicyPage() {
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 <strong className="text-neutral-700">
                   Mounting Kits, Downrods, and Canopies:
@@ -79,12 +79,12 @@ export default function WarrantyPolicyPage() {
               </div>
               <ul className="text-neutral-600 space-y-2 pl-10">
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand   shrink-0">&#9679;</span>
                   The warranty period begins from the date of purchase as per the
                   original invoice.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   For serialized products, warranty is validated based on the
                   serial number and invoice.
                 </li>
@@ -100,12 +100,12 @@ export default function WarrantyPolicyPage() {
               </div>
               <ul className="text-neutral-600 space-y-2 pl-10">
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Covers manufacturing defects and functional failures under
                   normal usage.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Includes free repair or replacement of defective parts during
                   the warranty period.
                 </li>
@@ -121,25 +121,25 @@ export default function WarrantyPolicyPage() {
               </div>
               <ul className="text-neutral-600 space-y-2 pl-10">
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Damage caused by improper installation, mishandling,
                   unauthorized repairs, or modifications.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Voltage fluctuations beyond 160V-250V.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Use of external regulators with remote-controlled fans.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Damage due to liquid exposure, pests, or external
                   environmental factors.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Normal wear and tear, including scratches, discoloration, or
                   dents.
                 </li>
@@ -157,51 +157,51 @@ export default function WarrantyPolicyPage() {
               </div>
               <ul className="text-neutral-600 space-y-2 pl-10">
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   For availing free home/onsite service, the product must be
                   within the warranty period.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   For serialized products with Sticker/Printed Manufacture
                   Month, warranty will be considered from the End User Sale
                   Invoice date till the time period mentioned in the warranty
                   table.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   For serialized products without Sticker/Printed Manufacture
                   Month, the start date will be considered from the End User Sale
                   Invoice date till the warranty period mentioned in the warranty
                   table.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   For any query or complaint about the product, the customer
                   needs to register a complaint only to the Company&apos;s
                   centralized call center number provided below.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   <span>
                     End User Sale Invoice should have the following clearly
                     mentioned:
                     <ul className="mt-2 space-y-1 pl-5">
                       <li className="flex items-start gap-2">
-                        <span className="text-primary-green mt-1 shrink-0">
+                        <span className="text-primary-green  shrink-0">
                           &#9642;
                         </span>
                         Valid GST Number
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="text-primary-green mt-1 shrink-0">
+                        <span className="text-primary-green  shrink-0">
                           &#9642;
                         </span>
                         Complete address and contact number of the shop or
                         platform from where the product was purchased
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="text-primary-green mt-1 shrink-0">
+                        <span className="text-primary-green  shrink-0">
                           &#9642;
                         </span>
                         Date of purchase, Model &amp; Serial number of the
@@ -211,13 +211,13 @@ export default function WarrantyPolicyPage() {
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   The warranty period starts from the date of the original
                   purchase of the SKU(s) by the first end-user. The invoice may
                   consist of different SKU(s) having different warranty periods.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   The Company will not entertain any complaint with incomplete
                   warranty details and service charge(s) as per company policy
                   may apply.
@@ -243,7 +243,7 @@ export default function WarrantyPolicyPage() {
               </div>
               <ul className="text-neutral-600 space-y-2 pl-10">
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   <span>
                     Contact Haneri Customer Support or email{" "}
                     <a
@@ -255,7 +255,7 @@ export default function WarrantyPolicyPage() {
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Provide details including invoice, product serial number, and a
                   description of the issue.
                 </li>
@@ -271,7 +271,7 @@ export default function WarrantyPolicyPage() {
               </div>
               <ul className="text-neutral-600 space-y-2 pl-10">
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   A service technician will inspect the product on-site or at an
                   authorized service center.
                 </li>
@@ -287,12 +287,12 @@ export default function WarrantyPolicyPage() {
               </div>
               <ul className="text-neutral-600 space-y-2 pl-10">
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Products will be repaired, replaced, or refunded based on the
                   technician&apos;s assessment.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Replacement units will carry the remaining warranty period of
                   the original product.
                 </li>
@@ -308,14 +308,14 @@ export default function WarrantyPolicyPage() {
           </h2>
           <ul className="text-neutral-600 space-y-3 pl-5">
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 <strong className="text-neutral-700">Wobbling Issues:</strong>{" "}
                 Claims must be reported within 30 days of purchase.
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 <strong className="text-neutral-700">Transit Damage:</strong>{" "}
                 Claims for transit damage must be filed within 10 days of
@@ -323,7 +323,7 @@ export default function WarrantyPolicyPage() {
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 <strong className="text-neutral-700">
                   Service Outside Warranty:
@@ -333,7 +333,7 @@ export default function WarrantyPolicyPage() {
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 <strong className="text-neutral-700">Force Majeure:</strong>{" "}
                 Haneri is not liable for delays or non-performance due to
@@ -351,16 +351,16 @@ export default function WarrantyPolicyPage() {
           </h2>
           <ul className="text-neutral-600 space-y-2 pl-5">
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               Ensure correct installation and usage as per the user manual.
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               Provide necessary tools or access for service, such as ladders or
               clear workspaces.
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               Report any performance issues promptly to avoid further damage.
             </li>
           </ul>
@@ -385,14 +385,14 @@ export default function WarrantyPolicyPage() {
               </p>
               <ul className="text-neutral-600 space-y-2 pl-10">
                 <li className="flex items-start gap-2">
-                  <span className="text-primary-green mt-1 shrink-0">
+                  <span className="text-primary-green  shrink-0">
                     &#9642;
                   </span>
                   The product has a manufacturing defect within 15 days of
                   purchase.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary-green mt-1 shrink-0">
+                  <span className="text-primary-green  shrink-0">
                     &#9642;
                   </span>
                   The product was received damaged or defective.
@@ -409,12 +409,12 @@ export default function WarrantyPolicyPage() {
               </div>
               <ul className="text-neutral-600 space-y-2 pl-10">
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   The product must be returned in its original condition, with
                   all accessories and packaging intact.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Proof of purchase is mandatory for processing refunds or
                   replacements.
                 </li>
@@ -430,7 +430,7 @@ export default function WarrantyPolicyPage() {
               </div>
               <ul className="text-neutral-600 space-y-2 pl-10">
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   <span>
                     Reach out to Haneri Customer Support at{" "}
                     <a
@@ -442,11 +442,11 @@ export default function WarrantyPolicyPage() {
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Provide the purchase receipt and a description of the issue.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   After verification, the product may be inspected before
                   processing a refund or replacement.
                 </li>
@@ -462,7 +462,7 @@ export default function WarrantyPolicyPage() {
               </div>
               <ul className="text-neutral-600 space-y-2 pl-10">
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Refunds will be processed through the original payment method
                   within 7-10 business days.
                 </li>
@@ -487,13 +487,13 @@ export default function WarrantyPolicyPage() {
               </div>
               <ul className="text-neutral-600 space-y-2 pl-10">
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Free installation services are available for select products
                   and cities. Contact Haneri Customer Support to confirm
                   availability.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   <span>
                     To avail of the free installation offer, customers need to
                     call or email Haneri Customer Support at{" "}
@@ -506,28 +506,28 @@ export default function WarrantyPolicyPage() {
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Working hours: 9 AM to 7 PM (Mon-Sat). We do not operate on
                   public and national holidays.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   A Haneri Service Executive will verify if the offer is
                   executable in your area.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   If your location is in a serviceable zone, the installation
                   request will be registered. For non-serviceable locations,
                   please refer to our installation video or guidelines.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Installation will be completed within 48 hours of request
                   registration.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Turnaround time/SLA starts from the date and time the request
                   is registered, after receiving all necessary details (Name,
                   Number, Purchase details, Address with pin code, Serial number
@@ -547,17 +547,17 @@ export default function WarrantyPolicyPage() {
               </div>
               <ul className="text-neutral-600 space-y-2 pl-10">
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Ensure that power supply requirements are met (e.g.,
                   160-250V).
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Provide necessary tools or access for installation, such as a
                   ladder or clear workspace.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Arrange for any additional modifications, such as false ceiling
                   adjustments, at the customer&apos;s expense.
                 </li>
@@ -575,13 +575,13 @@ export default function WarrantyPolicyPage() {
               </div>
               <ul className="text-neutral-600 space-y-2 pl-10">
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Haneri reserves the right to reject any service or installation
                   request if the area is beyond our serviceable zones or if no
                   authorized service center is available.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                  <span className="text-brand  shrink-0">&#9679;</span>
                   Haneri is not responsible for delays caused by force majeure
                   events such as natural disasters, pandemics, or government
                   restrictions.
