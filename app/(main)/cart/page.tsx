@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import axios from "axios";
+import CheckoutProgressBar from "@/components/CheckoutProgressBar";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com/api";
 
@@ -12,6 +13,9 @@ interface CartItem {
   product_name: string;
   variant_value?: string;
   selling_price: number | string;
+  mrp?: number | string;
+  original_price?: number | string;
+  discount?: number | string;
   quantity: number;
   file_urls?: string[];
 }
@@ -144,33 +148,80 @@ export default function CartPage() {
     }
   };
 
-  const calculateSubtotal = () => {
+  // selling_price from the API is tax-inclusive (GST already baked in)
+  const calculateTaxInclusiveTotal = () => {
     return cartItems.reduce(
       (sum, item) => sum + parsePrice(item.selling_price) * item.quantity,
       0,
     );
   };
 
+  // Base subtotal excluding 18% GST
+  const calculateSubtotal = () => {
+    return calculateTaxInclusiveTotal() / 1.18;
+  };
+
+  // Tax portion already included in the price
   const calculateTax = () => {
-    return calculateSubtotal() * 0.18;
+    return calculateTaxInclusiveTotal() - calculateSubtotal();
   };
 
   const calculateShipping = () => {
-    return calculateSubtotal() > 1000 ? 0 : 99;
+    return calculateTaxInclusiveTotal() > 1000 ? 0 : 99;
   };
 
   const calculateTotal = () => {
-    return calculateSubtotal() + calculateTax() + calculateShipping();
+    return calculateTaxInclusiveTotal() + calculateShipping();
   };
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("en-IN", {
       style: "currency",
       currency: "INR",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
     }).format(price);
   };
+
+  const getDiscountPct = (item: CartItem): number => {
+    const discount =
+      typeof item.discount === "number"
+        ? item.discount
+        : parseFloat(String(item.discount ?? "0")) || 0;
+    if (discount > 0) return Math.round(discount);
+    const original = item.mrp
+      ? parsePrice(item.mrp)
+      : item.original_price
+        ? parsePrice(item.original_price)
+        : 0;
+    const selling = parsePrice(item.selling_price);
+    if (original > selling) {
+      return Math.round(((original - selling) / original) * 100);
+    }
+    return 0;
+  };
+
+  const getOriginalPrice = (item: CartItem): number | null => {
+    // Prefer explicit mrp / original_price fields
+    if (item.mrp) {
+      const v = parsePrice(item.mrp);
+      if (v > 0) return v;
+    }
+    if (item.original_price) {
+      const v = parsePrice(item.original_price);
+      if (v > 0) return v;
+    }
+    // Fall back: derive from discount percentage
+    const discount =
+      typeof item.discount === "number"
+        ? item.discount
+        : parseFloat(String(item.discount ?? "0")) || 0;
+    if (discount > 0) {
+      return parsePrice(item.selling_price) / (1 - discount / 100);
+    }
+    return null;
+  };
+
 
   const getProductImage = (item: CartItem) => {
     if (item.file_urls && item.file_urls.length > 0) {
@@ -222,7 +273,9 @@ export default function CartPage() {
   }
 
   return (
-    <div className=" bg-[#F5F5F5] mt-20">
+    <div className=" bg-[#F5F5F5]  mt-15 lg:mt-20">
+      <CheckoutProgressBar step={1} />
+
       {/* Flash Message */}
       {/* {flash && (
         <div
@@ -237,9 +290,8 @@ export default function CartPage() {
       )} */}
 
       {/* Breadcrumb */}
-      <div className="bg-primary pt-4">
+      {/* <div className=" pt-10">
         <div className="container mx-auto px-4">
-          {/* Continue Shopping Link */}
           <Link
             href="/shop"
             className="inline-flex   font-heading  text-3xl items-center gap-2 text-[#075E5E] hover:text-brand font-semibold transition-colors mt-4"
@@ -261,7 +313,7 @@ export default function CartPage() {
             Shopping Cart
           </Link>
         </div>
-      </div>
+      </div> */}
 
       {/* Cart Content */}
       <div className="container mx-auto px-4 py-10">
@@ -337,9 +389,23 @@ export default function CartPage() {
                             ({item.variant_value})
                           </p>
                         )}
-                        <p className="text-brand font-semibold mt-2">
-                          {formatPrice(parsePrice(item.selling_price))}
-                        </p>
+                        <div className="mt-2">
+                          {getOriginalPrice(item) && (
+                            <p className="text-xs text-gray-400 line-through">
+                              {formatPrice(getOriginalPrice(item)!)}
+                            </p>
+                          )}
+                          <div className="flex items-center gap-2">
+                            <p className="text-brand font-semibold">
+                              {formatPrice(parsePrice(item.selling_price))}
+                            </p>
+                            {getDiscountPct(item) > 0 && (
+                              <span className="text-xs font-semibold bg-[#c8e5e3] text-[#005d5a] px-1.5 py-0.5 rounded">
+                                -{getDiscountPct(item)}%
+                              </span>
+                            )}
+                          </div>
+                        </div>
                       </div>
                       <button
                         onClick={() => removeItem(item.id)}
@@ -436,8 +502,20 @@ export default function CartPage() {
                         )}
                       </div>
                     </div>
-                    <div className="col-span-2 text-center font-semibold text-[#464646]">
-                      {formatPrice(parsePrice(item.selling_price))}
+                    <div className="col-span-2 text-center">
+                      {getOriginalPrice(item) && (
+                        <p className="text-xs text-gray-400 line-through">
+                          {formatPrice(getOriginalPrice(item)!)}
+                        </p>
+                      )}
+                      <p className="font-semibold text-[#464646]">
+                        {formatPrice(parsePrice(item.selling_price))}
+                      </p>
+                      {getDiscountPct(item) > 0 && (
+                        <span className="text-xs font-semibold bg-[#c8e5e3] text-[#005d5a] px-1.5 py-0.5 rounded">
+                          -{getDiscountPct(item)}%
+                        </span>
+                      )}
                     </div>
                     <div className="col-span-2 flex justify-center">
                       <div className="flex items-center border border-gray-200 rounded-lg">
@@ -465,9 +543,7 @@ export default function CartPage() {
                       </div>
                     </div>
                     <div className="col-span-2 text-center font-bold text-[#464646]">
-                      {formatPrice(
-                        parsePrice(item.selling_price) * item.quantity,
-                      )}
+                      {formatPrice(parsePrice(item.selling_price) * item.quantity)}
                     </div>
                   </div>
                 </div>
@@ -516,7 +592,7 @@ export default function CartPage() {
 
                 <div className="flex justify-between py-4 text-lg">
                   <span className="font-bold text-[#464646]">Total</span>
-                  <span className="font-bold text-brand">
+                  <span className="font-bold text-primary">
                     {formatPrice(calculateTotal())}
                   </span>
                 </div>

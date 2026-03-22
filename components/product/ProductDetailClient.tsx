@@ -75,7 +75,7 @@ export default function ProductDetailClient({
 
   const handleCartAction = () => {
     if (addedToCart) {
-      router.push(`${LEGACY_BASE_URL}/cart`);
+      router.push(`cart`);
     } else {
       handleAddToCart();
     }

@@ -121,7 +121,7 @@ function RecommendedCard({
           e.preventDefault();
           e.stopPropagation();
           if (isAdded) {
-            router.push(`${LEGACY_BASE_URL}/cart`);
+            router.push(`cart`);
           } else {
             onAddToCart(product.id, activeVariant.id);
           }

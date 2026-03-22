@@ -764,7 +764,7 @@ function ShopPageContent() {
   };
 
   const handleViewCart = () => {
-    router.push(`${LEGACY_BASE_URL}/cart`);
+    router.push(`/cart`);
   };
 
   const showFlash = (msg, bg = "#b3e3dd", color = "#005d5a") => {

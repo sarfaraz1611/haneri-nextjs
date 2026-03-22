@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Script from "next/script";
+import CheckoutProgressBar from "@/components/CheckoutProgressBar";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com/api";
 
@@ -71,8 +73,8 @@ const formatPrice = (price: number) => {
   return new Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: "INR",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
   }).format(price);
 };
 
@@ -80,6 +82,7 @@ export default function CheckoutPage() {
   // Auth
   const [authToken, setAuthToken] = useState<string | null>(null);
   const [tempId, setTempId] = useState<string | null>(null);
+  const [hydrated, setHydrated] = useState(false);
 
   // Data
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -121,9 +124,6 @@ export default function CheckoutPage() {
   // Order
   const [placingOrder, setPlacingOrder] = useState(false);
 
-  // Login Modal
-  const [showLoginModal, setShowLoginModal] = useState(false);
-
   // Flash
   const [flash, setFlash] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
@@ -134,25 +134,27 @@ export default function CheckoutPage() {
     }
   }, [flash]);
 
-  // Init
+  // Init — read localStorage once on mount
   useEffect(() => {
     const token = localStorage.getItem("auth_token");
     const tid = localStorage.getItem("temp_id");
     setAuthToken(token);
     setTempId(tid);
+    setHydrated(true);
   }, []);
 
   useEffect(() => {
-    if (authToken !== null || tempId !== null) {
-      fetchCart();
-      if (authToken) {
-        fetchAddresses();
-      } else {
-        setLoading(false);
-      }
+    if (!hydrated) return;
+    const token = authToken;
+    const tid = tempId;
+    fetchCart(token, tid);
+    if (token) {
+      fetchAddresses(token);
+    } else {
+      setLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [authToken, tempId]);
+  }, [hydrated]);
 
   const getAuthHeaders = (): Record<string, string> => {
     if (authToken) return { Authorization: `Bearer ${authToken}` };
@@ -160,44 +162,41 @@ export default function CheckoutPage() {
   };
 
   // ── Cart ──
-  const fetchCart = async () => {
+  const fetchCart = async (token: string | null, tid: string | null) => {
     try {
       const payload: { cart_id?: string } = {};
-      if (!authToken && tempId) payload.cart_id = tempId;
-
+      if (!token && tid) payload.cart_id = tid;
+      const headers: Record<string, string> = { "Content-Type": "application/json" };
+      if (token) headers["Authorization"] = `Bearer ${token}`;
       const res = await fetch(`${BASE_URL}/cart/fetch`, {
         method: "POST",
-        headers: { "Content-Type": "application/json", ...getAuthHeaders() },
+        headers,
         body: JSON.stringify(payload),
       });
-      const data = await res.json()
+      const data = await res.json();
       if (data?.data) setCartItems(data.data);
       else if (Array.isArray(data)) setCartItems(data);
     } catch {
       console.error("Error fetching cart");
     } finally {
-      if (!authToken) setLoading(false);
+      setLoading(false);
     }
   };
 
   // ── Addresses ──
-  const fetchAddresses = async () => {
+  const fetchAddresses = async (token?: string) => {
+    const tok = token ?? authToken;
     try {
       setAddressLoading(true);
-      const res = await fetch(`${BASE_URL}/address`, {
-        headers: getAuthHeaders(),
-      });
+      const headers: Record<string, string> = {};
+      if (tok) headers["Authorization"] = `Bearer ${tok}`;
+      const res = await fetch(`${BASE_URL}/address`, { headers });
       const data = await res.json();
       if (data?.data && data.data.length > 0) {
         setAddresses(data.data);
-        const defaultAddr = data.data.find((a: Address) => a.is_default);
-        if (defaultAddr) {
-          setSelectedAddressId(defaultAddr.id);
-          calculateShipping(defaultAddr.id);
-        } else {
-          setSelectedAddressId(data.data[0].id);
-          calculateShipping(data.data[0].id);
-        }
+        const defaultAddr = data.data.find((a: Address) => a.is_default) || data.data[0];
+        setSelectedAddressId(defaultAddr.id);
+        calculateShipping(defaultAddr.id);
       } else {
         setAddresses([]);
         setAddForm({ ...emptyForm });
@@ -209,7 +208,6 @@ export default function CheckoutPage() {
       console.error("Error fetching addresses");
     } finally {
       setAddressLoading(false);
-      setLoading(false);
     }
   };
 
@@ -221,7 +219,7 @@ export default function CheckoutPage() {
       });
       const data = await res.json();
       if (data?.message?.includes("success")) {
-        fetchAddresses();
+        fetchAddresses(authToken ?? undefined);
         setFlash({ type: "success", message: "Address deleted successfully" });
       } else {
         setFlash({ type: "error", message: "Failed to delete address" });
@@ -249,17 +247,10 @@ export default function CheckoutPage() {
       if (data?.shipping_cost !== undefined) {
         setShippingCost(data.shipping_cost);
       } else {
-        // Fallback: free over ₹1000, else ₹99
-        const subtotal = cartItems.reduce(
-          (sum, item) => sum + parsePrice(item.selling_price) * item.quantity, 0
-        );
-        setShippingCost(subtotal > 1000 ? 0 : 99);
+        setShippingCost(0);
       }
     } catch {
-      const subtotal = cartItems.reduce(
-        (sum, item) => sum + parsePrice(item.selling_price) * item.quantity, 0
-      );
-      setShippingCost(subtotal > 1000 ? 0 : 99);
+      setShippingCost(0);
     } finally {
       setShippingLoading(false);
     }
@@ -268,7 +259,6 @@ export default function CheckoutPage() {
   // ── Form Validation ──
   const validateForm = (form: AddressFormData, requireEmail: boolean): string | null => {
     const errors: Record<string, string> = {};
-
     if (!form.name.trim()) errors.name = "Name is required";
     else if (form.name.trim().length < 2) errors.name = "Name must be at least 2 characters";
     else if (!/^[a-zA-Z\s.]+$/.test(form.name.trim())) errors.name = "Name can only contain letters, spaces and dots";
@@ -299,10 +289,7 @@ export default function CheckoutPage() {
     else if (!/^\d{6}$/.test(form.postal_code)) errors.postal_code = "Pincode must be exactly 6 digits";
 
     setFieldErrors(errors);
-
-    if (Object.keys(errors).length > 0) {
-      return Object.values(errors)[0];
-    }
+    if (Object.keys(errors).length > 0) return Object.values(errors)[0];
     return null;
   };
 
@@ -330,23 +317,19 @@ export default function CheckoutPage() {
     setOtpValues(["", "", "", "", "", ""]);
     setOtpError("");
     setOtpCallback(() => onVerified);
-
     try {
       const res = await requestOtp(mobile);
       const msg = res?.message || "";
       const msgL = msg.toLowerCase();
-
       if (res?.success && msgL.includes("mobile already validated")) {
         setFlash({ type: "error", message: msg || "Mobile already registered, use another number." });
         return;
       }
-
       if (res?.success && msgL.includes("otp sent")) {
         setOtpStep("sent");
         setTimeout(() => otpInputRefs.current[0]?.focus(), 100);
         return;
       }
-
       setFlash({ type: "error", message: msg || "Failed to request OTP" });
     } catch {
       setFlash({ type: "error", message: "Failed to request OTP" });
@@ -358,9 +341,7 @@ export default function CheckoutPage() {
     const newValues = [...otpValues];
     newValues[index] = value.slice(-1);
     setOtpValues(newValues);
-    if (value && index < 5) {
-      otpInputRefs.current[index + 1]?.focus();
-    }
+    if (value && index < 5) otpInputRefs.current[index + 1]?.focus();
   };
 
   const handleOtpKeyDown = (index: number, e: React.KeyboardEvent) => {
@@ -381,22 +362,17 @@ export default function CheckoutPage() {
 
   const handleVerifyOtp = async () => {
     const otp = otpValues.join("");
-    if (!/^\d{6}$/.test(otp)) {
-      setOtpError("Please enter a valid 6-digit OTP");
-      return;
-    }
+    if (!/^\d{6}$/.test(otp)) { setOtpError("Please enter a valid 6-digit OTP"); return; }
     setOtpStep("verifying");
     try {
       const res = await verifyOtp(otpMobile, otp);
-      const msg = res?.message || "";
-      const msgL = msg.toLowerCase();
-
+      const msgL = (res?.message || "").toLowerCase();
       if (res?.success && (msgL.includes("otp verified successfully") || msgL.includes("otp already verified"))) {
         setOtpStep("idle");
         if (otpCallback) otpCallback();
         return;
       }
-      setOtpError(msg || "OTP verification failed");
+      setOtpError(res?.message || "OTP verification failed");
       setOtpStep("sent");
     } catch {
       setOtpError("OTP verification failed");
@@ -409,14 +385,12 @@ export default function CheckoutPage() {
     setOtpValues(["", "", "", "", "", ""]);
     try {
       const res = await requestOtp(otpMobile);
-      const msg = res?.message || "";
-      const msgL = msg.toLowerCase();
+      const msgL = (res?.message || "").toLowerCase();
       if (res?.success && msgL.includes("otp sent")) {
-        setOtpError("");
         setFlash({ type: "success", message: "OTP resent successfully" });
         setTimeout(() => otpInputRefs.current[0]?.focus(), 100);
       } else {
-        setOtpError(msg || "Failed to resend OTP");
+        setOtpError(res?.message || "Failed to resend OTP");
       }
     } catch {
       setOtpError("Failed to resend OTP");
@@ -445,8 +419,6 @@ export default function CheckoutPage() {
     const proceedAfterOtp = async () => {
       try {
         let token = authToken;
-
-        // Guest user: create user first
         if (!token && tempId) {
           const makeRes = await fetch(`${BASE_URL}/make_user`, {
             method: "POST",
@@ -459,7 +431,6 @@ export default function CheckoutPage() {
             }),
           });
           const makeData = await makeRes.json();
-
           if (makeData.token && makeData.user) {
             localStorage.setItem("auth_token", makeData.token);
             localStorage.setItem("user_name", makeData.user.name);
@@ -475,28 +446,19 @@ export default function CheckoutPage() {
             return;
           }
         }
-
-        if (!token) {
-          setFormError("User not logged in or cart session expired");
-          setFormLoading(false);
-          return;
-        }
+        if (!token) { setFormError("User not logged in or cart session expired"); setFormLoading(false); return; }
 
         const res = await fetch(`${BASE_URL}/address/register`, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
           body: JSON.stringify(addressData),
         });
         const data = await res.json();
-
         if (data?.success || data?.message?.toLowerCase().includes("success")) {
           setShowAddModal(false);
           setAddForm({ ...emptyForm });
           setFlash({ type: "success", message: "Address added successfully" });
-          fetchAddresses();
+          fetchAddresses(authToken ?? undefined);
         } else {
           setFormError(data?.message || "Failed to add address");
         }
@@ -507,7 +469,6 @@ export default function CheckoutPage() {
       }
     };
 
-    // Start OTP flow
     startOtpFlow(addForm.contact_no, proceedAfterOtp);
     setFormLoading(false);
   };
@@ -536,14 +497,10 @@ export default function CheckoutPage() {
     if (err) { setFormError(err); return; }
     setFormError("");
     setFormLoading(true);
-
     try {
       const res = await fetch(`${BASE_URL}/address/update/${editForm.id}`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          ...getAuthHeaders(),
-        },
+        headers: { "Content-Type": "application/json", ...getAuthHeaders() },
         body: JSON.stringify({
           name: editForm.name,
           contact_no: editForm.contact_no,
@@ -557,11 +514,10 @@ export default function CheckoutPage() {
         }),
       });
       const data = await res.json();
-
       if (data?.message?.includes("success")) {
         setShowEditModal(false);
         setFlash({ type: "success", message: "Address updated successfully" });
-        fetchAddresses();
+        fetchAddresses(authToken ?? undefined);
       } else {
         setFormError(data?.message || "Failed to update address");
       }
@@ -574,19 +530,16 @@ export default function CheckoutPage() {
 
   // ── Coupon ──
   const applyCoupon = async () => {
-    if (!authToken) { setShowLoginModal(true); return; }
     if (!couponCode.trim()) { setCouponError("Enter a coupon code"); return; }
     setCouponError("");
     setCouponLoading(true);
-
     try {
-      const res = await fetch(`${BASE_URL}/coupon/apply`, {
+      const res = await fetch(`${BASE_URL}/coupons/check`, {
         method: "POST",
         headers: { "Content-Type": "application/json", ...getAuthHeaders() },
         body: JSON.stringify({ coupon_code: couponCode }),
       });
       const data = await res.json();
-
       if (data?.success) {
         setCouponDiscount(data.discount || 0);
         setCouponApplied(true);
@@ -616,32 +569,20 @@ export default function CheckoutPage() {
   };
 
   // ── Calculations ──
-  const subtotal = cartItems.reduce(
-    (sum, item) => sum + parsePrice(item.selling_price) * item.quantity, 0
-  );
-  const tax = subtotal * 0.18;
-  const total = subtotal + tax + shippingCost - couponDiscount;
+  const taxInclusiveSubtotal = cartItems.reduce((sum, item) => sum + parsePrice(item.selling_price) * item.quantity, 0);
+  const subtotal = taxInclusiveSubtotal / 1.18;
+  const tax = taxInclusiveSubtotal - subtotal;
+  const total = taxInclusiveSubtotal + shippingCost - couponDiscount;
 
   // ── Place Order ──
   const placeOrder = async () => {
-    if (!selectedAddressId) {
-      setFlash({ type: "error", message: "Please select a delivery address" });
-      return;
-    }
-    if (cartItems.length === 0) {
-      setFlash({ type: "error", message: "Your cart is empty" });
-      return;
-    }
-
+    if (!selectedAddressId) { setFlash({ type: "error", message: "Please select a delivery address" }); return; }
+    if (cartItems.length === 0) { setFlash({ type: "error", message: "Your cart is empty" }); return; }
     const selectedAddress = addresses.find((a) => a.id === selectedAddressId);
-    if (!selectedAddress) {
-      setFlash({ type: "error", message: "Selected address not found" });
-      return;
-    }
+    if (!selectedAddress) { setFlash({ type: "error", message: "Selected address not found" }); return; }
 
     setPlacingOrder(true);
     try {
-      // Build shipping_address string: "name, phone, city, state, country, pincode, address"
       const shippingAddressStr = [
         selectedAddress.name,
         selectedAddress.contact_no,
@@ -658,9 +599,7 @@ export default function CheckoutPage() {
         shipping_address: shippingAddressStr,
         shipping_charge: shippingCost,
       };
-      if (couponApplied && couponCode) {
-        payload.coupon_code = couponCode;
-      }
+      if (couponApplied && couponCode) payload.coupon_code = couponCode;
 
       const res = await fetch(`${BASE_URL}/orders`, {
         method: "POST",
@@ -691,6 +630,7 @@ export default function CheckoutPage() {
       currency: "INR",
       name: "Haneri",
       description: "Order Payment",
+      image: "/images/razorpay.png",
       order_id: orderData.razorpay_order_id as string,
       handler: async (response: Record<string, string>) => {
         try {
@@ -720,43 +660,126 @@ export default function CheckoutPage() {
       },
       theme: { color: "#005d5a" },
     };
-
     const rzp = new (window as unknown as Record<string, unknown> & { Razorpay: new (opts: typeof options) => { open: () => void } }).Razorpay(options);
     rzp.open();
   };
 
-  // ── Product Image ──
   const getProductImage = (item: CartItem) => {
     if (item.file_urls && item.file_urls.length > 0) return item.file_urls[0];
     return "/images/placeholder.png";
   };
 
+  // ── Shared input style ──
+  const inputClass = (field: string) =>
+    `w-full px-3.5 py-3 border rounded-lg text-sm outline-none transition-colors font-heading ${
+      fieldErrors[field] ? "border-red-400 focus:border-red-500 bg-red-50" : "border-gray-300 focus:border-[#005d5a] bg-white"
+    }`;
+
+  const clearFieldError = (field: string) => {
+    if (fieldErrors[field]) setFieldErrors((prev) => { const n = { ...prev }; delete n[field]; return n; });
+  };
+
+  const renderAddressForm = (form: AddressFormData, setForm: (f: AddressFormData) => void, showEmail: boolean) => (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wide">Full Name *</label>
+        <input type="text" placeholder="e.g. Ramesh Kumar" value={form.name}
+          onChange={(e) => { setForm({ ...form, name: e.target.value }); clearFieldError("name"); }}
+          className={inputClass("name")} />
+        {fieldErrors.name && <p className="text-xs text-red-500 mt-1">{fieldErrors.name}</p>}
+      </div>
+      <div>
+        <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wide">Mobile Number *</label>
+        <div className={`flex border rounded-lg overflow-hidden transition-colors ${fieldErrors.contact_no ? "border-red-400" : "border-gray-300 focus-within:border-[#005d5a]"}`}>
+          <span className="px-3 py-3 bg-gray-100 text-gray-600 text-sm font-semibold border-r border-gray-300 select-none">+91</span>
+          <input type="text" placeholder="10-digit number" value={form.contact_no}
+            onChange={(e) => { setForm({ ...form, contact_no: e.target.value.replace(/\D/g, "").slice(0, 10) }); clearFieldError("contact_no"); }}
+            inputMode="numeric" maxLength={10}
+            className="flex-1 px-3 py-3 text-sm outline-none bg-white font-heading" />
+        </div>
+        {fieldErrors.contact_no && <p className="text-xs text-red-500 mt-1">{fieldErrors.contact_no}</p>}
+      </div>
+      {showEmail && (
+        <div className="sm:col-span-2">
+          <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wide">Email Address *</label>
+          <input type="email" placeholder="example@email.com" value={form.email}
+            onChange={(e) => { setForm({ ...form, email: e.target.value }); clearFieldError("email"); }}
+            className={inputClass("email")} />
+          {fieldErrors.email && <p className="text-xs text-red-500 mt-1">{fieldErrors.email}</p>}
+        </div>
+      )}
+      <div className="sm:col-span-2">
+        <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wide">Address Line 1 *</label>
+        <input type="text" placeholder="House no., Street, Locality" value={form.address_line1}
+          onChange={(e) => { setForm({ ...form, address_line1: e.target.value.slice(0, 250) }); clearFieldError("address_line1"); }}
+          maxLength={250} className={inputClass("address_line1")} />
+        {fieldErrors.address_line1 && <p className="text-xs text-red-500 mt-1">{fieldErrors.address_line1}</p>}
+      </div>
+      <div className="sm:col-span-2">
+        <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wide">Address Line 2 <span className="text-gray-400 normal-case">(optional)</span></label>
+        <input type="text" placeholder="Landmark, Area, etc." value={form.address_line2}
+          onChange={(e) => { setForm({ ...form, address_line2: e.target.value.slice(0, 250) }); clearFieldError("address_line2"); }}
+          maxLength={250} className={inputClass("address_line2")} />
+        {fieldErrors.address_line2 && <p className="text-xs text-red-500 mt-1">{fieldErrors.address_line2}</p>}
+      </div>
+      <div>
+        <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wide">City *</label>
+        <input type="text" placeholder="City" value={form.city}
+          onChange={(e) => { setForm({ ...form, city: e.target.value }); clearFieldError("city"); }}
+          className={inputClass("city")} />
+        {fieldErrors.city && <p className="text-xs text-red-500 mt-1">{fieldErrors.city}</p>}
+      </div>
+      <div>
+        <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wide">Pincode *</label>
+        <input type="text" placeholder="6-digit pincode" value={form.postal_code}
+          onChange={(e) => { setForm({ ...form, postal_code: e.target.value.replace(/\D/g, "").slice(0, 6) }); clearFieldError("postal_code"); }}
+          inputMode="numeric" maxLength={6} className={inputClass("postal_code")} />
+        {fieldErrors.postal_code && <p className="text-xs text-red-500 mt-1">{fieldErrors.postal_code}</p>}
+      </div>
+      <div>
+        <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wide">State *</label>
+        <select value={form.state}
+          onChange={(e) => { setForm({ ...form, state: e.target.value }); clearFieldError("state"); }}
+          className={inputClass("state")}>
+          <option value="">Select State</option>
+          {INDIAN_STATES.map((s) => <option key={s} value={s}>{s}</option>)}
+        </select>
+        {fieldErrors.state && <p className="text-xs text-red-500 mt-1">{fieldErrors.state}</p>}
+      </div>
+      <div>
+        <label className="block text-xs font-semibold text-gray-500 mb-1 uppercase tracking-wide">Country *</label>
+        <select value={form.country}
+          onChange={(e) => { setForm({ ...form, country: e.target.value }); clearFieldError("country"); }}
+          className={inputClass("country")}>
+          <option value="India">India</option>
+        </select>
+        {fieldErrors.country && <p className="text-xs text-red-500 mt-1">{fieldErrors.country}</p>}
+      </div>
+    </div>
+  );
+
   // ── Loading Skeleton ──
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#F5F5F5]">
-        <div className="bg-primary py-6">
-          <div className="container mx-auto px-4">
-            <div className="h-8 w-48 bg-white/20 rounded animate-pulse"></div>
+      <div className="min-h-screen bg-[#F5F5F5] mt-20">
+        <div className="bg-primary py-5">
+          <div className="container mx-auto px-4 flex justify-center gap-10">
+            {[1, 2, 3].map((i) => <div key={i} className="h-5 w-28 bg-white/20 rounded animate-pulse" />)}
           </div>
         </div>
         <div className="container mx-auto px-4 py-10">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-4">
               {[1, 2].map((i) => (
-                <div key={i} className="bg-white rounded-lg p-6 animate-pulse">
+                <div key={i} className="bg-white rounded-xl p-6 animate-pulse">
                   <div className="h-5 bg-gray-200 rounded w-1/3 mb-4"></div>
-                  <div className="h-24 bg-gray-200 rounded"></div>
+                  <div className="h-28 bg-gray-100 rounded-lg"></div>
                 </div>
               ))}
             </div>
-            <div className="bg-white rounded-lg p-6 h-fit animate-pulse">
+            <div className="bg-white rounded-xl p-6 animate-pulse">
               <div className="h-6 bg-gray-200 rounded w-1/2 mb-6"></div>
-              <div className="space-y-3">
-                <div className="h-4 bg-gray-200 rounded"></div>
-                <div className="h-4 bg-gray-200 rounded"></div>
-                <div className="h-4 bg-gray-200 rounded"></div>
-              </div>
+              {[1, 2, 3, 4].map((i) => <div key={i} className="h-4 bg-gray-100 rounded mb-3" />)}
             </div>
           </div>
         </div>
@@ -764,303 +787,157 @@ export default function CheckoutPage() {
     );
   }
 
-  // ── Address Form Inputs (reused in Add & Edit modals) ──
-  const inputClass = (field: string) =>
-    `w-full px-3.5 py-3 border rounded-md text-sm outline-none transition-colors ${
-      fieldErrors[field] ? "border-red-400 focus:border-red-500" : "border-gray-300 focus:border-[#005d5a]"
-    }`;
-
-  const clearFieldError = (field: string) => {
-    if (fieldErrors[field]) {
-      setFieldErrors((prev) => {
-        const next = { ...prev };
-        delete next[field];
-        return next;
-      });
-    }
-  };
-
-  const renderAddressForm = (
-    form: AddressFormData,
-    setForm: (f: AddressFormData) => void,
-    showEmail: boolean
-  ) => (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      <div>
-        <input
-          type="text"
-          placeholder="Name *"
-          value={form.name}
-          onChange={(e) => { setForm({ ...form, name: e.target.value }); clearFieldError("name"); }}
-          className={inputClass("name")}
-        />
-        {fieldErrors.name && <p className="text-xs text-red-500 mt-1">{fieldErrors.name}</p>}
-      </div>
-      <div>
-        <input
-          type="text"
-          placeholder="Contact No *"
-          value={form.contact_no}
-          onChange={(e) => { setForm({ ...form, contact_no: e.target.value.replace(/\D/g, "").slice(0, 10) }); clearFieldError("contact_no"); }}
-          inputMode="numeric"
-          maxLength={10}
-          className={inputClass("contact_no")}
-        />
-        {fieldErrors.contact_no && <p className="text-xs text-red-500 mt-1">{fieldErrors.contact_no}</p>}
-      </div>
-      {showEmail && (
-        <div className="sm:col-span-2">
-          <input
-            type="email"
-            placeholder="Email *"
-            value={form.email}
-            onChange={(e) => { setForm({ ...form, email: e.target.value }); clearFieldError("email"); }}
-            className={inputClass("email")}
-          />
-          {fieldErrors.email && <p className="text-xs text-red-500 mt-1">{fieldErrors.email}</p>}
-        </div>
-      )}
-      <div className="sm:col-span-2">
-        <input
-          type="text"
-          placeholder="Address Line 1 *"
-          value={form.address_line1}
-          onChange={(e) => { setForm({ ...form, address_line1: e.target.value.slice(0, 250) }); clearFieldError("address_line1"); }}
-          maxLength={250}
-          className={inputClass("address_line1")}
-        />
-        {fieldErrors.address_line1 && <p className="text-xs text-red-500 mt-1">{fieldErrors.address_line1}</p>}
-      </div>
-      <div className="sm:col-span-2">
-        <input
-          type="text"
-          placeholder="Address Line 2 (optional)"
-          value={form.address_line2}
-          onChange={(e) => { setForm({ ...form, address_line2: e.target.value.slice(0, 250) }); clearFieldError("address_line2"); }}
-          maxLength={250}
-          className={inputClass("address_line2")}
-        />
-        {fieldErrors.address_line2 && <p className="text-xs text-red-500 mt-1">{fieldErrors.address_line2}</p>}
-      </div>
-      <div>
-        <input
-          type="text"
-          placeholder="City *"
-          value={form.city}
-          onChange={(e) => { setForm({ ...form, city: e.target.value }); clearFieldError("city"); }}
-          className={inputClass("city")}
-        />
-        {fieldErrors.city && <p className="text-xs text-red-500 mt-1">{fieldErrors.city}</p>}
-      </div>
-      <div>
-        <select
-          value={form.state}
-          onChange={(e) => { setForm({ ...form, state: e.target.value }); clearFieldError("state"); }}
-          className={inputClass("state")}
-        >
-          <option value="">Select State *</option>
-          {INDIAN_STATES.map((s) => (
-            <option key={s} value={s}>{s}</option>
-          ))}
-        </select>
-        {fieldErrors.state && <p className="text-xs text-red-500 mt-1">{fieldErrors.state}</p>}
-      </div>
-      <div>
-        <select
-          value={form.country}
-          onChange={(e) => { setForm({ ...form, country: e.target.value }); clearFieldError("country"); }}
-          className={inputClass("country")}
-        >
-          <option value="India">India</option>
-        </select>
-        {fieldErrors.country && <p className="text-xs text-red-500 mt-1">{fieldErrors.country}</p>}
-      </div>
-      <div>
-        <input
-          type="text"
-          placeholder="Pincode *"
-          value={form.postal_code}
-          onChange={(e) => { setForm({ ...form, postal_code: e.target.value.replace(/\D/g, "").slice(0, 6) }); clearFieldError("postal_code"); }}
-          inputMode="numeric"
-          maxLength={6}
-          className={inputClass("postal_code")}
-        />
-        {fieldErrors.postal_code && <p className="text-xs text-red-500 mt-1">{fieldErrors.postal_code}</p>}
-      </div>
-    </div>
-  );
-
   return (
     <div className="bg-[#F5F5F5] mt-20 min-h-screen">
+      <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
+
       {/* Flash Message */}
       {flash && (
-        <div
-          className={`fixed bottom-5 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-lg shadow-lg transition-all duration-300 ${
-            flash.type === "success" ? "bg-[#b3e3dd] text-[#005d5a]" : "bg-red-100 text-red-700"
-          }`}
-        >
+        <div className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] px-6 py-3 rounded-xl shadow-xl text-sm font-semibold transition-all duration-300 ${
+          flash.type === "success" ? "bg-[#005d5a] text-white" : "bg-red-600 text-white"
+        }`}>
           {flash.message}
         </div>
       )}
 
-      {/* Progress Bar */}
-      {/* <div className="bg-primary py-6">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center gap-2 sm:gap-4 flex-wrap">
-            <Link href="/cart" className="text-white/70 hover:text-white font-heading text-sm sm:text-base transition-colors">
-              Shopping Cart
-            </Link>
-            <span className="text-white/40">―</span>
-            <span className="text-white font-heading text-sm sm:text-base font-bold border-b-2 border-brand pb-1">
-              Checkout
-            </span>
-            <span className="text-white/40">―</span>
-            <span className="text-white/40 font-heading text-sm sm:text-base">
-              Order Complete
-            </span>
-          </div>
-        </div>
-      </div> */}
+      <CheckoutProgressBar step={2} />
 
       <div className="container mx-auto px-4 py-10">
         {cartItems.length === 0 ? (
-          <div className="bg-white rounded-lg p-10 text-center max-w-lg mx-auto">
-            <div className="w-24 h-24 mx-auto mb-6 text-gray-300">
+          <div className="bg-white rounded-2xl p-12 text-center max-w-md mx-auto shadow-sm">
+            <div className="w-20 h-20 mx-auto mb-5 text-gray-200">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
             </div>
-            <h2 className="text-2xl font-heading font-semibold text-[#464646] mb-3">Your cart is empty</h2>
-            <p className="text-gray-500 mb-6">Add items to your cart before checking out.</p>
-            <Link href="/shop" className="inline-block bg-[#075E5E] hover:bg-[#064d4d] text-white font-semibold px-8 py-3 rounded-lg transition-colors">
+            <h2 className="text-2xl font-heading font-bold text-[#464646] mb-2">Your cart is empty</h2>
+            <p className="text-gray-400 text-sm mb-6">Add items to your cart before checking out.</p>
+            <Link href="/shop" className="inline-block bg-[#075E5E] hover:bg-[#064d4d] text-white font-semibold px-8 py-3 rounded-xl transition-colors">
               Continue Shopping
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Left: Address Section */}
-            <div className="lg:col-span-2 space-y-6">
-              {/* Delivery Address */}
-              <div className="bg-white rounded-lg p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-heading font-bold text-[#464646] uppercase">
-                    Delivery Address
-                  </h2>
-                  {authToken && (
-                    <button
-                      onClick={() => { setAddForm({ ...emptyForm }); setFormError(""); setFieldErrors({}); setShowAddModal(true); }}
-                      className="text-sm font-semibold text-[#005d5a] hover:text-brand transition-colors"
-                    >
-                      + Add New Address
-                    </button>
-                  )}
-                </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
 
-                {addressLoading ? (
-                  <div className="space-y-3">
-                    {[1, 2].map((i) => (
-                      <div key={i} className="h-28 bg-gray-100 rounded-lg animate-pulse"></div>
-                    ))}
-                  </div>
-                ) : addresses.length > 0 ? (
-                  <div className="space-y-3">
-                    {addresses.map((address) => (
-                      <label
-                        key={address.id}
-                        className={`block border-2 rounded-lg p-4 cursor-pointer transition-colors ${
-                          selectedAddressId === address.id
-                            ? "border-[#005d5a] bg-[#f0f9f8]"
-                            : "border-gray-200 hover:border-gray-300"
-                        }`}
-                      >
-                        <div className="flex items-start gap-3">
-                          <input
-                            type="radio"
-                            name="address_select"
-                            checked={selectedAddressId === address.id}
-                            onChange={() => handleSelectAddress(address.id)}
-                            className="mt-1 accent-[#005d5a]"
-                          />
-                          <div className="flex-1">
-                            <div className="flex items-center justify-between">
-                              <div>
-                                <span className="font-semibold text-[#464646]">{address.name}</span>
-                                <span className="text-sm text-gray-500 ml-3">{address.contact_no}</span>
-                              </div>
-                              <div className="flex gap-2">
-                                <button
-                                  onClick={(e) => { e.preventDefault(); openEditModal(address); }}
-                                  className="text-xs px-3 py-1 border border-[#005d5a] text-[#005d5a] rounded hover:bg-[#005d5a] hover:text-white transition-colors"
-                                >
-                                  Edit
-                                </button>
-                                <button
-                                  onClick={(e) => { e.preventDefault(); deleteAddress(address.id); }}
-                                  className="text-xs px-3 py-1 border border-red-400 text-red-500 rounded hover:bg-red-500 hover:text-white transition-colors"
-                                >
-                                  Delete
-                                </button>
-                              </div>
-                            </div>
-                            <p className="text-sm text-gray-600 mt-1">
-                              {address.address_line1}
-                              {address.address_line2 && `, ${address.address_line2}`}
-                            </p>
-                            <p className="text-sm text-gray-600">
-                              {address.city}, {address.state}, {address.country} - {address.postal_code}
-                            </p>
-                          </div>
-                        </div>
-                      </label>
-                    ))}
-                  </div>
-                ) : (
-                  /* No Address State */
-                  <div className="text-center py-10">
-                    <div className="w-16 h-16 mx-auto mb-4 text-gray-300">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor">
+            {/* ── LEFT COLUMN ── */}
+            <div className="lg:col-span-2 space-y-5">
+
+              {/* Delivery Address Card */}
+              <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+                <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+                  <div className="flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-full bg-[#e6f4f3] flex items-center justify-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-[#005d5a]" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                       </svg>
                     </div>
-                    <h3 className="text-lg font-semibold text-[#464646] mb-2">No Address Found</h3>
-                    <p className="text-sm text-gray-500 mb-4">
-                      Add your first shipping address to continue.
-                    </p>
-                    <button
-                      onClick={() => { setAddForm({ ...emptyForm }); setFormError(""); setFieldErrors({}); setShowAddModal(true); }}
-                      className="px-6 py-2.5 bg-[#075E5E] text-white font-semibold rounded-lg hover:bg-[#064d4d] transition-colors"
-                    >
-                      + Add New Address
-                    </button>
+                    <h2 className="text-base font-heading font-bold text-[#464646] uppercase tracking-wide">Delivery Address</h2>
                   </div>
-                )}
+                  <button
+                    onClick={() => { setAddForm({ ...emptyForm }); setFormError(""); setFieldErrors({}); setShowAddModal(true); }}
+                    className="flex items-center gap-1 text-sm font-semibold text-[#005d5a] hover:text-[#064d4d] transition-colors"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                    </svg>
+                    Add New
+                  </button>
+                </div>
+
+                <div className="p-6">
+                  {addressLoading ? (
+                    <div className="space-y-3">
+                      {[1, 2].map((i) => <div key={i} className="h-24 bg-gray-100 rounded-xl animate-pulse" />)}
+                    </div>
+                  ) : addresses.length > 0 ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {addresses.map((address) => (
+                        <label
+                          key={address.id}
+                          onClick={() => handleSelectAddress(address.id)}
+                          className={`relative block rounded-xl p-4 cursor-pointer transition-all border-2 ${
+                            selectedAddressId === address.id
+                              ? "border-[#005d5a] bg-[#f0faf9]"
+                              : "border-gray-200 hover:border-gray-300 bg-white"
+                          }`}
+                        >
+                          {/* Selected badge */}
+                          {selectedAddressId === address.id && (
+                            <div className="absolute top-3 right-3 w-5 h-5 rounded-full bg-[#005d5a] flex items-center justify-center">
+                              <svg xmlns="http://www.w3.org/2000/svg" className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                              </svg>
+                            </div>
+                          )}
+                          <p className="font-bold text-[#464646] text-sm pr-6">{address.name}</p>
+                          <p className="text-xs text-gray-500 mt-0.5">+91 {address.contact_no}</p>
+                          <p className="text-xs text-gray-600 mt-1.5 leading-relaxed">
+                            {address.address_line1}{address.address_line2 && `, ${address.address_line2}`}
+                          </p>
+                          <p className="text-xs text-gray-600">{address.city}, {address.state} - {address.postal_code}</p>
+                          <div className="flex gap-2 mt-3 pt-3 border-t border-gray-100">
+                            <button
+                              onClick={(e) => { e.preventDefault(); e.stopPropagation(); openEditModal(address); }}
+                              className="text-xs px-3 py-1.5 rounded-lg border border-[#005d5a] text-[#005d5a] hover:bg-[#005d5a] hover:text-white transition-colors font-semibold"
+                            >
+                              Edit
+                            </button>
+                            <button
+                              onClick={(e) => { e.preventDefault(); e.stopPropagation(); deleteAddress(address.id); }}
+                              className="text-xs px-3 py-1.5 rounded-lg border border-red-400 text-red-500 hover:bg-red-500 hover:text-white transition-colors font-semibold"
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </label>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-8">
+                      <div className="w-14 h-14 mx-auto mb-3 rounded-full bg-[#f0faf9] flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-[#005d5a]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                        </svg>
+                      </div>
+                      <h3 className="font-bold text-[#464646] mb-1">No Address Found</h3>
+                      <p className="text-sm text-gray-400 mb-4">Add your first shipping address to continue.</p>
+                      <button
+                        onClick={() => { setAddForm({ ...emptyForm }); setFormError(""); setFieldErrors({}); setShowAddModal(true); }}
+                        className="px-6 py-2.5 bg-[#075E5E] text-white text-sm font-semibold rounded-xl hover:bg-[#064d4d] transition-colors"
+                      >
+                        + Add New Address
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
 
-              {/* Order Items Preview */}
-              <div className="bg-white rounded-lg p-6">
-                <h2 className="text-xl font-heading font-bold text-[#464646] uppercase mb-4">
-                  Order Items ({cartItems.length})
-                </h2>
-                <div className="space-y-3">
+              {/* Order Items */}
+              <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+                <div className="flex items-center gap-2 px-6 py-4 border-b border-gray-100">
+                  <div className="w-7 h-7 rounded-full bg-[#e6f4f3] flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-[#005d5a]" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007z" />
+                    </svg>
+                  </div>
+                  <h2 className="text-base font-heading font-bold text-[#464646] uppercase tracking-wide">
+                    Order Items <span className="text-[#005d5a]">({cartItems.length})</span>
+                  </h2>
+                </div>
+                <div className="divide-y divide-gray-50">
                   {cartItems.map((item) => (
-                    <div key={item.id} className="flex items-center gap-4 py-3 border-b border-gray-100 last:border-0">
-                      <div className="relative w-16 h-16 flex-shrink-0">
-                        <Image
-                          src={getProductImage(item)}
-                          alt={item.product_name}
-                          fill
-                          className="object-cover rounded-lg"
-                        />
+                    <div key={item.id} className="flex items-center gap-4 px-6 py-4">
+                      <div className="relative w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden bg-gray-50 border border-gray-100">
+                        <Image src={getProductImage(item)} alt={item.product_name} fill className="object-cover" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-semibold text-sm text-[#464646] truncate">{item.product_name}</h4>
-                        {item.variant_value && (
-                          <p className="text-xs text-gray-500">({item.variant_value})</p>
-                        )}
-                        <p className="text-xs text-gray-500">Qty: {item.quantity}</p>
+                        <p className="font-semibold text-sm text-[#464646] truncate">{item.product_name}</p>
+                        {item.variant_value && <p className="text-xs text-gray-400 mt-0.5">{item.variant_value}</p>}
+                        <p className="text-xs text-gray-400 mt-0.5">Qty: {item.quantity}</p>
                       </div>
-                      <p className="font-semibold text-[#464646] text-sm">
+                      <p className="font-bold text-[#005d5a] text-sm whitespace-nowrap">
                         {formatPrice(parsePrice(item.selling_price) * item.quantity)}
                       </p>
                     </div>
@@ -1069,118 +946,161 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            {/* Right: Order Summary */}
+            {/* ── RIGHT COLUMN: Order Summary ── */}
             <div className="lg:col-span-1">
-              <div className="bg-white rounded-lg p-6 sticky top-24">
-                <h2 className="text-xl font-heading font-bold text-[#464646] mb-6 uppercase">
-                  Order Summary
-                </h2>
+              <div className="bg-white rounded-2xl shadow-sm sticky top-24 overflow-hidden">
+                <div className="px-6 py-4 border-b border-gray-100">
+                  <h2 className="text-base font-heading font-bold text-[#464646] uppercase tracking-wide">Order Summary</h2>
+                </div>
 
-                <div className="space-y-3 pb-4 border-b border-gray-100">
-                  <div className="flex justify-between text-[#464646]">
+                <div className="p-6 space-y-3">
+                  <div className="flex justify-between text-sm text-gray-600">
                     <span>Subtotal ({cartItems.length} {cartItems.length === 1 ? "item" : "items"})</span>
-                    <span className="font-semibold">{formatPrice(subtotal)}</span>
+                    <span className="font-semibold text-[#464646]">{formatPrice(subtotal)}</span>
                   </div>
-                  <div className="flex justify-between text-[#464646]">
-                    <span>Tax (18%)</span>
-                    <span className="font-semibold">{formatPrice(tax)}</span>
+                  <div className="flex justify-between text-sm text-gray-600">
+                    <span>Tax (18% GST)</span>
+                    <span className="font-semibold text-[#464646]">{formatPrice(tax)}</span>
                   </div>
-                  <div className="flex justify-between text-[#464646]">
+                  <div className="flex justify-between text-sm text-gray-600">
                     <span>Shipping</span>
-                    <span className={`font-semibold ${shippingCost === 0 ? "text-green-600" : ""}`}>
-                      {shippingLoading ? "..." : shippingCost === 0 ? "Free" : formatPrice(shippingCost)}
+                    <span className={`font-semibold ${shippingCost === 0 ? "text-green-600" : "text-[#464646]"}`}>
+                      {shippingLoading
+                        ? <span className="inline-block w-12 h-3 bg-gray-200 rounded animate-pulse" />
+                        : shippingCost === 0 ? "FREE" : formatPrice(shippingCost)}
                     </span>
                   </div>
                   {couponApplied && couponDiscount > 0 && (
-                    <div className="flex justify-between text-green-600">
+                    <div className="flex justify-between text-sm text-green-600">
                       <span>Coupon Discount</span>
-                      <span className="font-semibold">-{formatPrice(couponDiscount)}</span>
+                      <span className="font-semibold">−{formatPrice(couponDiscount)}</span>
                     </div>
                   )}
                 </div>
 
                 {/* Coupon */}
-                <div className="py-4 border-b border-gray-100">
+                <div className="px-6 pb-4 border-t border-gray-100 pt-4">
+                  <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">Coupon Code</p>
                   {!couponApplied ? (
                     <div>
                       <div className="flex gap-2">
                         <input
                           type="text"
-                          placeholder="Coupon Code"
+                          placeholder="Enter code"
                           value={couponCode}
                           onChange={(e) => { setCouponCode(e.target.value.toUpperCase()); setCouponError(""); }}
-                          className="flex-1 px-3 py-2.5 border border-gray-300 rounded-md text-sm outline-none focus:border-[#005d5a] transition-colors"
+                          className="flex-1 px-3 py-2.5 border border-gray-300 rounded-lg text-sm outline-none focus:border-[#005d5a] transition-colors font-heading"
                         />
                         <button
                           onClick={applyCoupon}
                           disabled={couponLoading}
-                          className="px-4 py-2.5 bg-[#075E5E] text-white text-sm font-semibold rounded-md hover:bg-[#064d4d] transition-colors disabled:opacity-50"
+                          className="px-4 py-2.5 bg-[#075E5E] text-white text-sm font-semibold rounded-lg hover:bg-[#064d4d] transition-colors disabled:opacity-50"
                         >
                           {couponLoading ? "..." : "Apply"}
                         </button>
                       </div>
-                      {couponError && <p className="text-xs text-red-500 mt-1">{couponError}</p>}
+                      {couponError && <p className="text-xs text-red-500 mt-1.5">{couponError}</p>}
                     </div>
                   ) : (
-                    <div className="flex items-center justify-between bg-green-50 px-3 py-2 rounded-md">
-                      <span className="text-sm text-green-700 font-semibold">{couponCode} applied</span>
-                      <button onClick={removeCoupon} className="text-xs text-red-500 hover:underline">
-                        Remove
-                      </button>
+                    <div className="flex items-center justify-between bg-green-50 border border-green-200 px-3 py-2.5 rounded-lg">
+                      <div className="flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-green-600" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span className="text-sm text-green-700 font-bold">{couponCode}</span>
+                      </div>
+                      <button onClick={removeCoupon} className="text-xs text-red-500 font-semibold hover:underline">Remove</button>
                     </div>
                   )}
                 </div>
 
-                <div className="flex justify-between py-4 text-lg">
-                  <span className="font-bold text-[#464646]">Total</span>
-                  <span className="font-bold text-brand">{formatPrice(total)}</span>
+                {/* Total */}
+                <div className="px-6 py-4 border-t-2 border-dashed border-gray-100">
+                  <div className="flex justify-between items-center">
+                    <span className="text-base font-bold text-[#464646]">Total Payable</span>
+                    <span className="text-xl font-bold text-[#005d5a]">{formatPrice(total)}</span>
+                  </div>
+                  <p className="text-xs text-gray-400 mt-0.5">Inclusive of all taxes</p>
                 </div>
 
-                <button
-                  onClick={placeOrder}
-                  disabled={placingOrder || !selectedAddressId}
-                  className="w-full bg-[#075E5E] hover:bg-[#064d4d] text-white font-semibold py-4 rounded-lg transition-colors uppercase tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {placingOrder ? "Placing Order..." : "Place Order"}
-                </button>
-
-                <p className="text-xs text-gray-500 text-center mt-4">
-                  Inclusive of all taxes
-                </p>
+                {/* Place Order Button */}
+                <div className="px-6 pb-6">
+                  <button
+                    onClick={placeOrder}
+                    disabled={placingOrder || !selectedAddressId || cartItems.length === 0}
+                    className="w-full bg-[#075E5E] hover:bg-[#064d4d] text-white font-bold py-4 rounded-xl transition-colors uppercase tracking-widest text-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  >
+                    {placingOrder ? (
+                      <>
+                        <svg className="animate-spin w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                        </svg>
+                        Processing...
+                      </>
+                    ) : (
+                      <>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                        </svg>
+                        Proceed to Pay
+                      </>
+                    )}
+                  </button>
+                  {!selectedAddressId && (
+                    <p className="text-xs text-red-500 text-center mt-2">Please select a delivery address to continue</p>
+                  )}
+                  <div className="flex items-center justify-center gap-2 mt-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 text-gray-400" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                    </svg>
+                    <span className="text-xs text-gray-400">Secured by Razorpay</span>
+                  </div>
+                </div>
               </div>
             </div>
+
           </div>
         )}
       </div>
 
       {/* ── Add Address Modal ── */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={() => { setShowAddModal(false); setFormError(""); }}>
-          <div className="bg-white rounded-xl p-6 sm:p-8 w-full max-w-[700px] max-h-[90vh] overflow-y-auto shadow-2xl relative" onClick={(e) => e.stopPropagation()}>
-            <button
-              onClick={() => { setShowAddModal(false); setFormError(""); }}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            <h3 className="text-xl font-semibold text-[#005d5a] mb-5">Add New Address</h3>
-            {renderAddressForm(addForm, setAddForm, !authToken)}
-            {formError && <p className="text-sm text-red-500 mt-3">{formError}</p>}
-            <div className="flex justify-end gap-3 mt-6">
-              <button
-                onClick={() => { setShowAddModal(false); setFormError(""); }}
-                className="px-4 py-2.5 text-sm border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50 transition-colors"
-              >
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={() => { setShowAddModal(false); setFormError(""); }}>
+          <div className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 sticky top-0 bg-white z-10">
+              <h3 className="text-lg font-heading font-bold text-[#005d5a]">Add New Address</h3>
+              <button onClick={() => { setShowAddModal(false); setFormError(""); }} className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors text-gray-400">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="p-6">
+              {renderAddressForm(addForm, setAddForm, !authToken)}
+              {formError && (
+                <div className="flex items-center gap-2 mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-red-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                  </svg>
+                  <p className="text-sm text-red-600">{formError}</p>
+                </div>
+              )}
+            </div>
+            <div className="flex justify-end gap-3 px-6 pb-6">
+              <button onClick={() => { setShowAddModal(false); setFormError(""); }}
+                className="px-5 py-2.5 text-sm border border-gray-300 rounded-xl text-gray-600 hover:bg-gray-50 transition-colors font-semibold">
                 Cancel
               </button>
-              <button
-                onClick={handleAddAddress}
-                disabled={formLoading}
-                className="px-6 py-2.5 text-sm bg-[#005d5a] text-white rounded-md font-semibold hover:bg-[#1a3634] transition-colors disabled:opacity-70"
-              >
-                {formLoading ? "Adding..." : "Add Address"}
+              <button onClick={handleAddAddress} disabled={formLoading}
+                className="px-6 py-2.5 text-sm bg-[#005d5a] text-white rounded-xl font-bold hover:bg-[#064d4d] transition-colors disabled:opacity-60 flex items-center gap-2">
+                {formLoading && (
+                  <svg className="animate-spin w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                  </svg>
+                )}
+                {formLoading ? "Saving..." : "Add Address"}
               </button>
             </div>
           </div>
@@ -1189,23 +1109,40 @@ export default function CheckoutPage() {
 
       {/* ── Edit Address Modal ── */}
       {showEditModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white rounded-xl p-6 sm:p-8 w-full max-w-[700px] max-h-[90vh] overflow-y-auto shadow-2xl">
-            <h3 className="text-xl font-semibold text-[#005d5a] mb-5">Update Address</h3>
-            {renderAddressForm(editForm, (f) => setEditForm({ ...f, id: editForm.id }), false)}
-            {formError && <p className="text-sm text-red-500 mt-3">{formError}</p>}
-            <div className="flex justify-end gap-3 mt-6">
-              <button
-                onClick={() => { setShowEditModal(false); setFormError(""); }}
-                className="px-4 py-2.5 text-sm border border-gray-300 rounded-md text-gray-600 hover:bg-gray-50 transition-colors"
-              >
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4" onClick={() => { setShowEditModal(false); setFormError(""); }}>
+          <div className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 sticky top-0 bg-white z-10">
+              <h3 className="text-lg font-heading font-bold text-[#005d5a]">Update Address</h3>
+              <button onClick={() => { setShowEditModal(false); setFormError(""); }} className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors text-gray-400">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="p-6">
+              {renderAddressForm(editForm, (f) => setEditForm({ ...f, id: editForm.id }), false)}
+              {formError && (
+                <div className="flex items-center gap-2 mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-red-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                  </svg>
+                  <p className="text-sm text-red-600">{formError}</p>
+                </div>
+              )}
+            </div>
+            <div className="flex justify-end gap-3 px-6 pb-6">
+              <button onClick={() => { setShowEditModal(false); setFormError(""); }}
+                className="px-5 py-2.5 text-sm border border-gray-300 rounded-xl text-gray-600 hover:bg-gray-50 transition-colors font-semibold">
                 Cancel
               </button>
-              <button
-                onClick={handleEditAddress}
-                disabled={formLoading}
-                className="px-6 py-2.5 text-sm bg-[#005d5a] text-white rounded-md font-semibold hover:bg-[#1a3634] transition-colors disabled:opacity-70"
-              >
+              <button onClick={handleEditAddress} disabled={formLoading}
+                className="px-6 py-2.5 text-sm bg-[#005d5a] text-white rounded-xl font-bold hover:bg-[#064d4d] transition-colors disabled:opacity-60 flex items-center gap-2">
+                {formLoading && (
+                  <svg className="animate-spin w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                  </svg>
+                )}
                 {formLoading ? "Saving..." : "Save Changes"}
               </button>
             </div>
@@ -1213,65 +1150,23 @@ export default function CheckoutPage() {
         </div>
       )}
 
-      {/* ── Login Modal ── */}
-      {showLoginModal && !authToken && (
-        <div className="fixed inset-0 z-70 flex items-center justify-center bg-black/60 p-4" onClick={() => setShowLoginModal(false)}>
-          <div className="bg-white rounded-xl p-8 w-full max-w-[420px] shadow-2xl text-center relative" onClick={(e) => e.stopPropagation()}>
-            <button
-              onClick={() => setShowLoginModal(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            <div className="w-16 h-16 mx-auto mb-4 text-[#005d5a]">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-              </svg>
-            </div>
-            <h3 className="text-xl font-heading font-bold text-[#464646] mb-2">
-              Login Required
-            </h3>
-            <p className="text-sm text-gray-500 mb-6">
-              Please login or create an account to proceed with checkout.
-            </p>
-            <div className="flex flex-col gap-3">
-              <Link
-                href="/login"
-                className="w-full bg-[#075E5E] hover:bg-[#064d4d] text-white font-semibold py-3 rounded-lg transition-colors text-center"
-              >
-                Login
-              </Link>
-              <Link
-                href="/register"
-                className="w-full border-2 border-[#075E5E] text-[#075E5E] hover:bg-[#f0f9f8] font-semibold py-3 rounded-lg transition-colors text-center"
-              >
-                Create Account
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* ── OTP Modal ── */}
       {otpStep !== "idle" && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white rounded-xl p-8 w-full max-w-[400px] shadow-2xl">
-            <h4 className="text-xl font-semibold text-[#005d5a] mb-2">Enter OTP</h4>
-            <p className="text-sm text-gray-600 mb-1">
-              We have sent a 6-digit code to your mobile number.
-            </p>
-            <p className="text-sm font-medium text-gray-700 mb-1">
-              Sent to +91 {otpMobile.replace(/(\d{5})(\d{5})/, "$1 $2")}
-            </p>
-            <button
-              type="button"
-              className="text-[13px] text-[#005d5a] font-semibold hover:underline mb-5 cursor-pointer"
-              onClick={() => { setOtpStep("idle"); setOtpError(""); }}
-            >
-              Change number
-            </button>
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 p-4">
+          <div className="bg-white rounded-2xl p-8 w-full max-w-sm shadow-2xl">
+            <div className="text-center mb-5">
+              <div className="w-14 h-14 mx-auto mb-3 rounded-full bg-[#e6f4f3] flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 text-[#005d5a]" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18h3" />
+                </svg>
+              </div>
+              <h4 className="text-lg font-heading font-bold text-[#464646]">Verify Mobile</h4>
+              <p className="text-sm text-gray-500 mt-1">OTP sent to <span className="font-semibold text-[#464646]">+91 {otpMobile.replace(/^91/, "").replace(/(\d{5})(\d{5})/, "$1 $2")}</span></p>
+              <button type="button" onClick={() => { setOtpStep("idle"); setOtpError(""); }}
+                className="text-xs text-[#005d5a] font-semibold hover:underline mt-1">
+                Change number
+              </button>
+            </div>
 
             <div className="flex justify-center gap-2.5 mb-4">
               {otpValues.map((val, i) => (
@@ -1281,41 +1176,35 @@ export default function CheckoutPage() {
                   type="text"
                   inputMode="numeric"
                   maxLength={1}
-                  className="w-11 h-12 text-center text-lg font-semibold border border-gray-300 rounded-md outline-none transition-colors focus:border-[#005d5a]"
                   value={val}
                   onChange={(e) => handleOtpChange(i, e.target.value)}
                   onKeyDown={(e) => handleOtpKeyDown(i, e)}
                   onPaste={i === 0 ? handleOtpPaste : undefined}
                   disabled={otpStep === "verifying"}
+                  className="w-11 h-12 text-center text-lg font-bold border-2 rounded-xl outline-none transition-colors focus:border-[#005d5a] border-gray-200 disabled:bg-gray-50"
                 />
               ))}
             </div>
 
-            {otpError && (
-              <p className="text-[13px] text-red-500 text-center mb-3">{otpError}</p>
-            )}
+            {otpError && <p className="text-xs text-red-500 text-center mb-3">{otpError}</p>}
 
-            <div className="flex items-center justify-between mt-4">
-              <button
-                type="button"
-                className="text-sm text-[#005d5a] font-semibold hover:underline cursor-pointer"
-                onClick={handleResendOtp}
-                disabled={otpStep === "verifying"}
-              >
-                Resend OTP
-              </button>
-              <button
-                type="button"
-                className="px-6 py-2 text-sm bg-[#005d5a] text-white rounded-md font-semibold hover:bg-[#1a3634] transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
-                onClick={handleVerifyOtp}
-                disabled={otpStep === "verifying"}
-              >
-                {otpStep === "verifying" ? "Verifying..." : "Verify"}
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={handleVerifyOtp}
+              disabled={otpStep === "verifying" || otpValues.join("").length !== 6}
+              className="w-full py-3 bg-[#005d5a] text-white text-sm font-bold rounded-xl hover:bg-[#064d4d] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {otpStep === "verifying" ? "Verifying..." : "Verify OTP"}
+            </button>
+
+            <button type="button" onClick={handleResendOtp} disabled={otpStep === "verifying"}
+              className="w-full text-sm text-[#005d5a] font-semibold hover:underline mt-3 text-center disabled:opacity-50">
+              Resend OTP
+            </button>
           </div>
         </div>
       )}
     </div>
   );
 }
+

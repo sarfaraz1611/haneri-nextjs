@@ -387,7 +387,7 @@ export default function Header() {
               {isLoggedIn ? (
                 <div className="flex items-center gap-2.5">
                   <Link
-                    href={`${LEGACY_BASE_URL}/profile.php`}
+                    href={`profile`}
                     className="text-lg cursor-pointer transition-colors duration-300 p-1 hover:text-brand  text-primary"
                     title="Profile"
                   >
@@ -395,7 +395,7 @@ export default function Header() {
                   </Link>
                    <span className="max-sm:text-sm text-primary">|</span>
                   <Link
-                    href={`${LEGACY_BASE_URL}/cart.php`}
+                    href={`/cart`}
                     className="relative text-xl cursor-pointer transition-colors duration-300 p-1 hover:text-brand text-primary"
                     title="Cart"
                   >
@@ -466,7 +466,7 @@ export default function Header() {
               ) : (
                 <>
                   <Link
-                    href={`${LEGACY_BASE_URL}/login.php`}
+                    href={`/login.php`}
                     className="text-lg cursor-pointer transition-colors duration-300 p-1 hover:text-brand  max-sm:p-[3px] text-primary"
                     title="Login"
                   >
@@ -474,7 +474,7 @@ export default function Header() {
                   </Link>
                   <span className="max-sm:text-sm text-primary">|</span>
                   <Link
-                    href={`${LEGACY_BASE_URL}/cart.php`}
+                    href={`cart`}
                     className="relative text-sm cursor-pointer transition-colors duration-300 p-1 hover:text-brand  max-sm:p-[3px] text-primary"
                     title="Cart"
                   >

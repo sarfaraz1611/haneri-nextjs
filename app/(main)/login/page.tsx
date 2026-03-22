@@ -4,6 +4,8 @@ import { useState, useRef } from "react";
 import Link from "next/link";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "@/lib/firebase";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -43,9 +45,38 @@ export default function LoginPage() {
     }
   };
 
-  // const handleGoogleLogin = () => {
-  //   window.location.href = "https://api.haneri.com/api/google";
-  // };
+  const handleGoogleLogin = async () => {
+    setError("");
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const idToken = await result.user.getIdToken(true);
+      const { email, displayName: name, uid: google_uid } = result.user;
+
+      const res = await fetch("https://api.haneri.com/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ auth_provider: "google", idToken, email, name, google_uid }),
+      });
+
+      const data = await res.json();
+
+      if ((data.code === 200 || data.code === 201 || data.success) && data.data?.token) {
+        const user = data.data.user || data.data;
+        localStorage.setItem("auth_token", data.data.token);
+        localStorage.setItem("user_name", user.name || "");
+        localStorage.setItem("user_email", user.email || "");
+        localStorage.setItem("user_mobile", user.mobile || "");
+        localStorage.setItem("user_role", user.role || "");
+        if (user.id) localStorage.setItem("user_id", user.id);
+        window.location.href = "/";
+      } else {
+        setError(data.message || "Google login failed. Please try again.");
+      }
+    } catch (err) {
+      console.error("Google login error:", err);
+      setError("Something went wrong during Google login.");
+    }
+  };
 
   const handleOtpLogin = () => {
     setShowOtpModal(true);
@@ -159,122 +190,155 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-[80vh]  mt-20 flex items-center justify-center py-10 px-4 bg-gray-50">
-      <div className="w-full max-w-[480px] mx-auto bg-white rounded-[10px] p-9 shadow-[0_6px_14px_rgba(0,0,0,0.12)] max-sm:p-7">
-        <div className="mb-6">
-          <h2 className="font-heading font-semibold text-[32px] text-[#005d5a]">
-            Login
-          </h2>
+    <div className="min-h-screen mt-20 flex">
+      {/* Left Panel — brand / image (desktop only) */}
+      <div className="hidden lg:flex lg:w-1/2 relative bg-[#244a46] flex-col items-center justify-center overflow-hidden">
+        {/* Background image with dark overlay */}
+        <div className="absolute inset-0">
+          <img
+            src="/images/Slider2.jpg"
+            alt=""
+            className="w-full h-full object-cover opacity-25"
+          />
         </div>
+        {/* Brand content */}
+        <div className="relative z-10 text-center px-12">
+          <img
+            src="/images/logo_white.png"
+            alt="Haneri"
+            className="h-16 w-auto mx-auto mb-10"
+          />
+          {/* <h1 className="font-heading text-white text-5xl font-bold mb-4 leading-tight">
+            Welcome Back
+          </h1> */}
+          <p className="text-white/70 text-base max-w-xs mx-auto leading-relaxed">
+            India&apos;s leading premium fan brand. Log in to continue your
+            journey.
+          </p>
+        </div>
+      </div>
 
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label
-              htmlFor="login-email"
-              className="block text-sm font-semibold text-gray-800 mb-1.5"
-            >
-              Username or email address <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="email"
-              id="login-email"
-              className="w-full px-3.5 py-3 border border-gray-300 rounded-md text-sm font-[inherit] outline-none transition-colors duration-200 focus:border-[#005d5a]"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+      {/* Right Panel — login form */}
+      <div className="flex-1 flex items-center justify-center py-12 px-6 bg-white">
+        <div className="w-full max-w-[420px]">
+          <div className="mb-8">
+            <h2 className="font-heading font-semibold text-[32px] text-[#005d5a]">
+              Login
+            </h2>
+            <p className="text-sm text-gray-500 mt-1">
+              Sign in to your Haneri account
+            </p>
           </div>
 
-          <div className="mb-4">
-            <label
-              htmlFor="login-password"
-              className="block text-sm font-semibold text-gray-800 mb-1.5"
-            >
-              Password <span className="text-red-500">*</span>
-            </label>
-            <div className="relative">
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label
+                htmlFor="login-email"
+                className="block text-sm font-semibold text-gray-800 mb-1.5"
+              >
+                Username or email address <span className="text-red-500">*</span>
+              </label>
               <input
-                type={showPassword ? "text" : "password"}
-                id="login-password"
-                className="w-full px-3.5 py-3 pr-11 border border-gray-300 rounded-md text-sm font-[inherit] outline-none transition-colors duration-200 focus:border-[#005d5a]"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                type="email"
+                id="login-email"
+                className="w-full px-3.5 py-3 border border-gray-300 rounded-md text-sm font-[inherit] outline-none transition-colors duration-200 focus:border-[#005d5a] focus:ring-2 focus:ring-[#005d5a]/10"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
-              <button
-                type="button"
-                className="absolute right-3 top-1/2 -translate-y-1/2 bg-transparent border-none cursor-pointer text-gray-500 flex items-center"
-                onClick={() => setShowPassword(!showPassword)}
-                aria-label={showPassword ? "Hide password" : "Show password"}
-              >
-                {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
-              </button>
             </div>
-          </div>
 
-          <div className="flex items-center justify-between mb-5 text-sm">
-            <label className="flex items-center gap-2 cursor-pointer text-gray-800">
-              <input
-                type="checkbox"
-                className="w-4 h-4 accent-[#005d5a] cursor-pointer"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-              />
-              <span>Remember me</span>
-            </label>
-            {/* <Link
-              href="/forgot-password"
-              className="text-gray-800 font-semibold hover:text-[#005d5a] transition-colors"
+            <div className="mb-4">
+              <label
+                htmlFor="login-password"
+                className="block text-sm font-semibold text-gray-800 mb-1.5"
+              >
+                Password <span className="text-red-500">*</span>
+              </label>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="login-password"
+                  className="w-full px-3.5 py-3 pr-11 border border-gray-300 rounded-md text-sm font-[inherit] outline-none transition-colors duration-200 focus:border-[#005d5a] focus:ring-2 focus:ring-[#005d5a]/10"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 bg-transparent border-none cursor-pointer text-gray-500 flex items-center"
+                  onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
+                </button>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between mb-5 text-sm">
+              <label className="flex items-center gap-2 cursor-pointer text-gray-800">
+                <input
+                  type="checkbox"
+                  className="w-4 h-4 accent-[#005d5a] cursor-pointer"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                />
+                <span>Remember me</span>
+              </label>
+              <Link
+                href="/forgot-password"
+                className="text-gray-800 font-semibold hover:text-[#005d5a] transition-colors"
+              >
+                Forgot Password?
+              </Link>
+            </div>
+
+            {error && (
+              <p className="text-red-600 text-sm mb-4 text-center">{error}</p>
+            )}
+
+            <button
+              type="submit"
+              className="w-full py-3.5 bg-[#244a46] text-white rounded-[10px] font-bold text-[15px] tracking-wide cursor-pointer transition-all duration-300 hover:bg-[#1a3634] shadow-md hover:shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"
+              disabled={loading}
             >
-              Forgot Password?
-            </Link> */}
-          </div>
+              {loading ? "LOGGING IN..." : "LOGIN"}
+            </button>
 
-          <button
-            type="submit"
-            className="w-full py-3.5 bg-[#244a46] text-white rounded-[10px] font-bold text-[15px] tracking-wide cursor-pointer transition-all duration-300 hover:bg-[#1a3634] disabled:opacity-70 disabled:cursor-not-allowed"
-            disabled={loading}
-          >
-            {loading ? "LOGGING IN..." : "LOGIN"}
-          </button>
+            <div className="flex items-center my-5 gap-3">
+              <span className="flex-1 h-px bg-gray-300"></span>
+              <span className="text-xs text-gray-400 uppercase">or</span>
+              <span className="flex-1 h-px bg-gray-300"></span>
+            </div>
 
-          <div className="flex items-center my-5 gap-3">
-            <span className="flex-1 h-px bg-gray-300"></span>
-            <span className="text-xs text-gray-400 uppercase">or</span>
-            <span className="flex-1 h-px bg-gray-300"></span>
-          </div>
-
-          <button
-            type="button"
-            className="w-full py-3 border-2 border-[#005d5a] rounded-md bg-transparent text-[#005d5a] text-sm font-bold cursor-pointer mb-3 transition-all duration-300 font-[inherit] hover:bg-[#005d5a] hover:text-white"
-            onClick={handleOtpLogin}
-          >
-            Login with OTP
-          </button>
-
-          {/* <button
-            type="button"
-            className="w-full py-3 border border-gray-300 rounded-md bg-white flex items-center justify-center gap-2.5 text-sm font-semibold text-gray-800 cursor-pointer transition-all duration-300 font-[inherit] hover:border-gray-400 hover:bg-gray-50"
-            onClick={handleGoogleLogin}
-          >
-            <FcGoogle size={20} />
-            <span>Continue With Google</span>
-          </button> */}
-
-          <p className="mt-5 text-center text-sm text-gray-500">
-            Don&apos;t have an account yet?{" "}
-            <Link
-              href="/register"
-              className="text-[#005d5a] font-bold hover:underline"
+            <button
+              type="button"
+              className="w-full py-3 border-2 border-[#005d5a] rounded-md bg-transparent text-[#005d5a] text-sm font-bold cursor-pointer mb-3 transition-all duration-300 font-[inherit] hover:bg-[#005d5a] hover:text-white"
+              onClick={handleOtpLogin}
             >
-              Register
-            </Link>
-          </p>
-        </form>
+              Login with OTP
+            </button>
 
-        {error && (
-          <p className="text-red-600 text-sm mt-4 text-center">{error}</p>
-        )}
+            <button
+              type="button"
+              className="w-full py-3 border border-gray-300 rounded-md bg-white flex items-center justify-center gap-2.5 text-sm font-semibold text-gray-800 cursor-pointer transition-all duration-300 font-[inherit] hover:border-gray-400 hover:bg-gray-50"
+              onClick={handleGoogleLogin}
+            >
+              <FcGoogle size={20} />
+              <span>Continue With Google</span>
+            </button>
+
+            <p className="mt-5 text-center text-sm text-gray-500">
+              Don&apos;t have an account yet?{" "}
+              <Link
+                href="/register"
+                className="text-[#005d5a] font-bold hover:underline"
+              >
+                Register
+              </Link>
+            </p>
+          </form>
+        </div>
       </div>
 
       {/* OTP Mobile Number Modal */}
