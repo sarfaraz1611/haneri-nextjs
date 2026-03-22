@@ -841,7 +841,7 @@ export default function ProfilePage() {
               <button onClick={() => setShowAddModal(false)} className="text-gray-400 hover:text-gray-600 text-xl leading-none">&times;</button>
             </div>
             <form onSubmit={handleAddAddress} className="p-6">
-              <AddressFormFields form={addForm} onChange={setAddForm} error={addressFormError} />
+              <AddressFormFields form={addForm} onChange={(v) => setAddForm((prev) => ({ ...prev, ...v }))} error={addressFormError} />
               <div className="flex justify-end gap-3 mt-6">
                 <button type="button" onClick={() => setShowAddModal(false)} className="px-5 py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50">
                   Cancel
