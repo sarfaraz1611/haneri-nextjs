@@ -12,6 +12,7 @@ import FeatureSlider from "./FeatureSlider";
 import ProductSpecifications from "./ProductSpecifications";
 import ProductFAQ from "./ProductFAQ";
 import DescriptionSection from "./DescriptionSection";
+import RecommendedProducts from "./RecommendedProducts";
 import { useProduct, useCart } from "./hooks";
 import { ProductDetailClientProps } from "./types";
 import { LEGACY_BASE_URL } from "./constants";
@@ -145,6 +146,8 @@ export default function ProductDetailClient({
       {product.features && product.features.length > 0 && (
         <ProductSpecifications features={product.features} />
       )}
+
+      <RecommendedProducts currentProductId={productId} />
 
       <ProductFAQ />
 

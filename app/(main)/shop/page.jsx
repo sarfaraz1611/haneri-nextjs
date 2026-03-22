@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, Suspense } from "react";
+import * as Slider from "@radix-ui/react-slider";
 import axios from "axios";
 import {
   Dialog,
@@ -318,10 +319,43 @@ function FilterSection({ section, selectedValues, onFilterChange }) {
   );
 }
 
+// Price Range Slider
+function PriceSlider({ priceRange, onPriceChange, onPageReset }) {
+  return (
+    <div className="space-y-4">
+      <Slider.Root
+        className="relative flex items-center w-full h-5 select-none touch-none"
+        min={0}
+        max={20000}
+        step={100}
+        value={priceRange}
+        onValueChange={(val) => onPriceChange(val)}
+        onValueCommit={() => onPageReset()}
+      >
+        <Slider.Track className="relative grow rounded-full h-0.5 bg-gray-200">
+          <Slider.Range className="absolute h-full rounded-full bg-[#005d5a]" />
+        </Slider.Track>
+        <Slider.Thumb
+          className="block w-4 h-4 rounded-full border-2 border-[#005d5a] bg-white shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#005d5a]/20 transition-shadow cursor-grab active:cursor-grabbing"
+          aria-label="Min price"
+        />
+        <Slider.Thumb
+          className="block w-4 h-4 rounded-full border-2 border-[#005d5a] bg-white shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[#005d5a]/20 transition-shadow cursor-grab active:cursor-grabbing"
+          aria-label="Max price"
+        />
+      </Slider.Root>
+      <div className="flex justify-between text-xs text-gray-400">
+        <span>Rs.{priceRange[0].toLocaleString()}</span>
+        <span>Rs.{priceRange[1].toLocaleString()}</span>
+      </div>
+    </div>
+  );
+}
+
 // Price Range Filter Component
 function PriceRangeFilter({ priceRange, onPriceChange, onPageReset }) {
   return (
-    <Disclosure as="div" className="border-b border-gray-200 py-6">
+    <Disclosure as="div" className="border-b border-gray-200 py-6" defaultOpen>
       <h3 className="-my-3 flow-root">
         <DisclosureButton className="group flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
           <span className="font-medium text-gray-900">Price Range</span>
@@ -338,36 +372,11 @@ function PriceRangeFilter({ priceRange, onPriceChange, onPageReset }) {
         </DisclosureButton>
       </h3>
       <DisclosurePanel className="pt-6">
-        <div className="space-y-4">
-          <div className="flex gap-2">
-            <input
-              type="number"
-              placeholder="Min"
-              value={priceRange[0]}
-              onChange={(e) => {
-                onPriceChange([parseInt(e.target.value) || 0, priceRange[1]]);
-                onPageReset();
-              }}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
-            />
-            <input
-              type="number"
-              placeholder="Max"
-              value={priceRange[1]}
-              onChange={(e) => {
-                onPriceChange([
-                  priceRange[0],
-                  parseInt(e.target.value) || 20000,
-                ]);
-                onPageReset();
-              }}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
-            />
-          </div>
-          <p className="text-sm text-gray-600">
-            Rs.{priceRange[0]} - Rs.{priceRange[1]}
-          </p>
-        </div>
+        <PriceSlider
+          priceRange={priceRange}
+          onPriceChange={onPriceChange}
+          onPageReset={onPageReset}
+        />
       </DisclosurePanel>
     </Disclosure>
   );

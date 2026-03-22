@@ -10,12 +10,12 @@ export default function ShippingPolicyPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Banner */}
-      <div className="relative bg-primary pt-20 md:pt-40 overflow-hidden">
+      <div className="relative bg-primary pt-20 pb-10 md:pt-40 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
-          <h1 className="heading_1 text-center mb-8 uppercase text-[#005d5a]">
+          <h1 className="heading_1 text-center mb-8 uppercase text-white/80">
             Shipping Policy
           </h1>
-          <p className="container mx-auto max-w-4xl text-neutral-600 leading-relaxed">
+          <p className="container mx-auto max-w-4xl text-white/80 leading-relaxed">
             Haneri Electricals LLP (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or
             &ldquo;us&rdquo;) is committed to providing a seamless and efficient
             shipping experience for all our customers. This Shipping Policy
@@ -33,11 +33,11 @@ export default function ShippingPolicyPage() {
           </h2>
           <ul className="text-neutral-600 space-y-2 pl-5">
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               We ship our products across all major cities and towns in India.
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               Delivery services may not be available in remote or
               non-serviceable areas. Customers in such locations will be notified
               during the order placement process.
@@ -52,7 +52,7 @@ export default function ShippingPolicyPage() {
           </h2>
           <ul className="text-neutral-600 space-y-2 pl-5">
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 <strong className="text-neutral-700">Standard Delivery:</strong>{" "}
                 Orders are typically delivered within 5-7 business days from the
@@ -60,7 +60,7 @@ export default function ShippingPolicyPage() {
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 <strong className="text-neutral-700">Express Delivery:</strong>{" "}
                 Available in select cities, with delivery within 2-3 business
@@ -68,12 +68,12 @@ export default function ShippingPolicyPage() {
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               Delivery timelines may vary based on the location and product
               availability.
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               Customers will be notified of any delays due to unforeseen
               circumstances or high demand.
             </li>
@@ -87,7 +87,7 @@ export default function ShippingPolicyPage() {
           </h2>
           <ul className="text-neutral-600 space-y-2 pl-5">
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 <strong className="text-neutral-700">Free Shipping:</strong>{" "}
                 Shipping charges are included in the product cost, and no
@@ -95,7 +95,7 @@ export default function ShippingPolicyPage() {
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               Any additional packaging request made by the customer will be
               charged extra as per actual.
             </li>
@@ -109,17 +109,17 @@ export default function ShippingPolicyPage() {
           </h2>
           <ul className="text-neutral-600 space-y-2 pl-5">
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               Once an order is shipped, customers will receive a confirmation
               email or SMS with a tracking ID and link.
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               Customers can use the tracking ID to monitor the shipment status
               via our logistics partner&apos;s portal.
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 For any issues with tracking, please contact our customer
                 support team at{" "}
@@ -141,12 +141,12 @@ export default function ShippingPolicyPage() {
           </h2>
           <ul className="text-neutral-600 space-y-2 pl-5">
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               We do not deliver to P.O. Boxes or military addresses (e.g.,
               APO/FPO).
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               Certain products may have shipping restrictions due to legal or
               regulatory requirements. Such restrictions will be communicated at
               the time of purchase.
@@ -165,17 +165,17 @@ export default function ShippingPolicyPage() {
           </h3>
           <ul className="text-neutral-600 mb-6 space-y-2 pl-5">
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               Customers must notify our customer support team within 48 hours of
               delivery.
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               Please provide photographic evidence of the damaged product and
               packaging.
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               We will arrange for a replacement or refund after verifying the
               issue.
             </li>
@@ -186,12 +186,12 @@ export default function ShippingPolicyPage() {
           </h3>
           <ul className="text-neutral-600 space-y-2 pl-5">
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               If an order is not received within the expected delivery time,
               customers must contact our support team immediately.
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               We will investigate with our logistics partner and provide a
               resolution within 7-10 business days.
             </li>
@@ -205,12 +205,12 @@ export default function ShippingPolicyPage() {
           </h2>
           <ul className="text-neutral-600 space-y-2 pl-5">
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               Orders can be cancelled before they are shipped. Once shipped,
               cancellations are not allowed.
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 To cancel an order, contact Haneri Customer Support at{" "}
                 <a
@@ -222,7 +222,7 @@ export default function ShippingPolicyPage() {
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               Refunds for cancelled orders will be processed within 7-10
               business days.
             </li>

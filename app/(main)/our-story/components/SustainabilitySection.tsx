@@ -4,7 +4,7 @@ export default function SustainabilitySection() {
   return (
     <section id="sustainability" className="relative px-4 sm:px-8 lg:px-16 w-full py-8 scroll-mt-20">
       <div className="relative w-full flex items-center justify-center">
-        <div className="flex items-stretch w-full max-h-[440px] flex-col md:flex-row overflow-hidden rounded-lg shadow-lg">
+        <div className="flex items-stretch w-full lg:max-h-[440px] flex-col md:flex-row overflow-hidden rounded-lg shadow-lg">
           <div className="w-full md:w-3/4">
             <img
               src="images/about_sustainability.png"

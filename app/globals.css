@@ -265,6 +265,51 @@
     gap: 3rem;
   }
 
+  /* noUiSlider price range — primary brand color */
+  .nouislider-price {
+    margin: 18px 10px;
+    height: 2px;
+    border-radius: 9999px;
+    border: none;
+    background: #e5e7eb;
+    box-shadow: none;
+  }
+
+  .nouislider-price .noUi-base,
+  .nouislider-price .noUi-connects {
+    border-radius: 9999px;
+  }
+
+  .nouislider-price .noUi-connect {
+    background: #005d5a;
+    border-radius: 9999px;
+  }
+
+  .nouislider-price .noUi-handle {
+    width: 20px !important;
+    height: 20px !important;
+    top: -9px !important;
+    right: -10px !important;
+    border-radius: 9999px;
+    border: 2.5px solid #005d5a;
+    background: #f3f4f6;
+    box-shadow: none;
+    cursor: grab;
+    transition: box-shadow 0.15s ease;
+  }
+
+  .nouislider-price .noUi-handle:focus,
+  .nouislider-price .noUi-handle:active {
+    cursor: grabbing;
+    box-shadow: 0 0 0 8px rgba(0, 93, 90, 0.12);
+    outline: none;
+  }
+
+  .nouislider-price .noUi-handle::before,
+  .nouislider-price .noUi-handle::after {
+    display: none;
+  }
+
   /* Image container with overflow hidden for zoom effect */
   .img-zoom-container {
     overflow: hidden;

@@ -10,12 +10,12 @@ export default function PrivacyPolicyPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Banner */}
-      <div className="relative bg-primary pt-20 md:pt-40 overflow-hidden">
+      <div className="relative bg-primary pt-20 md:pt-40 pb-10 overflow-hidden">
         <div className="container mx-auto px-4 relative z-10">
-          <h1 className="heading_1 text-center mb-8 uppercase text-[#005d5a]">
+          <h1 className="heading_1 text-center mb-8 uppercase text-white/80">
             Privacy Policy
           </h1>
-          <p className="container mx-auto max-w-4xl text-neutral-600 leading-relaxed">
+          <p className="container mx-auto max-w-4xl text-white/80 leading-relaxed">
             At HANERI ELECTRICALS LLP and its subsidiaries (&ldquo;we,&rdquo;
             &ldquo;us,&rdquo; &ldquo;our,&rdquo; or &ldquo;HANERI&rdquo;), we
             are committed to safeguarding your privacy. This Privacy Policy
@@ -39,11 +39,11 @@ export default function PrivacyPolicyPage() {
           </p>
           <ul className="text-neutral-600 mb-4 space-y-2 pl-5">
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               Applications and websites hosted by HANERI ELECTRICALS LLP
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 Related services accessed through{" "}
                 <a
@@ -62,7 +62,7 @@ export default function PrivacyPolicyPage() {
           </p>
           <ul className="text-neutral-600 space-y-2 pl-5">
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 <strong className="text-neutral-700">
                   &ldquo;Personal Data&rdquo;
@@ -73,7 +73,7 @@ export default function PrivacyPolicyPage() {
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 <strong className="text-neutral-700">
                   &ldquo;Smart Devices&rdquo;
@@ -85,7 +85,7 @@ export default function PrivacyPolicyPage() {
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 <strong className="text-neutral-700">&ldquo;Apps&rdquo;</strong>{" "}
                 are mobile applications developed by or for HANERI, enabling
@@ -107,7 +107,7 @@ export default function PrivacyPolicyPage() {
           </h3>
           <ul className="text-neutral-600 mb-6 space-y-3 pl-5">
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 <strong className="text-neutral-700">
                   Account or Profile Data:
@@ -120,7 +120,7 @@ export default function PrivacyPolicyPage() {
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 <strong className="text-neutral-700">Feedback:</strong> If you
                 use feedback or suggestion features, we collect your email
@@ -135,7 +135,7 @@ export default function PrivacyPolicyPage() {
           </h3>
           <ul className="text-neutral-600 mb-6 space-y-3 pl-5">
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 <strong className="text-neutral-700">
                   Device Information:
@@ -147,7 +147,7 @@ export default function PrivacyPolicyPage() {
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 <strong className="text-neutral-700">Usage Data:</strong>{" "}
                 Interaction data, including visits, clicks, downloads, and
@@ -156,7 +156,7 @@ export default function PrivacyPolicyPage() {
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 <strong className="text-neutral-700">Log Information:</strong>{" "}
                 System and exception logs are automatically uploaded when you
@@ -164,7 +164,7 @@ export default function PrivacyPolicyPage() {
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 <strong className="text-neutral-700">Location Data:</strong>{" "}
                 With your permission, we may collect your real-time location,
@@ -179,7 +179,7 @@ export default function PrivacyPolicyPage() {
           </h3>
           <ul className="text-neutral-600 space-y-3 pl-5">
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 <strong className="text-neutral-700">
                   Basic Device Information:
@@ -190,7 +190,7 @@ export default function PrivacyPolicyPage() {
               </span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="text-brand mt-1 shrink-0">&#9679;</span>
+              <span className="text-brand  shrink-0">&#9679;</span>
               <span>
                 <strong className="text-neutral-700">
                   Device-Generated Data:
@@ -315,7 +315,7 @@ export default function PrivacyPolicyPage() {
               "Send periodic updates and emails",
             ].map((item, i) => (
               <li key={i} className="flex items-start gap-2">
-                <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                <span className="text-brand  shrink-0">&#9679;</span>
                 {item}
               </li>
             ))}
@@ -361,7 +361,7 @@ export default function PrivacyPolicyPage() {
               "Object to or opt out of data processing based on your consent.",
             ].map((item, i) => (
               <li key={i} className="flex items-start gap-2">
-                <span className="text-brand mt-1 shrink-0">&#9679;</span>
+                <span className="text-brand  shrink-0">&#9679;</span>
                 {item}
               </li>
             ))}

@@ -122,7 +122,14 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
               <div className="flex flex-col gap-[15px]">
                 <div className="flex gap-3 items-start text-sm text-white">
                   <FaHome className=" mt-1 shrink-0" />
-                  <span>{companyInfo.address}</span>
+                  <a
+                    href="https://maps.google.com/?q=A-48+Sector+57+Noida+Uttar+Pradesh+201301"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white transition-colors hover:text-brand"
+                  >
+                    {companyInfo.address}
+                  </a>
                 </div>
                 <div className="flex gap-3 items-start text-sm text-white">
                   <FaPhone className=" mt-1 shrink-0" />
