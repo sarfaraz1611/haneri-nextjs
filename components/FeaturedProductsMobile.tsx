@@ -293,7 +293,7 @@ export default function FeaturedProductsMobile() {
                     if (addedToCart.has(product.id)) {
                       e.preventDefault();
                       e.stopPropagation();
-                      router.push(`${LEGACY_BASE_URL}/cart`);
+                      router.push(`/cart`);
                     } else {
                       handleAddToCart(e, product.id, first.id);
                     }

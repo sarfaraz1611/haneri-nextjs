@@ -59,7 +59,7 @@ const config: Config = {
           "var(--font-open-sans)",
         ],
         heading: [
-          "Barlow Condensed"
+          "var(--font-barlow-condensed)"
         ],
         ailerons: ["Ailerons"],
       },
