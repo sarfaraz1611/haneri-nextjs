@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Script from "next/script";
 import CheckoutProgressBar from "@/components/CheckoutProgressBar";
+import EmptyCart from "@/components/EmptyCart";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com/api";
 
@@ -804,18 +805,7 @@ export default function CheckoutPage() {
 
       <div className="container mx-auto px-4 py-10">
         {cartItems.length === 0 ? (
-          <div className="bg-white rounded-2xl p-12 text-center max-w-md mx-auto shadow-sm">
-            <div className="w-20 h-20 mx-auto mb-5 text-gray-200">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-              </svg>
-            </div>
-            <h2 className="text-2xl font-heading font-bold text-[#464646] mb-2">Your cart is empty</h2>
-            <p className="text-gray-400 text-sm mb-6">Add items to your cart before checking out.</p>
-            <Link href="/shop" className="inline-block bg-[#075E5E] hover:bg-[#064d4d] text-white font-semibold px-8 py-3 rounded-xl transition-colors">
-              Continue Shopping
-            </Link>
-          </div>
+          <EmptyCart />
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
 
