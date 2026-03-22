@@ -319,14 +319,16 @@ export default function CartPage() {
       <div className="container mx-auto px-4 py-10">
         {cartItems.length === 0 ? (
           /* Empty Cart */
-          <div className="bg-white rounded-lg p-10 text-center max-w-lg mx-auto">
-            <div className="w-24 h-24 mx-auto mb-6 text-gray-300">
+          <div className="bg-white rounded-2xl px-10 py-16 text-center max-w-xl mx-auto shadow-sm">
+            {/* Icon with teal circle background */}
+            <div className="w-28 h-28 mx-auto mb-8 rounded-full bg-[#e8f4f4] flex items-center justify-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1}
                 stroke="currentColor"
+                className="w-14 h-14 text-primary"
               >
                 <path
                   strokeLinecap="round"
@@ -335,18 +337,49 @@ export default function CartPage() {
                 />
               </svg>
             </div>
-            <h2 className="text-2xl font-heading font-semibold text-[#464646] mb-3">
+
+            {/* Heading */}
+            <h2 className="text-3xl font-heading font-semibold text-primary-dark mb-2 uppercase tracking-wide">
               Your cart is empty
             </h2>
-            <p className="text-gray-500 mb-6">
+
+            {/* Orange accent bar */}
+            <div className="w-12 h-1 bg-brand rounded mx-auto mb-4" />
+
+            {/* Subtitle */}
+            <p className="text-gray-500 mb-8 text-base leading-relaxed">
               Looks like you haven&apos;t added any items to your cart yet.
             </p>
+
+            {/* Primary CTA */}
             <Link
               href="/shop"
-              className="inline-block bg-[#075E5E] hover:bg-[#064d4d] text-white font-semibold px-8 py-3 rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-semibold px-10 py-3.5 rounded-lg transition-colors uppercase tracking-widest text-sm"
             >
               Continue Shopping
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+                className="w-4 h-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                />
+              </svg>
             </Link>
+
+            {/* Secondary link */}
+            <p className="mt-5 text-sm text-gray-400">
+              Not sure where to start?{" "}
+              <Link href="/shop" className="text-brand hover:underline font-semibold">
+                Browse all products
+              </Link>
+            </p>
           </div>
         ) : (
           /* Cart with Items */

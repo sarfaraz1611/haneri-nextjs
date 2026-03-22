@@ -466,7 +466,7 @@ export default function Header() {
               ) : (
                 <>
                   <Link
-                    href={`/login.php`}
+                    href={`/login`}
                     className="text-lg cursor-pointer transition-colors duration-300 p-1 hover:text-brand  max-sm:p-[3px] text-primary"
                     title="Login"
                   >
