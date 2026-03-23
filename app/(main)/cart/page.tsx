@@ -167,12 +167,8 @@ export default function CartPage() {
     return calculateTaxInclusiveTotal() - calculateSubtotal();
   };
 
-  const calculateShipping = () => {
-    return calculateTaxInclusiveTotal() > 1000 ? 0 : 99;
-  };
-
   const calculateTotal = () => {
-    return calculateTaxInclusiveTotal() + calculateShipping();
+    return calculateTaxInclusiveTotal();
   };
 
   const formatPrice = (price: number) => {
@@ -547,19 +543,8 @@ export default function CartPage() {
                   </div>
                   <div className="flex justify-between text-[#464646]">
                     <span>Shipping</span>
-                    <span
-                      className={`font-semibold ${calculateShipping() === 0 ? "text-green-600" : ""}`}
-                    >
-                      {calculateShipping() === 0
-                        ? "Free"
-                        : formatPrice(calculateShipping())}
-                    </span>
+                    <span className="font-semibold text-green-600">Free</span>
                   </div>
-                  {calculateShipping() > 0 && (
-                    <p className="text-xs text-gray-500">
-                      Free shipping on orders above {formatPrice(1000)}
-                    </p>
-                  )}
                 </div>
 
                 <div className="flex justify-between py-4 text-lg">
