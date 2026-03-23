@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import Script from "next/script";
 import CheckoutProgressBar from "@/components/CheckoutProgressBar";
+import EmptyCart from "@/components/EmptyCart";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com/api";
 
@@ -117,9 +117,8 @@ export default function CheckoutPage() {
   const [couponError, setCouponError] = useState("");
   const [couponLoading, setCouponLoading] = useState(false);
 
-  // Shipping
-  const [shippingCost, setShippingCost] = useState(0);
-  const [shippingLoading, setShippingLoading] = useState(false);
+  // Shipping is always free
+  const shippingCost = 0;
 
   // Order
   const [placingOrder, setPlacingOrder] = useState(false);
@@ -196,7 +195,6 @@ export default function CheckoutPage() {
         setAddresses(data.data);
         const defaultAddr = data.data.find((a: Address) => a.is_default) || data.data[0];
         setSelectedAddressId(defaultAddr.id);
-        calculateShipping(defaultAddr.id);
       } else {
         setAddresses([]);
         setAddForm({ ...emptyForm });
@@ -231,30 +229,8 @@ export default function CheckoutPage() {
 
   const handleSelectAddress = (id: number) => {
     setSelectedAddressId(id);
-    calculateShipping(id);
   };
 
-  // ── Shipping ──
-  const calculateShipping = async (addressId: number) => {
-    try {
-      setShippingLoading(true);
-      const res = await fetch(`${BASE_URL}/shipping/calculate`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", ...getAuthHeaders() },
-        body: JSON.stringify({ address_id: addressId }),
-      });
-      const data = await res.json();
-      if (data?.shipping_cost !== undefined) {
-        setShippingCost(data.shipping_cost);
-      } else {
-        setShippingCost(0);
-      }
-    } catch {
-      setShippingCost(0);
-    } finally {
-      setShippingLoading(false);
-    }
-  };
 
   // ── Form Validation ──
   const validateForm = (form: AddressFormData, requireEmail: boolean): string | null => {
@@ -608,8 +584,11 @@ export default function CheckoutPage() {
       });
       const data = await res.json();
 
-      if (data?.razorpay_order_id) {
-        openRazorpay(data);
+
+      const orderPayload = data?.data?.data ?? data?.data ?? data;
+
+      if (orderPayload?.razorpay_order_id) {
+        openRazorpay(orderPayload);
       } else if (data?.success) {
         setFlash({ type: "success", message: "Order placed successfully!" });
         window.location.href = "/order-complete";
@@ -625,40 +604,30 @@ export default function CheckoutPage() {
 
   const openRazorpay = (orderData: Record<string, unknown>) => {
     const options = {
-      key: orderData.razorpay_key as string,
+      key: "rzp_live_OYEz8EFvKlVIEq",
       amount: orderData.razorpay_amount as number,
       currency: "INR",
-      name: "Haneri",
+      name: "HANERI ELECTRICALS LLP",
       description: "Order Payment",
       image: "/images/razorpay.png",
       order_id: orderData.razorpay_order_id as string,
-      handler: async (response: Record<string, string>) => {
-        try {
-          const verifyRes = await fetch(`${BASE_URL}/order/verify-payment`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json", ...getAuthHeaders() },
-            body: JSON.stringify({
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature,
-            }),
-          });
-          const verifyData = await verifyRes.json();
-          if (verifyData?.success) {
-            window.location.href = "/order-complete";
-          } else {
-            setFlash({ type: "error", message: "Payment verification failed" });
-          }
-        } catch {
-          setFlash({ type: "error", message: "Payment verification failed" });
-        }
+      handler: (response: Record<string, string>) => {
+        const orderId = (orderData.order_id ?? orderData.razorpay_order_id) as string;
+        const amount = orderData.total_amount ?? orderData.razorpay_amount ?? "";
+        const params = new URLSearchParams({
+          status: "success",
+          order_id: String(orderId),
+          payment_id: response.razorpay_payment_id,
+          amount: String(amount),
+        });
+        window.location.href = `/order-complete?${params.toString()}`;
       },
       prefill: {
         name: localStorage.getItem("user_name") || "",
         email: localStorage.getItem("user_email") || "",
         contact: localStorage.getItem("user_mobile") || "",
       },
-      theme: { color: "#005d5a" },
+      theme: { color: "#f0f8fe" },
     };
     const rzp = new (window as unknown as Record<string, unknown> & { Razorpay: new (opts: typeof options) => { open: () => void } }).Razorpay(options);
     rzp.open();
@@ -789,7 +758,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="bg-[#F5F5F5] mt-20 min-h-screen">
-      <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="lazyOnload" />
+      <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="afterInteractive" />
 
       {/* Flash Message */}
       {flash && (
@@ -804,18 +773,7 @@ export default function CheckoutPage() {
 
       <div className="container mx-auto px-4 py-10">
         {cartItems.length === 0 ? (
-          <div className="bg-white rounded-2xl p-12 text-center max-w-md mx-auto shadow-sm">
-            <div className="w-20 h-20 mx-auto mb-5 text-gray-200">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-              </svg>
-            </div>
-            <h2 className="text-2xl font-heading font-bold text-[#464646] mb-2">Your cart is empty</h2>
-            <p className="text-gray-400 text-sm mb-6">Add items to your cart before checking out.</p>
-            <Link href="/shop" className="inline-block bg-[#075E5E] hover:bg-[#064d4d] text-white font-semibold px-8 py-3 rounded-xl transition-colors">
-              Continue Shopping
-            </Link>
-          </div>
+          <EmptyCart />
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
 
@@ -964,11 +922,7 @@ export default function CheckoutPage() {
                   </div>
                   <div className="flex justify-between text-sm text-gray-600">
                     <span>Shipping</span>
-                    <span className={`font-semibold ${shippingCost === 0 ? "text-green-600" : "text-[#464646]"}`}>
-                      {shippingLoading
-                        ? <span className="inline-block w-12 h-3 bg-gray-200 rounded animate-pulse" />
-                        : shippingCost === 0 ? "FREE" : formatPrice(shippingCost)}
-                    </span>
+                    <span className="font-semibold text-green-600">FREE</span>
                   </div>
                   {couponApplied && couponDiscount > 0 && (
                     <div className="flex justify-between text-sm text-green-600">
