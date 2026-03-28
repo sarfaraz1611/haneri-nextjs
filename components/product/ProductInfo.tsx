@@ -18,9 +18,12 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         className="h-7 mb-2"
       />
 
-      <h1 className="font-heading text-3xl uppercase text-[#CA5D27] font-semibold">
+      <h1 className="font-heading text-3xl  text-[#CA5D27] font-semibold">
         {product.name || "Product Name"}
-      </h1>
+      </h1> 
+      {/* <h1 className="font-heading text-3xl  text-[#CA5D27] font-semibold">
+        {product.name ? (() => { const words = product.name.toLowerCase().replace(/\b\w/g, c => c.toUpperCase()).split(" "); return words[0].toUpperCase() + (words.length > 1 ? " " + words.slice(1).join(" ") : ""); })() : "Product Name"}
+      </h1> */}
 
       <ProductRating rating={product.rating} reviewCount={product.review_count} />
 

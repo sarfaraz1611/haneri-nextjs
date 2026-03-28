@@ -48,6 +48,8 @@ interface Order {
   total_amount: string | number;
   items: { order_id: number }[];
   invoice?: { url: string } | null;
+  return?: boolean;
+  order_date?: string | null;
 }
 
 interface Quotation {
@@ -90,6 +92,9 @@ export default function ProfilePage() {
   // Orders
   const [orders, setOrders] = useState<Order[]>([]);
   const [ordersLoading, setOrdersLoading] = useState(false);
+  const [returnModal, setReturnModal] = useState<{ orderId: number } | null>(null);
+  const [returnReason, setReturnReason] = useState("");
+  const [returnLoading, setReturnLoading] = useState(false);
 
   // Quotations
   const [quotations, setQuotations] = useState<Quotation[]>([]);
@@ -169,6 +174,26 @@ export default function ProfilePage() {
       setFlash({ type: "error", message: "Failed to load orders." });
     } finally {
       setOrdersLoading(false);
+    }
+  };
+
+  const submitReturn = async () => {
+    if (!returnModal || !returnReason.trim()) return;
+    setReturnLoading(true);
+    try {
+      const res = await fetch(`${BASE_URL}/returns/create`, {
+        method: "POST",
+        headers: authHeaders(),
+        body: JSON.stringify({ order_id: returnModal.orderId, reason: returnReason }),
+      });
+      if (!res.ok) throw new Error();
+      setFlash({ type: "success", message: "Return request submitted." });
+      setReturnModal(null);
+      setReturnReason("");
+    } catch {
+      setFlash({ type: "error", message: "Failed to submit return request." });
+    } finally {
+      setReturnLoading(false);
     }
   };
 
@@ -513,7 +538,7 @@ export default function ProfilePage() {
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="border-b border-gray-100">
-                          {["ORDER", "BILLING", "STATUS", "PAYMENT", "TOTAL", "ACTIONS"].map((h) => (
+                          {["ORDER", "DATE", "BILLING", "STATUS", "PAYMENT", "TOTAL", "ACTIONS"].map((h) => (
                             <th key={h} className="text-left py-3 px-3 text-xs font-semibold text-gray-400 uppercase tracking-wide whitespace-nowrap">
                               {h}
                             </th>
@@ -527,6 +552,9 @@ export default function ProfilePage() {
                           return (
                             <tr key={i} className="hover:bg-gray-50 transition-colors">
                               <td className="py-3 px-3 font-medium text-gray-700">#{orderId}</td>
+                              <td className="py-3 px-3 text-gray-500 whitespace-nowrap">
+                                {order.order_date ? new Date(order.order_date).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" }) : "—"}
+                              </td>
                               <td className="py-3 px-3 text-gray-500 max-w-[160px] truncate">{order.shipping_address || "—"}</td>
                               <td className="py-3 px-3">
                                 <span className="inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-blue-700 capitalize">
@@ -546,17 +574,28 @@ export default function ProfilePage() {
                                 ₹{order.total_amount || "0.00"}
                               </td>
                               <td className="py-3 px-3">
-                                {invoiceUrl ? (
-                                  <a
-                                    href={invoiceUrl}
-                                    download
-                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#005d5a] text-white text-xs font-medium hover:bg-[#004744] transition-colors"
-                                  >
-                                    <FaDownload className="text-xs" /> Invoice
-                                  </a>
-                                ) : (
-                                  <span className="text-gray-300 text-xs">—</span>
-                                )}
+                                <div className="flex items-center gap-2 flex-wrap">
+                                  {invoiceUrl && (
+                                    <a
+                                      href={invoiceUrl}
+                                      download
+                                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#005d5a] text-white text-xs font-medium hover:bg-[#004744] transition-colors"
+                                    >
+                                      <FaDownload className="text-xs" /> Invoice
+                                    </a>
+                                  )}
+                                  {order.return && (
+                                    <button
+                                      onClick={() => { setReturnModal({ orderId: order.items?.[0]?.order_id }); setReturnReason(""); }}
+                                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-50 text-red-600 text-xs font-medium border border-red-200 hover:bg-red-100 transition-colors"
+                                    >
+                                      Return
+                                    </button>
+                                  )}
+                                  {!invoiceUrl && !order.return && (
+                                    <span className="text-gray-300 text-xs">—</span>
+                                  )}
+                                </div>
                               </td>
                             </tr>
                           );
@@ -962,6 +1001,37 @@ export default function ProfilePage() {
                 className="w-full py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50"
               >
                 Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Return Modal */}
+      {returnModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
+            <h3 className="text-lg font-bold text-gray-800 mb-1">Request Return</h3>
+            <p className="text-sm text-gray-500 mb-4">Please provide a reason for returning order <span className="font-medium text-gray-700">#{returnModal.orderId}</span>.</p>
+            <textarea
+              rows={4}
+              value={returnReason}
+              onChange={(e) => setReturnReason(e.target.value)}
+              placeholder="Enter reason..."
+              className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#005d5a] resize-none"
+            />
+            <div className="flex items-center justify-end gap-3 mt-4">
+              <button
+                onClick={() => { setReturnModal(null); setReturnReason(""); }}
+                className="px-4 py-2 rounded-lg text-sm text-gray-600 border border-gray-200 hover:bg-gray-50 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={submitReturn}
+                disabled={!returnReason.trim() || returnLoading}
+                className="px-4 py-2 rounded-lg text-sm font-medium bg-red-600 text-white hover:bg-red-700 disabled:opacity-50 transition-colors"
+              >
+                {returnLoading ? "Submitting..." : "Submit"}
               </button>
             </div>
           </div>

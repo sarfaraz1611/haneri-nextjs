@@ -488,7 +488,7 @@ export default function SilentHASS() {
                 transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
               >
                 <Image
-                  src="/images/quiet_operation.png"
+                  src="/images/HASS.svg"
                   alt="Modern Aesthetics"
                   width={72}
                   height={72}
@@ -496,7 +496,7 @@ export default function SilentHASS() {
                 />
                 <div>
                   <h3 className="text-xl font-semibold text-[#ca5d27]">
-                    Optimized Airflow
+                 Air Curve
                   </h3>
                   <p className="mt-2 text-black">
                   Air Curve technology refines blade aerodynamics to deliver smoother, wider air circulation with improved efficiency - ensuring consistent, balanced comfort across every space.

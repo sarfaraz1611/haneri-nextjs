@@ -4,6 +4,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "@/lib/firebase";
 
 export default function RegisterPage() {
   const [name, setName] = useState("");
@@ -33,7 +35,7 @@ export default function RegisterPage() {
     try {
       const res = await fetch("https://api.haneri.com/api/register", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify({
           auth_provider:"email",
           name,
@@ -61,9 +63,38 @@ export default function RegisterPage() {
     }
   };
 
-  // const handleGoogleLogin = () => {
-  //   window.location.href = "https://api.haneri.com/api/auth/google";
-  // };
+  const handleGoogleRegister = async () => {
+    setError("");
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const idToken = await result.user.getIdToken(true);
+      const { email, displayName: name, uid: google_uid } = result.user;
+
+      const res = await fetch("https://api.haneri.com/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ auth_provider: "google", idToken, email, name, google_uid }),
+      });
+
+      const data = await res.json();
+
+      if ((data.code === 200 || data.code === 201 || data.success) && data.data?.token) {
+        const user = data.data.user || data.data;
+        localStorage.setItem("auth_token", data.data.token);
+        localStorage.setItem("user_name", user.name || "");
+        localStorage.setItem("user_email", user.email || "");
+        localStorage.setItem("user_mobile", user.mobile || "");
+        localStorage.setItem("user_role", user.role || "");
+        if (user.id) localStorage.setItem("user_id", user.id);
+        window.location.href = "/";
+      } else {
+        setError(data.message || "Google registration failed. Please try again.");
+      }
+    } catch (err) {
+      console.error("Google register error:", err);
+      setError("Something went wrong during Google registration.");
+    }
+  };
 
   const validateGstin = (value: string) => {
     setGstin(value);
@@ -254,6 +285,21 @@ export default function RegisterPage() {
               disabled={loading}
             >
               {loading ? "REGISTERING..." : "REGISTER"}
+            </button>
+
+            <div className="flex items-center my-5 gap-3">
+              <span className="flex-1 h-px bg-gray-300"></span>
+              <span className="text-xs text-gray-400 uppercase">or</span>
+              <span className="flex-1 h-px bg-gray-300"></span>
+            </div>
+
+            <button
+              type="button"
+              className="w-full py-3 border border-gray-300 rounded-md bg-white flex items-center justify-center gap-2.5 text-sm font-semibold text-gray-800 cursor-pointer transition-all duration-300 font-[inherit] hover:border-gray-400 hover:bg-gray-50"
+              onClick={handleGoogleRegister}
+            >
+              <FcGoogle size={20} />
+              <span>Continue With Google</span>
             </button>
 
             <p className="mt-5 text-center text-sm text-gray-500">
