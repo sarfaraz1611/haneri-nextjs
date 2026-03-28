@@ -1,6 +1,26 @@
 "use client";
+import { useEffect, useRef } from "react";
+import "./../../../../components/VideoSlider.css";
 
 export default function HeroSection() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const slideCount = track.children.length;
+    const slideWidth = 100;
+    let currentIndex = 0;
+
+    const autoSlide = () => {
+      currentIndex = (currentIndex + 1) % slideCount;
+      track.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+    };
+
+    const interval = setInterval(autoSlide, 5000);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <section id="top" className="w-full scroll-mt-20">
       <div className="relative w-full bg-white">
@@ -13,15 +33,19 @@ export default function HeroSection() {
             crafted to elevate everyday living.
           </p>
         </div>
-        <div className="w-full sm:pb-8">
-          <iframe
-            src="https://player.vimeo.com/video/1131575735?autoplay=1&muted=1&loop=1&autopause=0&background=1&playsinline=1&title=0&byline=0&portrait=0&badge=0&controls=0&dnt=1"
-            frameBorder="0"
-            allow="autoplay; fullscreen; picture-in-picture"
-            allowFullScreen
-            className="w-full rounded-[5px] pointer-events-none"
-            style={{ height: "clamp(180px, 56vw, 520px)", display: "block" }}
-          ></iframe>
+
+        <div className=" px-4 sm:px-8 lg:px-16 " ref={containerRef}>
+          <div className="track" ref={trackRef} id="videoTrack">
+            <div className="video-slide">
+              <div className="video-thumbnail" />
+              <iframe
+                src={`https://player.vimeo.com/video/1131575735?autoplay=1&muted=1&loop=1&playsinline=1&controls=0&title=0&byline=0&portrait=0&background=1&autopause=0`}
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                frameBorder="0"
+                referrerPolicy="strict-origin-when-cross-origin"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -372,7 +372,7 @@ export default function PrivacyPolicyPage() {
               href="mailto:INFO@HANERI.co.in"
               className="text-brand hover:text-brand-dark font-semibold underline transition-colors"
             >
-              INFO@HANERI.co.in
+              info@haneri.co.in
             </a>
             . We may verify your identity before proceeding with your request to
             ensure security.
@@ -393,7 +393,7 @@ export default function PrivacyPolicyPage() {
               href="mailto:INFO@HANERI.in"
               className="text-brand hover:text-brand-dark font-semibold underline transition-colors"
             >
-              INFO@HANERI.in
+              info@haneri.in
             </a>
           </p>
         </section>
