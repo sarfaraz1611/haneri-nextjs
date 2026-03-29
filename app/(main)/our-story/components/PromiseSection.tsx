@@ -21,7 +21,7 @@ export default function PromiseSection() {
             <h2 className="text-white text-[22px] sm:text-[30px] lg:text-[42px] font-light font-heading mb-2 sm:mb-4">
               THE HANERI PROMISE
             </h2>
-            <p className="text-white mb-4 sm:mb-6 text-[12px] sm:text-[14px] lg:text-[16px] leading-[1.6] sm:leading-[1.8]">
+            <p className="text-white mb-4 sm:mb-6 text-[12px] sm:text-[14px] lg:text-[16px] leading-6 sm:leading-[1.8]">
               Every product we create is a reflection of our passion for design, precision, and purpose. We promise innovation that lasts, experiences that inspire, and quality that defines every space you live in.
             </p>
             <a

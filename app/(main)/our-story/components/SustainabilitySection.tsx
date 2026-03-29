@@ -16,10 +16,10 @@ export default function SustainabilitySection() {
             <h2 className="text-white text-[18px] sm:text-[28px] font-heading mb-5">
               SUSTAINABILITY & RESPONSIBILITY
             </h2>
-            <p className="text-white mb-5 text-[12px] sm:text-[14px] sm:leading-[1.75]">
+            <p className="text-white mb-5 text-[12px] sm:text-[14px] sm:leading-6">
               We believe true innovation is sustainable.
             </p>
-            <p className="text-white text-[14px] sm:text-[14px] sm:leading-[1.75]">
+            <p className="text-white text-[12px] sm:text-[14px] lg:text-[16px]  sm:leading-6">
               From energy-efficient technology to recyclable packaging and
               ethically driven manufacturing practices, every Haneri process
               embodies our unwavering commitment to a cleaner, smarter, and

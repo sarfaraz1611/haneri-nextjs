@@ -11,18 +11,18 @@ export default function HeartSection() {
             <br className="hidden lg:block" />
             <span className="text-[#CA5D27]">Who We Are</span>
           </h2>
-          <p className="text-[14px] sm:text-[15px] text-[#CA5D27] font-['Open_Sans'] mb-4 font-semibold leading-[1.6]">
+          <p className="text-[12px] sm:text-[14px] lg:text-[16px] text-[#CA5D27] font-['Open_Sans'] mb-4 font-semibold leading-[1.6]">
             Haneri is the culmination of over 75 years of collective expertise
             in design, engineering, and manufacturing.
           </p>
-          <p className="text-[13px] text-black leading-[1.75] font-['Open_Sans'] mb-3">
+          <p className="text-[12px] sm:text-[14px] lg:text-[16px] text-black leading-6 font-['Open_Sans'] mb-3">
             Born from a deep passion for redefining everyday living, Haneri
             represents a legacy of craftsmanship where technology meets
             timeless aesthetics. Each product is a reflection of our
             commitment to innovation, quality, and purposeful design —
             created to enhance the way people experience their spaces.
           </p>
-          <p className="text-[13px] text-black leading-[1.75] font-['Open_Sans'] mb-8">
+          <p className="text-[12px] sm:text-[14px] lg:text-[16px] text-black leading-6 font-['Open_Sans'] mb-8">
             From homes and offices to large-scale commercial environments, our
             solutions are thoughtfully engineered to deliver comfort,
             efficiency, and enduring reliability. At Haneri, we believe true

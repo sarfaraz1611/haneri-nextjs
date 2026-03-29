@@ -28,7 +28,7 @@ export default function HeroSection() {
           <h1 className="text-[24px] sm:text-[32px] lg:text-[42px] text-[#005d5a] font-heading leading-tight font-medium mb-2 sm:mb-3">
             Designing Tomorrow's Comfort
           </h1>
-          <p className="text-[13px] sm:text-[14px] text-black leading-[1.6] sm:leading-[1.75] max-w-[350px] mb-2 sm:mb-6 font-['Open_Sans']">
+          <p className="text-[12px] sm:text-[14px] lg:text-[16px] text-black leading-[1.6] sm:leading-6 max-w-[350px] mb-2 sm:mb-6 font-['Open_Sans']">
             Thoughtful innovation, enduring quality, and timeless design -
             crafted to elevate everyday living.
           </p>
