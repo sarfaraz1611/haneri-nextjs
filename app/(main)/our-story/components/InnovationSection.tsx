@@ -7,7 +7,7 @@ export default function InnovationSection() {
         <h1 className="text-[24px] font-heading sm:text-[42px] text-[#005d5a] leading-none font-medium text-center mb-5">
           Innovation and Design Philosophy
         </h1>
-        <p className="text-base text-[14px] text-black leading-[1.6] sm:leading-[1.75] max-w-[650px] mx-auto mb-8 text-center font-['Open_Sans']">
+        <p className="text-base text-[12px] sm:text-[14px] lg:text-[16px] text-black leading-6 sm:leading-6 max-w-[650px] mx-auto mb-8 text-center font-['Open_Sans']">
           Every Haneri product begins with a simple idea — to make technology
           intuitive and design effortless. Our design philosophy combines
           technical precision, aesthetic balance, and human understanding.

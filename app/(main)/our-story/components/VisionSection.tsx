@@ -9,7 +9,7 @@ export default function VisionSection() {
           <h3 className="text-[40px] sm:text-[42px] font-heading text-[#005d5a] font-medium leading-tight">
             Vision
           </h3>
-          <p className="text-[14px] font-['Open_Sans'] leading-[1.75] text-black">
+          <p className="text-[12px] sm:text-[14px] lg:text-[16px] font-['Open_Sans'] leading-6 text-black">
             We will achieve our mission through thoughtful design, lasting
             quality, inclusive pricing, and exceptional customer care—making
             luxury accessible and elevating everyday living for all.
@@ -30,7 +30,7 @@ export default function VisionSection() {
           <h3 className="text-[40px] sm:text-[42px] font-heading text-[#005d5a] font-medium leading-tight">
             Mission
           </h3>
-          <p className="text-[14px] font-['Open_Sans'] leading-[1.75] text-black">
+          <p className="text-[12px] sm:text-[14px] lg:text-[16px] font-['Open_Sans'] leading-6 text-black">
             We focus on human-centric, intuitive design, lasting quality, and
             accessible luxury for all lifestyles. With a commitment to
             transparency, responsiveness, and sustainability, we create

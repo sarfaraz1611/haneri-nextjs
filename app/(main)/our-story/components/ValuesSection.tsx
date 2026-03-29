@@ -49,7 +49,7 @@ export default function ValuesSection() {
           <h3 className="text-[40px] sm:text-[42px] font-heading text-[#005d5a] font-medium leading-tight">
             Values
           </h3>
-          <p className="text-[14px] font-['Open_Sans'] leading-[1.75] text-black mb-2">
+          <p className="text-[12px] sm:text-[14px] lg:text-[16px] font-['Open_Sans'] leading-6 text-black mb-2">
             To redefine aspirational product experiences by creating beautifully
             crafted, technologically advanced, and accessible luxury solutions
             that blend exceptional quality with inclusive design.
