@@ -3,10 +3,10 @@
 export default function HeartSection() {
   return (
     <section id="heart" className="relative w-full bg-white md:py-10 lg:py-16 scroll-mt-20">
-      <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 w-full px-4 sm:px-8 lg:px-16 mx-auto">
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 w-full  mx-auto">
         {/* Left column */}
-        <div className="w-full lg:w-[38%] flex flex-col">
-          <h2 className="text-[28px] sm:text-[36px] lg:text-[48px] flex gap-2 lg:flex-col font-heading text-[#005d5a] font-medium mb-4 leading-tight">
+        <div className="w-full lg:w-[38%] flex flex-col leading-10">
+          <h2 className="text-[28px] sm:text-[36px] lg:text-[48px] flex gap-2 lg:flex-col tracking-tight font-heading text-[#005d5a] font-medium mb-4">
             The Heart of
             <br className="hidden lg:block" />
             <span className="text-[#CA5D27]">Who We Are</span>

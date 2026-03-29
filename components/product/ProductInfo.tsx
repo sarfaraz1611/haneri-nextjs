@@ -20,22 +20,30 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
       <h1 className="font-heading text-3xl  text-[#CA5D27] font-semibold">
         {product.name || "Product Name"}
-      </h1> 
-      {/* <h1 className="font-heading text-3xl  text-[#CA5D27] font-semibold">
-        {product.name ? (() => { const words = product.name.toLowerCase().replace(/\b\w/g, c => c.toUpperCase()).split(" "); return words[0].toUpperCase() + (words.length > 1 ? " " + words.slice(1).join(" ") : ""); })() : "Product Name"}
-      </h1> */}
+      </h1>
 
-      <ProductRating rating={product.rating} reviewCount={product.review_count} />
-
+      <ProductRating
+        rating={product.rating}
+        reviewCount={product.review_count}
+      />
+      {/* 
       {product.category && (
         <p className="text-sm font-bold text-[#075E5E] mt-3">
-          Category: <span className="font-bold">{product.category.toLowerCase().replace(/\b\w/g, c => c.toUpperCase())}</span>
+          Category:{" "}
+          <span className="font-bold">
+            {product.category
+              .toLowerCase()
+              .replace(/\b\w/g, (c) => c.toUpperCase())}
+          </span>
         </p>
-      )}
+      )} */}
 
       {product.description && (
         <div className="text-[#777] font-normal mt-3 text-[14px]">
-          {product.description.match(/[^.!?]+[.!?]+/g)?.slice(0, 2).join(" ") ?? product.description}
+          {product.description
+            .match(/[^.!?]+[.!?]+/g)
+            ?.slice(0, 2)
+            .join(" ") ?? product.description}
         </div>
       )}
     </div>

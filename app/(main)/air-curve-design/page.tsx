@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 
 export default function AirCurveDesign() {
   return (
-    <div className="bg-gray-50">
-      <div className="mx-auto max-w-[90%] py-24 sm:px-2 sm:py-32 lg:px-4">
-        <div className="mx-auto max-w-2xl px-4 lg:max-w-none">
+    <div className=" container">
+      <div className=" py-24 ">
+        <div className="mx-auto max-w-2xl  lg:max-w-none">
           {/* Section 1 - Image Left */}
           <div className="grid grid-cols-1 items-center gap-x-16 gap-y-10 lg:grid-cols-2">
             <motion.div
@@ -455,7 +455,7 @@ export default function AirCurveDesign() {
                 transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
               >
                 <Image
-                  src="/images/quiet_operation.png"
+                  src="/images/HASS.svg"
                   alt="Modern Aesthetics"
                   width={72}
                   height={72}
@@ -463,18 +463,10 @@ export default function AirCurveDesign() {
                 />
                 <div>
                   <h3 className="text-xl font-semibold text-[#ca5d27]">
-                    Quiet Operation
+                 Air Curve
                   </h3>
-                  <p
-                    className="mt-2 text-black"
-                    style={{
-                      fontFamily: "var(--font-open-sans)",
-                      fontWeight: 400,
-                    }}
-                  >
-                    Reduced turbulence and noise make Silent HASS ideal for
-                    bedrooms, offices, and libraries where silence is a
-                    priority.
+                  <p className="mt-2 text-black">
+                  Air Curve technology refines blade aerodynamics to deliver smoother, wider air circulation with improved efficiency - ensuring consistent, balanced comfort across every space.
                   </p>
                 </div>
               </motion.div>

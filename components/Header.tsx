@@ -213,15 +213,30 @@ export default function Header() {
               <nav className="flex max-lg:hidden font-sans">
                 <ul className="list-none flex gap-[30px] lg:gap-0 m-0 p-0 pl-10 ">
                   {/* Categories Menu */}
-                  <li className="relative group" onMouseEnter={() => { if (activeDropdown && activeDropdown !== "desktop-categories") setActiveDropdown(null); }}>
+                  <li
+                    className="relative group"
+                    onMouseEnter={() => {
+                      if (
+                        activeDropdown &&
+                        activeDropdown !== "desktop-categories"
+                      )
+                        setActiveDropdown(null);
+                    }}
+                  >
                     <button
-                      onClick={(e) => { e.stopPropagation(); toggleDropdown("desktop-categories"); }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleDropdown("desktop-categories");
+                      }}
                       className="text-[#464646] font-semibold text-[14px] font-sans transition-colors duration-300 py-[15px] px-[15px] block hover:text-brand uppercase tracking-[-0.25px] bg-transparent border-none cursor-pointer"
                     >
                       Categories
                     </button>
 
-                    <div onClick={(e) => e.stopPropagation()} className={`absolute top-full left-1/2 -translate-x-1/2 pt-2.5 transition-all duration-300 z-50 ${activeDropdown === "desktop-categories" ? "visible opacity-100" : "invisible opacity-0 group-hover:visible group-hover:opacity-100"}`}>
+                    <div
+                      onClick={(e) => e.stopPropagation()}
+                      className={`absolute top-full left-1/2 -translate-x-1/2 pt-2.5 transition-all duration-300 z-50 ${activeDropdown === "desktop-categories" ? "visible opacity-100" : "invisible opacity-0 group-hover:visible group-hover:opacity-100"}`}
+                    >
                       <div className="bg-white min-w-1000 px-[30px] py-[25px] rounded-lg shadow-lg ">
                         <div className="flex justify-center items-center gap-5">
                           {categories.map((category) => (
@@ -249,14 +264,26 @@ export default function Header() {
                   </li>
 
                   {/* Pillar Technology Menu */}
-                  <li className="relative group" onMouseEnter={() => { if (activeDropdown && activeDropdown !== "desktop-pillar") setActiveDropdown(null); }}>
+                  <li
+                    className="relative group"
+                    onMouseEnter={() => {
+                      if (activeDropdown && activeDropdown !== "desktop-pillar")
+                        setActiveDropdown(null);
+                    }}
+                  >
                     <button
-                      onClick={(e) => { e.stopPropagation(); toggleDropdown("desktop-pillar"); }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleDropdown("desktop-pillar");
+                      }}
                       className="text-[#464646] font-semibold text-[14px] font-sans transition-colors duration-300 py-[15px] px-[15px] block hover:text-brand uppercase tracking-[-0.25px] bg-transparent border-none cursor-pointer"
                     >
                       Pillar Technology
                     </button>
-                    <div onClick={(e) => e.stopPropagation()} className={`absolute top-full left-1/2 -translate-x-1/2 pt-2.5 transition-all duration-300 z-50 ${activeDropdown === "desktop-pillar" ? "visible opacity-100" : "invisible opacity-0 group-hover:visible group-hover:opacity-100"}`}>
+                    <div
+                      onClick={(e) => e.stopPropagation()}
+                      className={`absolute top-full left-1/2 -translate-x-1/2 pt-2.5 transition-all duration-300 z-50 ${activeDropdown === "desktop-pillar" ? "visible opacity-100" : "invisible opacity-0 group-hover:visible group-hover:opacity-100"}`}
+                    >
                       <div className="bg-white min-w-[300px] px-[30px] py-[25px] rounded-lg shadow-lg">
                         <ul className="list-none p-0 m-0 flex flex-col gap-[5px] ">
                           {pillarTechnologies.map((tech) => (
@@ -276,14 +303,26 @@ export default function Header() {
                   </li>
 
                   {/* About Us Menu */}
-                  <li className="relative group" onMouseEnter={() => { if (activeDropdown && activeDropdown !== "desktop-about") setActiveDropdown(null); }}>
+                  <li
+                    className="relative group"
+                    onMouseEnter={() => {
+                      if (activeDropdown && activeDropdown !== "desktop-about")
+                        setActiveDropdown(null);
+                    }}
+                  >
                     <button
-                      onClick={(e) => { e.stopPropagation(); toggleDropdown("desktop-about"); }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleDropdown("desktop-about");
+                      }}
                       className="text-[#464646] font-semibold text-[14px] font-sans transition-colors duration-300 py-[15px] px-[15px] block hover:text-brand uppercase tracking-[-0.25px] bg-transparent border-none cursor-pointer"
                     >
                       About Us
                     </button>
-                    <div onClick={(e) => e.stopPropagation()} className={`absolute top-full left-1/2 -translate-x-1/2 transition-all duration-300 z-50 ${activeDropdown === "desktop-about" ? "visible opacity-100" : "invisible opacity-0 group-hover:visible group-hover:opacity-100"}`}>
+                    <div
+                      onClick={(e) => e.stopPropagation()}
+                      className={`absolute top-full left-1/2 -translate-x-1/2 transition-all duration-300 z-50 ${activeDropdown === "desktop-about" ? "visible opacity-100" : "invisible opacity-0 group-hover:visible group-hover:opacity-100"}`}
+                    >
                       <div className="bg-white min-w-[300px] px-[30px] py-[25px] rounded-lg shadow-lg">
                         <ul className="list-none p-0 m-0 flex flex-col gap-[15px]">
                           {aboutUsMenu.map((item) => (
@@ -324,14 +363,25 @@ export default function Header() {
                   </li>
 
                   {/* Support Menu */}
-                  <li className="relative group" onMouseEnter={() => { if (activeDropdown && activeDropdown !== "desktop-support") setActiveDropdown(null); }}>
+                  <li
+                    className="relative group"
+                    onMouseEnter={() => {
+                      if (
+                        activeDropdown &&
+                        activeDropdown !== "desktop-support"
+                      )
+                        setActiveDropdown(null);
+                    }}
+                  >
                     <button
                       onClick={() => toggleDropdown("desktop-support")}
                       className="text-[#464646] font-semibold text-[14px] font-sans transition-colors duration-300 py-[15px] px-[15px] block hover:text-brand uppercase tracking-[-0.25px] bg-transparent border-none cursor-pointer"
                     >
                       Support
                     </button>
-                    <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-2.5 transition-all duration-300 z-50 ${activeDropdown === "desktop-support" ? "visible opacity-100" : "invisible opacity-0 group-hover:visible group-hover:opacity-100"}`}>
+                    <div
+                      className={`absolute top-full left-1/2 -translate-x-1/2 pt-2.5 transition-all duration-300 z-50 ${activeDropdown === "desktop-support" ? "visible opacity-100" : "invisible opacity-0 group-hover:visible group-hover:opacity-100"}`}
+                    >
                       <div className="bg-white min-w-[300px] px-[30px] py-[25px] rounded-lg shadow-lg">
                         <ul className="list-none p-0 m-0 flex flex-col gap-[15px]">
                           {supportMenu.map((item) => (
@@ -358,7 +408,9 @@ export default function Header() {
                                         <span key={subLink.name}>
                                           <Link
                                             href={subLink.href}
-                                            onClick={() => setActiveDropdown(null)}
+                                            onClick={() =>
+                                              setActiveDropdown(null)
+                                            }
                                             className="text-neutral-600 text-xs font-light hover:text-brand  uppercase"
                                           >
                                             {subLink.name}
@@ -393,7 +445,7 @@ export default function Header() {
                   >
                     <FiUser />
                   </Link>
-                   <span className="max-sm:text-sm text-primary">|</span>
+                  <span className="max-sm:text-sm text-primary">|</span>
                   <Link
                     href={`/cart`}
                     className="relative text-xl cursor-pointer transition-colors duration-300 p-1 hover:text-brand text-primary"
@@ -433,14 +485,14 @@ export default function Header() {
                   </Link>
                   <span className="max-sm:text-sm text-primary">|</span>
                   <a
-                    href="https://wa.me/"
+                    href="https://wa.me/918377826826"
                     className="text-xl cursor-pointer transition-colors duration-300 p-1 hover:text-brand text-primary"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <FaWhatsapp />
                   </a>
-                 
+
                   {/* <span className="max-sm:text-sm text-primary">|</span> */}
                   {/* <button
                     onClick={handleLogout}
@@ -512,7 +564,7 @@ export default function Header() {
                   </Link>
                   <span className="max-sm:text-sm text-primary">|</span>
                   <a
-                    href="https://wa.me/"
+                    href="https://wa.me/918377826826"
                     className="text-xl cursor-pointer transition-colors duration-300 p-1 hover:text-brand text-primary"
                     target="_blank"
                     rel="noopener noreferrer"

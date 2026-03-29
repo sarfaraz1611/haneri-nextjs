@@ -24,7 +24,7 @@ export default function HeroSection() {
   return (
     <section id="top" className="w-full scroll-mt-20">
       <div className="relative w-full bg-white">
-        <div className="w-full px-4 sm:px-8 lg:px-16 pt-2 sm:pt-8 pb-2 max-w-6xl">
+        <div className="w-full   mx-auto     pt-2 sm:pt-8 pb-2 ">
           <h1 className="text-[24px] sm:text-[32px] lg:text-[42px] text-[#005d5a] font-heading leading-tight font-medium mb-2 sm:mb-3">
             Designing Tomorrow's Comfort
           </h1>
@@ -34,7 +34,9 @@ export default function HeroSection() {
           </p>
         </div>
 
-        <div className=" px-4 sm:px-8 lg:px-16 " ref={containerRef}>
+        {/* <div className=" px-4 sm:px-8 lg:px-16 " ref={containerRef}> */}
+
+        <div className="  " ref={containerRef}>
           <div className="track" ref={trackRef} id="videoTrack">
             <div className="video-slide">
               <div className="video-thumbnail" />

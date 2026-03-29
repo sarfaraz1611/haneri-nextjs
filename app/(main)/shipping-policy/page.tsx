@@ -127,7 +127,7 @@ export default function ShippingPolicyPage() {
                   href="mailto:INFO@HANERI.in"
                   className="text-brand hover:text-brand-dark font-semibold underline transition-colors"
                 >
-                  INFO@HANERI.in
+              info@haneri.in
                 </a>
               </span>
             </li>
@@ -217,7 +217,7 @@ export default function ShippingPolicyPage() {
                   href="mailto:INFO@HANERI.in"
                   className="text-brand hover:text-brand-dark font-semibold underline transition-colors"
                 >
-                  INFO@HANERI.in
+                  info@haneri.in
                 </a>
               </span>
             </li>
@@ -247,7 +247,7 @@ export default function ShippingPolicyPage() {
                 href="mailto:INFO@HANERI.in"
                 className="text-brand hover:text-brand-dark font-semibold underline transition-colors"
               >
-                INFO@HANERI.in
+            info@haneri.in
               </a>
             </p>
             <p>Office Address: A48, Sector 57, Noida, Uttar Pradesh - 201301</p>
