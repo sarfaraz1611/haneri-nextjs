@@ -47,12 +47,12 @@ export default function PrivacyPolicyPage() {
               <span>
                 Related services accessed through{" "}
                 <a
-                  href="https://www.haneri.in"
+                  href="https://www.haneri.com"
                   className="text-brand hover:text-brand-dark underline transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  https://www.haneri.in
+                  https://www.haneri.com
                 </a>
               </span>
             </li>
@@ -436,7 +436,7 @@ export default function PrivacyPolicyPage() {
               href="mailto:INFO@HANERI.in"
               className="text-brand hover:text-brand-dark font-semibold underline transition-colors"
             >
-              INFO@HANERI.in
+              info@haneri.in
             </a>
           </p>
         </section>

@@ -35,7 +35,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                 <li className="mb-3">
                   <Link
                     href="/air-curve-design"
-                    className="text-white text-sm transition-colors hover:text-brand"
+                    className="text-white text-sm transition-colors"
                   >
                     Air Curve Design
                   </Link>
@@ -43,7 +43,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                 <li className="mb-3">
                   <Link
                     href="/turbosilent-bldc"
-                    className="text-white text-sm transition-colors hover:text-brand"
+                    className="text-white text-sm transition-colors"
                   >
                     Turbosilent BLDC
                   </Link>
@@ -51,7 +51,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                 <li className="mb-3">
                   <Link
                     href="/hass"
-                    className="text-white text-sm transition-colors hover:text-brand"
+                    className="text-white text-sm transition-colors"
                   >
                     HASS
                   </Link>
@@ -59,7 +59,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                 <li className="mb-3">
                   <Link
                     href="/lumiambience"
-                    className="text-white text-sm transition-colors hover:text-brand"
+                    className="text-white text-sm transition-colors"
                   >
                     Lumiambience
                   </Link>
@@ -67,7 +67,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                 <li className="mb-3">
                   <Link
                     href="/scan"
-                    className="text-white text-sm transition-colors hover:text-brand"
+                    className="text-white text-sm transition-colors"
                   >
                     SCAN
                   </Link>
@@ -83,7 +83,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                 <li className="mb-3">
                   <Link
                     href="/faqs"
-                    className="text-white text-sm transition-colors hover:text-brand"
+                    className="text-white text-sm transition-colors"
                   >
                     FAQs
                   </Link>
@@ -91,7 +91,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                 <li className="mb-3">
                   <Link
                     href="/privacy-policy"
-                    className="text-white text-sm transition-colors hover:text-brand"
+                    className="text-white text-sm transition-colors"
                   >
                     Privacy Policy
                   </Link>
@@ -99,7 +99,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                 <li className="mb-3">
                   <Link
                     href="/shipping-policy"
-                    className="text-white text-sm transition-colors hover:text-brand"
+                    className="text-white text-sm transition-colors"
                   >
                     Shipping Policy
                   </Link>
@@ -107,7 +107,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                 <li className="mb-3">
                   <Link
                     href="/wir-policy"
-                    className="text-white text-sm transition-colors hover:text-brand"
+                    className="text-white text-sm transition-colors"
                   >
                     WIR Policy
                   </Link>
@@ -126,7 +126,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                     href="https://maps.google.com/?q=A-48+Sector+57+Noida+Uttar+Pradesh+201301"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white transition-colors hover:text-brand"
+                    className="text-white transition-colors"
                   >
                     {companyInfo.address}
                   </a>
@@ -135,7 +135,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                   <FaPhone className=" mt-1 shrink-0" />
                   <a
                     href={`tel:${companyInfo.phone}`}
-                    className="text-white transition-colors hover:text-brand"
+                    className="text-white transition-colors"
                   >
                     {companyInfo.phone}
                   </a>
@@ -144,7 +144,7 @@ A-48, SECTOR 57, NOIDA, UTTAR PRADESH, PINCODE - 201301`,
                   <FaEnvelope className=" mt-1 shrink-0" />
                   <a
                     href={`mailto:${companyInfo.email}`}
-                    className="text-white transition-colors hover:text-brand"
+                    className="text-white transition-colors"
                   >
                     {companyInfo.email}
                   </a>

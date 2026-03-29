@@ -2,7 +2,7 @@
 
 export default function PromiseSection() {
   return (
-    <section id="promise" className="relative w-full px-4 sm:px-8 lg:px-16 flex items-center justify-center bg-white/80 backdrop-blur-sm py-8 scroll-mt-20">
+    <section id="promise" className="relative w-full  flex items-center justify-center bg-white/80 backdrop-blur-sm py-8 scroll-mt-20">
       <div className="relative w-full sm:mx-auto overflow-hidden rounded-lg shadow-lg h-[300px] sm:h-[400px] lg:h-[520px]">
         <img
           src="images/about_top_last.png"

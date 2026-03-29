@@ -8,8 +8,8 @@ import PromiseSection from "./components/PromiseSection";
 
 export default function OurStoryPage() {
   return (
-    <main className="main about bg-white">
-      <div className="relative w-full" style={{ paddingTop: "80px" }}>
+    <main className="container bg-white">
+      <div className=" w-full" style={{ paddingTop: "80px" }}>
         <HeroSection />
         <HeartSection />
         <SustainabilitySection />

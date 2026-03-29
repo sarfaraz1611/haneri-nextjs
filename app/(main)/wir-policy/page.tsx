@@ -18,9 +18,9 @@ export default function WarrantyPolicyPage() {
           <p className="container mx-auto max-w-4xl text-white/80 leading-relaxed">
             Haneri Electricals LLP (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or
             &ldquo;us&rdquo;) is committed to ensuring customer satisfaction and
-            confidence in our products. This Warranty and Refunds Policy provides
-            clarity on the warranty coverage and refund/replacement terms for all
-            Haneri products.
+            confidence in our products. This Warranty and Refunds Policy
+            provides clarity on the warranty coverage and refund/replacement
+            terms for all Haneri products.
           </p>
         </div>
       </div>
@@ -80,8 +80,8 @@ export default function WarrantyPolicyPage() {
               <ul className="text-neutral-600 space-y-2 pl-10">
                 <li className="flex items-start gap-2">
                   <span className="text-brand   shrink-0">&#9679;</span>
-                  The warranty period begins from the date of purchase as per the
-                  original invoice.
+                  The warranty period begins from the date of purchase as per
+                  the original invoice.
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-brand  shrink-0">&#9679;</span>
@@ -171,9 +171,9 @@ export default function WarrantyPolicyPage() {
                 <li className="flex items-start gap-2">
                   <span className="text-brand  shrink-0">&#9679;</span>
                   For serialized products without Sticker/Printed Manufacture
-                  Month, the start date will be considered from the End User Sale
-                  Invoice date till the warranty period mentioned in the warranty
-                  table.
+                  Month, the start date will be considered from the End User
+                  Sale Invoice date till the warranty period mentioned in the
+                  warranty table.
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-brand  shrink-0">&#9679;</span>
@@ -250,14 +250,14 @@ export default function WarrantyPolicyPage() {
                       href="mailto:INFO@HANERI.in"
                       className="text-brand hover:text-brand-dark font-semibold underline transition-colors"
                     >
-                      INFO@HANERI.in
+                      info@haneri.in
                     </a>
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-brand  shrink-0">&#9679;</span>
-                  Provide details including invoice, product serial number, and a
-                  description of the issue.
+                  Provide details including invoice, product serial number, and
+                  a description of the issue.
                 </li>
               </ul>
             </li>
@@ -271,8 +271,8 @@ export default function WarrantyPolicyPage() {
               </div>
               <ul className="text-neutral-600 space-y-2 pl-10">
                 <li className="flex items-start gap-2">
-                  <span className="text-brand  shrink-0">&#9679;</span>
-                  A service technician will inspect the product on-site or at an
+                  <span className="text-brand  shrink-0">&#9679;</span>A service
+                  technician will inspect the product on-site or at an
                   authorized service center.
                 </li>
               </ul>
@@ -385,16 +385,12 @@ export default function WarrantyPolicyPage() {
               </p>
               <ul className="text-neutral-600 space-y-2 pl-10">
                 <li className="flex items-start gap-2">
-                  <span className="text-primary-green  shrink-0">
-                    &#9642;
-                  </span>
+                  <span className="text-primary-green  shrink-0">&#9642;</span>
                   The product has a manufacturing defect within 15 days of
                   purchase.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary-green  shrink-0">
-                    &#9642;
-                  </span>
+                  <span className="text-primary-green  shrink-0">&#9642;</span>
                   The product was received damaged or defective.
                 </li>
               </ul>
@@ -437,7 +433,7 @@ export default function WarrantyPolicyPage() {
                       href="mailto:INFO@HANERI.in"
                       className="text-brand hover:text-brand-dark font-semibold underline transition-colors"
                     >
-                      INFO@HANERI.in
+                      info@haneri.in
                     </a>
                   </span>
                 </li>
@@ -501,7 +497,7 @@ export default function WarrantyPolicyPage() {
                       href="mailto:INFO@HANERI.in"
                       className="text-brand hover:text-brand-dark font-semibold underline transition-colors"
                     >
-                      INFO@HANERI.in
+                      info@haneri.in
                     </a>
                   </span>
                 </li>
@@ -511,9 +507,9 @@ export default function WarrantyPolicyPage() {
                   public and national holidays.
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-brand  shrink-0">&#9679;</span>
-                  A Haneri Service Executive will verify if the offer is
-                  executable in your area.
+                  <span className="text-brand  shrink-0">&#9679;</span>A Haneri
+                  Service Executive will verify if the offer is executable in
+                  your area.
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-brand  shrink-0">&#9679;</span>
@@ -558,8 +554,8 @@ export default function WarrantyPolicyPage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-brand  shrink-0">&#9679;</span>
-                  Arrange for any additional modifications, such as false ceiling
-                  adjustments, at the customer&apos;s expense.
+                  Arrange for any additional modifications, such as false
+                  ceiling adjustments, at the customer&apos;s expense.
                 </li>
               </ul>
             </li>
@@ -576,9 +572,9 @@ export default function WarrantyPolicyPage() {
               <ul className="text-neutral-600 space-y-2 pl-10">
                 <li className="flex items-start gap-2">
                   <span className="text-brand  shrink-0">&#9679;</span>
-                  Haneri reserves the right to reject any service or installation
-                  request if the area is beyond our serviceable zones or if no
-                  authorized service center is available.
+                  Haneri reserves the right to reject any service or
+                  installation request if the area is beyond our serviceable
+                  zones or if no authorized service center is available.
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-brand  shrink-0">&#9679;</span>
@@ -610,7 +606,7 @@ export default function WarrantyPolicyPage() {
                 href="mailto:INFO@HANERI.in"
                 className="text-brand hover:text-brand-dark font-semibold underline transition-colors"
               >
-                INFO@HANERI.in
+                info@haneri.in
               </a>
             </p>
             <p>Office Address: A48, Sector 57, Noida, Uttar Pradesh - 201301</p>

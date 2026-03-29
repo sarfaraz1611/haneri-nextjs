@@ -3,7 +3,7 @@
 export default function InnovationSection() {
   return (
     <section id="innovation" className="relative w-full flex items-center justify-center bg-white/80 backdrop-blur-sm py-8 scroll-mt-20">
-      <div className="w-full px-4 sm:px-8 lg:px-16 mx-auto">
+      <div className="w-full mx-auto">
         <h1 className="text-[24px] font-heading sm:text-[42px] text-[#005d5a] leading-none font-medium text-center mb-5">
           Innovation and Design Philosophy
         </h1>

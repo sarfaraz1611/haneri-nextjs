@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 
 export default function SilentHASS() {
   return (
-    <div className="bg-gray-50">
-      <div className="mx-auto max-w-[90%] py-24 sm:px-2 sm:py-32 lg:px-4">
-        <div className="mx-auto max-w-2xl px-4 lg:max-w-none">
+    <div className="container">
+      <div className="mx-auto py-24  sm:py-32">
+        <div className="mx-auto max-w-2xl  lg:max-w-none">
           {/* Section 1 - Image Left */}
           <div className="grid grid-cols-1 items-center gap-x-16 gap-y-10 lg:grid-cols-2">
             <motion.div
@@ -479,8 +479,7 @@ export default function SilentHASS() {
                   </p>
                 </div>
               </motion.div>
-
-              <motion.div
+               <motion.div
                 className="grid grid-cols-[72px_1fr] items-start gap-3.5 p-4 rounded-lg border border-gray-200 bg-white"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -488,7 +487,7 @@ export default function SilentHASS() {
                 transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
               >
                 <Image
-                  src="/images/HASS.svg"
+                  src="/images/quiet_operation.png"
                   alt="Modern Aesthetics"
                   width={72}
                   height={72}
@@ -496,13 +495,23 @@ export default function SilentHASS() {
                 />
                 <div>
                   <h3 className="text-xl font-semibold text-[#ca5d27]">
-                 Air Curve
+                    Quiet Operation
                   </h3>
-                  <p className="mt-2 text-black">
-                  Air Curve technology refines blade aerodynamics to deliver smoother, wider air circulation with improved efficiency - ensuring consistent, balanced comfort across every space.
+                  <p
+                    className="mt-2 text-black"
+                    style={{
+                      fontFamily: "var(--font-open-sans)",
+                      fontWeight: 400,
+                    }}
+                  >
+                    Reduced turbulence and noise make Silent HASS ideal for
+                    bedrooms, offices, and libraries where silence is a
+                    priority.
                   </p>
                 </div>
               </motion.div>
+
+             
             </div>
           </div>
         </div>

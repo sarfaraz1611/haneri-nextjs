@@ -3,13 +3,13 @@
 export default function VisionSection() {
   return (
     <section className="relative w-full bg-white/80 backdrop-blur-sm py-8">
-      <div className="px-4 sm:px-8 lg:px-16 w-full mx-auto grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-10 items-start">
+      <div className=" w-full mx-auto grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-10 items-start">
         {/* Vision text */}
         <div id="vision" className="flex flex-col gap-3 order-2 lg:order-1 scroll-mt-20">
-          <h3 className="text-[40px] sm:text-[48px] font-heading text-[#005d5a] font-semibold leading-tight">
+          <h3 className="text-[40px] sm:text-[42px] font-heading text-[#005d5a] font-medium leading-tight">
             Vision
           </h3>
-          <p className="text-[13px] font-['Open_Sans'] leading-[1.75] text-black">
+          <p className="text-[14px] font-['Open_Sans'] leading-[1.75] text-black">
             We will achieve our mission through thoughtful design, lasting
             quality, inclusive pricing, and exceptional customer care—making
             luxury accessible and elevating everyday living for all.
@@ -27,10 +27,10 @@ export default function VisionSection() {
 
         {/* Mission text */}
         <div id="mission" className="flex flex-col gap-3 order-4 lg:order-3 scroll-mt-20">
-          <h3 className="text-[40px] sm:text-[48px] font-heading text-[#005d5a] font-semibold leading-tight">
+          <h3 className="text-[40px] sm:text-[42px] font-heading text-[#005d5a] font-medium leading-tight">
             Mission
           </h3>
-          <p className="text-[13px] font-['Open_Sans'] leading-[1.75] text-black">
+          <p className="text-[14px] font-['Open_Sans'] leading-[1.75] text-black">
             We focus on human-centric, intuitive design, lasting quality, and
             accessible luxury for all lifestyles. With a commitment to
             transparency, responsiveness, and sustainability, we create

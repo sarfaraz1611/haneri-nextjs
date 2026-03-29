@@ -43,13 +43,13 @@ export default function ValuesSection() {
       id="values"
       className="relative w-full bg-white/80 backdrop-blur-sm lg:py-8 scroll-mt-20"
     >
-      <div className="px-4 sm:px-8 lg:px-16  w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+      <div className=" w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
         {/* Left: text + accordion */}
         <div className="flex flex-col gap-4 order-2 lg:order-1">
-          <h3 className="text-[40px] sm:text-[48px] font-heading text-[#005d5a] font-semibold leading-tight">
+          <h3 className="text-[40px] sm:text-[42px] font-heading text-[#005d5a] font-medium leading-tight">
             Values
           </h3>
-          <p className="text-[13px] font-['Open_Sans'] leading-[1.75] text-black mb-2">
+          <p className="text-[14px] font-['Open_Sans'] leading-[1.75] text-black mb-2">
             To redefine aspirational product experiences by creating beautifully
             crafted, technologically advanced, and accessible luxury solutions
             that blend exceptional quality with inclusive design.
