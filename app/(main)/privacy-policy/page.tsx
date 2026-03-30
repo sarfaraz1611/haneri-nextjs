@@ -369,10 +369,10 @@ export default function PrivacyPolicyPage() {
           <p className="text-neutral-600 leading-relaxed">
             To exercise your rights, contact us at{" "}
             <a
-              href="mailto:INFO@HANERI.co.in"
+              href="mailto:INFO@HANERI.in"
               className="text-brand hover:text-brand-dark font-semibold underline transition-colors"
             >
-              info@haneri.co.in
+              info@haneri.in
             </a>
             . We may verify your identity before proceeding with your request to
             ensure security.
