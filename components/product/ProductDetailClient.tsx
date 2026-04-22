@@ -16,6 +16,7 @@ import RecommendedProducts from "./RecommendedProducts";
 import { useProduct, useCart } from "./hooks";
 import { ProductDetailClientProps } from "./types";
 import { LEGACY_BASE_URL } from "./constants";
+import { trackViewItem, type GA4Item } from "@/lib/analytics";
 
 export default function ProductDetailClient({
   productId,
@@ -35,8 +36,42 @@ export default function ProductDetailClient({
     images,
   } = useProduct({ productId, variantId });
 
+  const analyticsItem: GA4Item | null =
+    product && selectedVariant
+      ? {
+          item_id: String(product.id),
+          item_name: product.name,
+          item_category: product.category,
+          item_brand: product.brand ?? "Haneri",
+          item_variant: selectedVariant.variant_value,
+          price: selectedVariant.selling_price,
+          currency: "INR",
+        }
+      : null;
+
   const { quantity, setQuantity, addingToCart, addedToCart, handleAddToCart } =
-    useCart({ productId, variantId: selectedVariantId });
+    useCart({ productId, variantId: selectedVariantId, analyticsItem });
+
+  useEffect(() => {
+    if (!product || !selectedVariant) return;
+    trackViewItem({
+      currency: "INR",
+      value: selectedVariant.selling_price,
+      items: [
+        {
+          item_id: String(product.id),
+          item_name: product.name,
+          item_category: product.category,
+          item_brand: product.brand ?? "Haneri",
+          item_variant: selectedVariant.variant_value,
+          price: selectedVariant.selling_price,
+          quantity: 1,
+          currency: "INR",
+        },
+      ],
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product?.id, selectedVariant?.id]);
 
   const priceRef = useRef<HTMLDivElement>(null);
   const [showStickyCart, setShowStickyCart] = useState(false);

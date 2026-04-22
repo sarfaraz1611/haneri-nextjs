@@ -15,6 +15,11 @@ import {
   FaCheckCircle,
 } from "react-icons/fa";
 
+import {
+  trackLogout,
+  setUserProperties,
+} from "@/lib/analytics";
+
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com/api";
 
 const INDIAN_STATES = [
@@ -144,7 +149,13 @@ export default function ProfilePage() {
     }
     setAuthToken(token);
     setUserName(localStorage.getItem("user_name") || "");
-    setUserRole(localStorage.getItem("user_role") || "");
+    const role = localStorage.getItem("user_role") || "";
+    setUserRole(role);
+    setUserProperties({
+      user_id: localStorage.getItem("user_id"),
+      user_role: role,
+      logged_in: true,
+    });
     setHydrated(true);
   }, []);
 
@@ -418,6 +429,7 @@ export default function ProfilePage() {
 
   // ── Logout ───────────────────────────────────────────────────────────────────
   const handleLogout = () => {
+    trackLogout();
     [
       "auth_token", "user_name", "user_email", "user_mobile",
       "user_role", "user_id", "unique_id", "guest_id", "pwd_000", "temp_id",

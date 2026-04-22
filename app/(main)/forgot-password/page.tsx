@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { pushToDataLayer } from "@/lib/analytics";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
@@ -18,6 +19,7 @@ export default function ForgotPasswordPage() {
     setStatusMessage("");
     setTempPassword("");
     setLoading(true);
+    pushToDataLayer("password_reset_request", { method: "email" });
 
     try {
       const res = await fetch("https://api.haneri.com/api/forgot_password", {
@@ -32,6 +34,7 @@ export default function ForgotPasswordPage() {
       const data = await res.json();
 
       if (res.ok && data.temporary_password) {
+        pushToDataLayer("password_reset_success", { method: "email" });
         setTempPassword(data.temporary_password);
         setStatusMessage(data.message || "Temporary password generated successfully.");
         // Start countdown

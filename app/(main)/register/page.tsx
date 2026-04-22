@@ -6,6 +6,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "@/lib/firebase";
+import { trackSignUp, setUserProperties, type SignUpRole } from "@/lib/analytics";
 
 export default function RegisterPage() {
   const [name, setName] = useState("");
@@ -50,8 +51,20 @@ export default function RegisterPage() {
       const data = await res.json();
 
       if (res.ok && data.data?.token) {
+        const user = data.data.user;
         localStorage.setItem("auth_token", data.data.token);
-        localStorage.setItem("user", JSON.stringify(data.data.user));
+        localStorage.setItem("user", JSON.stringify(user));
+        if (user?.id) localStorage.setItem("user_id", String(user.id));
+        if (user?.role) localStorage.setItem("user_role", user.role);
+        if (user?.name) localStorage.setItem("user_name", user.name);
+        if (user?.email) localStorage.setItem("user_email", user.email);
+        if (user?.mobile) localStorage.setItem("user_mobile", user.mobile);
+        trackSignUp("email", role as SignUpRole, user?.id);
+        setUserProperties({
+          user_id: user?.id,
+          user_role: user?.role ?? role,
+          logged_in: true,
+        });
         window.location.href = "/";
       } else {
         setError(data.message || "Registration failed. Please try again.");
@@ -86,6 +99,12 @@ export default function RegisterPage() {
         localStorage.setItem("user_mobile", user.mobile || "");
         localStorage.setItem("user_role", user.role || "");
         if (user.id) localStorage.setItem("user_id", user.id);
+        trackSignUp("google", (user.role || "customer") as SignUpRole, user.id);
+        setUserProperties({
+          user_id: user.id,
+          user_role: user.role,
+          logged_in: true,
+        });
         window.location.href = "/";
       } else {
         setError(data.message || "Google registration failed. Please try again.");

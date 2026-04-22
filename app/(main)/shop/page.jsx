@@ -25,6 +25,12 @@ import {
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import { LEGACY_BASE_URL } from "@/components/product/constants";
+import {
+  trackViewItemList,
+  trackSelectItem,
+  trackFilterApplied,
+  trackAddToCart,
+} from "@/lib/analytics";
 
 // ==================== Constants ====================
 
@@ -125,7 +131,22 @@ function ProductCard({
   return (
     <li className="group relative flex flex-col shadow-md rounded-xl p-4 inset-shadow-2xs hover:scale-95 transition duration-300 ease-in-out ">
       {/* Product Image */}
-      <Link href={productUrl}>
+      <Link
+        href={productUrl}
+        onClick={() => {
+          try {
+            trackSelectItem("shop_main", "Shop Page", {
+              item_id: String(product.id),
+              item_name: product.name,
+              item_category: product.category,
+              item_brand: product.brand ?? "Haneri",
+              item_variant: activeVariant.variant_value,
+              price: sellingPrice,
+              currency: "INR",
+            });
+          } catch {}
+        }}
+      >
         <div className="aspect-square w-full overflow-hidden rounded-lg ">
           <img
             alt={activeVariant.variant_value || product.name}
@@ -695,6 +716,24 @@ function ShopPageContent() {
           );
           setProducts(productCards);
           setTotalItems(res.data.total_records || 0);
+          try {
+            trackViewItemList(
+              "shop_main",
+              "Shop Page",
+              productCards.slice(0, 20).map((p, index) => ({
+                item_id: String(p.id),
+                item_name: p.name,
+                item_category: p.category,
+                item_brand: p.brand ?? "Haneri",
+                item_variant: p.activeVariant?.variant_value,
+                price: Number(p.activeVariant?.selling_price) || 0,
+                currency: "INR",
+                index,
+                item_list_id: "shop_main",
+                item_list_name: "Shop Page",
+              })),
+            );
+          } catch {}
         } else {
           setProducts([]);
           setTotalItems(0);
@@ -752,6 +791,29 @@ function ShopPageContent() {
         setAddedToCart((prev) => new Set(prev).add(cartKey));
         window.dispatchEvent(new Event("cartUpdated"));
         showFlash("Item added to cart!");
+        try {
+          const card = products.find(
+            (p) => p.id === productId && p.activeVariantId === variantId,
+          );
+          if (card) {
+            const price = normalizePrice(card.activeVariant?.selling_price);
+            trackAddToCart({
+              value: price,
+              items: [
+                {
+                  item_id: String(card.id),
+                  item_name: card.name,
+                  item_category: card.category,
+                  item_brand: card.brand ?? "Haneri",
+                  item_variant: card.activeVariant?.variant_value,
+                  price,
+                  quantity: 1,
+                  currency: "INR",
+                },
+              ],
+            });
+          }
+        } catch {}
       } else {
         showFlash("Failed to add to cart", "#ffeaea", "#ff0000");
       }
@@ -782,12 +844,15 @@ function ShopPageContent() {
     switch (filterId) {
       case "model":
         updateFilter(setSelectedModels);
+        if (checked) trackFilterApplied("category", value);
         break;
       case "color":
         updateFilter(setSelectedColors);
+        if (checked) trackFilterApplied("color", value);
         break;
       case "sweep":
         updateFilter(setSelectedSweeps);
+        if (checked) trackFilterApplied("category", `sweep:${value}`);
         break;
     }
     setCurrentPage(1);
@@ -844,7 +909,10 @@ function ShopPageContent() {
           <div className="flex items-center gap-4">
             <SortMenu
               currentSort={sortBy}
-              onSortChange={setSortBy}
+              onSortChange={(val) => {
+                setSortBy(val);
+                if (val) trackFilterApplied("sort", val);
+              }}
               onPageReset={() => setCurrentPage(1)}
             />
 

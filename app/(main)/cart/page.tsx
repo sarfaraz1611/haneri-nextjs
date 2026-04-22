@@ -6,6 +6,7 @@ import Link from "next/link";
 import axios from "axios";
 import CheckoutProgressBar from "@/components/CheckoutProgressBar";
 import EmptyCart from "@/components/EmptyCart";
+import { trackViewCart, trackRemoveFromCart, type GA4Item } from "@/lib/analytics";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com/api";
 
@@ -72,11 +73,31 @@ export default function CartPage() {
         headers: getAuthHeaders(),
       });
 
+      let items: CartItem[] = [];
       if (response.data && response.data.data) {
-        setCartItems(response.data.data);
+        items = response.data.data;
+        setCartItems(items);
       } else if (response.data && Array.isArray(response.data)) {
-        setCartItems(response.data);
+        items = response.data;
+        setCartItems(items);
       }
+      try {
+        const ga4Items: GA4Item[] = items.map((it) => ({
+          item_id: String(it.id),
+          item_name: it.product_name,
+          item_variant: it.variant_value,
+          price: parsePrice(it.selling_price),
+          quantity: it.quantity,
+          currency: "INR",
+        }));
+        const value = items.reduce(
+          (s, it) => s + parsePrice(it.selling_price) * it.quantity,
+          0,
+        );
+        if (ga4Items.length > 0) {
+          trackViewCart({ value, items: ga4Items });
+        }
+      } catch {}
     } catch (error) {
       console.error("Error fetching cart:", error);
       setFlash({ type: "error", message: "Failed to load cart" });
@@ -133,6 +154,8 @@ export default function CartPage() {
         payload.cart_id = tempId;
       }
 
+      const removedItem = cartItems.find((it) => it.id === itemId);
+
       await axios.delete(`${BASE_URL}/cart/remove/${itemId}`, {
         headers: getAuthHeaders(),
         data: payload,
@@ -141,6 +164,24 @@ export default function CartPage() {
       setCartItems((prev) => prev.filter((item) => item.id !== itemId));
       window.dispatchEvent(new Event("cartUpdated"));
       setFlash({ type: "success", message: "Item removed from cart" });
+      try {
+        if (removedItem) {
+          const price = parsePrice(removedItem.selling_price);
+          trackRemoveFromCart({
+            value: price * removedItem.quantity,
+            items: [
+              {
+                item_id: String(removedItem.id),
+                item_name: removedItem.product_name,
+                item_variant: removedItem.variant_value,
+                price,
+                quantity: removedItem.quantity,
+                currency: "INR",
+              },
+            ],
+          });
+        }
+      } catch {}
     } catch (error) {
       console.error("Error removing item:", error);
       setFlash({ type: "error", message: "Failed to remove item" });

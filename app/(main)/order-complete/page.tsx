@@ -3,6 +3,7 @@
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { trackPurchase } from "@/lib/analytics";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com/api";
 
@@ -28,14 +29,21 @@ const VARIANT_COLORS: Record<string, string> = {
 };
 
 interface OrderItem {
+  product_id?: number | string;
+  id?: number | string;
   product_name: string;
   quantity: number;
   "variant value"?: string;
   variant_value?: string;
+  selling_price?: number | string;
+  price?: number | string;
 }
 
 interface OrderData {
   total_amount?: number;
+  tax_amount?: number;
+  shipping_charge?: number;
+  coupon_code?: string;
   shipping_address?: string;
   items?: OrderItem[];
 }
@@ -86,9 +94,46 @@ function OrderCompleteContent() {
       headers: { Authorization: `Bearer ${authToken}`, Accept: "application/json" },
     })
       .then((r) => r.json())
-      .then((res) => { if (res?.success && res?.data) setOrderData(res.data); })
+      .then((res) => {
+        if (res?.success && res?.data) {
+          setOrderData(res.data);
+          try {
+            if (status === "success" && orderId !== "N/A") {
+              const dedupeKey = `purchase_tracked_${orderId}`;
+              if (!sessionStorage.getItem(dedupeKey)) {
+                sessionStorage.setItem(dedupeKey, "1");
+                const items = (res.data.items ?? []).map(
+                  (it: OrderItem) => ({
+                    item_id: String(it.product_id ?? it.id ?? ""),
+                    item_name: it.product_name,
+                    item_variant: it.variant_value ?? it["variant value"],
+                    price:
+                      parseFloat(
+                        String(it.selling_price ?? it.price ?? 0),
+                      ) || 0,
+                    quantity: it.quantity,
+                    currency: "INR",
+                  }),
+                );
+                trackPurchase({
+                  transaction_id: String(orderId),
+                  currency: "INR",
+                  value:
+                    parseFloat(
+                      String(res.data.total_amount ?? amount),
+                    ) || 0,
+                  tax: res.data.tax_amount,
+                  shipping: res.data.shipping_charge ?? 0,
+                  coupon: res.data.coupon_code,
+                  items,
+                });
+              }
+            }
+          } catch {}
+        }
+      })
       .catch(() => {});
-  }, [orderId]);
+  }, [orderId, status, amount]);
 
   const displayAmount = orderData?.total_amount
     ? "₹\u00a0" + parseFloat(String(orderData.total_amount)).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
