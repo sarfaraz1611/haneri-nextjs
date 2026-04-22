@@ -6,6 +6,12 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { FcGoogle } from "react-icons/fc";
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "@/lib/firebase";
+import {
+  trackLogin,
+  trackOtpRequest,
+  trackOtpVerify,
+  setUserProperties,
+} from "@/lib/analytics";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -33,7 +39,19 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (res.ok && data.data?.token) {
+        const user = data.data.user || data.data;
         localStorage.setItem("auth_token", data.data.token);
+        if (user?.id) localStorage.setItem("user_id", String(user.id));
+        if (user?.role) localStorage.setItem("user_role", user.role);
+        if (user?.name) localStorage.setItem("user_name", user.name);
+        if (user?.email) localStorage.setItem("user_email", user.email);
+        if (user?.mobile) localStorage.setItem("user_mobile", user.mobile);
+        trackLogin("email", user?.id);
+        setUserProperties({
+          user_id: user?.id,
+          user_role: user?.role,
+          logged_in: true,
+        });
         window.location.href = "/";
       } else {
         setError(data.message || "Invalid email or password.");
@@ -68,6 +86,12 @@ export default function LoginPage() {
         localStorage.setItem("user_mobile", user.mobile || "");
         localStorage.setItem("user_role", user.role || "");
         if (user.id) localStorage.setItem("user_id", user.id);
+        trackLogin("google", user.id);
+        setUserProperties({
+          user_id: user.id,
+          user_role: user.role,
+          logged_in: true,
+        });
         window.location.href = "/";
       } else {
         setError(data.message || "Google login failed. Please try again.");
@@ -126,10 +150,24 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (res.ok && data.data?.token) {
+        const user = data.data.user;
         localStorage.setItem("auth_token", data.data.token);
-        localStorage.setItem("user", JSON.stringify(data.data.user));
+        localStorage.setItem("user", JSON.stringify(user));
+        if (user?.id) localStorage.setItem("user_id", String(user.id));
+        if (user?.role) localStorage.setItem("user_role", user.role);
+        if (user?.name) localStorage.setItem("user_name", user.name);
+        if (user?.email) localStorage.setItem("user_email", user.email);
+        if (user?.mobile) localStorage.setItem("user_mobile", user.mobile);
+        trackOtpVerify(true);
+        trackLogin("otp", user?.id);
+        setUserProperties({
+          user_id: user?.id,
+          user_role: user?.role,
+          logged_in: true,
+        });
         window.location.href = "/";
       } else {
+        trackOtpVerify(false);
         setOtpError(data.message || "Invalid OTP. Please try again.");
       }
     } catch {
@@ -161,6 +199,7 @@ export default function LoginPage() {
     }
     setMobileError("");
     setOtpLoading(true);
+    trackOtpRequest("sms");
 
     try {
       const res = await fetch("https://api.haneri.com/api/generate-otp", {

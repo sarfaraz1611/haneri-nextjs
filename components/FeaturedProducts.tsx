@@ -6,6 +6,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import LOGO_SRC from "./../public/Haneri_Logo-.svg";
 import DiscoverHero from "./DiscoverHero";
+import {
+  trackViewItemList,
+  trackSelectItem,
+  trackAddToCart,
+} from "@/lib/analytics";
 
 // Import GSAP and ScrollTrigger
 import { gsap } from "gsap";
@@ -149,6 +154,28 @@ export default function FeaturedProducts() {
 
         if (result.success && Array.isArray(result.data)) {
           setProducts(result.data);
+          try {
+            trackViewItemList(
+              "home_featured",
+              "Home - Featured Products",
+              result.data.slice(0, 20).map((p: Product, index: number) => {
+                const first = p.variants?.[0];
+                return {
+                  item_id: String(p.id),
+                  item_name: p.name,
+                  item_brand: "Haneri",
+                  item_variant: first?.variant_value,
+                  price: first
+                    ? parseFloat(String(first.selling_price).replace(/,/g, "")) || 0
+                    : 0,
+                  currency: "INR",
+                  index,
+                  item_list_id: "home_featured",
+                  item_list_name: "Home - Featured Products",
+                };
+              }),
+            );
+          } catch {}
         } else {
           console.error("Invalid API response:", result);
         }
@@ -301,6 +328,30 @@ export default function FeaturedProducts() {
         }
         setAddedToCart((prev) => new Set(prev).add(productId));
         window.dispatchEvent(new Event("cartUpdated"));
+        try {
+          const prod = products.find((p) => String(p.id) === String(productId));
+          const variant = prod?.variants?.find((v) => String(v.id) === String(variantId));
+          if (prod && variant) {
+            const price =
+              parseFloat(String(variant.selling_price).replace(/,/g, "")) || 0;
+            trackAddToCart({
+              value: price,
+              items: [
+                {
+                  item_id: String(prod.id),
+                  item_name: prod.name,
+                  item_brand: "Haneri",
+                  item_variant: variant.variant_value,
+                  price,
+                  quantity: 1,
+                  currency: "INR",
+                  item_list_id: "home_featured",
+                  item_list_name: "Home - Featured Products",
+                },
+              ],
+            });
+          }
+        } catch {}
       } else {
         alert(data.message || "Failed to add to cart");
       }
@@ -397,6 +448,23 @@ export default function FeaturedProducts() {
                     <Link
                       href={`/product_detail?id=${product.id}&v_id=${first.id}`}
                       className="block w-full h-full relative"
+                      onClick={() => {
+                        try {
+                          trackSelectItem(
+                            "home_featured",
+                            "Home - Featured Products",
+                            {
+                              item_id: String(product.id),
+                              item_name: product.name,
+                              item_brand: "Haneri",
+                              item_variant: first.variant_value,
+                              price: sellingPrice,
+                              currency: "INR",
+                              index,
+                            },
+                          );
+                        } catch {}
+                      }}
                     >
                       {/* Image component - GSAP controls the transform style */}
                       <Image

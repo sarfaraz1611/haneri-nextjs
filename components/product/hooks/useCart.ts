@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { CART_BASE_URL } from "../constants";
+import { trackAddToCart, type GA4Item } from "@/lib/analytics";
 
 interface UseCartOptions {
   productId: string;
   variantId: number | null;
+  analyticsItem?: GA4Item | null;
 }
 
 interface UseCartReturn {
@@ -19,6 +21,7 @@ interface UseCartReturn {
 export function useCart({
   productId,
   variantId,
+  analyticsItem,
 }: UseCartOptions): UseCartReturn {
   const [quantity, setQuantity] = useState(1);
   const [addingToCart, setAddingToCart] = useState(false);
@@ -71,6 +74,13 @@ export function useCart({
           localStorage.setItem("temp_id", data.data.user_id);
         }
         setAddedToCart(true);
+        if (analyticsItem) {
+          const item: GA4Item = { ...analyticsItem, quantity };
+          trackAddToCart({
+            value: (item.price ?? 0) * quantity,
+            items: [item],
+          });
+        }
         window.dispatchEvent(new Event("cartUpdated"));
       }
     } catch (error) {

@@ -5,6 +5,12 @@ import Image from "next/image";
 import Script from "next/script";
 import CheckoutProgressBar from "@/components/CheckoutProgressBar";
 import EmptyCart from "@/components/EmptyCart";
+import {
+  trackBeginCheckout,
+  trackAddShippingInfo,
+  trackAddPaymentInfo,
+  type GA4Item,
+} from "@/lib/analytics";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com/api";
 
@@ -83,6 +89,7 @@ export default function CheckoutPage() {
   const [authToken, setAuthToken] = useState<string | null>(null);
   const [tempId, setTempId] = useState<string | null>(null);
   const [hydrated, setHydrated] = useState(false);
+  const beginCheckoutTracked = useRef(false);
 
   // Data
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -229,6 +236,16 @@ export default function CheckoutPage() {
 
   const handleSelectAddress = (id: number) => {
     setSelectedAddressId(id);
+    try {
+      if (cartItems.length > 0) {
+        trackAddShippingInfo({
+          value: total,
+          coupon: couponApplied ? couponCode : undefined,
+          shipping_tier: "Standard",
+          items: cartItemsToGA4(),
+        });
+      }
+    } catch {}
   };
 
 
@@ -551,6 +568,28 @@ export default function CheckoutPage() {
   const total = taxInclusiveSubtotal + shippingCost - couponDiscount;
 
   // ── Place Order ──
+  const cartItemsToGA4 = (): GA4Item[] =>
+    cartItems.map((it) => ({
+      item_id: String(it.id),
+      item_name: it.product_name,
+      item_variant: it.variant_value,
+      price: parsePrice(it.selling_price),
+      quantity: it.quantity,
+      currency: "INR",
+    }));
+
+  useEffect(() => {
+    if (!hydrated || cartItems.length === 0) return;
+    if (beginCheckoutTracked.current) return;
+    beginCheckoutTracked.current = true;
+    trackBeginCheckout({
+      value: total,
+      coupon: couponApplied ? couponCode : undefined,
+      items: cartItemsToGA4(),
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hydrated, cartItems.length]);
+
   const placeOrder = async () => {
     if (!selectedAddressId) { setFlash({ type: "error", message: "Please select a delivery address" }); return; }
     if (cartItems.length === 0) { setFlash({ type: "error", message: "Your cart is empty" }); return; }
@@ -588,6 +627,14 @@ export default function CheckoutPage() {
       const orderPayload = data?.data?.data ?? data?.data ?? data;
 
       if (orderPayload?.razorpay_order_id) {
+        try {
+          trackAddPaymentInfo({
+            value: total,
+            coupon: couponApplied ? couponCode : undefined,
+            payment_type: "Razorpay",
+            items: cartItemsToGA4(),
+          });
+        } catch {}
         openRazorpay(orderPayload);
       } else if (data?.success) {
         setFlash({ type: "success", message: "Order placed successfully!" });

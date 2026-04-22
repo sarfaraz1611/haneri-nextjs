@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { trackGenerateLead } from "@/lib/analytics";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -80,6 +81,7 @@ export default function ContactPage() {
         }),
       });
       if (!res.ok) throw new Error("Failed to send message");
+      trackGenerateLead("contact_form");
       setSubmitStatus("success");
       setFormData({ fullName: "", email: "", phone: "", message: "" });
       setTouched({});
