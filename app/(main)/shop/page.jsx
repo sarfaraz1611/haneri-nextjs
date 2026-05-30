@@ -25,6 +25,7 @@ import {
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import { LEGACY_BASE_URL } from "@/components/product/constants";
+import ProductActionButton from "@/components/product/ProductActionButton";
 import {
   trackViewItemList,
   trackSelectItem,
@@ -229,30 +230,18 @@ function ProductCard({
         </div>
       )}
 
-      {/* Add to Cart Button */}
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          if (addedToCart.has(`${product.id}-${activeVariant.id}`)) {
-            onViewCart();
-          } else {
-            onAddToCart(product.id, activeVariant.id);
-          }
-        }}
-        disabled={addingToCart === `${product.id}-${activeVariant.id}`}
-        className={`mt-4 w-full rounded-lg px-4 py-2 text-sm font-semibold text-white shadow-sm hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${
-          addedToCart.has(`${product.id}-${activeVariant.id}`)
-            ? "bg-[#CA5D27] hover:bg-[#b54d1f]"
-            : "bg-[#005d5a] hover:bg-[#244a46]"
-        }`}
-      >
-        {addingToCart === `${product.id}-${activeVariant.id}`
-          ? "Adding..."
-          : addedToCart.has(`${product.id}-${activeVariant.id}`)
-            ? "View Cart"
-            : "Add to Cart"}
-      </button>
+      {/* Add to Cart / Send Enquiry */}
+      <ProductActionButton
+        productId={product.id}
+        productName={product.name}
+        variantId={activeVariant.id}
+        variantValue={activeVariant.variant_value || ""}
+        className="mt-4 w-full focus-visible:outline-2 focus-visible:outline-offset-2"
+        onAddToCart={() => onAddToCart(product.id, activeVariant.id)}
+        addingToCart={addingToCart === `${product.id}-${activeVariant.id}`}
+        addedToCart={addedToCart.has(`${product.id}-${activeVariant.id}`)}
+        onViewCart={onViewCart}
+      />
     </li>
   );
 }

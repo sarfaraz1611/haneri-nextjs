@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { FaBars, FaTimes, FaPlus, FaWhatsapp } from "react-icons/fa";
 import { FiUser } from "react-icons/fi";
-import { LEGACY_BASE_URL } from "./product/constants";
+import { LEGACY_BASE_URL, BASE_URL } from "./product/constants";
+import { useSiteMode } from "@/context/SiteModeContext";
 
 // Category data
 const categories = [
@@ -107,6 +108,7 @@ const supportMenu = [
 ];
 
 export default function Header() {
+  const { isShoppingMode } = useSiteMode();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -122,7 +124,7 @@ export default function Header() {
         payload.cart_id = tempId;
       }
 
-      const res = await fetch("https://api.haneri.com/api/cart/fetch", {
+      const res = await fetch(`${BASE_URL}/cart/fetch`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -152,11 +154,14 @@ export default function Header() {
     // Check if user is logged in
     const authToken = localStorage.getItem("auth_token");
     setIsLoggedIn(!!authToken);
+
+    if (!isShoppingMode) return;
+
     fetchCartCount();
 
     window.addEventListener("cartUpdated", fetchCartCount);
     return () => window.removeEventListener("cartUpdated", fetchCartCount);
-  }, []);
+  }, [isShoppingMode]);
 
   useEffect(() => {
     if (!activeDropdown?.startsWith("desktop-")) return;
@@ -446,6 +451,7 @@ export default function Header() {
                     <FiUser />
                   </Link>
                   <span className="max-sm:text-sm text-primary">|</span>
+                  {isShoppingMode && (
                   <Link
                     href={`/cart`}
                     className="relative text-xl cursor-pointer transition-colors duration-300 p-1 hover:text-brand text-primary"
@@ -483,7 +489,10 @@ export default function Header() {
                       </span>
                     )}
                   </Link>
+                  )}
+                  {isShoppingMode && (
                   <span className="max-sm:text-sm text-primary">|</span>
+                  )}
                   <a
                     href="https://wa.me/918377826826"
                     className="text-xl cursor-pointer transition-colors duration-300 p-1 hover:text-brand text-primary"
@@ -525,6 +534,7 @@ export default function Header() {
                     <FiUser />
                   </Link>
                   <span className="max-sm:text-sm text-primary">|</span>
+                  {isShoppingMode && (
                   <Link
                     href={`cart`}
                     className="relative text-sm cursor-pointer transition-colors duration-300 p-1 hover:text-brand  max-sm:p-[3px] text-primary"
@@ -562,7 +572,10 @@ export default function Header() {
                       </span>
                     )}
                   </Link>
+                  )}
+                  {isShoppingMode && (
                   <span className="max-sm:text-sm text-primary">|</span>
+                  )}
                   <a
                     href="https://wa.me/918377826826"
                     className="text-xl cursor-pointer transition-colors duration-300 p-1 hover:text-brand text-primary"

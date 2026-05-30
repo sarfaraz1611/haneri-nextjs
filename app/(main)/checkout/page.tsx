@@ -11,6 +11,7 @@ import {
   trackAddPaymentInfo,
   type GA4Item,
 } from "@/lib/analytics";
+import { useEnquiryModeRedirect } from "@/hooks/useEnquiryModeRedirect";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com/api";
 
@@ -85,6 +86,7 @@ const formatPrice = (price: number) => {
 };
 
 export default function CheckoutPage() {
+  const { loading: siteModeLoading } = useEnquiryModeRedirect();
   // Auth
   const [authToken, setAuthToken] = useState<string | null>(null);
   const [tempId, setTempId] = useState<string | null>(null);
@@ -775,6 +777,10 @@ export default function CheckoutPage() {
   );
 
   // ── Loading Skeleton ──
+  if (siteModeLoading) {
+    return null;
+  }
+
   if (loading) {
     return (
       <div className="min-h-screen bg-[#F5F5F5] mt-20">

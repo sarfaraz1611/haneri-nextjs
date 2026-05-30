@@ -7,6 +7,7 @@ import axios from "axios";
 import CheckoutProgressBar from "@/components/CheckoutProgressBar";
 import EmptyCart from "@/components/EmptyCart";
 import { trackViewCart, trackRemoveFromCart, type GA4Item } from "@/lib/analytics";
+import { useEnquiryModeRedirect } from "@/hooks/useEnquiryModeRedirect";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com/api";
 
@@ -34,6 +35,7 @@ interface FlashMessage {
 }
 
 export default function CartPage() {
+  const { loading: siteModeLoading } = useEnquiryModeRedirect();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState<number | null>(null);
@@ -267,6 +269,10 @@ export default function CartPage() {
     }
     return "/images/placeholder.png";
   };
+
+  if (siteModeLoading) {
+    return null;
+  }
 
   if (loading) {
     return (

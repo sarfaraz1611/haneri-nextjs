@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { BASE_URL, CART_BASE_URL, LEGACY_BASE_URL, COLOR_OPTIONS } from "./constants";
+import ProductActionButton from "./ProductActionButton";
 import { Product, Variant } from "./types";
 
 const classNames = (...classes: (string | boolean | undefined)[]) =>
@@ -116,25 +117,17 @@ function RecommendedCard({
         </div>
       )}
 
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          if (isAdded) {
-            router.push(`cart`);
-          } else {
-            onAddToCart(product.id, activeVariant.id);
-          }
-        }}
-        disabled={isAdding}
-        className={`mt-4 w-full rounded-lg px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed ${
-          isAdded
-            ? "bg-[#CA5D27] hover:bg-[#b54d1f]"
-            : "bg-[#005d5a] hover:bg-[#244a46]"
-        }`}
-      >
-        {isAdding ? "Adding..." : isAdded ? "View Cart" : "Add to Cart"}
-      </button>
+      <ProductActionButton
+        productId={product.id}
+        productName={product.name}
+        variantId={activeVariant.id}
+        variantValue={activeVariant.variant_value || ""}
+        className="mt-4 w-full"
+        onAddToCart={() => onAddToCart(product.id, activeVariant.id)}
+        addingToCart={isAdding}
+        addedToCart={isAdded}
+        onViewCart={() => router.push("cart")}
+      />
     </li>
   );
 }

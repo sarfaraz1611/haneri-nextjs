@@ -19,6 +19,7 @@ import {
   trackLogout,
   setUserProperties,
 } from "@/lib/analytics";
+import { useSiteMode } from "@/context/SiteModeContext";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.haneri.com/api";
 
@@ -88,6 +89,7 @@ const emptyAddressForm: AddressForm = {
 };
 
 export default function ProfilePage() {
+  const { isShoppingMode } = useSiteMode();
   const [hydrated, setHydrated] = useState(false);
   const [authToken, setAuthToken] = useState<string | null>(null);
   const [userName, setUserName] = useState("");
@@ -638,7 +640,7 @@ export default function ProfilePage() {
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="border-b border-gray-100">
-                          {["##", "QUOTE NO", "USER", "TOTAL", "QUOTATION", "BUY", "ACTION"].map((h) => (
+                          {["##", "QUOTE NO", "USER", "TOTAL", "QUOTATION", ...(isShoppingMode ? ["BUY"] : []), "ACTION"].map((h) => (
                             <th key={h} className="text-left py-3 px-3 text-xs font-semibold text-gray-400 uppercase tracking-wide whitespace-nowrap">
                               {h}
                             </th>
@@ -668,6 +670,7 @@ export default function ProfilePage() {
                                   <span className="text-gray-300 text-xs">—</span>
                                 )}
                               </td>
+                              {isShoppingMode && (
                               <td className="py-3 px-3">
                                 <button
                                   onClick={() => setBuyModalQuotationId(Number(qId))}
@@ -676,6 +679,7 @@ export default function ProfilePage() {
                                   <FaShoppingBag className="text-xs" /> Buy
                                 </button>
                               </td>
+                              )}
                               <td className="py-3 px-3">
                                 <button
                                   onClick={() => setDeleteQuotationId(Number(qId))}

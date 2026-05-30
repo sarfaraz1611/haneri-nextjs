@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import DiscoverHero from "./DiscoverHero";
 import { LEGACY_BASE_URL } from "./product/constants";
+import ProductActionButton from "./product/ProductActionButton";
 
 // --- Types ---
 interface Variant {
@@ -288,29 +289,17 @@ export default function FeaturedProductsMobile() {
                     );
                   })}
                 </div>
-                <button
-                  onClick={(e) => {
-                    if (addedToCart.has(product.id)) {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      router.push(`/cart`);
-                    } else {
-                      handleAddToCart(e, product.id, first.id);
-                    }
-                  }}
-                  disabled={addingToCart === product.id}
-                  className={`mt-2 w-full rounded-lg px-4 py-2 text-sm font-semibold text-white shadow-sm hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed ${
-                    addedToCart.has(product.id)
-                      ? "bg-[#CA5D27] hover:bg-[#b54d1f]"
-                      : "bg-[#005d5a] hover:bg-[#244a46]"
-                  }`}
-                >
-                  {addingToCart === product.id
-                    ? "Adding..."
-                    : addedToCart.has(product.id)
-                      ? "View Cart"
-                      : "Add to Cart"}
-                </button>
+                <ProductActionButton
+                  productId={product.id}
+                  productName={product.name}
+                  variantId={first.id}
+                  variantValue={first.variant_value || ""}
+                  className="mt-2 w-full focus-visible:outline-2 focus-visible:outline-offset-2"
+                  onAddToCart={(e) => handleAddToCart(e, product.id, first.id)}
+                  addingToCart={addingToCart === product.id}
+                  addedToCart={addedToCart.has(product.id)}
+                  onViewCart={() => router.push("/cart")}
+                />
               </article>
             );
           })}

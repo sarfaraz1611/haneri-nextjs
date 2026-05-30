@@ -17,12 +17,17 @@ import { useProduct, useCart } from "./hooks";
 import { ProductDetailClientProps } from "./types";
 import { LEGACY_BASE_URL } from "./constants";
 import { trackViewItem, type GA4Item } from "@/lib/analytics";
+import { useSiteMode } from "@/context/SiteModeContext";
+import ProductActionButton from "./ProductActionButton";
+import EnquiryModal from "@/components/EnquiryModal";
 
 export default function ProductDetailClient({
   productId,
   variantId,
 }: ProductDetailClientProps) {
   const router = useRouter();
+  const { isEnquiryMode, isShoppingMode } = useSiteMode();
+  const [enquiryOpen, setEnquiryOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const {
@@ -146,16 +151,28 @@ export default function ProductDetailClient({
 
               {/* Quantity + CTA */}
               <div className="flex items-center gap-4 mt-6">
-                <QuantitySelector
-                  quantity={quantity}
-                  onQuantityChange={setQuantity}
-                />
-                <AddToCartButton
-                  onClick={handleCartAction}
-                  disabled={addingToCart}
-                  addingToCart={addingToCart}
-                  addedToCart={addedToCart}
-                />
+                {isShoppingMode && (
+                  <QuantitySelector
+                    quantity={quantity}
+                    onQuantityChange={setQuantity}
+                  />
+                )}
+                {isShoppingMode ? (
+                  <AddToCartButton
+                    onClick={handleCartAction}
+                    disabled={addingToCart}
+                    addingToCart={addingToCart}
+                    addedToCart={addedToCart}
+                  />
+                ) : (
+                  <ProductActionButton
+                    productId={productId}
+                    productName={product.name}
+                    variantId={selectedVariantId ?? selectedVariant?.id ?? ""}
+                    variantValue={selectedVariant?.variant_value ?? ""}
+                    className="px-6 py-3 font-bold"
+                  />
+                )}
               </div>
 
               <GuideLinks />
@@ -194,6 +211,8 @@ export default function ProductDetailClient({
           }`}
         >
           <div className="flex items-center justify-around gap-3 px-4  py-4">
+            {isShoppingMode && (
+            <>
             {/* Quantity */}
             <div className="flex items-center gap-2">
               <button
@@ -223,8 +242,11 @@ export default function ProductDetailClient({
               </div>
               <small className="text-xs text-gray-500">Incl. taxes</small>
             </div>
+            </>
+            )}
 
-            {/* Add to Cart / View Cart */}
+            {isShoppingMode ? (
+            /* Add to Cart / View Cart */
             <button
               onClick={handleCartAction}
               disabled={addingToCart}
@@ -240,8 +262,28 @@ export default function ProductDetailClient({
                   ? "View Cart"
                   : "Add to Cart"}
             </button>
+            ) : (
+            <button
+              type="button"
+              onClick={() => setEnquiryOpen(true)}
+              className="px-5 py-2.5 rounded-lg font-bold text-sm text-white bg-[#075E5E] hover:bg-[#064d4d] transition-colors"
+            >
+              Send Enquiry
+            </button>
+            )}
           </div>
         </div>
+      )}
+
+      {isEnquiryMode && selectedVariant && (
+        <EnquiryModal
+          productId={productId}
+          productName={product.name}
+          variantId={selectedVariantId ?? selectedVariant.id ?? ""}
+          variantValue={selectedVariant.variant_value ?? ""}
+          isOpen={enquiryOpen}
+          onClose={() => setEnquiryOpen(false)}
+        />
       )}
     </main>
   );
