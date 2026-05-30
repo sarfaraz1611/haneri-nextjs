@@ -5,5 +5,6 @@ export default function MainLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <MainLayoutClient>{children}</MainLayoutClient>;
+  const siteLive = process.env.SITE_LIVE === "true";
+  return <MainLayoutClient siteLive={siteLive}>{children}</MainLayoutClient>;
 }
