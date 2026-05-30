@@ -25,7 +25,7 @@ export default function DevLoginPage() {
       const data = await res.json().catch(() => ({}));
 
       if (res.ok && data?.ok) {
-        window.location.href = "/live";
+        window.location.href = "/";
       } else {
         setError(data?.message || "Invalid credentials.");
       }

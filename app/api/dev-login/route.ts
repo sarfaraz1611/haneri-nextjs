@@ -6,7 +6,18 @@ const DEV_AUTH_COOKIE = "haneri_dev_auth";
 const DEV_AUTH_TOKEN = "haneri-dev-2026-v1";
 const THIRTY_DAYS_SECONDS = 60 * 60 * 24 * 30;
 
+function liveModeBlocked() {
+  return NextResponse.json(
+    { ok: false, message: "Dev login is disabled in live mode." },
+    { status: 403 },
+  );
+}
+
 export async function POST(request: Request) {
+  if (process.env.SITE_LIVE === "true") {
+    return liveModeBlocked();
+  }
+
   let username = "";
   let password = "";
 
@@ -42,6 +53,10 @@ export async function POST(request: Request) {
 }
 
 export async function DELETE() {
+  if (process.env.SITE_LIVE === "true") {
+    return liveModeBlocked();
+  }
+
   const response = NextResponse.json({ ok: true });
   response.cookies.set({
     name: DEV_AUTH_COOKIE,

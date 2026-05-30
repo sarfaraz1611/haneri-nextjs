@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { useSiteMode } from "@/context/SiteModeContext";
 
 export interface EnquiryModalProps {
@@ -61,6 +62,7 @@ export default function EnquiryModal({
   onClose,
 }: EnquiryModalProps) {
   const { enquiryUrl } = useSiteMode();
+  const [mounted, setMounted] = useState(false);
   const [formData, setFormData] = useState<FormData>(initialForm);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -68,6 +70,10 @@ export default function EnquiryModal({
   const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(
     null,
   );
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -89,8 +95,6 @@ export default function EnquiryModal({
       document.body.style.overflow = "";
     };
   }, [isOpen, onClose]);
-
-  if (!isOpen) return null;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -148,7 +152,6 @@ export default function EnquiryModal({
     };
 
     try {
-      // text/plain avoids CORS preflight with Google Apps Script web apps
       await fetch(enquiryUrl, {
         method: "POST",
         mode: "no-cors",
@@ -163,9 +166,11 @@ export default function EnquiryModal({
     }
   };
 
-  return (
+  if (!isOpen || !mounted) return null;
+
+  return createPortal(
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="enquiry-modal-title"
@@ -177,7 +182,7 @@ export default function EnquiryModal({
         onClick={onClose}
       />
 
-      <div className="relative w-full max-w-lg rounded-2xl bg-white shadow-xl max-h-[90vh] overflow-y-auto">
+      <div className="relative z-10 w-full max-w-lg rounded-2xl bg-white shadow-xl max-h-[90vh] overflow-y-auto">
         <div className="sticky top-0 flex items-center justify-between border-b border-gray-100 bg-white px-6 py-4">
           <h2
             id="enquiry-modal-title"
@@ -315,7 +320,8 @@ export default function EnquiryModal({
           )}
         </form>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 

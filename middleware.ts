@@ -7,8 +7,20 @@ export const DEV_AUTH_TOKEN = "haneri-dev-2026-v1";
 const PUBLIC_PATHS = new Set<string>(["/", "/DevLogin"]);
 const PUBLIC_API_PATHS = new Set<string>(["/api/dev-login"]);
 
+const isLive = process.env.SITE_LIVE === "true";
+
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  if (isLive) {
+    if (pathname === "/live") {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+    if (pathname === "/DevLogin" || pathname === "/api/dev-login") {
+      return NextResponse.redirect(new URL("/", request.url));
+    }
+    return NextResponse.next();
+  }
 
   if (PUBLIC_PATHS.has(pathname) || PUBLIC_API_PATHS.has(pathname)) {
     return NextResponse.next();
